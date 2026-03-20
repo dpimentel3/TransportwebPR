@@ -993,7 +993,8 @@
 
               <div>
                 <label for="pickupTime">Time of pick up</label>
-                <input id="pickupTime" name="pickupTime" type="time" required />
+                <input id="pickupTime" type="time" required />
+                <input type="hidden" id="pickupTimeFormatted" name="pickupTime" />
               </div>
 
               <div>
@@ -1210,6 +1211,18 @@
           if (!tripDate || !pickupLocation || !pickupTime || !destination || !passengers || !firstName || !phone) {
             event.preventDefault();
             alert('Please complete all required fields before sending your booking request.');
+            return;
+          }
+
+          // Convert 24-hour time to 12-hour format with AM/PM
+          if (pickupTime) {
+            var parts = pickupTime.split(':');
+            var hours = parseInt(parts[0], 10);
+            var minutes = parts[1];
+            var ampm = hours >= 12 ? 'PM' : 'AM';
+            hours = hours % 12;
+            if (hours === 0) hours = 12;
+            document.getElementById('pickupTimeFormatted').value = hours + ':' + minutes + ' ' + ampm;
           }
         });
       }
