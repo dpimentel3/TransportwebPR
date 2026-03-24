@@ -993,7 +993,8 @@
 
               <div>
                 <label for="pickupTime">Time of pick up</label>
-                <input id="pickupTime" name="pickupTime" type="time" required />
+                <input id="pickupTime" type="time" required />
+                <input type="hidden" id="pickupTimeFormatted" name="pickupTime" />
               </div>
 
               <div>
@@ -1195,6 +1196,26 @@
         });
       });
 
+      function formatTimeTo12Hour(timeValue) {
+        if (!timeValue) return '';
+        var parts = timeValue.split(':');
+        var hours = parseInt(parts[0], 10);
+        var minutes = parts[1];
+        var ampm = hours >= 12 ? 'PM' : 'AM';
+        hours = hours % 12;
+        if (hours === 0) hours = 12;
+        return hours + ':' + minutes + ' ' + ampm;
+      }
+
+      var timeInput = document.getElementById('pickupTime');
+      var timeHidden = document.getElementById('pickupTimeFormatted');
+
+      if (timeInput && timeHidden) {
+        timeInput.addEventListener('change', function () {
+          timeHidden.value = formatTimeTo12Hour(timeInput.value);
+        });
+      }
+
       const form = document.getElementById('bookingForm');
 
       if (form) {
@@ -1210,7 +1231,10 @@
           if (!tripDate || !pickupLocation || !pickupTime || !destination || !passengers || !firstName || !phone) {
             event.preventDefault();
             alert('Please complete all required fields before sending your booking request.');
+            return;
           }
+
+          timeHidden.value = formatTimeTo12Hour(pickupTime);
         });
       }
     })();
