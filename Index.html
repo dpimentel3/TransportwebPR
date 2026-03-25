@@ -1219,7 +1219,16 @@
       const form = document.getElementById('bookingForm');
 
       if (form) {
+        var isSubmitting = false;
+
         form.addEventListener('submit', function (event) {
+          var submitBtn = form.querySelector('button[type="submit"]');
+
+          if (isSubmitting) {
+            event.preventDefault();
+            return;
+          }
+
           const tripDate = document.getElementById('tripDate').value;
           const pickupLocation = document.getElementById('pickupLocation').value.trim();
           const pickupTime = document.getElementById('pickupTime').value;
@@ -1235,6 +1244,10 @@
           }
 
           timeHidden.value = formatTimeTo12Hour(pickupTime);
+
+          isSubmitting = true;
+          submitBtn.disabled = true;
+          submitBtn.textContent = 'Sending…';
         });
       }
     })();
