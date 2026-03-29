@@ -695,6 +695,95 @@
       white-space: nowrap;
     }
 
+    .btn-quote {
+      background: var(--accent);
+      color: #1a1a1a;
+      font-size: 1rem;
+    }
+    .btn-quote:hover { background: var(--accent-dark); }
+
+    .quote-modal-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      background: rgba(8, 37, 61, 0.55);
+      backdrop-filter: blur(4px);
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    .quote-modal-overlay.active {
+      display: flex;
+    }
+    .quote-modal {
+      background: #fff;
+      border-radius: var(--radius-xl);
+      padding: 36px 32px 32px;
+      max-width: 480px;
+      width: 100%;
+      position: relative;
+      box-shadow: var(--shadow-lg);
+      animation: quoteModalIn 0.25s ease;
+    }
+    @keyframes quoteModalIn {
+      from { opacity: 0; transform: translateY(24px) scale(0.97); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+    .quote-modal h2 {
+      font-size: 1.5rem;
+      margin: 0 0 4px;
+      color: var(--primary);
+    }
+    .quote-modal-close {
+      position: absolute;
+      top: 14px;
+      right: 18px;
+      background: none;
+      border: none;
+      font-size: 1.8rem;
+      color: var(--muted);
+      cursor: pointer;
+      line-height: 1;
+      padding: 4px;
+    }
+    .quote-modal-close:hover { color: var(--text); }
+    .quote-modal form > div { margin-bottom: 14px; }
+    .quote-modal label {
+      display: block;
+      font-weight: 600;
+      font-size: 0.92rem;
+      margin-bottom: 5px;
+      color: var(--text);
+    }
+    .quote-modal input[type="text"],
+    .quote-modal input[type="number"],
+    .quote-modal input[type="tel"] {
+      width: 100%;
+      padding: 12px 14px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      font-size: 1rem;
+      background: var(--bg);
+      transition: border-color 0.15s;
+    }
+    .quote-modal input:focus {
+      outline: none;
+      border-color: var(--accent);
+    }
+    .quote-modal .booking-note {
+      margin-top: 12px;
+      font-size: 0.88rem;
+      color: var(--muted);
+    }
+
+    @media (max-width: 720px) {
+      .quote-modal {
+        padding: 28px 20px 24px;
+        border-radius: var(--radius-lg);
+      }
+    }
+
     @media (max-width: 1024px) {
       .hero-grid,
       .two-col,
@@ -865,6 +954,7 @@
           <div class="hero-actions">
             <a class="btn btn-primary" href="#book">Book Your Ride</a>
             <a class="btn btn-light" href="tel:7872142058">Call 787-214-2058</a>
+            <button class="btn btn-quote" id="openQuoteModal" type="button">Get a Free Quote</button>
           </div>
           <div class="hero-mobile-note">Quickest option: tap <strong>Book Your Ride</strong> and complete the form in under a minute.</div>
           <div class="quick-actions" aria-label="Quick actions">
@@ -1135,6 +1225,43 @@
     </section>
   </main>
 
+  <!-- Free Quote Modal -->
+  <div class="quote-modal-overlay" id="quoteModalOverlay" aria-hidden="true">
+    <div class="quote-modal" role="dialog" aria-labelledby="quoteModalTitle" aria-modal="true">
+      <button class="quote-modal-close" id="closeQuoteModal" type="button" aria-label="Close quote form">&times;</button>
+      <h2 id="quoteModalTitle">Get a Free Quote</h2>
+      <p id="quoteModalSubtitle" class="muted" style="margin:0 0 18px;">Tell us about your trip and we'll get back to you with an estimated price.</p>
+      <form id="quoteForm" name="free-quote" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+        <input type="hidden" name="form-name" value="free-quote" />
+        <p class="hidden-field">
+          <label>Don't fill this out if you're human: <input name="bot-field" /></label>
+        </p>
+        <div>
+          <label for="quotePassengers">Number of Passengers</label>
+          <input id="quotePassengers" name="passengers" type="number" min="1" max="50" placeholder="Example: 4" required />
+        </div>
+        <div>
+          <label for="quotePickup">Pick up location</label>
+          <input id="quotePickup" name="pickupLocation" type="text" placeholder="Example: SJU Airport or hotel name" required />
+        </div>
+        <div>
+          <label for="quoteDestination">Destination</label>
+          <input id="quoteDestination" name="destination" type="text" placeholder="Example: San Juan Cruise Port" required />
+        </div>
+        <div>
+          <label for="quotePhone">Phone Number</label>
+          <input id="quotePhone" name="phone" type="tel" placeholder="Example: 787-555-1234" required />
+        </div>
+        <div class="hero-actions" style="margin: 6px 0 0;">
+          <button type="submit" class="btn btn-primary">Send Quote Request</button>
+        </div>
+        <div class="booking-note">
+          After you press <strong>Send Quote Request</strong> we will contact you with a quote.
+        </div>
+      </form>
+    </div>
+  </div>
+
   <footer>
     <div class="container footer-wrap">
       <div>
@@ -1248,6 +1375,95 @@
           isSubmitting = true;
           submitBtn.disabled = true;
           submitBtn.textContent = 'Sending…';
+        });
+      }
+
+      // Quote modal
+      var quoteOverlay = document.getElementById('quoteModalOverlay');
+      var openQuoteBtn = document.getElementById('openQuoteModal');
+      var closeQuoteBtn = document.getElementById('closeQuoteModal');
+      var quoteForm = document.getElementById('quoteForm');
+
+      if (openQuoteBtn && quoteOverlay) {
+        openQuoteBtn.addEventListener('click', function () {
+          quoteOverlay.classList.add('active');
+          quoteOverlay.setAttribute('aria-hidden', 'false');
+          document.body.style.overflow = 'hidden';
+          quoteOverlay.querySelector('input[name="passengers"]').focus();
+        });
+
+        closeQuoteBtn.addEventListener('click', function () {
+          quoteOverlay.classList.remove('active');
+          quoteOverlay.setAttribute('aria-hidden', 'true');
+          document.body.style.overflow = '';
+        });
+
+        quoteOverlay.addEventListener('click', function (e) {
+          if (e.target === quoteOverlay) {
+            quoteOverlay.classList.remove('active');
+            quoteOverlay.setAttribute('aria-hidden', 'true');
+            document.body.style.overflow = '';
+          }
+        });
+
+        document.addEventListener('keydown', function (e) {
+          if (e.key === 'Escape' && quoteOverlay.classList.contains('active')) {
+            quoteOverlay.classList.remove('active');
+            quoteOverlay.setAttribute('aria-hidden', 'true');
+            document.body.style.overflow = '';
+          }
+        });
+      }
+
+      if (quoteForm) {
+        var quoteSubmitting = false;
+
+        quoteForm.addEventListener('submit', function (event) {
+          var submitBtn = quoteForm.querySelector('button[type="submit"]');
+
+          if (quoteSubmitting) {
+            event.preventDefault();
+            return;
+          }
+
+          event.preventDefault();
+          quoteSubmitting = true;
+          submitBtn.disabled = true;
+          submitBtn.textContent = 'Sending…';
+
+          fetch('/', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            body: new URLSearchParams(new FormData(quoteForm)).toString()
+          }).then(function (response) {
+            if (response.ok) {
+              var modalTitle = document.getElementById('quoteModalTitle');
+              var modalSubtitle = document.getElementById('quoteModalSubtitle');
+              if (modalTitle) {
+                modalTitle.textContent = 'Quote request sent!';
+                modalTitle.style.color = 'var(--primary)';
+                modalTitle.style.textAlign = 'center';
+              }
+              if (modalSubtitle) {
+                modalSubtitle.textContent = 'The driver will reach out to you shortly.';
+                modalSubtitle.style.color = 'var(--muted)';
+                modalSubtitle.style.textAlign = 'center';
+                modalSubtitle.style.fontSize = '1rem';
+                modalSubtitle.style.marginBottom = '24px';
+              }
+              quoteForm.innerHTML = '<div style="text-align:center;padding:24px 0;"><p style="margin:0;font-size:0.95rem;color:var(--muted);line-height:1.6;">Pro tip: most quotes are flexible. Just check with your driver and they\'ll help you out.</p></div>';
+            } else {
+              alert('There was a problem sending your request. Please try again.');
+              quoteSubmitting = false;
+              submitBtn.disabled = false;
+              submitBtn.textContent = 'Send Quote Request';
+            }
+          }).catch(function () {
+            alert('There was a problem sending your request. Please try again.');
+            quoteSubmitting = false;
+            submitBtn.disabled = false;
+            submitBtn.textContent = 'Send Quote Request';
+          });
         });
       }
     })();
