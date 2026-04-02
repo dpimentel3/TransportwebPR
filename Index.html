@@ -1006,7 +1006,7 @@
           <article class="service-card">
             <div class="service-icon" aria-hidden="true">🌴</div>
             <h3>Excursions &amp; Tourist Rides</h3>
-            <p>Transportation to beaches, rainforest adventures, sightseeing spots like old San Juan, restaurants, cave swimming tours and other visitor destinations.</p>
+            <p>Transportation to beaches, rainforest adventures, sightseeing spots like old San Juan, restaurants, cave swimming tours and other visitor destinations. To book excursions like fishing trips, rain forest tours, cave swimming and boat charters contact us directly via text or call.</p>
           </article>
 
           <article class="service-card">
@@ -1257,6 +1257,15 @@
           <input id="quoteDestination" name="destination" type="text" placeholder="Example: San Juan Cruise Port" required />
         </div>
         <div>
+          <label for="quoteDate">Date of Pick Up</label>
+          <input id="quoteDate" name="pickupDate" type="date" required />
+        </div>
+        <div>
+          <label for="quoteTime">Time of Pick Up</label>
+          <input id="quoteTime" name="pickupTime" type="time" required />
+          <input type="hidden" id="quoteTimeFormatted" name="pickupTimeFormatted" />
+        </div>
+        <div>
           <label for="quotePhone">Phone Number</label>
           <input id="quotePhone" name="phone" type="tel" placeholder="Example: 787-555-1234" required />
         </div>
@@ -1423,6 +1432,14 @@
         });
       }
 
+      var quoteTimeInput = document.getElementById('quoteTime');
+      var quoteTimeHidden = document.getElementById('quoteTimeFormatted');
+      if (quoteTimeInput && quoteTimeHidden) {
+        quoteTimeInput.addEventListener('change', function () {
+          quoteTimeHidden.value = formatTimeTo12Hour(quoteTimeInput.value);
+        });
+      }
+
       if (quoteForm) {
         var quoteSubmitting = false;
 
@@ -1438,6 +1455,10 @@
           quoteSubmitting = true;
           submitBtn.disabled = true;
           submitBtn.textContent = 'Sending…';
+
+          if (quoteTimeInput && quoteTimeHidden) {
+            quoteTimeHidden.value = formatTimeTo12Hour(quoteTimeInput.value);
+          }
 
           fetch('/', {
             method: 'POST',
