@@ -490,6 +490,92 @@
       background: linear-gradient(180deg, rgba(255,255,255,0.92), rgba(255,255,255,0.84));
     }
 
+    .product-cards-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-top: 40px;
+    }
+
+    @media (max-width: 900px) {
+      .product-cards-row {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .product-card {
+      background: #fff;
+      border: 1px solid #e0e0e0;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      box-shadow: var(--shadow-sm);
+      transition: box-shadow 0.2s ease;
+    }
+
+    .product-card:hover {
+      box-shadow: var(--shadow-md);
+    }
+
+    .product-card img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+    }
+
+    .product-card-body {
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+    }
+
+    .product-card-body h3 {
+      font-size: 1.15rem;
+      color: var(--primary);
+      margin-bottom: 8px;
+    }
+
+    .product-card-body p {
+      font-size: 0.92rem;
+      color: var(--text);
+      margin-bottom: 6px;
+      line-height: 1.5;
+    }
+
+    .product-card-body .price {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--primary);
+      margin: 10px 0 4px;
+    }
+
+    .product-card-body .btn {
+      margin-top: auto;
+      padding-top: 12px;
+    }
+
+    .product-card-body .btn-primary {
+      display: inline-block;
+      text-align: center;
+      width: 100%;
+    }
+
+    .product-card-body .btn-secondary {
+      display: inline-block;
+      text-align: center;
+      width: 100%;
+    }
+
+    .product-card-body .price-line {
+      font-size: 0.92rem;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 4px;
+      line-height: 1.5;
+    }
+
     .service-icon {
       width: 54px;
       height: 54px;
@@ -1006,7 +1092,7 @@
           <article class="service-card">
             <div class="service-icon" aria-hidden="true">🌴</div>
             <h3>Excursions &amp; Tourist Rides</h3>
-            <p>Transportation to beaches, rainforest adventures, sightseeing spots like old San Juan, restaurants, cave swimming tours and other visitor destinations. To book excursions like fishing trips, rain forest tours, cave swimming and boat charters contact us directly via text or call.</p>
+            <p>Transportation to beaches, rainforest adventures, sightseeing spots like old San Juan, restaurants, cave swimming tours and other visitor destinations. To book excursions like fishing trips, boat charters contact us directly via text or call.</p>
           </article>
 
           <article class="service-card">
@@ -1014,6 +1100,37 @@
             <h3>Port &amp; Private Transfers</h3>
             <p>Enjoy reliable, convenient transportation to cruise ports, hotels, car rentals, marinas, and destinations throughout Puerto Rico. Whether you're heading to a bioluminescent bay tour or catching a ferry to Culebra, Vieques, Palomino, or Icacos, we provide seamless round-trip transportation carefully scheduled around your activities for a smooth and stress-free experience.</p>
           </article>
+        </div>
+
+        <div class="product-cards-row">
+          <div class="product-card">
+            <img src="20260211_162245.JPG" alt="Airport transfer vehicle">
+            <div class="product-card-body">
+              <h3>Airport Transfers</h3>
+              <p class="price">$10 / person</p>
+              <p>Drop-offs in the San Juan/Isla Verde area</p>
+              <p style="font-size:0.84rem; color:#666;">Request a free quote for drop-offs outside these areas</p>
+              <div class="btn">
+                <a href="#book" class="btn btn-primary">Book Now</a>
+              </div>
+            </div>
+          </div>
+          <div class="product-card">
+            <img src="IMG_7217.WEBP" alt="Excursions and tourist rides in Puerto Rico">
+            <div class="product-card-body">
+              <h3>Excursions &amp; Tourist Rides</h3>
+              <p class="price-line">$35 / person — Old San Juan Tours</p>
+              <p class="price-line">$95 / person — Cave Swimming in Charco Azul Vega Baja</p>
+              <p class="price-line">$72 / person — Rainforest Tour (4 person minimum)</p>
+              <p style="font-size:0.84rem; color:#666; margin-top:8px;">For fishing trips and Boat Charters contact us first</p>
+              <div class="btn">
+                <a href="#book" class="btn btn-primary">Book Now</a>
+              </div>
+              <div class="btn" style="padding-top:0;">
+                <a href="#contact-us" class="btn btn-secondary">Contact Us</a>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </section>
