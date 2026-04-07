@@ -570,7 +570,7 @@
 
     .product-card-body .price-line {
       font-size: 0.92rem;
-      font-weight: 600;
+      font-weight: 400;
       color: var(--text);
       margin-bottom: 4px;
       line-height: 1.5;
@@ -1131,6 +1131,19 @@
               </div>
             </div>
           </div>
+          <div class="product-card">
+            <img src="cruise-port-transfers.png" alt="Cruise port and ferry transfers in Puerto Rico">
+            <div class="product-card-body">
+              <h3>Cruise Ports &amp; Ferry Transfers</h3>
+              <p>Pricing for cruise ports/ferry pick-ups and drop-offs varies based on distance.</p>
+              <div class="btn">
+                <a href="#book" class="btn btn-primary">Book Now</a>
+              </div>
+              <div class="btn" style="padding-top:0;">
+                <a href="#" class="btn btn-secondary open-quote-link">Check Pricing &amp; Availability</a>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -1208,8 +1221,7 @@
 
               <div>
                 <label for="pickupTime">Time of pick up</label>
-                <input id="pickupTime" type="time" required />
-                <input type="hidden" id="pickupTimeFormatted" name="pickupTime" />
+                <input id="pickupTime" name="pickupTime" type="time" required />
               </div>
 
               <div>
@@ -1380,7 +1392,6 @@
         <div>
           <label for="quoteTime">Time of Pick Up</label>
           <input id="quoteTime" name="pickupTime" type="time" required />
-          <input type="hidden" id="quoteTimeFormatted" name="pickupTimeFormatted" />
         </div>
         <div>
           <label for="quotePhone">Phone Number</label>
@@ -1469,11 +1480,10 @@
       }
 
       var timeInput = document.getElementById('pickupTime');
-      var timeHidden = document.getElementById('pickupTimeFormatted');
 
-      if (timeInput && timeHidden) {
+      if (timeInput) {
         timeInput.addEventListener('change', function () {
-          timeHidden.value = formatTimeTo12Hour(timeInput.value);
+          timeInput.setAttribute('data-raw', timeInput.value);
         });
       }
 
@@ -1504,7 +1514,8 @@
             return;
           }
 
-          timeHidden.value = formatTimeTo12Hour(pickupTime);
+          var rawTime = timeInput.getAttribute('data-raw') || pickupTime;
+          timeInput.value = formatTimeTo12Hour(rawTime);
 
           isSubmitting = true;
           submitBtn.disabled = true;
@@ -1524,6 +1535,21 @@
           quoteOverlay.setAttribute('aria-hidden', 'false');
           document.body.style.overflow = 'hidden';
           quoteOverlay.querySelector('input[name="passengers"]').focus();
+        });
+
+        // "Check Pricing & Availability" links also open the quote modal
+        var quoteTriggers = document.querySelectorAll('.open-quote-link');
+        quoteTriggers.forEach(function (link) {
+          link.addEventListener('click', function (e) {
+            e.preventDefault();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            setTimeout(function () {
+              quoteOverlay.classList.add('active');
+              quoteOverlay.setAttribute('aria-hidden', 'false');
+              document.body.style.overflow = 'hidden';
+              quoteOverlay.querySelector('input[name="passengers"]').focus();
+            }, 400);
+          });
         });
 
         closeQuoteBtn.addEventListener('click', function () {
@@ -1550,10 +1576,9 @@
       }
 
       var quoteTimeInput = document.getElementById('quoteTime');
-      var quoteTimeHidden = document.getElementById('quoteTimeFormatted');
-      if (quoteTimeInput && quoteTimeHidden) {
+      if (quoteTimeInput) {
         quoteTimeInput.addEventListener('change', function () {
-          quoteTimeHidden.value = formatTimeTo12Hour(quoteTimeInput.value);
+          quoteTimeInput.setAttribute('data-raw', quoteTimeInput.value);
         });
       }
 
@@ -1573,8 +1598,9 @@
           submitBtn.disabled = true;
           submitBtn.textContent = 'Sending…';
 
-          if (quoteTimeInput && quoteTimeHidden) {
-            quoteTimeHidden.value = formatTimeTo12Hour(quoteTimeInput.value);
+          if (quoteTimeInput) {
+            var rawQuoteTime = quoteTimeInput.getAttribute('data-raw') || quoteTimeInput.value;
+            quoteTimeInput.value = formatTimeTo12Hour(rawQuoteTime);
           }
 
           fetch('/', {
