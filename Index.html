@@ -803,9 +803,11 @@
       z-index: 9999;
       background: rgba(8, 37, 61, 0.55);
       backdrop-filter: blur(4px);
-      align-items: center;
+      align-items: flex-start;
       justify-content: center;
       padding: 20px;
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
     }
     .quote-modal-overlay.active {
       display: flex;
@@ -819,6 +821,8 @@
       position: relative;
       box-shadow: var(--shadow-lg);
       animation: quoteModalIn 0.25s ease;
+      margin: auto 0;
+      flex-shrink: 0;
     }
     @keyframes quoteModalIn {
       from { opacity: 0; transform: translateY(24px) scale(0.97); }
@@ -1476,7 +1480,7 @@
         var ampm = hours >= 12 ? 'PM' : 'AM';
         hours = hours % 12;
         if (hours === 0) hours = 12;
-        return hours + ':' + minutes + ' ' + ampm;
+        return hours + ':' + minutes + ampm;
       }
 
       var timeInput = document.getElementById('pickupTime');
