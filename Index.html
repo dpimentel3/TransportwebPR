@@ -1395,7 +1395,8 @@
         </div>
         <div>
           <label for="quoteTime">Time of Pick Up</label>
-          <input id="quoteTime" name="pickupTime" type="time" required />
+          <input id="quoteTime" type="time" required />
+          <input type="hidden" id="quoteTimeFormatted" name="pickupTime" value="" />
         </div>
         <div>
           <label for="quotePhone">Phone Number</label>
@@ -1604,7 +1605,10 @@
 
           if (quoteTimeInput) {
             var rawQuoteTime = quoteTimeInput.getAttribute('data-raw') || quoteTimeInput.value;
-            quoteTimeInput.value = formatTimeTo12Hour(rawQuoteTime);
+            var formattedTimeField = document.getElementById('quoteTimeFormatted');
+            if (formattedTimeField) {
+              formattedTimeField.value = formatTimeTo12Hour(rawQuoteTime);
+            }
           }
 
           fetch('/', {
