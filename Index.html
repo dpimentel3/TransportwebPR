@@ -819,32 +819,25 @@
       background: rgba(13, 53, 87, 0.1);
     }
 
+    /* Desktop: show header toggle, hide menu toggle */
+    .lang-toggle-menu {
+      display: none;
+    }
+
     @media (max-width: 720px) {
-      .lang-toggle {
-        position: absolute;
-        top: 50%;
-        right: 60px;
-        transform: translateY(-50%);
-        margin-left: 0;
-        z-index: 10;
+      /* Mobile: hide header toggle, show menu toggle inside hamburger */
+      .lang-toggle-header {
+        display: none;
       }
 
-      .lang-toggle button {
-        padding: 6px 12px;
-        font-size: 0.82rem;
+      .lang-toggle-menu {
+        display: inline-flex;
+        align-self: center;
+        margin-top: 4px;
       }
     }
 
     @media (max-width: 360px) {
-      .lang-toggle {
-        right: 54px;
-      }
-
-      .lang-toggle button {
-        padding: 5px 8px;
-        font-size: 0.75rem;
-      }
-
       .brand span {
         display: none;
       }
@@ -1089,9 +1082,9 @@
         <span>DP Transport</span>
       </a>
 
-      <div class="lang-toggle" aria-label="Language switcher">
-        <button type="button" id="langEn" class="active" aria-pressed="true">English</button>
-        <button type="button" id="langEs" aria-pressed="false">Español</button>
+      <div class="lang-toggle lang-toggle-header" aria-label="Language switcher">
+        <button type="button" id="langEnHeader" class="active" aria-pressed="true">English</button>
+        <button type="button" id="langEsHeader" aria-pressed="false">Español</button>
       </div>
 
       <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="primary-nav" aria-label="Open menu">☰</button>
@@ -1102,6 +1095,10 @@
         <a href="#book" data-i18n="nav_book">Book</a>
         <a href="#faq" data-i18n="nav_faq">FAQ</a>
         <a href="#contact-us" data-i18n="nav_contact">Contact Us</a>
+        <div class="lang-toggle lang-toggle-menu" aria-label="Language switcher">
+          <button type="button" id="langEnMenu" class="active" aria-pressed="true">English</button>
+          <button type="button" id="langEsMenu" aria-pressed="false">Español</button>
+        </div>
       </nav>
     </div>
   </header>
@@ -1768,8 +1765,11 @@
     // Language Toggle
     (function () {
       var currentLang = 'en';
-      var langBtnEn = document.getElementById('langEn');
-      var langBtnEs = document.getElementById('langEs');
+      var allLangEnBtns = [document.getElementById('langEnHeader'), document.getElementById('langEnMenu')];
+      var allLangEsBtns = [document.getElementById('langEsHeader'), document.getElementById('langEsMenu')];
+      // Keep references for compatibility
+      var langBtnEn = allLangEnBtns[0];
+      var langBtnEs = allLangEsBtns[0];
 
       var esTranslations = {
         // Navigation
@@ -1975,10 +1975,8 @@
             var key = el.getAttribute('data-i18n-html');
             if (esHtmlTranslations[key]) el.innerHTML = esHtmlTranslations[key];
           });
-          langBtnEs.classList.add('active');
-          langBtnEn.classList.remove('active');
-          langBtnEs.setAttribute('aria-pressed', 'true');
-          langBtnEn.setAttribute('aria-pressed', 'false');
+          allLangEsBtns.forEach(function(b) { if(b) { b.classList.add('active'); b.setAttribute('aria-pressed', 'true'); } });
+          allLangEnBtns.forEach(function(b) { if(b) { b.classList.remove('active'); b.setAttribute('aria-pressed', 'false'); } });
         } else {
           document.querySelectorAll('[data-i18n]').forEach(function (el) {
             var key = el.getAttribute('data-i18n');
@@ -1996,20 +1994,16 @@
             var key = el.getAttribute('data-i18n-html');
             if (enHtmlTexts[key]) el.innerHTML = enHtmlTexts[key];
           });
-          langBtnEn.classList.add('active');
-          langBtnEs.classList.remove('active');
-          langBtnEn.setAttribute('aria-pressed', 'true');
-          langBtnEs.setAttribute('aria-pressed', 'false');
+          allLangEnBtns.forEach(function(b) { if(b) { b.classList.add('active'); b.setAttribute('aria-pressed', 'true'); } });
+          allLangEsBtns.forEach(function(b) { if(b) { b.classList.remove('active'); b.setAttribute('aria-pressed', 'false'); } });
         }
       }
 
       // Initialize
       storeEnglish();
 
-      if (langBtnEn && langBtnEs) {
-        langBtnEn.addEventListener('click', function () { setLanguage('en'); });
-        langBtnEs.addEventListener('click', function () { setLanguage('es'); });
-      }
+      allLangEnBtns.forEach(function(b) { if(b) b.addEventListener('click', function () { setLanguage('en'); }); });
+      allLangEsBtns.forEach(function(b) { if(b) b.addEventListener('click', function () { setLanguage('es'); }); });
     })();
   </script>
 </body>
