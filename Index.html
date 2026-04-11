@@ -789,6 +789,67 @@
       white-space: nowrap;
     }
 
+    .lang-toggle {
+      display: inline-flex;
+      border-radius: 999px;
+      overflow: hidden;
+      border: 2px solid var(--primary);
+      flex-shrink: 0;
+      margin-left: 4px;
+    }
+
+    .lang-toggle button {
+      padding: 7px 16px;
+      font-size: 0.88rem;
+      font-weight: 700;
+      border: none;
+      cursor: pointer;
+      transition: background 0.2s ease, color 0.2s ease;
+      background: transparent;
+      color: var(--primary);
+      line-height: 1.2;
+    }
+
+    .lang-toggle button.active {
+      background: var(--primary);
+      color: #fff;
+    }
+
+    .lang-toggle button:hover:not(.active) {
+      background: rgba(13, 53, 87, 0.1);
+    }
+
+    @media (max-width: 720px) {
+      .lang-toggle {
+        position: absolute;
+        top: 50%;
+        right: 60px;
+        transform: translateY(-50%);
+        margin-left: 0;
+        z-index: 10;
+      }
+
+      .lang-toggle button {
+        padding: 6px 12px;
+        font-size: 0.82rem;
+      }
+    }
+
+    @media (max-width: 360px) {
+      .lang-toggle {
+        right: 54px;
+      }
+
+      .lang-toggle button {
+        padding: 5px 8px;
+        font-size: 0.75rem;
+      }
+
+      .brand span {
+        display: none;
+      }
+    }
+
     .btn-quote {
       background: var(--accent);
       color: #1a1a1a;
@@ -1028,14 +1089,19 @@
         <span>DP Transport</span>
       </a>
 
+      <div class="lang-toggle" aria-label="Language switcher">
+        <button type="button" id="langEn" class="active" aria-pressed="true">English</button>
+        <button type="button" id="langEs" aria-pressed="false">Español</button>
+      </div>
+
       <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="primary-nav" aria-label="Open menu">☰</button>
 
       <nav class="nav-links" id="primary-nav" aria-label="Primary navigation">
-        <a href="#service">Services</a>
-        <a href="#how-it-works">How It Works</a>
-        <a href="#book">Book</a>
-        <a href="#faq">FAQ</a>
-        <a href="#contact-us">Contact Us</a>
+        <a href="#service" data-i18n="nav_services">Services</a>
+        <a href="#how-it-works" data-i18n="nav_how">How It Works</a>
+        <a href="#book" data-i18n="nav_book">Book</a>
+        <a href="#faq" data-i18n="nav_faq">FAQ</a>
+        <a href="#contact-us" data-i18n="nav_contact">Contact Us</a>
       </nav>
     </div>
   </header>
@@ -1044,35 +1110,35 @@
     <section class="hero" aria-labelledby="hero-title">
       <div class="container hero-grid">
         <div>
-          <span class="eyebrow">Reliable transportation in Puerto Rico</span>
-          <h1 id="hero-title">Professional airport rides, excursions, port transfers, and private transportation across Puerto Rico.</h1>
-          <p>
+          <span class="eyebrow" data-i18n="hero_eyebrow">Reliable transportation in Puerto Rico</span>
+          <h1 id="hero-title" data-i18n="hero_title">Professional airport rides, excursions, port transfers, and private transportation across Puerto Rico.</h1>
+          <p data-i18n="hero_desc">
             DP Transport helps visitors move around Puerto Rico with confidence. Whether you need airport pickup, transportation to ports, a custom excursion, or a private ride anywhere on the island, we make the process simple, professional, and easy to confirm.
           </p>
           <div class="hero-actions">
-            <a class="btn btn-primary" href="#book">Book Your Ride</a>
-            <a class="btn btn-light" href="tel:7872142058">Call 787-214-2058</a>
-            <button class="btn btn-quote" id="openQuoteModal" type="button">Get a Free Quote</button>
+            <a class="btn btn-primary" href="#book" data-i18n="hero_book">Book Your Ride</a>
+            <a class="btn btn-light" href="tel:7872142058" data-i18n="hero_call">Call 787-214-2058</a>
+            <button class="btn btn-quote" id="openQuoteModal" type="button" data-i18n="hero_quote">Get a Free Quote</button>
           </div>
-          <div class="hero-mobile-note">Quickest option: tap <strong>Book Your Ride</strong> and complete the form in under a minute.</div>
+          <div class="hero-mobile-note" data-i18n-html="hero_mobile_note">Quickest option: tap <strong>Book Your Ride</strong> and complete the form in under a minute.</div>
           <div class="quick-actions" aria-label="Quick actions">
             <a class="quick-action" href="#how-it-works">
-              <strong>See how it works</strong>
-              <p>Understand the booking process in 4 quick steps.</p>
+              <strong data-i18n="qa_how_title">See how it works</strong>
+              <p data-i18n="qa_how_desc">Understand the booking process in 4 quick steps.</p>
             </a>
             <a class="quick-action" href="#book">
-              <strong>Book in under 1 minute</strong>
-              <p>Fill out the form and send your trip details.</p>
+              <strong data-i18n="qa_book_title">Book in under 1 minute</strong>
+              <p data-i18n="qa_book_desc">Fill out the form and send your trip details.</p>
             </a>
             <a class="quick-action" href="#contact-us">
-              <strong>Need help first?</strong>
-              <p>Call or text us directly before booking.</p>
+              <strong data-i18n="qa_help_title">Need help first?</strong>
+              <p data-i18n="qa_help_desc">Call or text us directly before booking.</p>
             </a>
           </div>
           <div class="hero-stats" aria-label="Business highlights">
-            <div class="hero-stat"><strong>Safe &amp; On Time</strong><span>Reliable rides for visitors, families, and groups.</span></div>
-            <div class="hero-stat"><strong>Bilingual Drivers</strong><span>Easy communication in English and Spanish.</span></div>
-            <div class="hero-stat"><strong>Fast Confirmation</strong><span>Send your details and confirm by text.</span></div>
+            <div class="hero-stat"><strong data-i18n="stat_safe_title">Safe &amp; On Time</strong><span data-i18n="stat_safe_desc">Reliable rides for visitors, families, and groups.</span></div>
+            <div class="hero-stat"><strong data-i18n="stat_bilingual_title">Bilingual Drivers</strong><span data-i18n="stat_bilingual_desc">Easy communication in English and Spanish.</span></div>
+            <div class="hero-stat"><strong data-i18n="stat_fast_title">Fast Confirmation</strong><span data-i18n="stat_fast_desc">Send your details and confirm by text.</span></div>
           </div>
         </div>
       </div>
@@ -1082,27 +1148,27 @@
     <section id="service" class="background-section section-services">
       <div class="container section-shell">
         <div class="section-intro">
-          <h2>Services</h2>
-          <p>Clear communication, dependable pickups, and comfortable rides for airport travel, excursions, cruise ports, and custom island transportation.</p>
+          <h2 data-i18n="svc_title">Services</h2>
+          <p data-i18n="svc_desc">Clear communication, dependable pickups, and comfortable rides for airport travel, excursions, cruise ports, and custom island transportation.</p>
         </div>
 
         <div class="services-grid">
           <article class="service-card">
             <div class="service-icon" aria-hidden="true">✈️</div>
-            <h3>Airport Transportation</h3>
-            <p>Dependable rides to and from the airport so your arrival and departure feel smooth and stress-free. To ensure the best experience possible, we recommend booking at least 48 to 72 hours in advance. If you are scheduling an airport pickup, please add your flight number and airline of choice.</p>
+            <h3 data-i18n="svc_airport_title">Airport Transportation</h3>
+            <p data-i18n="svc_airport_desc">Dependable rides to and from the airport so your arrival and departure feel smooth and stress-free. To ensure the best experience possible, we recommend booking at least 48 to 72 hours in advance. If you are scheduling an airport pickup, please add your flight number and airline of choice.</p>
           </article>
 
           <article class="service-card">
             <div class="service-icon" aria-hidden="true">🌴</div>
-            <h3>Excursions &amp; Tourist Rides</h3>
-            <p>Transportation to beaches, rainforest adventures, sightseeing spots like old San Juan, restaurants, cave swimming tours and other visitor destinations. To book excursions like fishing trips, boat charters contact us directly via text or call.</p>
+            <h3 data-i18n="svc_excursion_title">Excursions &amp; Tourist Rides</h3>
+            <p data-i18n="svc_excursion_desc">Transportation to beaches, rainforest adventures, sightseeing spots like old San Juan, restaurants, cave swimming tours and other visitor destinations. To book excursions like fishing trips, boat charters contact us directly via text or call.</p>
           </article>
 
           <article class="service-card">
             <div class="service-icon" aria-hidden="true">⚓</div>
-            <h3>Port &amp; Private Transfers</h3>
-            <p>Enjoy reliable, convenient transportation to cruise ports, hotels, car rentals, marinas, and destinations throughout Puerto Rico. Whether you're heading to a bioluminescent bay tour or catching a ferry to Culebra, Vieques, Palomino, or Icacos, we provide seamless round-trip transportation carefully scheduled around your activities for a smooth and stress-free experience.</p>
+            <h3 data-i18n="svc_port_title">Port &amp; Private Transfers</h3>
+            <p data-i18n="svc_port_desc">Enjoy reliable, convenient transportation to cruise ports, hotels, car rentals, marinas, and destinations throughout Puerto Rico. Whether you're heading to a bioluminescent bay tour or catching a ferry to Culebra, Vieques, Palomino, or Icacos, we provide seamless round-trip transportation carefully scheduled around your activities for a smooth and stress-free experience.</p>
           </article>
         </div>
 
@@ -1110,41 +1176,41 @@
           <div class="product-card">
             <img src="20260211_162245.JPG" alt="Airport transfer vehicle">
             <div class="product-card-body">
-              <h3>Airport Transfers</h3>
-              <p class="price">$10 / person</p>
-              <p>Drop-offs in the San Juan/Isla Verde area</p>
-              <p style="font-size:0.84rem; color:#666;">Request a free quote for drop-offs outside these areas</p>
+              <h3 data-i18n="prod_airport_title">Airport Transfers</h3>
+              <p class="price" data-i18n="prod_airport_price">$10 / person</p>
+              <p data-i18n="prod_airport_area">Drop-offs in the San Juan/Isla Verde area</p>
+              <p style="font-size:0.84rem; color:#666;" data-i18n="prod_airport_quote">Request a free quote for drop-offs outside these areas</p>
               <div class="btn">
-                <a href="#book" class="btn btn-primary">Book Now</a>
+                <a href="#book" class="btn btn-primary" data-i18n="book_now">Book Now</a>
               </div>
             </div>
           </div>
           <div class="product-card">
             <img src="IMG_7217.WEBP" alt="Excursions and tourist rides in Puerto Rico">
             <div class="product-card-body">
-              <h3>Excursions &amp; Tourist Rides</h3>
-              <p class="price-line">$35 / person — Old San Juan Tours</p>
-              <p class="price-line">$95 / person — Cave Swimming in Charco Azul Vega Baja</p>
-              <p class="price-line">$72 / person — Rainforest Tour (4 person minimum)</p>
-              <p style="font-size:0.84rem; color:#666; margin-top:8px;">For fishing trips and Boat Charters contact us first</p>
+              <h3 data-i18n="prod_excursion_title">Excursions &amp; Tourist Rides</h3>
+              <p class="price-line" data-i18n="prod_exc_price1">$35 / person — Old San Juan Tours</p>
+              <p class="price-line" data-i18n="prod_exc_price2">$95 / person — Cave Swimming in Charco Azul Vega Baja</p>
+              <p class="price-line" data-i18n="prod_exc_price3">$72 / person — Rainforest Tour (4 person minimum)</p>
+              <p style="font-size:0.84rem; color:#666; margin-top:8px;" data-i18n="prod_exc_contact">For fishing trips and Boat Charters contact us first</p>
               <div class="btn">
-                <a href="#book" class="btn btn-primary">Book Now</a>
+                <a href="#book" class="btn btn-primary" data-i18n="book_now">Book Now</a>
               </div>
               <div class="btn" style="padding-top:0;">
-                <a href="#contact-us" class="btn btn-secondary">Contact Us</a>
+                <a href="#contact-us" class="btn btn-secondary" data-i18n="nav_contact">Contact Us</a>
               </div>
             </div>
           </div>
           <div class="product-card">
             <img src="cruise-port-transfers.png" alt="Cruise port and ferry transfers in Puerto Rico">
             <div class="product-card-body">
-              <h3>Cruise Ports &amp; Ferry Transfers</h3>
-              <p>Pricing for cruise ports/ferry pick-ups and drop-offs varies based on distance.</p>
+              <h3 data-i18n="prod_cruise_title">Cruise Ports &amp; Ferry Transfers</h3>
+              <p data-i18n="prod_cruise_desc">Pricing for cruise ports/ferry pick-ups and drop-offs varies based on distance.</p>
               <div class="btn">
-                <a href="#book" class="btn btn-primary">Book Now</a>
+                <a href="#book" class="btn btn-primary" data-i18n="book_now">Book Now</a>
               </div>
               <div class="btn" style="padding-top:0;">
-                <a href="#" class="btn btn-secondary open-quote-link">Check Pricing &amp; Availability</a>
+                <a href="#" class="btn btn-secondary open-quote-link" data-i18n="check_pricing">Check Pricing &amp; Availability</a>
               </div>
             </div>
           </div>
@@ -1155,32 +1221,32 @@
     <section id="how-it-works" class="background-section section-how">
       <div class="container section-shell">
         <div class="section-intro">
-          <h2>How it works</h2>
-          <p>Every step is laid out clearly so arranging transportation feels quick and straightforward.</p>
+          <h2 data-i18n="how_title">How it works</h2>
+          <p data-i18n="how_desc">Every step is laid out clearly so arranging transportation feels quick and straightforward.</p>
         </div>
         <div class="steps-grid">
           <article class="step">
             <div class="step-number">1</div>
-            <h3>Fill in your trip details</h3>
-            <p>Enter your date, pickup time and location, destination, number of passengers, first name, and phone number.</p>
+            <h3 data-i18n="step1_title">Fill in your trip details</h3>
+            <p data-i18n="step1_desc">Enter your date, pickup time and location, destination, number of passengers, first name, and phone number.</p>
           </article>
 
           <article class="step">
             <div class="step-number">2</div>
-            <h3>Send the request</h3>
-            <p>Tap the booking button to send your transportation request with all the details included.</p>
+            <h3 data-i18n="step2_title">Send the request</h3>
+            <p data-i18n="step2_desc">Tap the booking button to send your transportation request with all the details included.</p>
           </article>
 
           <article class="step">
             <div class="step-number">3</div>
-            <h3>Receive a text from the driver</h3>
-            <p>After your request is received, the driver will text you with your trip details and confirmation steps.</p>
+            <h3 data-i18n="step3_title">Receive a text from the driver</h3>
+            <p data-i18n="step3_desc">After your request is received, the driver will text you with your trip details and confirmation steps.</p>
           </article>
 
           <article class="step">
             <div class="step-number">4</div>
-            <h3>Reply to confirm the trip</h3>
-            <p>Answer the driver’s text to confirm your transportation. Once you reply, your trip is confirmed.</p>
+            <h3 data-i18n="step4_title">Reply to confirm the trip</h3>
+            <p data-i18n="step4_desc">Answer the driver’s text to confirm your transportation. Once you reply, your trip is confirmed.</p>
           </article>
         </div>
       </div>
@@ -1191,75 +1257,75 @@
         <div class="section-grid two-col">
           <div>
             <div class="section-intro">
-              <h2>Book</h2>
-              <p>Fill out your transportation request so the driver can follow up and confirm your trip.</p>
+              <h2 data-i18n="book_title">Book</h2>
+              <p data-i18n="book_desc">Fill out your transportation request so the driver can follow up and confirm your trip.</p>
             </div>
             <div class="summary-box">
-              <h3>Before you send the request</h3>
-              <p class="muted" style="margin:0;">Having these details ready makes confirmation faster.</p>
+              <h3 data-i18n="book_before_title">Before you send the request</h3>
+              <p class="muted" style="margin:0;" data-i18n="book_before_desc">Having these details ready makes confirmation faster.</p>
               <ul class="summary-list">
-                <li>Choose the correct date and pickup time/location</li>
-                <li>Enter the exact destination or place name</li>
-                <li>Make sure your phone number is correct</li>
+                <li data-i18n="book_check1">Choose the correct date and pickup time/location</li>
+                <li data-i18n="book_check2">Enter the exact destination or place name</li>
+                <li data-i18n="book_check3">Make sure your phone number is correct</li>
               </ul>
             </div>
           </div>
 
           <aside class="booking-card" aria-labelledby="booking-title">
-            <h2 id="booking-title">Book your transportation</h2>
+            <h2 id="booking-title" data-i18n="book_form_title">Book your transportation</h2>
             <form id="bookingForm" name="booking" method="POST" data-netlify="true" netlify-honeypot="bot-field">
               <input type="hidden" name="form-name" value="booking" />
               <p class="hidden-field">
-                <label>Don’t fill this out if you're human: <input name="bot-field" /></label>
+                <label>Don’t fill this out if you’re human: <input name="bot-field" /></label>
               </p>
               <div class="field-grid">
                 <div>
-                  <label for="tripDate">Date (month/day)</label>
+                  <label for="tripDate" data-i18n="label_date">Date (month/day)</label>
                   <input id="tripDate" name="tripDate" type="date" required />
                 </div>
                 <div>
-                  <label for="pickupLocation">Pick up location</label>
-                  <input id="pickupLocation" name="pickupLocation" type="text" placeholder="Example: SJU Airport or hotel name" required />
+                  <label for="pickupLocation" data-i18n="label_pickup">Pick up location</label>
+                  <input id="pickupLocation" name="pickupLocation" type="text" data-i18n-placeholder="ph_pickup" placeholder="Example: SJU Airport or hotel name" required />
                 </div>
               </div>
 
               <div>
-                <label for="pickupTime">Time of pick up</label>
+                <label for="pickupTime" data-i18n="label_time">Time of pick up</label>
                 <input id="pickupTime" type="time" required />
                 <input type="hidden" id="pickupTimeFormatted" name="pickupTime" value="" />
               </div>
 
               <div>
-                <label for="destination">Destination</label>
-                <input id="destination" name="destination" type="text" placeholder="Example: San Juan Cruise Port" required />
-                <div class="helper">Use a place name or address so the driver clearly understands your destination.</div>
+                <label for="destination" data-i18n="label_destination">Destination</label>
+                <input id="destination" name="destination" type="text" data-i18n-placeholder="ph_destination" placeholder="Example: San Juan Cruise Port" required />
+                <div class="helper" data-i18n="helper_destination">Use a place name or address so the driver clearly understands your destination.</div>
               </div>
 
               <div class="field-grid">
                 <div>
-                  <label for="passengers">Number of passengers</label>
-                  <input id="passengers" name="passengers" type="number" min="1" max="50" placeholder="Example: 4" required />
+                  <label for="passengers" data-i18n="label_passengers">Number of passengers</label>
+                  <input id="passengers" name="passengers" type="number" min="1" max="50" data-i18n-placeholder="ph_passengers" placeholder="Example: 4" required />
                 </div>
                 <div>
-                  <label for="phone">Phone number</label>
+                  <label for="phone" data-i18n="label_phone">Phone number</label>
                   <input id="phone" name="phone" type="tel" placeholder="787-214-2058" required />
                 </div>
               </div>
 
               <div>
-                <label for="firstName">First name</label>
+                <label for="firstName" data-i18n="label_name">First name</label>
                 <input id="firstName" name="firstName" type="text" required />
               </div>
 
               <div>
-                <label for="comments">Comments</label>
-                <textarea id="comments" name="comments" placeholder="Add any extra details about your trip if necessary (flight number/airline, need/have car seat, number of bags or golf bags)"></textarea>
+                <label for="comments" data-i18n="label_comments">Comments</label>
+                <textarea id="comments" name="comments" data-i18n-placeholder="ph_comments" placeholder="Add any extra details about your trip if necessary (flight number/airline, need/have car seat, number of bags or golf bags)"></textarea>
               </div>
 
               <div class="hero-actions" style="margin: 6px 0 0;">
-                <button type="submit" class="btn btn-primary">Send Booking Request</button>
+                <button type="submit" class="btn btn-primary" data-i18n="btn_send_booking">Send Booking Request</button>
               </div>
-              <div class="booking-note">
+              <div class="booking-note" data-i18n="booking_note">
                 No payments are made through the website. Payment is made directly to the driver at the end of the trip, and can be made by cash or credit card.
               </div>
             </form>
@@ -1271,38 +1337,38 @@
     <section id="faq" class="background-section section-faq">
       <div class="container section-shell">
         <div class="section-intro">
-          <h2>Frequently asked questions</h2>
-          <p>Clear answers so you feel comfortable booking your ride.</p>
+          <h2 data-i18n="faq_title">Frequently asked questions</h2>
+          <p data-i18n="faq_desc">Clear answers so you feel comfortable booking your ride.</p>
         </div>
         <div class="faq-grid faq-list">
           <details class="faq-item">
-            <summary>Are your drivers licensed?</summary>
-            <div class="faq-answer">Yes. Our drivers are licensed professionals with years of experience in the transportation business.</div>
+            <summary data-i18n="faq1_q">Are your drivers licensed?</summary>
+            <div class="faq-answer" data-i18n="faq1_a">Yes. Our drivers are licensed professionals with years of experience in the transportation business.</div>
           </details>
 
           <details class="faq-item">
-            <summary>Do you provide safe and on-time transportation?</summary>
-            <div class="faq-answer">Yes. We focus on safe, reliable, and on-time transportation so visitors can travel with confidence.</div>
+            <summary data-i18n="faq2_q">Do you provide safe and on-time transportation?</summary>
+            <div class="faq-answer" data-i18n="faq2_a">Yes. We focus on safe, reliable, and on-time transportation so visitors can travel with confidence.</div>
           </details>
 
           <details class="faq-item">
-            <summary>Are your drivers bilingual?</summary>
-            <div class="faq-answer">Yes. Our drivers are bilingual, making communication easier for both local and international travelers.</div>
+            <summary data-i18n="faq3_q">Are your drivers bilingual?</summary>
+            <div class="faq-answer" data-i18n="faq3_a">Yes. Our drivers are bilingual, making communication easier for both local and international travelers.</div>
           </details>
 
           <details class="faq-item">
-            <summary>Do you offer group transportation?</summary>
-            <div class="faq-answer">Yes. We offer transportation for groups as well as private rides for individuals, couples, and families.</div>
+            <summary data-i18n="faq4_q">Do you offer group transportation?</summary>
+            <div class="faq-answer" data-i18n="faq4_a">Yes. We offer transportation for groups as well as private rides for individuals, couples, and families.</div>
           </details>
 
           <details class="faq-item">
-            <summary>Do you operate every day?</summary>
-            <div class="faq-answer">Yes. Drivers operate 24/7, 365 days a year, and the business is available daily to help arrange transportation requests.</div>
+            <summary data-i18n="faq5_q">Do you operate every day?</summary>
+            <div class="faq-answer" data-i18n="faq5_a">Yes. Drivers operate 24/7, 365 days a year, and the business is available daily to help arrange transportation requests.</div>
           </details>
 
           <details class="faq-item">
-            <summary>What information do I need to book?</summary>
-            <div class="faq-answer">Please provide the date, pickup time and location, destination, number of passengers, your first name, and your phone number. After that, the driver will text you and you must reply to confirm the trip.</div>
+            <summary data-i18n="faq6_q">What information do I need to book?</summary>
+            <div class="faq-answer" data-i18n="faq6_a">Please provide the date, pickup time and location, destination, number of passengers, your first name, and your phone number. After that, the driver will text you and you must reply to confirm the trip.</div>
           </details>
         </div>
       </div>
@@ -1312,43 +1378,43 @@
       <div class="container section-shell">
         <div class="panel">
           <div class="section-intro" style="margin-bottom: 18px;">
-            <h2>Contact us</h2>
-            <p>Need airport transportation, a cruise port transfer, or a ride for your excursion? Reach out directly and we’ll help arrange it.</p>
+            <h2 data-i18n="contact_title">Contact us</h2>
+            <p data-i18n="contact_desc">Need airport transportation, a cruise port transfer, or a ride for your excursion? Reach out directly and we’ll help arrange it.</p>
           </div>
 
           <div class="contact-grid">
             <div>
               <div class="info-list">
                 <div>
-                  <strong>Phone</strong>
+                  <strong data-i18n="contact_phone">Phone</strong>
                   <a href="tel:7872142058">787-214-2058</a>
                 </div>
                 <div>
-                  <strong>Address</strong>
+                  <strong data-i18n="contact_address">Address</strong>
                   Rio Grande, Puerto Rico
                 </div>
                 <div>
-                  <strong>Office Hours</strong>
-                  9:00 AM – 11:00 PM, every day
+                  <strong data-i18n="contact_hours_label">Office Hours</strong>
+                  <span data-i18n="contact_hours_value">9:00 AM – 11:00 PM, every day</span>
                 </div>
               </div>
             </div>
 
             <div>
-              <h3>Why visitors choose DP Transport</h3>
+              <h3 data-i18n="contact_why_title">Why visitors choose DP Transport</h3>
               <ul class="check-list">
-                <li>Licensed professional drivers with years of experience</li>
-                <li>Bilingual service for local and international travelers</li>
-                <li>Group transportation available</li>
-                <li>Safe and on-time transportation across Puerto Rico</li>
-                <li>Fast click-to-call and click-to-text booking options</li>
+                <li data-i18n="contact_why1">Licensed professional drivers with years of experience</li>
+                <li data-i18n="contact_why2">Bilingual service for local and international travelers</li>
+                <li data-i18n="contact_why3">Group transportation available</li>
+                <li data-i18n="contact_why4">Safe and on-time transportation across Puerto Rico</li>
+                <li data-i18n="contact_why5">Fast click-to-call and click-to-text booking options</li>
               </ul>
             </div>
           </div>
 
           <div class="hero-actions" style="margin-top: 24px; margin-bottom: 0;">
-            <a class="btn btn-primary" href="sms:+17872142058?body=Hello%20DP%20Transport%2C%20I%20would%20like%20to%20arrange%20transportation.">Text Us</a>
-            <a class="btn btn-secondary" href="tel:7872142058">Call Now</a>
+            <a class="btn btn-primary" href="sms:+17872142058?body=Hello%20DP%20Transport%2C%20I%20would%20like%20to%20arrange%20transportation." data-i18n="btn_text_us">Text Us</a>
+            <a class="btn btn-secondary" href="tel:7872142058" data-i18n="btn_call_now">Call Now</a>
           </div>
         </div>
       </div>
@@ -1358,10 +1424,10 @@
       <div class="container section-shell">
         <div class="cta">
           <div>
-            <h2>Ready to arrange transportation?</h2>
-            <p>Book now, send your trip details, and watch for the confirmation text from the driver.</p>
+            <h2 data-i18n="cta_title">Ready to arrange transportation?</h2>
+            <p data-i18n="cta_desc">Book now, send your trip details, and watch for the confirmation text from the driver.</p>
           </div>
-          <a class="btn btn-primary" href="#book">Go to Booking</a>
+          <a class="btn btn-primary" href="#book" data-i18n="cta_btn">Go to Booking</a>
         </div>
       </div>
     </section>
@@ -1371,42 +1437,42 @@
   <div class="quote-modal-overlay" id="quoteModalOverlay" aria-hidden="true">
     <div class="quote-modal" role="dialog" aria-labelledby="quoteModalTitle" aria-modal="true">
       <button class="quote-modal-close" id="closeQuoteModal" type="button" aria-label="Close quote form">&times;</button>
-      <h2 id="quoteModalTitle">Get a Free Quote</h2>
-      <p id="quoteModalSubtitle" class="muted" style="margin:0 0 18px;">Tell us about your trip and we'll get back to you with an estimated price.</p>
+      <h2 id="quoteModalTitle" data-i18n="quote_title">Get a Free Quote</h2>
+      <p id="quoteModalSubtitle" class="muted" style="margin:0 0 18px;" data-i18n="quote_subtitle">Tell us about your trip and we'll get back to you with an estimated price.</p>
       <form id="quoteForm" name="free-quote" method="POST" data-netlify="true" netlify-honeypot="bot-field">
         <input type="hidden" name="form-name" value="free-quote" />
         <p class="hidden-field">
           <label>Don't fill this out if you're human: <input name="bot-field" /></label>
         </p>
         <div>
-          <label for="quotePassengers">Number of Passengers</label>
-          <input id="quotePassengers" name="passengers" type="number" min="1" max="50" placeholder="Example: 4" required />
+          <label for="quotePassengers" data-i18n="ql_passengers">Number of Passengers</label>
+          <input id="quotePassengers" name="passengers" type="number" min="1" max="50" data-i18n-placeholder="ph_passengers" placeholder="Example: 4" required />
         </div>
         <div>
-          <label for="quotePickup">Pick up location</label>
-          <input id="quotePickup" name="pickupLocation" type="text" placeholder="Example: SJU Airport or hotel name" required />
+          <label for="quotePickup" data-i18n="label_pickup">Pick up location</label>
+          <input id="quotePickup" name="pickupLocation" type="text" data-i18n-placeholder="ph_pickup" placeholder="Example: SJU Airport or hotel name" required />
         </div>
         <div>
-          <label for="quoteDestination">Destination</label>
-          <input id="quoteDestination" name="destination" type="text" placeholder="Example: San Juan Cruise Port" required />
+          <label for="quoteDestination" data-i18n="label_destination">Destination</label>
+          <input id="quoteDestination" name="destination" type="text" data-i18n-placeholder="ph_destination" placeholder="Example: San Juan Cruise Port" required />
         </div>
         <div>
-          <label for="quoteDate">Date of Pick Up</label>
+          <label for="quoteDate" data-i18n="ql_date">Date of Pick Up</label>
           <input id="quoteDate" name="pickupDate" type="date" required />
         </div>
         <div>
-          <label for="quoteTime">Time of Pick Up</label>
+          <label for="quoteTime" data-i18n="ql_time">Time of Pick Up</label>
           <input id="quoteTime" type="time" required />
           <input type="hidden" id="quoteTimeFormatted" name="pickupTime" value="" />
         </div>
         <div>
-          <label for="quotePhone">Phone Number</label>
-          <input id="quotePhone" name="phone" type="tel" placeholder="Example: 787-555-1234" required />
+          <label for="quotePhone" data-i18n="ql_phone">Phone Number</label>
+          <input id="quotePhone" name="phone" type="tel" data-i18n-placeholder="ph_quote_phone" placeholder="Example: 787-555-1234" required />
         </div>
         <div class="hero-actions" style="margin: 6px 0 0;">
-          <button type="submit" class="btn btn-primary">Send Quote Request</button>
+          <button type="submit" class="btn btn-primary" data-i18n="btn_send_quote">Send Quote Request</button>
         </div>
-        <div class="booking-note">
+        <div class="booking-note" data-i18n-html="quote_note">
           After you press <strong>Send Quote Request</strong> we will contact you with a quote.
         </div>
       </form>
@@ -1420,11 +1486,11 @@
         Rio Grande, Puerto Rico · 787-214-2058
       </div>
       <nav class="footer-nav" aria-label="Footer navigation">
-        <a href="#service">Services</a>
-        <a href="#how-it-works">How It Works</a>
-        <a href="#book">Book</a>
-        <a href="#faq">FAQ</a>
-        <a href="#contact-us">Contact Us</a>
+        <a href="#service" data-i18n="nav_services">Services</a>
+        <a href="#how-it-works" data-i18n="nav_how">How It Works</a>
+        <a href="#book" data-i18n="nav_book">Book</a>
+        <a href="#faq" data-i18n="nav_faq">FAQ</a>
+        <a href="#contact-us" data-i18n="nav_contact">Contact Us</a>
       </nav>
     </div>
   </footer>
@@ -1499,10 +1565,10 @@
         var isSubmitting = false;
 
         form.addEventListener('submit', function (event) {
+          event.preventDefault();
           var submitBtn = form.querySelector('button[type="submit"]');
 
           if (isSubmitting) {
-            event.preventDefault();
             return;
           }
 
@@ -1515,8 +1581,10 @@
           const phone = document.getElementById('phone').value.trim();
 
           if (!tripDate || !pickupLocation || !pickupTime || !destination || !passengers || !firstName || !phone) {
-            event.preventDefault();
-            alert('Please complete all required fields before sending your booking request.');
+            var alertMsg = document.documentElement.getAttribute('lang') === 'es'
+              ? 'Por favor complete todos los campos requeridos antes de enviar su solicitud de reserva.'
+              : 'Please complete all required fields before sending your booking request.';
+            alert(alertMsg);
             return;
           }
 
@@ -1525,7 +1593,46 @@
 
           isSubmitting = true;
           submitBtn.disabled = true;
-          submitBtn.textContent = 'Sending…';
+          var isEs = document.documentElement.getAttribute('lang') === 'es';
+          submitBtn.textContent = isEs ? 'Enviando…' : 'Sending…';
+
+          fetch('/', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            body: new URLSearchParams(new FormData(form)).toString()
+          }).then(function (response) {
+            isEs = document.documentElement.getAttribute('lang') === 'es';
+            if (response.ok) {
+              var bookingCard = form.closest('.booking-card');
+              var titleEl = bookingCard ? bookingCard.querySelector('#booking-title') : null;
+              if (titleEl) {
+                titleEl.textContent = isEs ? '¡Solicitud de reserva enviada!' : 'Booking request sent!';
+                titleEl.style.color = 'var(--primary)';
+                titleEl.style.textAlign = 'center';
+                titleEl.setAttribute('data-i18n', 'book_form_success_title');
+              }
+              form.innerHTML = '<div style="text-align:center;padding:24px 0;">' +
+                '<p style="margin:0 0 12px;font-size:1.1rem;color:var(--primary);font-weight:600;" data-i18n="book_form_success_msg">' +
+                (isEs ? 'El conductor se comunicará con usted pronto por mensaje de texto.' : 'The driver will reach out to you shortly via text message.') +
+                '</p>' +
+                '<p style="margin:0;font-size:0.95rem;color:var(--muted);line-height:1.6;" data-i18n="book_form_success_tip">' +
+                (isEs ? 'Consejo: responda al mensaje del conductor para confirmar su viaje.' : 'Tip: reply to the driver\'s text message to confirm your trip.') +
+                '</p></div>';
+            } else {
+              var errMsg = isEs ? 'Hubo un problema al enviar su solicitud. Por favor intente de nuevo.' : 'There was a problem sending your request. Please try again.';
+              alert(errMsg);
+              isSubmitting = false;
+              submitBtn.disabled = false;
+              submitBtn.textContent = isEs ? 'Enviar Solicitud de Reserva' : 'Send Booking Request';
+            }
+          }).catch(function () {
+            var isEs = document.documentElement.getAttribute('lang') === 'es';
+            var errMsg = isEs ? 'Hubo un problema al enviar su solicitud. Por favor intente de nuevo.' : 'There was a problem sending your request. Please try again.';
+            alert(errMsg);
+            isSubmitting = false;
+            submitBtn.disabled = false;
+            submitBtn.textContent = isEs ? 'Enviar Solicitud de Reserva' : 'Send Booking Request';
+          });
         });
       }
 
@@ -1602,7 +1709,7 @@
           event.preventDefault();
           quoteSubmitting = true;
           submitBtn.disabled = true;
-          submitBtn.textContent = 'Sending…';
+          submitBtn.textContent = document.documentElement.getAttribute('lang') === 'es' ? 'Enviando…' : 'Sending…';
 
           if (quoteTimeInput) {
             var rawQuoteTime = quoteTimeInput.getAttribute('data-raw') || quoteTimeInput.value;
@@ -1617,35 +1724,291 @@
             headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
             body: new URLSearchParams(new FormData(quoteForm)).toString()
           }).then(function (response) {
+            var isEs = document.documentElement.getAttribute('lang') === 'es';
             if (response.ok) {
               var modalTitle = document.getElementById('quoteModalTitle');
               var modalSubtitle = document.getElementById('quoteModalSubtitle');
               if (modalTitle) {
-                modalTitle.textContent = 'Quote request sent!';
+                modalTitle.textContent = isEs ? '¡Solicitud de cotización enviada!' : 'Quote request sent!';
                 modalTitle.style.color = 'var(--primary)';
                 modalTitle.style.textAlign = 'center';
+                modalTitle.setAttribute('data-i18n', 'quote_success_title');
               }
               if (modalSubtitle) {
-                modalSubtitle.textContent = 'The driver will reach out to you shortly.';
+                modalSubtitle.textContent = isEs ? 'El conductor se comunicará con usted pronto.' : 'The driver will reach out to you shortly.';
                 modalSubtitle.style.color = 'var(--muted)';
                 modalSubtitle.style.textAlign = 'center';
                 modalSubtitle.style.fontSize = '1rem';
                 modalSubtitle.style.marginBottom = '24px';
+                modalSubtitle.setAttribute('data-i18n', 'quote_success_subtitle');
               }
-              quoteForm.innerHTML = '<div style="text-align:center;padding:24px 0;"><p style="margin:0;font-size:0.95rem;color:var(--muted);line-height:1.6;">Pro tip: most quotes are flexible. Just check with your driver and they\'ll help you out.</p></div>';
+              var proTip = isEs
+                ? 'Consejo: la mayoría de las cotizaciones son flexibles. Consulte con su conductor y le ayudarán.'
+                : 'Pro tip: most quotes are flexible. Just check with your driver and they\'ll help you out.';
+              quoteForm.innerHTML = '<div style="text-align:center;padding:24px 0;"><p style="margin:0;font-size:0.95rem;color:var(--muted);line-height:1.6;" data-i18n="quote_success_tip">' + proTip + '</p></div>';
             } else {
-              alert('There was a problem sending your request. Please try again.');
+              var errMsg = isEs ? 'Hubo un problema al enviar su solicitud. Por favor intente de nuevo.' : 'There was a problem sending your request. Please try again.';
+              alert(errMsg);
               quoteSubmitting = false;
               submitBtn.disabled = false;
-              submitBtn.textContent = 'Send Quote Request';
+              submitBtn.textContent = isEs ? 'Enviar Solicitud de Cotización' : 'Send Quote Request';
             }
           }).catch(function () {
-            alert('There was a problem sending your request. Please try again.');
+            var isEs = document.documentElement.getAttribute('lang') === 'es';
+            var errMsg = isEs ? 'Hubo un problema al enviar su solicitud. Por favor intente de nuevo.' : 'There was a problem sending your request. Please try again.';
+            alert(errMsg);
             quoteSubmitting = false;
             submitBtn.disabled = false;
-            submitBtn.textContent = 'Send Quote Request';
+            submitBtn.textContent = isEs ? 'Enviar Solicitud de Cotización' : 'Send Quote Request';
           });
         });
+      }
+    })();
+
+    // Language Toggle
+    (function () {
+      var currentLang = 'en';
+      var langBtnEn = document.getElementById('langEn');
+      var langBtnEs = document.getElementById('langEs');
+
+      var esTranslations = {
+        // Navigation
+        nav_services: 'Servicios',
+        nav_how: 'Cómo Funciona',
+        nav_book: 'Reservar',
+        nav_faq: 'Preguntas Frecuentes',
+        nav_contact: 'Contáctenos',
+
+        // Hero
+        hero_eyebrow: 'Transporte confiable en Puerto Rico',
+        hero_title: 'Viajes profesionales al aeropuerto, excursiones, traslados a puertos y transporte privado en todo Puerto Rico.',
+        hero_desc: 'DP Transport ayuda a los visitantes a moverse por Puerto Rico con confianza. Ya sea que necesite recogida en el aeropuerto, transporte a puertos, una excursión personalizada o un viaje privado a cualquier lugar de la isla, hacemos el proceso simple, profesional y fácil de confirmar.',
+        hero_book: 'Reserve Su Viaje',
+        hero_call: 'Llame al 787-214-2058',
+        hero_quote: 'Cotización Gratis',
+
+        // Quick actions
+        qa_how_title: 'Vea cómo funciona',
+        qa_how_desc: 'Entienda el proceso de reserva en 4 pasos rápidos.',
+        qa_book_title: 'Reserve en menos de 1 minuto',
+        qa_book_desc: 'Complete el formulario y envíe los detalles de su viaje.',
+        qa_help_title: '¿Necesita ayuda primero?',
+        qa_help_desc: 'Llámenos o envíenos un mensaje antes de reservar.',
+
+        // Hero stats
+        stat_safe_title: 'Seguro y Puntual',
+        stat_safe_desc: 'Viajes confiables para visitantes, familias y grupos.',
+        stat_bilingual_title: 'Conductores Bilingües',
+        stat_bilingual_desc: 'Comunicación fácil en inglés y español.',
+        stat_fast_title: 'Confirmación Rápida',
+        stat_fast_desc: 'Envíe sus detalles y confirme por mensaje de texto.',
+
+        // Services
+        svc_title: 'Servicios',
+        svc_desc: 'Comunicación clara, recogidas confiables y viajes cómodos para transporte al aeropuerto, excursiones, puertos de cruceros y transporte personalizado por la isla.',
+        svc_airport_title: 'Transporte al Aeropuerto',
+        svc_airport_desc: 'Viajes confiables hacia y desde el aeropuerto para que su llegada y salida sean tranquilas y sin estrés. Para asegurar la mejor experiencia posible, recomendamos reservar con al menos 48 a 72 horas de anticipación. Si está programando una recogida en el aeropuerto, por favor agregue su número de vuelo y aerolínea de preferencia.',
+        svc_excursion_title: 'Excursiones y Paseos Turísticos',
+        svc_excursion_desc: 'Transporte a playas, aventuras en el bosque tropical, lugares turísticos como el Viejo San Juan, restaurantes, tours de cuevas con natación y otros destinos para visitantes. Para reservar excursiones como viajes de pesca o alquiler de botes, contáctenos directamente por mensaje de texto o llamada.',
+        svc_port_title: 'Traslados a Puertos y Privados',
+        svc_port_desc: 'Disfrute de transporte confiable y conveniente a puertos de cruceros, hoteles, alquiler de autos, marinas y destinos en todo Puerto Rico. Ya sea que vaya a un tour de bahía bioluminiscente o tome un ferry a Culebra, Vieques, Palomino o Icacos, proporcionamos transporte de ida y vuelta cuidadosamente programado alrededor de sus actividades para una experiencia tranquila y sin estrés.',
+
+        // Product cards
+        prod_airport_title: 'Traslados al Aeropuerto',
+        prod_airport_price: '$10 / persona',
+        prod_airport_area: 'Dejadas en el área de San Juan/Isla Verde',
+        prod_airport_quote: 'Solicite una cotización gratis para dejadas fuera de estas áreas',
+        book_now: 'Reserve Ahora',
+        prod_excursion_title: 'Excursiones y Paseos Turísticos',
+        prod_exc_price1: '$35 / persona — Tours del Viejo San Juan',
+        prod_exc_price2: '$95 / persona — Natación en Cuevas en Charco Azul Vega Baja',
+        prod_exc_price3: '$72 / persona — Tour del Bosque Tropical (mínimo 4 personas)',
+        prod_exc_contact: 'Para viajes de pesca y alquiler de botes contáctenos primero',
+        prod_cruise_title: 'Puertos de Cruceros y Traslados de Ferry',
+        prod_cruise_desc: 'Los precios para recogidas y dejadas en puertos de cruceros/ferry varían según la distancia.',
+        check_pricing: 'Consultar Precios y Disponibilidad',
+
+        // How it works
+        how_title: 'Cómo funciona',
+        how_desc: 'Cada paso está explicado claramente para que organizar su transporte sea rápido y sencillo.',
+        step1_title: 'Complete los detalles de su viaje',
+        step1_desc: 'Ingrese la fecha, hora y lugar de recogida, destino, número de pasajeros, nombre y número de teléfono.',
+        step2_title: 'Envíe la solicitud',
+        step2_desc: 'Presione el botón de reserva para enviar su solicitud de transporte con todos los detalles incluidos.',
+        step3_title: 'Reciba un mensaje del conductor',
+        step3_desc: 'Después de recibir su solicitud, el conductor le enviará un mensaje de texto con los detalles de su viaje y los pasos de confirmación.',
+        step4_title: 'Responda para confirmar el viaje',
+        step4_desc: 'Responda al mensaje del conductor para confirmar su transporte. Una vez que responda, su viaje estará confirmado.',
+
+        // Book section
+        book_title: 'Reservar',
+        book_desc: 'Complete su solicitud de transporte para que el conductor pueda dar seguimiento y confirmar su viaje.',
+        book_before_title: 'Antes de enviar la solicitud',
+        book_before_desc: 'Tener estos detalles listos hace que la confirmación sea más rápida.',
+        book_check1: 'Elija la fecha y hora/lugar de recogida correctos',
+        book_check2: 'Ingrese el destino exacto o nombre del lugar',
+        book_check3: 'Asegúrese de que su número de teléfono sea correcto',
+        book_form_title: 'Reserve su transporte',
+        label_date: 'Fecha (mes/día)',
+        label_pickup: 'Lugar de recogida',
+        label_time: 'Hora de recogida',
+        label_destination: 'Destino',
+        label_passengers: 'Número de pasajeros',
+        label_phone: 'Número de teléfono',
+        label_name: 'Nombre',
+        label_comments: 'Comentarios',
+        helper_destination: 'Use un nombre de lugar o dirección para que el conductor entienda claramente su destino.',
+        btn_send_booking: 'Enviar Solicitud de Reserva',
+        booking_note: 'No se realizan pagos a través del sitio web. El pago se hace directamente al conductor al final del viaje, y puede ser en efectivo o con tarjeta de crédito.',
+
+        // FAQ
+        faq_title: 'Preguntas frecuentes',
+        faq_desc: 'Respuestas claras para que se sienta cómodo reservando su viaje.',
+        faq1_q: '¿Sus conductores tienen licencia?',
+        faq1_a: 'Sí. Nuestros conductores son profesionales con licencia y años de experiencia en el negocio de transporte.',
+        faq2_q: '¿Ofrecen transporte seguro y puntual?',
+        faq2_a: 'Sí. Nos enfocamos en transporte seguro, confiable y puntual para que los visitantes puedan viajar con confianza.',
+        faq3_q: '¿Sus conductores son bilingües?',
+        faq3_a: 'Sí. Nuestros conductores son bilingües, lo que facilita la comunicación tanto para viajeros locales como internacionales.',
+        faq4_q: '¿Ofrecen transporte grupal?',
+        faq4_a: 'Sí. Ofrecemos transporte para grupos, así como viajes privados para individuos, parejas y familias.',
+        faq5_q: '¿Operan todos los días?',
+        faq5_a: 'Sí. Los conductores operan 24/7, los 365 días del año, y el negocio está disponible diariamente para ayudar a organizar solicitudes de transporte.',
+        faq6_q: '¿Qué información necesito para reservar?',
+        faq6_a: 'Por favor proporcione la fecha, hora y lugar de recogida, destino, número de pasajeros, su nombre y su número de teléfono. Después, el conductor le enviará un mensaje y usted debe responder para confirmar el viaje.',
+
+        // Contact
+        contact_title: 'Contáctenos',
+        contact_desc: '¿Necesita transporte al aeropuerto, un traslado al puerto de cruceros o un viaje para su excursión? Comuníquese directamente y le ayudaremos a organizarlo.',
+        contact_phone: 'Teléfono',
+        contact_address: 'Dirección',
+        contact_hours_label: 'Horario de Oficina',
+        contact_hours_value: '9:00 AM – 11:00 PM, todos los días',
+        contact_why_title: 'Por qué los visitantes eligen DP Transport',
+        contact_why1: 'Conductores profesionales con licencia y años de experiencia',
+        contact_why2: 'Servicio bilingüe para viajeros locales e internacionales',
+        contact_why3: 'Transporte grupal disponible',
+        contact_why4: 'Transporte seguro y puntual en todo Puerto Rico',
+        contact_why5: 'Opciones rápidas de reserva por llamada y mensaje de texto',
+        btn_text_us: 'Envíenos un Mensaje',
+        btn_call_now: 'Llame Ahora',
+
+        // CTA
+        cta_title: '¿Listo para organizar su transporte?',
+        cta_desc: 'Reserve ahora, envíe los detalles de su viaje y espere el mensaje de confirmación del conductor.',
+        cta_btn: 'Ir a Reservar',
+
+        // Quote modal
+        quote_title: 'Cotización Gratis',
+        quote_subtitle: 'Cuéntenos sobre su viaje y le enviaremos un precio estimado.',
+        ql_passengers: 'Número de Pasajeros',
+        ql_date: 'Fecha de Recogida',
+        ql_time: 'Hora de Recogida',
+        ql_phone: 'Número de Teléfono',
+        btn_send_quote: 'Enviar Solicitud de Cotización',
+
+        // Success states
+        quote_success_title: '¡Solicitud de cotización enviada!',
+        quote_success_subtitle: 'El conductor se comunicará con usted pronto.',
+        quote_success_tip: 'Consejo: la mayoría de las cotizaciones son flexibles. Consulte con su conductor y le ayudarán.',
+        book_form_success_title: '¡Solicitud de reserva enviada!',
+        book_form_success_msg: 'El conductor se comunicará con usted pronto por mensaje de texto.',
+        book_form_success_tip: 'Consejo: responda al mensaje del conductor para confirmar su viaje.'
+      };
+
+      // Placeholder translations
+      var esPlaceholders = {
+        ph_pickup: 'Ejemplo: Aeropuerto SJU o nombre del hotel',
+        ph_destination: 'Ejemplo: Puerto de Cruceros de San Juan',
+        ph_passengers: 'Ejemplo: 4',
+        ph_comments: 'Agregue cualquier detalle adicional sobre su viaje si es necesario (número de vuelo/aerolínea, necesita/tiene asiento de bebé, número de maletas o bolsas de golf)',
+        ph_quote_phone: 'Ejemplo: 787-555-1234'
+      };
+
+      // HTML translations (for elements with nested HTML)
+      var esHtmlTranslations = {
+        hero_mobile_note: 'Opción más rápida: toque <strong>Reserve Su Viaje</strong> y complete el formulario en menos de un minuto.',
+        quote_note: 'Después de presionar <strong>Enviar Solicitud de Cotización</strong> le contactaremos con una cotización.'
+      };
+
+      // English translations for dynamically added elements
+      var enTranslations = {
+        quote_success_title: 'Quote request sent!',
+        quote_success_subtitle: 'The driver will reach out to you shortly.',
+        quote_success_tip: 'Pro tip: most quotes are flexible. Just check with your driver and they\'ll help you out.',
+        book_form_success_title: 'Booking request sent!',
+        book_form_success_msg: 'The driver will reach out to you shortly via text message.',
+        book_form_success_tip: 'Tip: reply to the driver\'s text message to confirm your trip.'
+      };
+
+      var enTexts = {};
+      var enPlaceholders = {};
+      var enHtmlTexts = {};
+
+      // Store original English text
+      function storeEnglish() {
+        document.querySelectorAll('[data-i18n]').forEach(function (el) {
+          enTexts[el.getAttribute('data-i18n')] = el.textContent;
+        });
+        document.querySelectorAll('[data-i18n-placeholder]').forEach(function (el) {
+          enPlaceholders[el.getAttribute('data-i18n-placeholder')] = el.getAttribute('placeholder');
+        });
+        document.querySelectorAll('[data-i18n-html]').forEach(function (el) {
+          enHtmlTexts[el.getAttribute('data-i18n-html')] = el.innerHTML;
+        });
+      }
+
+      function setLanguage(lang) {
+        currentLang = lang;
+        document.documentElement.setAttribute('lang', lang);
+
+        if (lang === 'es') {
+          document.querySelectorAll('[data-i18n]').forEach(function (el) {
+            var key = el.getAttribute('data-i18n');
+            if (esTranslations[key]) el.textContent = esTranslations[key];
+          });
+          document.querySelectorAll('[data-i18n-placeholder]').forEach(function (el) {
+            var key = el.getAttribute('data-i18n-placeholder');
+            if (esPlaceholders[key]) el.setAttribute('placeholder', esPlaceholders[key]);
+          });
+          document.querySelectorAll('[data-i18n-html]').forEach(function (el) {
+            var key = el.getAttribute('data-i18n-html');
+            if (esHtmlTranslations[key]) el.innerHTML = esHtmlTranslations[key];
+          });
+          langBtnEs.classList.add('active');
+          langBtnEn.classList.remove('active');
+          langBtnEs.setAttribute('aria-pressed', 'true');
+          langBtnEn.setAttribute('aria-pressed', 'false');
+        } else {
+          document.querySelectorAll('[data-i18n]').forEach(function (el) {
+            var key = el.getAttribute('data-i18n');
+            if (enTexts[key]) {
+              el.textContent = enTexts[key];
+            } else if (enTranslations[key]) {
+              el.textContent = enTranslations[key];
+            }
+          });
+          document.querySelectorAll('[data-i18n-placeholder]').forEach(function (el) {
+            var key = el.getAttribute('data-i18n-placeholder');
+            if (enPlaceholders[key]) el.setAttribute('placeholder', enPlaceholders[key]);
+          });
+          document.querySelectorAll('[data-i18n-html]').forEach(function (el) {
+            var key = el.getAttribute('data-i18n-html');
+            if (enHtmlTexts[key]) el.innerHTML = enHtmlTexts[key];
+          });
+          langBtnEn.classList.add('active');
+          langBtnEs.classList.remove('active');
+          langBtnEn.setAttribute('aria-pressed', 'true');
+          langBtnEs.setAttribute('aria-pressed', 'false');
+        }
+      }
+
+      // Initialize
+      storeEnglish();
+
+      if (langBtnEn && langBtnEs) {
+        langBtnEn.addEventListener('click', function () { setLanguage('en'); });
+        langBtnEs.addEventListener('click', function () { setLanguage('es'); });
       }
     })();
   </script>
