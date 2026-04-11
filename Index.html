@@ -1225,7 +1225,8 @@
 
               <div>
                 <label for="pickupTime">Time of pick up</label>
-                <input id="pickupTime" name="pickupTime" type="time" required />
+                <input id="pickupTime" type="time" required />
+                <input type="hidden" id="pickupTimeFormatted" name="pickupTime" value="" />
               </div>
 
               <div>
@@ -1520,7 +1521,7 @@
           }
 
           var rawTime = timeInput.getAttribute('data-raw') || pickupTime;
-          timeInput.value = formatTimeTo12Hour(rawTime);
+          document.getElementById('pickupTimeFormatted').value = formatTimeTo12Hour(rawTime);
 
           isSubmitting = true;
           submitBtn.disabled = true;
