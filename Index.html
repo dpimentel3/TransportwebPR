@@ -492,7 +492,7 @@
 
     .product-cards-row {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(2, 1fr);
       gap: 24px;
       margin-top: 40px;
     }
@@ -574,6 +574,71 @@
       color: var(--text);
       margin-bottom: 4px;
       line-height: 1.5;
+    }
+
+    .product-card-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+
+    .product-card-tags span {
+      background: #e9f5f3;
+      color: var(--primary);
+      font-size: 0.82rem;
+      font-weight: 600;
+      padding: 4px 12px;
+      border-radius: 20px;
+    }
+
+    .product-card-body .card-desc {
+      font-size: 0.88rem;
+      color: #555;
+      line-height: 1.6;
+      margin-bottom: 10px;
+    }
+
+    .product-card-details {
+      border-top: 1px solid #e0e0e0;
+      margin-top: 8px;
+    }
+
+    .product-card-details summary {
+      list-style: none;
+      cursor: pointer;
+      padding: 12px 0;
+      font-weight: 700;
+      color: var(--primary);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.95rem;
+    }
+
+    .product-card-details summary::-webkit-details-marker { display: none; }
+
+    .product-card-details summary::after {
+      content: "+";
+      font-size: 1.3rem;
+      color: var(--primary);
+      font-weight: 700;
+    }
+
+    .product-card-details[open] summary::after { content: "−"; }
+
+    .product-card-details .details-content {
+      padding: 0 0 12px;
+      color: #555;
+      font-size: 0.88rem;
+      line-height: 1.6;
+    }
+
+    .product-card-details .details-content strong {
+      color: var(--primary);
+      display: block;
+      margin-top: 12px;
+      margin-bottom: 4px;
     }
 
     .service-icon {
@@ -1180,21 +1245,21 @@
               <div class="btn">
                 <a href="#book" class="btn btn-primary" data-i18n="book_now">Book Now</a>
               </div>
+              <div class="btn" style="padding-top:0;">
+                <a href="#" class="btn btn-secondary open-quote-link" data-i18n="check_pricing">Check Pricing &amp; Availability</a>
+              </div>
             </div>
           </div>
           <div class="product-card">
             <img src="IMG_7217.WEBP" alt="Excursions and tourist rides in Puerto Rico">
             <div class="product-card-body">
               <h3 data-i18n="prod_excursion_title">Excursions &amp; Tourist Rides</h3>
-              <p class="price-line" data-i18n="prod_exc_price1">$35 / person — Old San Juan Tours</p>
-              <p class="price-line" data-i18n="prod_exc_price2">$95 / person — Cave Swimming in Charco Azul Vega Baja</p>
-              <p class="price-line" data-i18n="prod_exc_price3">$72 / person — Rainforest Tour (4 person minimum)</p>
-              <p style="font-size:0.84rem; color:#666; margin-top:8px;" data-i18n="prod_exc_contact">For fishing trips and Boat Charters contact us first</p>
+              <p class="card-desc" data-i18n="prod_exc_desc">For your bioluminescent kayak tour, Toro Verde Zipline adventure, or any other excursion you've already booked, arrange your transportation below so you don't miss out.</p>
               <div class="btn">
                 <a href="#book" class="btn btn-primary" data-i18n="book_now">Book Now</a>
               </div>
               <div class="btn" style="padding-top:0;">
-                <a href="#contact-us" class="btn btn-secondary" data-i18n="nav_contact">Contact Us</a>
+                <a href="#" class="btn btn-secondary open-quote-link" data-i18n="check_pricing">Check Pricing &amp; Availability</a>
               </div>
             </div>
           </div>
@@ -1208,6 +1273,30 @@
               </div>
               <div class="btn" style="padding-top:0;">
                 <a href="#" class="btn btn-secondary open-quote-link" data-i18n="check_pricing">Check Pricing &amp; Availability</a>
+              </div>
+            </div>
+          </div>
+          <div class="product-card">
+            <div class="product-card-body">
+              <h3 data-i18n="prod_tour_title">Old San Juan Tour</h3>
+              <p style="font-size:0.84rem; color:#666;" data-i18n="prod_tour_location">San Juan, PR</p>
+              <div class="product-card-tags">
+                <span data-i18n="prod_tour_price">$70 / Person</span>
+                <span data-i18n="prod_tour_duration">3 Hours</span>
+                <span data-i18n="prod_tour_min">Min. 2 people</span>
+              </div>
+              <p class="card-desc" data-i18n="prod_tour_desc">Explore Old San Juan, enjoy historic landmarks and scenic views, and experience one of Puerto Rico's most iconic destinations.</p>
+              <details class="product-card-details">
+                <summary data-i18n="prod_tour_details">View Details</summary>
+                <div class="details-content">
+                  <strong data-i18n="prod_tour_exp_label">Experience</strong>
+                  <span data-i18n="prod_tour_exp_text">We provide all transportation, starting with pick up and drop off. We take you around Old San Juan to show you the architecture, historical facts and even teach you a bit of the island's history. The tour can be a mixture of driving and walking with the opportunity of a restaurant recommendation (food not included). Make sure you bring a hat, sunscreen and wear comfortable shoes and clothes. Water bottles are provided by the tour guide.</span>
+                  <strong data-i18n="prod_tour_length_label">Tour Length</strong>
+                  <span data-i18n="prod_tour_length_text">3 hours plus transportation time.</span>
+                </div>
+              </details>
+              <div class="btn">
+                <a href="#book" class="btn btn-primary" data-i18n="book_now">Book Now</a>
               </div>
             </div>
           </div>
@@ -1820,13 +1909,21 @@
         prod_airport_quote: 'Solicite una cotización gratis para dejadas fuera de estas áreas',
         book_now: 'Reserve Ahora',
         prod_excursion_title: 'Excursiones y Paseos Turísticos',
-        prod_exc_price1: '$35 / persona — Tours del Viejo San Juan',
-        prod_exc_price2: '$95 / persona — Natación en Cuevas en Charco Azul Vega Baja',
-        prod_exc_price3: '$72 / persona — Tour del Bosque Tropical (mínimo 4 personas)',
-        prod_exc_contact: 'Para viajes de pesca y alquiler de botes contáctenos primero',
+        prod_exc_desc: 'Para su kayak tour en la bahía bioluminiscente, aventura en el Zipline de Toro Verde, o cualquier otra excursión que ya haya reservado, organice su transporte a continuación para que no se lo pierda.',
         prod_cruise_title: 'Puertos de Cruceros y Traslados de Ferry',
         prod_cruise_desc: 'Los precios para recogidas y dejadas en puertos de cruceros/ferry varían según la distancia.',
         check_pricing: 'Consultar Precios y Disponibilidad',
+        prod_tour_title: 'Tour del Viejo San Juan',
+        prod_tour_location: 'San Juan, PR',
+        prod_tour_price: '$70 / Persona',
+        prod_tour_duration: '3 Horas',
+        prod_tour_min: 'Mín. 2 personas',
+        prod_tour_desc: 'Explore el Viejo San Juan, disfrute de monumentos históricos y vistas panorámicas, y viva una de las experiencias más icónicas de Puerto Rico.',
+        prod_tour_details: 'Ver Detalles',
+        prod_tour_exp_label: 'Experiencia',
+        prod_tour_exp_text: 'Proporcionamos todo el transporte, comenzando con la recogida y el regreso. Lo llevamos por el Viejo San Juan para mostrarle la arquitectura, datos históricos e incluso enseñarle un poco de la historia de la isla. El tour puede ser una combinación de manejo y caminata con la oportunidad de una recomendación de restaurante (comida no incluida). Asegúrese de traer sombrero, protector solar y usar ropa y zapatos cómodos. El guía turístico provee botellas de agua.',
+        prod_tour_length_label: 'Duración del Tour',
+        prod_tour_length_text: '3 horas más tiempo de transporte.',
 
         // How it works
         how_title: 'Cómo funciona',
