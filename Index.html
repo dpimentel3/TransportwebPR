@@ -524,6 +524,79 @@
       object-fit: cover;
     }
 
+    /* Image Slider */
+    .image-slider {
+      position: relative;
+      width: 100%;
+      height: 200px;
+      overflow: hidden;
+      touch-action: pan-y;
+    }
+    .image-slider .slider-track {
+      display: flex;
+      height: 100%;
+      transition: transform 0.35s ease;
+      will-change: transform;
+    }
+    .image-slider .slider-track.dragging {
+      transition: none;
+    }
+    .image-slider .slider-track img {
+      min-width: 100%;
+      max-width: 100%;
+      height: 200px;
+      object-fit: cover;
+      flex-shrink: 0;
+      pointer-events: none;
+    }
+    .slider-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(0,0,0,0.45);
+      color: #fff;
+      border: none;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      font-size: 1.1rem;
+      cursor: pointer;
+      z-index: 2;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transition: opacity 0.2s;
+    }
+    .image-slider:hover .slider-btn {
+      opacity: 1;
+    }
+    .slider-btn.prev { left: 6px; }
+    .slider-btn.next { right: 6px; }
+    .slider-dots {
+      position: absolute;
+      bottom: 8px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 6px;
+      z-index: 2;
+    }
+    .slider-dots span {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.5);
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .slider-dots span.active {
+      background: #fff;
+    }
+    @media (max-width: 900px) {
+      .slider-btn { opacity: 0.8; width: 28px; height: 28px; font-size: 0.95rem; }
+    }
+
     .product-card-body {
       padding: 16px;
       display: flex;
@@ -1236,7 +1309,18 @@
 
         <div class="product-cards-row">
           <div class="product-card">
-            <img src="20260211_162245.JPG" alt="Airport transfer vehicle">
+            <div class="image-slider" id="airport-slider">
+              <div class="slider-track">
+                <img src="20260211_162245.JPG" alt="Airport transfer vehicle">
+                <img src="airport-transfer-vans.png" alt="Two identical white Ford vans">
+              </div>
+              <button class="slider-btn prev" aria-label="Previous image">&#10094;</button>
+              <button class="slider-btn next" aria-label="Next image">&#10095;</button>
+              <div class="slider-dots">
+                <span class="active"></span>
+                <span></span>
+              </div>
+            </div>
             <div class="product-card-body">
               <h3 data-i18n="prod_airport_title">Airport Transfers</h3>
               <p class="price" data-i18n="prod_airport_price">$10 / person</p>
@@ -1277,6 +1361,20 @@
             </div>
           </div>
           <div class="product-card">
+            <div class="image-slider" id="osj-slider">
+              <div class="slider-track">
+                <img src="old-san-juan-1.png" alt="Colorful cobblestone street in Old San Juan">
+                <img src="old-san-juan-2.png" alt="Colorful street in Old San Juan">
+                <img src="old-san-juan-3.png" alt="Colorful streets of Old San Juan">
+              </div>
+              <button class="slider-btn prev" aria-label="Previous image">&#10094;</button>
+              <button class="slider-btn next" aria-label="Next image">&#10095;</button>
+              <div class="slider-dots">
+                <span class="active"></span>
+                <span></span>
+                <span></span>
+              </div>
+            </div>
             <div class="product-card-body">
               <h3 data-i18n="prod_tour_title">Old San Juan Tour</h3>
               <p style="font-size:0.84rem; color:#666;" data-i18n="prod_tour_location">San Juan, PR</p>
@@ -2101,6 +2199,58 @@
 
       allLangEnBtns.forEach(function(b) { if(b) b.addEventListener('click', function () { setLanguage('en'); }); });
       allLangEsBtns.forEach(function(b) { if(b) b.addEventListener('click', function () { setLanguage('es'); }); });
+    })();
+
+    /* Image Slider */
+    (function() {
+      document.querySelectorAll('.image-slider').forEach(function(slider) {
+        var track = slider.querySelector('.slider-track');
+        var imgs = track.querySelectorAll('img');
+        var dots = slider.querySelectorAll('.slider-dots span');
+        var prevBtn = slider.querySelector('.slider-btn.prev');
+        var nextBtn = slider.querySelector('.slider-btn.next');
+        var current = 0;
+        var count = imgs.length;
+
+        function goTo(idx) {
+          if (idx < 0) idx = count - 1;
+          if (idx >= count) idx = 0;
+          current = idx;
+          track.style.transform = 'translateX(-' + (current * 100) + '%)';
+          dots.forEach(function(d, i) {
+            d.classList.toggle('active', i === current);
+          });
+        }
+
+        prevBtn.addEventListener('click', function() { goTo(current - 1); });
+        nextBtn.addEventListener('click', function() { goTo(current + 1); });
+        dots.forEach(function(dot, i) {
+          dot.addEventListener('click', function() { goTo(i); });
+        });
+
+        /* Touch / swipe support */
+        var startX = 0, deltaX = 0, dragging = false;
+        slider.addEventListener('touchstart', function(e) {
+          startX = e.touches[0].clientX;
+          deltaX = 0;
+          dragging = true;
+          track.classList.add('dragging');
+        }, { passive: true });
+        slider.addEventListener('touchmove', function(e) {
+          if (!dragging) return;
+          deltaX = e.touches[0].clientX - startX;
+          var offset = -(current * slider.offsetWidth) + deltaX;
+          track.style.transform = 'translateX(' + offset + 'px)';
+        }, { passive: true });
+        slider.addEventListener('touchend', function() {
+          if (!dragging) return;
+          dragging = false;
+          track.classList.remove('dragging');
+          if (deltaX > 40) goTo(current - 1);
+          else if (deltaX < -40) goTo(current + 1);
+          else goTo(current);
+        });
+      });
     })();
   </script>
 </body>
