@@ -1788,6 +1788,15 @@
           }).then(function (response) {
             isEs = document.documentElement.getAttribute('lang') === 'es';
             if (response.ok) {
+              gtag('event', 'form_submit', {
+                form_id: 'bookingForm',
+                form_name: 'booking',
+                form_destination: 'https://www.dptransportpr.com/?gtm_debug=177622796021' +
+                                  '1#book',
+                form_length: 12,
+                form_submit_text: undefined,
+                send_to: 'AW-18039811113'
+              });
               var bookingCard = form.closest('.booking-card');
               var titleEl = bookingCard ? bookingCard.querySelector('#booking-title') : null;
               if (titleEl) {
