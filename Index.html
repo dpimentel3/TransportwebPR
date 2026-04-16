@@ -1324,7 +1324,10 @@
             </div>
             <div class="product-card-body">
               <h3 data-i18n="prod_airport_title">Airport Transfers</h3>
-              <p class="price" data-i18n="prod_airport_price">$10 / person</p>
+              <div class="product-card-tags">
+                <span data-i18n="prod_airport_price">$10 / Person</span>
+                <span data-i18n="prod_airport_capacity">Up to 13 People</span>
+              </div>
               <p data-i18n="prod_airport_area">Drop-offs in the San Juan/Isla Verde area</p>
               <p style="font-size:0.84rem; color:#666;" data-i18n="prod_airport_quote">Request a free quote for drop-offs outside these areas</p>
               <div class="btn">
@@ -1339,7 +1342,10 @@
             <img src="IMG_7217.WEBP" alt="Excursions and tourist rides in Puerto Rico">
             <div class="product-card-body">
               <h3 data-i18n="prod_excursion_title">Excursions &amp; Tourist Rides</h3>
-              <p class="card-desc" data-i18n="prod_exc_desc">For your bioluminescent kayak tour, Toro Verde Zipline adventure, or any other excursion you've already booked, arrange your transportation below so you don't miss out.</p>
+              <div class="product-card-tags">
+                <span data-i18n="prod_exc_capacity">Max. 15 people</span>
+              </div>
+              <p class="card-desc" style="color:#000;" data-i18n="prod_exc_desc">For your bioluminescent kayak tour, Toro Verde Zipline adventure, or any other excursion you've already booked, arrange your transportation below so you don't miss out.</p>
               <div class="btn">
                 <a href="#book" class="btn btn-primary" data-i18n="book_now">Book Now</a>
               </div>
@@ -1383,6 +1389,7 @@
                 <span data-i18n="prod_tour_price">$70 / Person</span>
                 <span data-i18n="prod_tour_duration">3 Hours</span>
                 <span data-i18n="prod_tour_min">Min. 2 people</span>
+                <span data-i18n="prod_tour_ages">Ages 5 up to 80</span>
               </div>
               <p class="card-desc" data-i18n="prod_tour_desc">Explore Old San Juan, enjoy historic landmarks and scenic views, and experience one of Puerto Rico's most iconic destinations.</p>
               <details class="product-card-details">
@@ -1392,6 +1399,32 @@
                   <span data-i18n="prod_tour_exp_text">We provide all transportation, starting with pick up and drop off. We take you around Old San Juan to show you the architecture, historical facts and even teach you a bit of the island's history. The tour can be a mixture of driving and walking with the opportunity of a restaurant recommendation (food not included). Make sure you bring a hat, sunscreen and wear comfortable shoes and clothes. Water bottles are provided by the tour guide.</span>
                   <strong data-i18n="prod_tour_length_label">Tour Length</strong>
                   <span data-i18n="prod_tour_length_text">3 hours plus transportation time.</span>
+                </div>
+              </details>
+              <div class="btn">
+                <a href="#book" class="btn btn-primary" data-i18n="book_now">Book Now</a>
+              </div>
+            </div>
+          </div>
+          <div class="product-card">
+            <img src="IMG_7217.WEBP" alt="Cave swimming adventure in Vega Baja Puerto Rico">
+            <div class="product-card-body">
+              <h3 data-i18n="prod_cave_title">Cave Swimming Adventure</h3>
+              <p style="font-size:0.84rem; color:#666;" data-i18n="prod_cave_location">Vega Baja, PR</p>
+              <div class="product-card-tags">
+                <span data-i18n="prod_cave_price">$95 / Person</span>
+                <span data-i18n="prod_cave_duration">4 Hours</span>
+                <span data-i18n="prod_cave_min">Min. 2 People</span>
+                <span data-i18n="prod_cave_ages">Ages 5 up to 80</span>
+              </div>
+              <p class="card-desc" data-i18n="prod_cave_desc">Dive into one of Puerto Rico's most thrilling mountain adventures with a cave swimming experience surrounded by rugged scenery, crystal-clear waters, and unforgettable natural beauty.</p>
+              <details class="product-card-details">
+                <summary data-i18n="prod_cave_details">View Details</summary>
+                <div class="details-content">
+                  <strong data-i18n="prod_cave_exp_label">Experience</strong>
+                  <span data-i18n="prod_cave_exp_text">Experience one of Puerto Rico's hidden gems with our River Cave Swimming Adventure in the mountains of Vega Baja. Your experience includes round-trip transportation, so you can relax while we handle everything from start to finish. Once in Vega Baja, you'll hike through lush mountain terrain and swim through stunning natural caves—an unforgettable, off-the-beaten-path adventure. This is an intermediate-level activity perfect for those looking for a mix of excitement and exploration. We provide life jackets and bottled water for your safety and comfort. What to bring: sneakers (for hiking), a towel, and a change of clothes for after the tour.</span>
+                  <strong data-i18n="prod_cave_length_label">Tour Length</strong>
+                  <span data-i18n="prod_cave_length_text">The experience lasts approximately 4 hours, and we never rush—your designated driver stays with you, ensuring you can fully enjoy every moment at your own pace.</span>
                 </div>
               </details>
               <div class="btn">
@@ -2012,11 +2045,13 @@
 
         // Product cards
         prod_airport_title: 'Traslados al Aeropuerto',
-        prod_airport_price: '$10 / persona',
+        prod_airport_price: '$10 / Persona',
+        prod_airport_capacity: 'Hasta 13 Personas',
         prod_airport_area: 'Dejadas en el área de San Juan/Isla Verde',
         prod_airport_quote: 'Solicite una cotización gratis para dejadas fuera de estas áreas',
         book_now: 'Reserve Ahora',
         prod_excursion_title: 'Excursiones y Paseos Turísticos',
+        prod_exc_capacity: 'Máx. 15 personas',
         prod_exc_desc: 'Para su kayak tour en la bahía bioluminiscente, aventura en el Zipline de Toro Verde, o cualquier otra excursión que ya haya reservado, organice su transporte a continuación para que no se lo pierda.',
         prod_cruise_title: 'Puertos de Cruceros y Traslados de Ferry',
         prod_cruise_desc: 'Los precios para recogidas y dejadas en puertos de cruceros/ferry varían según la distancia.',
@@ -2026,12 +2061,27 @@
         prod_tour_price: '$70 / Persona',
         prod_tour_duration: '3 Horas',
         prod_tour_min: 'Mín. 2 personas',
+        prod_tour_ages: 'Edades de 5 a 80',
         prod_tour_desc: 'Explore el Viejo San Juan, disfrute de monumentos históricos y vistas panorámicas, y viva una de las experiencias más icónicas de Puerto Rico.',
         prod_tour_details: 'Ver Detalles',
         prod_tour_exp_label: 'Experiencia',
         prod_tour_exp_text: 'Proporcionamos todo el transporte, comenzando con la recogida y el regreso. Lo llevamos por el Viejo San Juan para mostrarle la arquitectura, datos históricos e incluso enseñarle un poco de la historia de la isla. El tour puede ser una combinación de manejo y caminata con la oportunidad de una recomendación de restaurante (comida no incluida). Asegúrese de traer sombrero, protector solar y usar ropa y zapatos cómodos. El guía turístico provee botellas de agua.',
         prod_tour_length_label: 'Duración del Tour',
         prod_tour_length_text: '3 horas más tiempo de transporte.',
+
+        // Cave Swimming Adventure card
+        prod_cave_title: 'Aventura de Natación en Cueva',
+        prod_cave_location: 'Vega Baja, PR',
+        prod_cave_price: '$95 / Persona',
+        prod_cave_duration: '4 Horas',
+        prod_cave_min: 'Mín. 2 Personas',
+        prod_cave_ages: 'Edades de 5 a 80',
+        prod_cave_desc: 'Sumérgete en una de las aventuras de montaña más emocionantes de Puerto Rico con una experiencia de natación en cuevas rodeada de paisajes escarpados, aguas cristalinas y una belleza natural inolvidable.',
+        prod_cave_details: 'Ver Detalles',
+        prod_cave_exp_label: 'Experiencia',
+        prod_cave_exp_text: 'Descubre una de las joyas ocultas de Puerto Rico con nuestra Aventura de Natación en Cueva en las montañas de Vega Baja. Tu experiencia incluye transporte de ida y vuelta, para que puedas relajarte mientras nos encargamos de todo de principio a fin. Una vez en Vega Baja, caminarás por un exuberante terreno montañoso y nadarás a través de impresionantes cuevas naturales—una aventura inolvidable fuera de lo común. Esta es una actividad de nivel intermedio perfecta para quienes buscan una mezcla de emoción y exploración. Proporcionamos chalecos salvavidas y agua embotellada para tu seguridad y comodidad. Qué traer: tenis (para caminar), una toalla y ropa de cambio para después del tour.',
+        prod_cave_length_label: 'Duración del Tour',
+        prod_cave_length_text: 'La experiencia dura aproximadamente 4 horas, y nunca apuramos—tu conductor designado se queda contigo, asegurando que puedas disfrutar cada momento a tu propio ritmo.',
 
         // How it works
         how_title: 'Cómo funciona',
