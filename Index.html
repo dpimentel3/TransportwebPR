@@ -1068,10 +1068,128 @@
       color: var(--muted);
     }
 
+    /* Instant quote section */
+    .instant-quote {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 18px 16px 14px;
+      margin-bottom: 18px;
+    }
+    .instant-quote > div { margin-bottom: 14px; }
+    .instant-quote > div:last-child { margin-bottom: 0; }
+    .instant-quote label {
+      display: block;
+      font-weight: 600;
+      font-size: 0.92rem;
+      margin-bottom: 5px;
+      color: var(--text);
+    }
+    .instant-quote input[type="text"],
+    .instant-quote input[type="tel"] {
+      width: 100%;
+      padding: 12px 14px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      font-size: 1rem;
+      background: #fff;
+      transition: border-color 0.15s;
+      box-sizing: border-box;
+    }
+    .instant-quote input:focus {
+      outline: none;
+      border-color: var(--accent);
+    }
+    .instant-quote .fare-input {
+      background: #fff;
+      color: var(--primary);
+      font-weight: 600;
+      font-size: 1.05rem;
+    }
+    .fare-hint {
+      display: block;
+      font-size: 0.82rem;
+      color: var(--muted);
+      margin-top: 6px;
+      line-height: 1.4;
+    }
+
+    /* Expandable form section */
+    .quote-expandable {
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      background: #fff;
+    }
+    .quote-expandable-toggle {
+      width: 100%;
+      background: var(--bg);
+      border: none;
+      text-align: left;
+      padding: 14px 44px 14px 16px;
+      font-family: inherit;
+      font-size: 0.92rem;
+      font-weight: 400;
+      color: var(--text);
+      cursor: pointer;
+      position: relative;
+      line-height: 1.4;
+      transition: background 0.15s;
+    }
+    .quote-expandable-toggle:hover { background: #eef3f8; }
+    .quote-expandable-toggle::after {
+      content: '+';
+      position: absolute;
+      right: 16px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 1.4rem;
+      font-weight: 400;
+      color: var(--primary);
+      line-height: 1;
+      transition: transform 0.2s;
+    }
+    .quote-expandable.open .quote-expandable-toggle::after {
+      content: '−';
+    }
+    .quote-expandable-content {
+      display: none;
+      padding: 16px;
+      border-top: 1px solid var(--border);
+    }
+    .quote-expandable.open .quote-expandable-content {
+      display: block;
+    }
+
+    /* Google Places autocomplete dropdown */
+    .pac-container {
+      z-index: 10000;
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow-md);
+      font-family: inherit;
+      margin-top: 2px;
+    }
+    .pac-item {
+      padding: 8px 12px;
+      font-size: 0.95rem;
+      line-height: 1.4;
+      cursor: pointer;
+    }
+
     @media (max-width: 720px) {
       .quote-modal {
         padding: 28px 20px 24px;
         border-radius: var(--radius-lg);
+      }
+      .instant-quote {
+        padding: 14px 12px 12px;
+      }
+      .quote-expandable-toggle {
+        font-size: 0.88rem;
+        padding: 12px 40px 12px 14px;
+      }
+      .quote-expandable-content {
+        padding: 14px 12px;
       }
     }
 
@@ -1673,7 +1791,28 @@
     <div class="quote-modal" role="dialog" aria-labelledby="quoteModalTitle" aria-modal="true">
       <button class="quote-modal-close" id="closeQuoteModal" type="button" aria-label="Close quote form">&times;</button>
       <h2 id="quoteModalTitle" data-i18n="quote_title">Get a Free Quote</h2>
-      <p id="quoteModalSubtitle" class="muted" style="margin:0 0 18px;" data-i18n="quote_subtitle">Tell us about your trip and we'll get back to you with an estimated price.</p>
+      <p id="quoteModalSubtitle" class="muted" style="margin:0 0 18px;" data-i18n="quote_subtitle">Fill in your trip details and receive an instant free quote.</p>
+
+      <!-- Instant Quote (Google Places Autocomplete) -->
+      <div class="instant-quote" id="instantQuote">
+        <div>
+          <label for="quoteInstantPickup" data-i18n="iq_pickup">Pick up Location</label>
+          <input id="quoteInstantPickup" type="text" autocomplete="off" data-i18n-placeholder="iq_ph_pickup" placeholder="Start typing a pickup location" />
+        </div>
+        <div>
+          <label for="quoteInstantDestination" data-i18n="iq_destination">Destination</label>
+          <input id="quoteInstantDestination" type="text" autocomplete="off" data-i18n-placeholder="iq_ph_destination" placeholder="Start typing a destination" />
+        </div>
+        <div>
+          <label for="quoteInstantFare" data-i18n="iq_fare">Trip Fare</label>
+          <input id="quoteInstantFare" class="fare-input" type="text" readonly data-i18n-placeholder="iq_ph_fare" placeholder="Select both locations to see fare" />
+        </div>
+      </div>
+
+      <!-- Expandable legacy form for larger groups -->
+      <div class="quote-expandable" id="quoteExpandable">
+        <button type="button" class="quote-expandable-toggle" id="quoteExpandableToggle" aria-expanded="false" aria-controls="quoteExpandableContent" data-i18n="quote_expandable_title">For trips of more than 4 passengers please request a free quote by filling out the form below (Airport Transfers in San Juan/Isla Verde area will be priced at $10 per person)</button>
+        <div class="quote-expandable-content" id="quoteExpandableContent">
       <form id="quoteForm" name="free-quote" method="POST" data-netlify="true" netlify-honeypot="bot-field">
         <input type="hidden" name="form-name" value="free-quote" />
         <p class="hidden-field">
@@ -1711,6 +1850,8 @@
           After you press <strong>Send Quote Request</strong> we will contact you with a quote.
         </div>
       </form>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -1886,12 +2027,23 @@
       var closeQuoteBtn = document.getElementById('closeQuoteModal');
       var quoteForm = document.getElementById('quoteForm');
 
+      // Expandable legacy form toggle
+      var quoteExpandable = document.getElementById('quoteExpandable');
+      var quoteExpandableToggle = document.getElementById('quoteExpandableToggle');
+      if (quoteExpandable && quoteExpandableToggle) {
+        quoteExpandableToggle.addEventListener('click', function () {
+          var isOpen = quoteExpandable.classList.toggle('open');
+          quoteExpandableToggle.setAttribute('aria-expanded', String(isOpen));
+        });
+      }
+
       if (openQuoteBtn && quoteOverlay) {
         openQuoteBtn.addEventListener('click', function () {
           quoteOverlay.classList.add('active');
           quoteOverlay.setAttribute('aria-hidden', 'false');
           document.body.style.overflow = 'hidden';
-          quoteOverlay.querySelector('input[name="passengers"]').focus();
+          var firstField = document.getElementById('quoteInstantPickup');
+          if (firstField) firstField.focus();
         });
 
         // "Check Pricing & Availability" links also open the quote modal
@@ -1904,7 +2056,8 @@
               quoteOverlay.classList.add('active');
               quoteOverlay.setAttribute('aria-hidden', 'false');
               document.body.style.overflow = 'hidden';
-              quoteOverlay.querySelector('input[name="passengers"]').focus();
+              var firstField = document.getElementById('quoteInstantPickup');
+              if (firstField) firstField.focus();
             }, 400);
           });
         });
@@ -2172,7 +2325,11 @@
 
         // Quote modal
         quote_title: 'Cotización Gratis',
-        quote_subtitle: 'Cuéntenos sobre su viaje y le enviaremos un precio estimado.',
+        quote_subtitle: 'Complete los detalles de su viaje y reciba una cotización gratis al instante.',
+        iq_pickup: 'Lugar de Recogida',
+        iq_destination: 'Destino',
+        iq_fare: 'Tarifa del Viaje',
+        quote_expandable_title: 'Para viajes de más de 4 pasajeros, solicite una cotización gratis completando el formulario a continuación (los traslados al aeropuerto en el área de San Juan/Isla Verde tienen un precio de $10 por persona)',
         ql_passengers: 'Número de Pasajeros',
         ql_date: 'Fecha de Recogida',
         ql_time: 'Hora de Recogida',
@@ -2194,7 +2351,10 @@
         ph_destination: 'Ejemplo: Puerto de Cruceros de San Juan',
         ph_passengers: 'Ejemplo: 4',
         ph_comments: 'Agregue cualquier detalle adicional sobre su viaje si es necesario (número de vuelo/aerolínea, necesita/tiene asiento de bebé, número de maletas o bolsas de golf)',
-        ph_quote_phone: 'Ejemplo: 787-555-1234'
+        ph_quote_phone: 'Ejemplo: 787-555-1234',
+        iq_ph_pickup: 'Comience a escribir un lugar de recogida',
+        iq_ph_destination: 'Comience a escribir un destino',
+        iq_ph_fare: 'Seleccione ambos lugares para ver la tarifa'
       };
 
       // HTML translations (for elements with nested HTML)
@@ -2329,6 +2489,145 @@
         });
       });
     })();
+
+    /* Google Places Autocomplete — Instant Quote */
+    (function() {
+      var pickupInput = document.getElementById('quoteInstantPickup');
+      var destinationInput = document.getElementById('quoteInstantDestination');
+      var fareInput = document.getElementById('quoteInstantFare');
+      if (!pickupInput || !destinationInput || !fareInput) return;
+
+      var pickupPlace = null;
+      var destinationPlace = null;
+      var distanceService = null;
+
+      function formatPlaceholderForFare(text) {
+        fareInput.value = '';
+        fareInput.setAttribute('placeholder', text);
+      }
+
+      function getFarePlaceholder(key) {
+        var isEs = document.documentElement.getAttribute('lang') === 'es';
+        if (key === 'default') {
+          return isEs ? 'Seleccione ambos lugares para ver la tarifa' : 'Select both locations to see fare';
+        }
+        if (key === 'calculating') {
+          return isEs ? 'Calculando tarifa…' : 'Calculating fare…';
+        }
+        if (key === 'error') {
+          return isEs ? 'No se pudo calcular la tarifa' : 'Unable to calculate fare';
+        }
+        return '';
+      }
+
+      function computeFare() {
+        if (!pickupPlace || !destinationPlace) {
+          formatPlaceholderForFare(getFarePlaceholder('default'));
+          return;
+        }
+        if (!window.google || !window.google.maps) {
+          formatPlaceholderForFare(getFarePlaceholder('error'));
+          return;
+        }
+        try {
+          if (!distanceService) distanceService = new google.maps.DistanceMatrixService();
+        } catch (e) {
+          formatPlaceholderForFare(getFarePlaceholder('error'));
+          return;
+        }
+        formatPlaceholderForFare(getFarePlaceholder('calculating'));
+        distanceService.getDistanceMatrix({
+          origins: [pickupPlace],
+          destinations: [destinationPlace],
+          travelMode: google.maps.TravelMode.DRIVING,
+          unitSystem: google.maps.UnitSystem.IMPERIAL
+        }, function(response, status) {
+          if (status !== 'OK' || !response || !response.rows || !response.rows[0] || !response.rows[0].elements || !response.rows[0].elements[0]) {
+            formatPlaceholderForFare(getFarePlaceholder('error'));
+            return;
+          }
+          var element = response.rows[0].elements[0];
+          if (element.status !== 'OK' || !element.distance) {
+            formatPlaceholderForFare(getFarePlaceholder('error'));
+            return;
+          }
+          var meters = element.distance.value;
+          var miles = meters / 1609.344;
+          var fare = miles * 3;
+          if (fare < 1) fare = 1;
+          var rounded = Math.round(fare * 100) / 100;
+          fareInput.value = '$' + rounded.toFixed(2) + ' (' + miles.toFixed(1) + ' mi)';
+        });
+      }
+
+      function bindAutocomplete(input, onSelect) {
+        if (!window.google || !window.google.maps || !window.google.maps.places) return;
+        try {
+          var ac = new google.maps.places.Autocomplete(input, {
+            fields: ['geometry', 'formatted_address', 'name'],
+            componentRestrictions: { country: ['pr', 'us'] }
+          });
+          ac.addListener('place_changed', function() {
+            var place = ac.getPlace();
+            if (!place || !place.geometry || !place.geometry.location) {
+              onSelect(null);
+              return;
+            }
+            onSelect(place.geometry.location);
+          });
+        } catch (e) {
+          // Silently fail — users can still submit the expandable form
+        }
+      }
+
+      // Recompute when user clears field manually
+      pickupInput.addEventListener('input', function() {
+        if (!pickupInput.value) {
+          pickupPlace = null;
+          computeFare();
+        }
+      });
+      destinationInput.addEventListener('input', function() {
+        if (!destinationInput.value) {
+          destinationPlace = null;
+          computeFare();
+        }
+      });
+
+      window.initQuoteAutocomplete = function() {
+        bindAutocomplete(pickupInput, function(loc) {
+          pickupPlace = loc;
+          computeFare();
+        });
+        bindAutocomplete(destinationInput, function(loc) {
+          destinationPlace = loc;
+          computeFare();
+        });
+      };
+
+      // In case the Maps API already loaded before this script ran
+      if (window.google && window.google.maps && window.google.maps.places) {
+        window.initQuoteAutocomplete();
+      }
+
+      // Reset placeholder on language change
+      var langBtnIds = ['langEnHeader', 'langEnMenu', 'langEsHeader', 'langEsMenu'];
+      langBtnIds.forEach(function(id) {
+        var btn = document.getElementById(id);
+        if (!btn) return;
+        btn.addEventListener('click', function() {
+          setTimeout(function() {
+            if (!fareInput.value) {
+              formatPlaceholderForFare(getFarePlaceholder('default'));
+            }
+          }, 50);
+        });
+      });
+    })();
   </script>
+
+  <!-- Google Maps JavaScript API for Places Autocomplete -->
+  <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCGKJigzmudkBONv9YWQnXxfs9HCN1wLMI&libraries=places&callback=initQuoteAutocomplete"></script>
 </body>
 </html>
