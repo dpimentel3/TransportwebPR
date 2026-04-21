@@ -2532,6 +2532,101 @@
         return isEs ? 'Traslados al Aeropuerto $10/persona' : 'Airport Transfers $10/person';
       }
 
+      function getShortTripFormText() {
+        var isEs = document.documentElement.getAttribute('lang') === 'es';
+        return isEs
+          ? 'Complete el formulario para viajes de menos de 10 millas'
+          : 'Fill out form for trips under 10 miles';
+      }
+
+      function normalizeText(s) {
+        if (!s) return '';
+        try {
+          return String(s).normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
+        } catch (e) {
+          return String(s).toLowerCase();
+        }
+      }
+
+      function matchesKeywords(haystack, keywords) {
+        for (var i = 0; i < keywords.length; i++) {
+          var k = keywords[i];
+          var escaped = k.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+          var re = new RegExp('(^|[^a-z0-9])' + escaped + '($|[^a-z0-9])', 'i');
+          if (!re.test(haystack)) return false;
+        }
+        return true;
+      }
+
+      function placeHaystack(place) {
+        if (!place) return '';
+        return normalizeText((place.name || '') + ' ' + (place.address || ''));
+      }
+
+      // Wyndham Grand Rio Mar Rainforest Beach and Golf Resort pickup
+      function isWyndhamRioMarPickup(place) {
+        var hay = placeHaystack(place);
+        if (!hay) return false;
+        // Match "Wyndham" + "Rio Mar", or the resort's signature "rainforest"/"rio mar" phrasing
+        if (hay.indexOf('rio mar') !== -1 && hay.indexOf('wyndham') !== -1) return true;
+        if (hay.indexOf('wyndham grand rio mar') !== -1) return true;
+        return false;
+      }
+
+      // Fixed flat fares from Wyndham Grand Rio Mar to specific destinations.
+      // Order matters: more specific entries come before more general ones.
+      var WYNDHAM_FIXED_FARES = [
+        { price: 95, keywords: ['wyndham', 'palmas'] },
+        { price: 40, keywords: ['four seasons'] },
+        { price: 35, keywords: ['hyatt', 'grand reserve'] },
+        { price: 45, keywords: ['conquistador'] },
+        { price: 65, keywords: ['ceiba', 'airport'] },
+        { price: 65, keywords: ['ceiba', 'ferry'] },
+        { price: 85, keywords: ['old san juan'] },
+        { price: 75, keywords: ['isla verde'] },
+        { price: 80, keywords: ['condado'] },
+        { price: 55, keywords: ['puerto del rey'] },
+        { price: 45, keywords: ['villa marina'] },
+        { price: 20, keywords: ['luquillo', 'kiosk'] },
+        { price: 20, keywords: ['luquillo', 'beach'] },
+        { price: 20, keywords: ['la parrilla'] },
+        { price: 10, keywords: ['don pepe'] },
+        { price: 10, keywords: ['dos panza'] },
+        { price: 10, keywords: ['las picuas'] },
+        { price: 20, keywords: ['terruno'] },
+        { price: 20, keywords: ['jibaro'] },
+        { price: 10, keywords: ['richie'] },
+        { price: 10, keywords: ['terraza montemar'] },
+        { price: 20, keywords: ['soleo'] },
+        { price: 20, keywords: ['sama'] },
+        { price: 10, keywords: ['rico pan'] },
+        { price: 30, keywords: ['junglequi'] },
+        { price: 20, keywords: ['famcoop'] },
+        { price: 20, keywords: ['amigo pharmacy', 'luquillo'] },
+        { price: 30, keywords: ['walmart', 'fajardo'] },
+        { price: 35, keywords: ['walmart', 'canovanas'] },
+        { price: 20, keywords: ['carabali'] },
+        { price: 35, keywords: ['outlet 66'] },
+        { price: 85, keywords: ['plaza las americas'] },
+        { price: 70, keywords: ['mall of san juan'] },
+        { price: 20, keywords: ['kenneth car rental'] },
+        { price: 100, keywords: ['bacardi'] },
+        { price: 50, keywords: ['croabas'] },
+        { price: 50, keywords: ['kayak village'] },
+        { price: 40, keywords: ['siesta alegre'] },
+        { price: 200, keywords: ['toro verde'] }
+      ];
+
+      function getWyndhamFixedFare(destPlace) {
+        var hay = placeHaystack(destPlace);
+        if (!hay) return null;
+        for (var i = 0; i < WYNDHAM_FIXED_FARES.length; i++) {
+          var entry = WYNDHAM_FIXED_FARES[i];
+          if (matchesKeywords(hay, entry.keywords)) return entry.price;
+        }
+        return null;
+      }
+
       function straightLineMeters(a, b) {
         if (window.google && google.maps && google.maps.geometry && google.maps.geometry.spherical) {
           return google.maps.geometry.spherical.computeDistanceBetween(a, b);
@@ -2576,6 +2671,10 @@
       }
 
       function showFareFromMiles(miles) {
+        if (miles < 10) {
+          fareInput.value = getShortTripFormText();
+          return;
+        }
         var fare = miles * PER_MILE_RATE;
         if (fare < 1) fare = 1;
         var rounded = Math.round(fare);
@@ -2585,7 +2684,7 @@
       function fallbackFare() {
         if (!pickupPlace || !destinationPlace) return;
         try {
-          var meters = straightLineMeters(pickupPlace, destinationPlace);
+          var meters = straightLineMeters(pickupPlace.location, destinationPlace.location);
           var miles = (meters * DRIVING_FACTOR) / 1609.344;
           showFareFromMiles(miles);
         } catch (e) {
@@ -2604,9 +2703,18 @@
         }
 
         // Airport flat-rate: only when pickup is AT SJU and destination is within 10 miles of SJU
-        if (isAtSJU(pickupPlace) && isNearSJU(destinationPlace)) {
+        if (isAtSJU(pickupPlace.location) && isNearSJU(destinationPlace.location)) {
           fareInput.value = getAirportFareText();
           return;
+        }
+
+        // Wyndham Grand Rio Mar flat-rate destinations
+        if (isWyndhamRioMarPickup(pickupPlace)) {
+          var fixed = getWyndhamFixedFare(destinationPlace);
+          if (fixed !== null) {
+            fareInput.value = '$' + fixed;
+            return;
+          }
         }
 
         formatPlaceholderForFare(getFarePlaceholder('calculating'));
@@ -2619,8 +2727,8 @@
         }
 
         distanceService.getDistanceMatrix({
-          origins: [pickupPlace],
-          destinations: [destinationPlace],
+          origins: [pickupPlace.location],
+          destinations: [destinationPlace.location],
           travelMode: google.maps.TravelMode.DRIVING,
           unitSystem: google.maps.UnitSystem.IMPERIAL
         }, function(response, status) {
@@ -2651,7 +2759,11 @@
               onSelect(null);
               return;
             }
-            onSelect(place.geometry.location);
+            onSelect({
+              location: place.geometry.location,
+              name: place.name || '',
+              address: place.formatted_address || ''
+            });
           });
         } catch (e) {
           // Silently fail — users can still submit the expandable form
