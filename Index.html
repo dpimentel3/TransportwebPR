@@ -1106,6 +1106,42 @@
       font-weight: 600;
       font-size: 1.05rem;
     }
+    .instant-quote .iq-input-wrap {
+      position: relative;
+    }
+    .instant-quote .iq-input-wrap input[type="text"] {
+      padding-right: 40px;
+    }
+    .iq-clear {
+      position: absolute;
+      top: 50%;
+      right: 8px;
+      transform: translateY(-50%);
+      width: 26px;
+      height: 26px;
+      padding: 0;
+      border: none;
+      border-radius: 999px;
+      background: transparent;
+      color: #666;
+      font-size: 1.25rem;
+      line-height: 1;
+      cursor: pointer;
+      display: none;
+      align-items: center;
+      justify-content: center;
+    }
+    .iq-clear:hover {
+      background: rgba(0, 0, 0, 0.08);
+      color: var(--text);
+    }
+    .iq-clear:focus {
+      outline: 2px solid var(--accent);
+      outline-offset: 1px;
+    }
+    .iq-input-wrap.has-value .iq-clear {
+      display: inline-flex;
+    }
     .fare-hint {
       display: block;
       font-size: 0.82rem;
@@ -1797,15 +1833,24 @@
       <div class="instant-quote" id="instantQuote">
         <div>
           <label for="quoteInstantPickup" data-i18n="iq_pickup">Pick up Location</label>
-          <input id="quoteInstantPickup" type="text" autocomplete="off" data-i18n-placeholder="iq_ph_pickup" placeholder="Start typing a pickup location" />
+          <div class="iq-input-wrap">
+            <input id="quoteInstantPickup" type="text" autocomplete="off" data-i18n-placeholder="iq_ph_pickup" placeholder="Start typing a pickup location" />
+            <button type="button" class="iq-clear" data-target="quoteInstantPickup" aria-label="Clear pick up location">&times;</button>
+          </div>
         </div>
         <div>
           <label for="quoteInstantDestination" data-i18n="iq_destination">Destination</label>
-          <input id="quoteInstantDestination" type="text" autocomplete="off" data-i18n-placeholder="iq_ph_destination" placeholder="Start typing a destination" />
+          <div class="iq-input-wrap">
+            <input id="quoteInstantDestination" type="text" autocomplete="off" data-i18n-placeholder="iq_ph_destination" placeholder="Start typing a destination" />
+            <button type="button" class="iq-clear" data-target="quoteInstantDestination" aria-label="Clear destination">&times;</button>
+          </div>
         </div>
         <div>
           <label for="quoteInstantFare" data-i18n="iq_fare">Trip Fare</label>
           <input id="quoteInstantFare" class="fare-input" type="text" readonly data-i18n-placeholder="iq_ph_fare" placeholder="Select both locations to see fare" />
+          <div class="hero-actions" style="margin: 12px 0 0;">
+            <a href="#book" class="btn btn-primary" id="quoteBookNow" data-i18n="book_now">Book Now</a>
+          </div>
         </div>
       </div>
 
@@ -2772,17 +2817,60 @@
 
       // Recompute when user clears field manually
       pickupInput.addEventListener('input', function() {
+        updateClearButtonVisibility(pickupInput);
         if (!pickupInput.value) {
           pickupPlace = null;
           computeFare();
         }
       });
       destinationInput.addEventListener('input', function() {
+        updateClearButtonVisibility(destinationInput);
         if (!destinationInput.value) {
           destinationPlace = null;
           computeFare();
         }
       });
+
+      function updateClearButtonVisibility(input) {
+        var wrap = input.parentElement;
+        if (!wrap || !wrap.classList || !wrap.classList.contains('iq-input-wrap')) return;
+        if (input.value) wrap.classList.add('has-value');
+        else wrap.classList.remove('has-value');
+      }
+
+      // Initialize clear button visibility (in case fields are pre-filled)
+      updateClearButtonVisibility(pickupInput);
+      updateClearButtonVisibility(destinationInput);
+
+      // Clear buttons for pickup/destination
+      var clearButtons = document.querySelectorAll('.iq-clear');
+      clearButtons.forEach(function(btn) {
+        btn.addEventListener('click', function() {
+          var targetId = btn.getAttribute('data-target');
+          var target = document.getElementById(targetId);
+          if (!target) return;
+          target.value = '';
+          updateClearButtonVisibility(target);
+          if (targetId === 'quoteInstantPickup') pickupPlace = null;
+          else if (targetId === 'quoteInstantDestination') destinationPlace = null;
+          computeFare();
+          target.focus();
+        });
+      });
+
+      // Book Now button inside the quote modal closes the modal, then scrolls to booking
+      var bookNowBtn = document.getElementById('quoteBookNow');
+      if (bookNowBtn) {
+        bookNowBtn.addEventListener('click', function() {
+          var overlay = document.getElementById('quoteModalOverlay');
+          if (overlay && overlay.classList.contains('active')) {
+            overlay.classList.remove('active');
+            overlay.setAttribute('aria-hidden', 'true');
+            document.body.style.overflow = '';
+          }
+          // Let the default anchor + existing smooth-scroll handler take over
+        });
+      }
 
       window.initQuoteAutocomplete = function() {
         bindAutocomplete(pickupInput, function(loc) {
@@ -2813,6 +2901,44 @@
           }, 50);
         });
       });
+    })();
+
+    /* Google Places Autocomplete — Booking Form */
+    (function() {
+      var bookingPickup = document.getElementById('pickupLocation');
+      var bookingDestination = document.getElementById('destination');
+      if (!bookingPickup || !bookingDestination) return;
+
+      function bindBookingAutocomplete(input) {
+        if (!window.google || !window.google.maps || !window.google.maps.places) return;
+        try {
+          new google.maps.places.Autocomplete(input, {
+            fields: ['geometry', 'formatted_address', 'name'],
+            componentRestrictions: { country: ['pr', 'us'] }
+          });
+        } catch (e) {
+          // Silently fail — users can still type the address manually
+        }
+      }
+
+      function bindAll() {
+        bindBookingAutocomplete(bookingPickup);
+        bindBookingAutocomplete(bookingDestination);
+      }
+
+      // Chain onto the existing Maps API callback so we bind once the API is ready
+      var prevInit = window.initQuoteAutocomplete;
+      window.initQuoteAutocomplete = function() {
+        if (typeof prevInit === 'function') {
+          try { prevInit(); } catch (e) { /* no-op */ }
+        }
+        bindAll();
+      };
+
+      // In case the Maps API already loaded before this script ran
+      if (window.google && window.google.maps && window.google.maps.places) {
+        bindAll();
+      }
     })();
   </script>
 
