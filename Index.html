@@ -1106,10 +1106,10 @@
       font-weight: 600;
       font-size: 1.05rem;
     }
-    .instant-quote .iq-input-wrap {
+    .iq-input-wrap {
       position: relative;
     }
-    .instant-quote .iq-input-wrap input[type="text"] {
+    .iq-input-wrap input[type="text"] {
       padding-right: 40px;
     }
     .iq-clear {
@@ -1674,7 +1674,10 @@
                 </div>
                 <div>
                   <label for="pickupLocation" data-i18n="label_pickup">Pick up location</label>
-                  <input id="pickupLocation" name="pickupLocation" type="text" data-i18n-placeholder="ph_pickup" placeholder="Example: SJU Airport or hotel name" required />
+                  <div class="iq-input-wrap">
+                    <input id="pickupLocation" name="pickupLocation" type="text" data-i18n-placeholder="ph_pickup" placeholder="Example: SJU Airport or hotel name" required />
+                    <button type="button" class="iq-clear" data-target="pickupLocation" aria-label="Clear pick up location">&times;</button>
+                  </div>
                 </div>
               </div>
 
@@ -1686,7 +1689,10 @@
 
               <div>
                 <label for="destination" data-i18n="label_destination">Destination</label>
-                <input id="destination" name="destination" type="text" data-i18n-placeholder="ph_destination" placeholder="Example: San Juan Cruise Port" required />
+                <div class="iq-input-wrap">
+                  <input id="destination" name="destination" type="text" data-i18n-placeholder="ph_destination" placeholder="Example: San Juan Cruise Port" required />
+                  <button type="button" class="iq-clear" data-target="destination" aria-label="Clear destination">&times;</button>
+                </div>
                 <div class="helper" data-i18n="helper_destination">Use a place name or address so the driver clearly understands your destination.</div>
               </div>
 
@@ -2259,7 +2265,7 @@
         svc_port_desc: 'Disfrute de transporte confiable y conveniente a puertos de cruceros, hoteles, alquiler de autos, marinas y destinos en todo Puerto Rico. Ya sea que vaya a un tour de bahía bioluminiscente o tome un ferry a Culebra, Vieques, Palomino o Icacos, proporcionamos transporte de ida y vuelta cuidadosamente programado alrededor de sus actividades para una experiencia tranquila y sin estrés.',
 
         // Product cards
-        prod_airport_title: 'Traslados al Aeropuerto',
+        prod_airport_title: 'Traslados al/del Aeropuerto',
         prod_airport_price: '$10 / Persona',
         prod_airport_capacity: 'Hasta 13 Personas',
         prod_airport_area: 'Dejadas en el área de San Juan/Isla Verde',
@@ -2374,7 +2380,7 @@
         iq_pickup: 'Lugar de Recogida',
         iq_destination: 'Destino',
         iq_fare: 'Tarifa del Viaje',
-        quote_expandable_title: 'Para viajes de más de 4 pasajeros, solicite una cotización gratis completando el formulario a continuación (los traslados al aeropuerto en el área de San Juan/Isla Verde tienen un precio de $10 por persona)',
+        quote_expandable_title: 'Para viajes de más de 4 pasajeros, solicite una cotización gratis completando el formulario a continuación (los traslados al/del aeropuerto en el área de San Juan/Isla Verde tienen un precio de $10 por persona)',
         ql_passengers: 'Número de Pasajeros',
         ql_date: 'Fecha de Recogida',
         ql_time: 'Hora de Recogida',
@@ -2574,7 +2580,7 @@
 
       function getAirportFareText() {
         var isEs = document.documentElement.getAttribute('lang') === 'es';
-        return isEs ? 'Traslados al Aeropuerto $10/persona' : 'Airport Transfers $10/person';
+        return isEs ? 'Traslados al/del Aeropuerto $10/persona' : 'Airport Transfers $10/person';
       }
 
       function getShortTripFormText() {
@@ -2862,6 +2868,17 @@
       var bookNowBtn = document.getElementById('quoteBookNow');
       if (bookNowBtn) {
         bookNowBtn.addEventListener('click', function() {
+          // Copy whatever the user typed in the quote widget into the booking form
+          var bookingPickupField = document.getElementById('pickupLocation');
+          var bookingDestinationField = document.getElementById('destination');
+          if (bookingPickupField) {
+            bookingPickupField.value = pickupInput.value || '';
+            bookingPickupField.dispatchEvent(new Event('input', { bubbles: true }));
+          }
+          if (bookingDestinationField) {
+            bookingDestinationField.value = destinationInput.value || '';
+            bookingDestinationField.dispatchEvent(new Event('input', { bubbles: true }));
+          }
           var overlay = document.getElementById('quoteModalOverlay');
           if (overlay && overlay.classList.contains('active')) {
             overlay.classList.remove('active');
@@ -2908,6 +2925,23 @@
       var bookingPickup = document.getElementById('pickupLocation');
       var bookingDestination = document.getElementById('destination');
       if (!bookingPickup || !bookingDestination) return;
+
+      function updateBookingClearVisibility(input) {
+        var wrap = input.parentElement;
+        if (!wrap || !wrap.classList || !wrap.classList.contains('iq-input-wrap')) return;
+        if (input.value) wrap.classList.add('has-value');
+        else wrap.classList.remove('has-value');
+      }
+
+      bookingPickup.addEventListener('input', function() {
+        updateBookingClearVisibility(bookingPickup);
+      });
+      bookingDestination.addEventListener('input', function() {
+        updateBookingClearVisibility(bookingDestination);
+      });
+
+      updateBookingClearVisibility(bookingPickup);
+      updateBookingClearVisibility(bookingDestination);
 
       function bindBookingAutocomplete(input) {
         if (!window.google || !window.google.maps || !window.google.maps.places) return;
