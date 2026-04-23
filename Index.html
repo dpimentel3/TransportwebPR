@@ -809,6 +809,90 @@
       color: var(--muted);
     }
 
+    .booking-tabs {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      margin: -8px -8px 22px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .booking-tab {
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      padding: 16px 8px 14px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 6px;
+      color: var(--muted);
+      font-weight: 600;
+      font-size: 0.95rem;
+      border-bottom: 3px solid transparent;
+      border-radius: 12px 12px 0 0;
+      transition: color 0.18s ease, border-color 0.18s ease, background 0.18s ease;
+      line-height: 1.2;
+    }
+
+    .booking-tab:hover:not(.active) {
+      color: var(--primary-dark);
+      background: rgba(13, 53, 87, 0.04);
+    }
+
+    .booking-tab.active {
+      color: var(--primary);
+      border-bottom-color: var(--primary);
+      background: rgba(13, 53, 87, 0.05);
+    }
+
+    .booking-tab-icon {
+      width: 26px;
+      height: 26px;
+      color: currentColor;
+    }
+
+    .booking-panel[hidden] { display: none; }
+
+    select {
+      width: 100%;
+      padding: 13px 40px 13px 14px;
+      border: 1px solid rgba(205, 218, 228, 0.95);
+      border-radius: 14px;
+      font-size: 1rem;
+      color: var(--text);
+      background-color: rgba(255,255,255,0.94);
+      background-image: url("data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8' fill='none' stroke='%230d3557' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M1 1l5 5 5-5'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 16px center;
+      background-size: 12px 8px;
+      transition: border-color 0.18s ease, box-shadow 0.18s ease;
+      min-height: 52px;
+      appearance: none;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      cursor: pointer;
+    }
+
+    select:focus {
+      outline: none;
+      border-color: rgba(227, 176, 75, 0.95);
+      box-shadow: 0 0 0 4px rgba(227,176,75,0.18);
+    }
+
+    @media (max-width: 540px) {
+      .booking-tab {
+        padding: 14px 4px 12px;
+        font-size: 0.82rem;
+        gap: 4px;
+      }
+      .booking-tab-icon { width: 22px; height: 22px; }
+    }
+
+    @media (max-width: 380px) {
+      .booking-tab { font-size: 0.72rem; }
+    }
+
     .step-number {
       width: 42px;
       height: 42px;
@@ -1558,7 +1642,7 @@
                 </div>
               </details>
               <div class="btn">
-                <a href="#book" class="btn btn-primary" data-i18n="book_now">Book Now</a>
+                <a href="#book" class="btn btn-primary book-tour-link" data-tour="Old San Juan Tour" data-i18n="book_now">Book Now</a>
               </div>
             </div>
           </div>
@@ -1599,7 +1683,7 @@
                 </div>
               </details>
               <div class="btn">
-                <a href="#book" class="btn btn-primary" data-i18n="book_now">Book Now</a>
+                <a href="#book" class="btn btn-primary book-tour-link" data-tour="Cave Swimming Adventure" data-i18n="book_now">Book Now</a>
               </div>
             </div>
           </div>
@@ -1661,8 +1745,36 @@
           </div>
 
           <aside class="booking-card" aria-labelledby="booking-title">
-            <h2 id="booking-title" data-i18n="book_form_title">Book your transportation</h2>
-            <form id="bookingForm" name="booking" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+            <div class="booking-tabs" role="tablist" aria-label="Booking options">
+              <button type="button" class="booking-tab active" id="tab-transport" role="tab" aria-selected="true" aria-controls="panel-transport" data-panel="panel-transport">
+                <svg class="booking-tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M4 13l1.6-4.8A2 2 0 0 1 7.5 7h9a2 2 0 0 1 1.9 1.2L20 13"/>
+                  <path d="M3 13h18v4a1 1 0 0 1-1 1h-1.5a1 1 0 0 1-1-1v-1h-11v1a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1v-4z"/>
+                  <circle cx="7.5" cy="16" r="1.2"/>
+                  <circle cx="16.5" cy="16" r="1.2"/>
+                </svg>
+                <span data-i18n="tab_transport">Transportation</span>
+              </button>
+              <button type="button" class="booking-tab" id="tab-tours" role="tab" aria-selected="false" aria-controls="panel-tours" data-panel="panel-tours">
+                <svg class="booking-tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M4 7.5h2.7l1.5-2h7.6l1.5 2H20a1 1 0 0 1 1 1v9.5a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V8.5a1 1 0 0 1 1-1z"/>
+                  <circle cx="12" cy="13" r="3.8"/>
+                </svg>
+                <span data-i18n="tab_tours">Tours</span>
+              </button>
+              <button type="button" class="booking-tab" id="tab-boats" role="tab" aria-selected="false" aria-controls="panel-boats" data-panel="panel-boats">
+                <svg class="booking-tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M3 17.5c1.5 1 3 1.3 4.5 1s2.5-1.2 4.5-1.2 3 1 4.5 1.2 3-.1 4.5-1"/>
+                  <path d="M5 14.5l7-8.5 7 8.5"/>
+                  <path d="M12 6v8.5"/>
+                </svg>
+                <span data-i18n="tab_boats">Boat Charters</span>
+              </button>
+            </div>
+
+            <div class="booking-panel" id="panel-transport" role="tabpanel" aria-labelledby="tab-transport">
+              <h2 id="booking-title" data-i18n="book_form_title">Book your transportation</h2>
+              <form id="bookingForm" name="booking" method="POST" data-netlify="true" netlify-honeypot="bot-field">
               <input type="hidden" name="form-name" value="booking" />
               <p class="hidden-field">
                 <label>Don’t fill this out if you’re human: <input name="bot-field" /></label>
@@ -1724,6 +1836,126 @@
                 No payments are made through the website. Payment is made directly to the driver at the end of the trip, and can be made by cash or credit card.
               </div>
             </form>
+            </div>
+
+            <div class="booking-panel" id="panel-tours" role="tabpanel" aria-labelledby="tab-tours" hidden>
+              <h2 id="tours-title" data-i18n="book_tours_title">Book your tour</h2>
+              <form id="toursForm" name="tour-booking" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+                <input type="hidden" name="form-name" value="tour-booking" />
+                <p class="hidden-field">
+                  <label>Don’t fill this out if you’re human: <input name="bot-field" /></label>
+                </p>
+                <div class="field-grid">
+                  <div>
+                    <label for="tourDate" data-i18n="label_date">Date (month/day)</label>
+                    <input id="tourDate" name="tripDate" type="date" required />
+                  </div>
+                  <div>
+                    <label for="tourSelect" data-i18n="label_select_tour">Select tour</label>
+                    <select id="tourSelect" name="tour" required>
+                      <option value="" disabled selected data-i18n="ph_select_tour">Choose a tour</option>
+                      <option value="Old San Juan Tour" data-i18n="tour_option_osj">Old San Juan Tour</option>
+                      <option value="Cave Swimming Adventure" data-i18n="tour_option_cave">Cave Swimming Adventure</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div>
+                  <label for="tourPickup" data-i18n="label_pickup">Pick up location</label>
+                  <div class="iq-input-wrap">
+                    <input id="tourPickup" name="pickupLocation" type="text" data-i18n-placeholder="ph_pickup" placeholder="Example: SJU Airport or hotel name" required />
+                    <button type="button" class="iq-clear" data-target="tourPickup" aria-label="Clear pick up location">&times;</button>
+                  </div>
+                </div>
+
+                <div class="field-grid">
+                  <div>
+                    <label for="tourPassengers" data-i18n="label_passengers">Number of passengers</label>
+                    <input id="tourPassengers" name="passengers" type="number" min="1" max="50" data-i18n-placeholder="ph_passengers" placeholder="Example: 4" required />
+                  </div>
+                  <div>
+                    <label for="tourPhone" data-i18n="label_phone">Phone number</label>
+                    <input id="tourPhone" name="phone" type="tel" placeholder="787-214-2058" required />
+                  </div>
+                </div>
+
+                <div>
+                  <label for="tourFirstName" data-i18n="label_name">First name</label>
+                  <input id="tourFirstName" name="firstName" type="text" required />
+                </div>
+
+                <div>
+                  <label for="tourComments" data-i18n="label_comments">Comments</label>
+                  <textarea id="tourComments" name="comments" data-i18n-placeholder="ph_comments_tour" placeholder="Add any extra details about your tour if necessary"></textarea>
+                </div>
+
+                <div class="hero-actions" style="margin: 6px 0 0;">
+                  <button type="submit" class="btn btn-primary" data-i18n="btn_send_booking">Send Booking Request</button>
+                </div>
+                <div class="booking-note" data-i18n="booking_note">
+                  No payments are made through the website. Payment is made directly to the driver at the end of the trip, and can be made by cash or credit card.
+                </div>
+              </form>
+            </div>
+
+            <div class="booking-panel" id="panel-boats" role="tabpanel" aria-labelledby="tab-boats" hidden>
+              <h2 id="boats-title" data-i18n="book_boats_title">Book a boat charter</h2>
+              <form id="boatsForm" name="boat-charter-booking" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+                <input type="hidden" name="form-name" value="boat-charter-booking" />
+                <p class="hidden-field">
+                  <label>Don’t fill this out if you’re human: <input name="bot-field" /></label>
+                </p>
+                <div class="field-grid">
+                  <div>
+                    <label for="boatDate" data-i18n="label_date">Date (month/day)</label>
+                    <input id="boatDate" name="tripDate" type="date" required />
+                  </div>
+                  <div>
+                    <label for="boatSelect" data-i18n="label_select_boat">Boats and Charters</label>
+                    <select id="boatSelect" name="charter" required>
+                      <option value="" disabled selected data-i18n="ph_select_boat">Choose a charter</option>
+                      <option value="Fishing Trip" data-i18n="boat_option_fishing">Fishing Trip</option>
+                      <option value="Luxury Lagoon 42'" data-i18n="boat_option_lagoon">Luxury Lagoon 42'</option>
+                      <option value="Cruiser 54' Yacht" data-i18n="boat_option_cruiser">Cruiser 54' Yacht</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="field-grid">
+                  <div>
+                    <label for="boatPassengers" data-i18n="label_passengers">Number of passengers</label>
+                    <input id="boatPassengers" name="passengers" type="number" min="1" max="50" data-i18n-placeholder="ph_passengers" placeholder="Example: 4" required />
+                  </div>
+                  <div>
+                    <label for="boatPhone" data-i18n="label_phone">Phone number</label>
+                    <input id="boatPhone" name="phone" type="tel" placeholder="787-214-2058" required />
+                  </div>
+                </div>
+
+                <div class="field-grid">
+                  <div>
+                    <label for="boatEmail" data-i18n="label_email">Email</label>
+                    <input id="boatEmail" name="email" type="email" placeholder="name@example.com" required />
+                  </div>
+                  <div>
+                    <label for="boatFirstName" data-i18n="label_name">First name</label>
+                    <input id="boatFirstName" name="firstName" type="text" required />
+                  </div>
+                </div>
+
+                <div>
+                  <label for="boatComments" data-i18n="label_comments">Comments</label>
+                  <textarea id="boatComments" name="comments" data-i18n-placeholder="ph_comments_boat" placeholder="Add any extra details about your charter if necessary"></textarea>
+                </div>
+
+                <div class="hero-actions" style="margin: 6px 0 0;">
+                  <button type="submit" class="btn btn-primary" data-i18n="btn_send_booking">Send Booking Request</button>
+                </div>
+                <div class="booking-note" data-i18n="booking_note">
+                  No payments are made through the website. Payment is made directly to the driver at the end of the trip, and can be made by cash or credit card.
+                </div>
+              </form>
+            </div>
           </aside>
         </div>
       </div>
@@ -2072,6 +2304,122 @@
         });
       }
 
+      // Booking tabs + Tour/Boat charter forms
+      (function () {
+        var tabs = document.querySelectorAll('.booking-tab');
+        var panels = document.querySelectorAll('.booking-panel');
+
+        function activateTab(panelId) {
+          tabs.forEach(function (t) {
+            var isActive = t.getAttribute('data-panel') === panelId;
+            t.classList.toggle('active', isActive);
+            t.setAttribute('aria-selected', isActive ? 'true' : 'false');
+          });
+          panels.forEach(function (p) {
+            if (p.id === panelId) p.removeAttribute('hidden');
+            else p.setAttribute('hidden', '');
+          });
+        }
+
+        tabs.forEach(function (tab) {
+          tab.addEventListener('click', function () {
+            activateTab(tab.getAttribute('data-panel'));
+          });
+        });
+
+        // Tour card "Book Now" buttons switch to Tours tab and preselect the tour
+        var tourLinks = document.querySelectorAll('.book-tour-link');
+        tourLinks.forEach(function (link) {
+          link.addEventListener('click', function () {
+            activateTab('panel-tours');
+            var tourName = link.getAttribute('data-tour');
+            var select = document.getElementById('tourSelect');
+            if (select && tourName) {
+              var options = select.querySelectorAll('option');
+              options.forEach(function (opt) {
+                if (opt.value === tourName) select.value = tourName;
+              });
+            }
+          });
+        });
+
+        function buildExtraForm(config) {
+          var formEl = document.getElementById(config.formId);
+          if (!formEl) return;
+          var submitting = false;
+
+          formEl.addEventListener('submit', function (event) {
+            event.preventDefault();
+            if (submitting) return;
+
+            var submitBtn = formEl.querySelector('button[type="submit"]');
+            var isEs = document.documentElement.getAttribute('lang') === 'es';
+
+            // Validate required fields
+            var requiredFields = formEl.querySelectorAll('[required]');
+            for (var i = 0; i < requiredFields.length; i++) {
+              if (!requiredFields[i].value || !String(requiredFields[i].value).trim()) {
+                alert(isEs
+                  ? 'Por favor complete todos los campos requeridos antes de enviar su solicitud de reserva.'
+                  : 'Please complete all required fields before sending your booking request.');
+                return;
+              }
+            }
+
+            submitting = true;
+            submitBtn.disabled = true;
+            submitBtn.textContent = isEs ? 'Enviando…' : 'Sending…';
+
+            fetch('/', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+              body: new URLSearchParams(new FormData(formEl)).toString()
+            }).then(function (response) {
+              isEs = document.documentElement.getAttribute('lang') === 'es';
+              if (response.ok) {
+                try {
+                  gtag('event', 'form_submit', {
+                    form_id: config.formId,
+                    form_name: config.formName,
+                    send_to: 'AW-18039811113'
+                  });
+                } catch (e) { /* no-op */ }
+
+                var panel = formEl.closest('.booking-panel');
+                var titleEl = panel ? panel.querySelector('h2') : null;
+                if (titleEl) {
+                  titleEl.textContent = isEs ? '¡Solicitud de reserva enviada!' : 'Booking request sent!';
+                  titleEl.style.color = 'var(--primary)';
+                  titleEl.style.textAlign = 'center';
+                  titleEl.setAttribute('data-i18n', 'book_form_success_title');
+                }
+                formEl.innerHTML = '<div style="text-align:center;padding:24px 0;">' +
+                  '<p style="margin:0 0 12px;font-size:1.1rem;color:var(--primary);font-weight:600;" data-i18n="book_form_success_msg">' +
+                  (isEs ? 'El conductor se comunicará con usted pronto por mensaje de texto.' : 'The driver will reach out to you shortly via text message.') +
+                  '</p>' +
+                  '<p style="margin:0;font-size:0.95rem;color:var(--muted);line-height:1.6;" data-i18n="book_form_success_tip">' +
+                  (isEs ? 'Consejo: responda al mensaje del conductor para confirmar su viaje.' : 'Tip: reply to the driver\'s text message to confirm your trip.') +
+                  '</p></div>';
+              } else {
+                alert(isEs ? 'Hubo un problema al enviar su solicitud. Por favor intente de nuevo.' : 'There was a problem sending your request. Please try again.');
+                submitting = false;
+                submitBtn.disabled = false;
+                submitBtn.textContent = isEs ? 'Enviar Solicitud de Reserva' : 'Send Booking Request';
+              }
+            }).catch(function () {
+              var isEs2 = document.documentElement.getAttribute('lang') === 'es';
+              alert(isEs2 ? 'Hubo un problema al enviar su solicitud. Por favor intente de nuevo.' : 'There was a problem sending your request. Please try again.');
+              submitting = false;
+              submitBtn.disabled = false;
+              submitBtn.textContent = isEs2 ? 'Enviar Solicitud de Reserva' : 'Send Booking Request';
+            });
+          });
+        }
+
+        buildExtraForm({ formId: 'toursForm', formName: 'tour-booking' });
+        buildExtraForm({ formId: 'boatsForm', formName: 'boat-charter-booking' });
+      })();
+
       // Quote modal
       var quoteOverlay = document.getElementById('quoteModalOverlay');
       var openQuoteBtn = document.getElementById('openQuoteModal');
@@ -2325,6 +2673,11 @@
         book_check2: 'Ingrese el destino exacto o nombre del lugar',
         book_check3: 'Asegúrese de que su número de teléfono sea correcto',
         book_form_title: 'Reserve su transporte',
+        book_tours_title: 'Reserve su tour',
+        book_boats_title: 'Reserve un chárter de bote',
+        tab_transport: 'Transporte',
+        tab_tours: 'Tours',
+        tab_boats: 'Chárters de Bote',
         label_date: 'Fecha (mes/día)',
         label_pickup: 'Lugar de recogida',
         label_time: 'Hora de recogida',
@@ -2333,6 +2686,16 @@
         label_phone: 'Número de teléfono',
         label_name: 'Nombre',
         label_comments: 'Comentarios',
+        label_email: 'Correo electrónico',
+        label_select_tour: 'Seleccione el tour',
+        label_select_boat: 'Botes y Chárters',
+        ph_select_tour: 'Elija un tour',
+        ph_select_boat: 'Elija un chárter',
+        tour_option_osj: 'Tour del Viejo San Juan',
+        tour_option_cave: 'Aventura de Natación en Cueva',
+        boat_option_fishing: 'Viaje de Pesca',
+        boat_option_lagoon: "Luxury Lagoon 42'",
+        boat_option_cruiser: "Cruiser 54' Yacht",
         helper_destination: 'Use un nombre de lugar o dirección para que el conductor entienda claramente su destino.',
         btn_send_booking: 'Enviar Solicitud de Reserva',
         booking_note: 'No se realizan pagos a través del sitio web. El pago se hace directamente al conductor al final del viaje, y puede ser en efectivo o con tarjeta de crédito.',
@@ -2402,6 +2765,10 @@
         ph_destination: 'Ejemplo: Puerto de Cruceros de San Juan',
         ph_passengers: 'Ejemplo: 4',
         ph_comments: 'Agregue cualquier detalle adicional sobre su viaje si es necesario (número de vuelo/aerolínea, necesita/tiene asiento de bebé, número de maletas o bolsas de golf)',
+        ph_comments_tour: 'Agregue cualquier detalle adicional sobre su tour si es necesario',
+        ph_comments_boat: 'Agregue cualquier detalle adicional sobre su chárter si es necesario',
+        ph_select_tour: 'Elija un tour',
+        ph_select_boat: 'Elija un chárter',
         ph_quote_phone: 'Ejemplo: 787-555-1234',
         iq_ph_pickup: 'Comience a escribir un lugar de recogida',
         iq_ph_destination: 'Comience a escribir un destino',
@@ -2924,6 +3291,7 @@
     (function() {
       var bookingPickup = document.getElementById('pickupLocation');
       var bookingDestination = document.getElementById('destination');
+      var tourPickup = document.getElementById('tourPickup');
       if (!bookingPickup || !bookingDestination) return;
 
       function updateBookingClearVisibility(input) {
@@ -2939,11 +3307,18 @@
       bookingDestination.addEventListener('input', function() {
         updateBookingClearVisibility(bookingDestination);
       });
+      if (tourPickup) {
+        tourPickup.addEventListener('input', function() {
+          updateBookingClearVisibility(tourPickup);
+        });
+      }
 
       updateBookingClearVisibility(bookingPickup);
       updateBookingClearVisibility(bookingDestination);
+      if (tourPickup) updateBookingClearVisibility(tourPickup);
 
       function bindBookingAutocomplete(input) {
+        if (!input) return;
         if (!window.google || !window.google.maps || !window.google.maps.places) return;
         try {
           new google.maps.places.Autocomplete(input, {
@@ -2958,6 +3333,7 @@
       function bindAll() {
         bindBookingAutocomplete(bookingPickup);
         bindBookingAutocomplete(bookingDestination);
+        bindBookingAutocomplete(tourPickup);
       }
 
       // Chain onto the existing Maps API callback so we bind once the API is ready
