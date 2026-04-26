@@ -504,6 +504,130 @@
       }
     }
 
+    .service-categories {
+      display: grid;
+      gap: 18px;
+      margin-top: 36px;
+    }
+
+    .category-accordion {
+      background: #fff;
+      border: 1px solid #e0e0e0;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+      transition: box-shadow 0.2s ease;
+    }
+    .category-accordion[open] {
+      box-shadow: var(--shadow-md);
+    }
+
+    .category-summary {
+      list-style: none;
+      cursor: pointer;
+      padding: 22px 26px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.96), rgba(241,247,251,0.92));
+      user-select: none;
+    }
+    .category-summary::-webkit-details-marker { display: none; }
+    .category-summary::marker { content: ''; }
+
+    .category-summary .category-icon {
+      font-size: 1.6rem;
+      line-height: 1;
+      flex-shrink: 0;
+    }
+
+    .category-summary .category-text {
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+      min-width: 0;
+    }
+
+    .category-summary .category-text strong {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--primary-dark);
+      line-height: 1.25;
+    }
+
+    .category-summary .category-text small {
+      display: block;
+      font-weight: 400;
+      font-size: 0.9rem;
+      color: var(--muted);
+      margin-top: 4px;
+      line-height: 1.4;
+    }
+
+    .category-summary .category-chevron {
+      margin-left: auto;
+      transition: transform 0.25s ease;
+      font-size: 1.1rem;
+      color: var(--primary);
+      flex-shrink: 0;
+    }
+    .category-accordion[open] .category-summary .category-chevron {
+      transform: rotate(180deg);
+    }
+
+    .category-content {
+      padding: 22px 22px 26px;
+      border-top: 1px solid var(--border);
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      align-items: start;
+      gap: 22px;
+      background: #fafcfd;
+    }
+
+    .product-card.no-photo .product-card-body {
+      padding: 22px 18px;
+    }
+
+    .product-card.boat-card {
+      text-align: center;
+    }
+    .product-card.boat-card .product-card-body {
+      padding: 30px 22px;
+      gap: 14px;
+      align-items: stretch;
+    }
+    .product-card.boat-card .product-card-body h3 {
+      font-size: 1.3rem;
+      margin-bottom: 0;
+    }
+    .product-card.boat-card .boat-placeholder {
+      font-size: 0.88rem;
+      color: var(--muted);
+      margin: 4px 0 8px;
+    }
+
+    @media (max-width: 900px) {
+      .category-content {
+        grid-template-columns: 1fr;
+        padding: 16px 14px 20px;
+        gap: 16px;
+      }
+      .category-summary {
+        padding: 18px 16px;
+        gap: 12px;
+      }
+      .category-summary .category-text strong {
+        font-size: 1.1rem;
+      }
+      .category-summary .category-text small {
+        font-size: 0.85rem;
+      }
+      .category-summary .category-icon {
+        font-size: 1.4rem;
+      }
+    }
+
     .product-card {
       background: #fff;
       border: 1px solid #e0e0e0;
@@ -1526,167 +1650,211 @@
           <p data-i18n="svc_desc">Clear communication, dependable pickups, and comfortable rides for airport travel, excursions, cruise ports, and custom island transportation.</p>
         </div>
 
-        <div class="services-grid">
-          <article class="service-card">
-            <div class="service-icon" aria-hidden="true">✈️</div>
-            <h3 data-i18n="svc_airport_title">Airport Transportation</h3>
-            <p data-i18n="svc_airport_desc">Dependable rides to and from the airport so your arrival and departure feel smooth and stress-free. To ensure the best experience possible, we recommend booking at least 48 to 72 hours in advance. If you are scheduling an airport pickup, please add your flight number and airline of choice.</p>
-          </article>
-
-          <article class="service-card">
-            <div class="service-icon" aria-hidden="true">🌴</div>
-            <h3 data-i18n="svc_excursion_title">Excursions &amp; Tourist Rides</h3>
-            <p data-i18n="svc_excursion_desc">Transportation to beaches, rainforest adventures, sightseeing destinations like Old San Juan, restaurants, Toro Verde Zipline, cave swimming tours, and other must-visit locations across Puerto Rico. For excursions such as fishing trips and boat charters, contact us directly by text or call and we'll help coordinate your booking.</p>
-          </article>
-
-          <article class="service-card">
-            <div class="service-icon" aria-hidden="true">⚓</div>
-            <h3 data-i18n="svc_port_title">Port &amp; Private Transfers</h3>
-            <p data-i18n="svc_port_desc">Enjoy reliable, convenient transportation to cruise ports, hotels, car rentals, marinas, and destinations throughout Puerto Rico. Whether you're heading to a bioluminescent bay tour or catching a ferry to Culebra, Vieques, Palomino, or Icacos, we provide seamless round-trip transportation carefully scheduled around your activities for a smooth and stress-free experience.</p>
-          </article>
-        </div>
-
-        <div class="product-cards-row">
-          <div class="product-card">
-            <div class="image-slider" id="airport-slider">
-              <div class="slider-track">
-                <img src="20260211_162245.JPG" alt="Airport transfer vehicle">
-                <img src="airport-transfer-vans.png" alt="Two identical white Ford vans">
-                <img src="airport-transfer-3.png" alt="Airport transfer service">
-              </div>
-              <button class="slider-btn prev" aria-label="Previous image">&#10094;</button>
-              <button class="slider-btn next" aria-label="Next image">&#10095;</button>
-              <div class="slider-dots">
-                <span class="active"></span>
-                <span></span>
-                <span></span>
-              </div>
-            </div>
-            <div class="product-card-body">
-              <h3 data-i18n="prod_airport_title">Airport Transfers</h3>
-              <div class="product-card-tags">
-                <span data-i18n="prod_airport_price">$10 / Person</span>
-                <span data-i18n="prod_airport_capacity">Up to 13 People</span>
-              </div>
-              <p data-i18n="prod_airport_area">Drop-offs in the San Juan/Isla Verde area</p>
-              <p style="font-size:0.84rem; color:#666;" data-i18n="prod_airport_quote">Request a free quote for drop-offs outside these areas</p>
-              <div class="btn">
-                <a href="#book" class="btn btn-primary" data-i18n="book_now">Book Now</a>
-              </div>
-              <div class="btn" style="padding-top:0;">
-                <a href="#" class="btn btn-secondary open-quote-link" data-i18n="check_pricing">Check Pricing &amp; Availability</a>
-              </div>
-            </div>
-          </div>
-          <div class="product-card">
-            <img src="IMG_7217.WEBP" alt="Excursions and tourist rides in Puerto Rico">
-            <div class="product-card-body">
-              <h3 data-i18n="prod_excursion_title">Excursions &amp; Tourist Rides</h3>
-              <div class="product-card-tags">
-                <span data-i18n="prod_exc_capacity">Max. 15 people</span>
-              </div>
-              <p class="card-desc" style="color:#000;" data-i18n="prod_exc_desc">For your bioluminescent kayak tour, Toro Verde Zipline adventure, or any other excursion you've already booked, arrange your transportation below so you don't miss out.</p>
-              <div class="btn">
-                <a href="#book" class="btn btn-primary" data-i18n="book_now">Book Now</a>
-              </div>
-              <div class="btn" style="padding-top:0;">
-                <a href="#" class="btn btn-secondary open-quote-link" data-i18n="check_pricing">Check Pricing &amp; Availability</a>
-              </div>
-            </div>
-          </div>
-          <div class="product-card">
-            <img src="cruise-port-transfers.png" alt="Cruise port and ferry transfers in Puerto Rico">
-            <div class="product-card-body">
-              <h3 data-i18n="prod_cruise_title">Cruise Ports &amp; Ferry Transfers</h3>
-              <p data-i18n="prod_cruise_desc">Pricing for cruise ports/ferry pick-ups and drop-offs varies based on distance.</p>
-              <div class="btn">
-                <a href="#book" class="btn btn-primary" data-i18n="book_now">Book Now</a>
-              </div>
-              <div class="btn" style="padding-top:0;">
-                <a href="#" class="btn btn-secondary open-quote-link" data-i18n="check_pricing">Check Pricing &amp; Availability</a>
-              </div>
-            </div>
-          </div>
-          <div class="product-card">
-            <div class="image-slider" id="osj-slider">
-              <div class="slider-track">
-                <img src="old-san-juan-1.png" alt="Colorful cobblestone street in Old San Juan">
-                <img src="old-san-juan-2.png" alt="Colorful street in Old San Juan">
-                <img src="old-san-juan-3.png" alt="Colorful streets of Old San Juan">
-              </div>
-              <button class="slider-btn prev" aria-label="Previous image">&#10094;</button>
-              <button class="slider-btn next" aria-label="Next image">&#10095;</button>
-              <div class="slider-dots">
-                <span class="active"></span>
-                <span></span>
-                <span></span>
-              </div>
-            </div>
-            <div class="product-card-body">
-              <h3 data-i18n="prod_tour_title">Old San Juan Tour</h3>
-              <p style="font-size:0.84rem; color:#666;" data-i18n="prod_tour_location">San Juan, PR</p>
-              <div class="product-card-tags">
-                <span data-i18n="prod_tour_price">$70 / Person</span>
-                <span data-i18n="prod_tour_duration">3 Hours</span>
-                <span data-i18n="prod_tour_min">Min. 2 people</span>
-                <span data-i18n="prod_tour_ages">Ages 5 up to 80</span>
-              </div>
-              <p class="card-desc" data-i18n="prod_tour_desc">Explore Old San Juan, enjoy historic landmarks and scenic views, and experience one of Puerto Rico's most iconic destinations.</p>
-              <details class="product-card-details">
-                <summary data-i18n="prod_tour_details">View Details</summary>
-                <div class="details-content">
-                  <strong data-i18n="prod_tour_exp_label">Experience</strong>
-                  <span data-i18n="prod_tour_exp_text">We provide all transportation, starting with pick up and drop off. We take you around Old San Juan to show you the architecture, historical facts and even teach you a bit of the island's history. The tour can be a mixture of driving and walking with the opportunity of a restaurant recommendation (food not included). Make sure you bring a hat, sunscreen and wear comfortable shoes and clothes. Water bottles are provided by the tour guide.</span>
-                  <strong data-i18n="prod_tour_length_label">Tour Length</strong>
-                  <span data-i18n="prod_tour_length_text">3 hours plus transportation time.</span>
+        <div class="service-categories">
+          <details class="category-accordion" open>
+            <summary class="category-summary">
+              <span class="category-icon" aria-hidden="true">🚐</span>
+              <span class="category-text">
+                <strong data-i18n="cat_transport_title">Transportation</strong>
+                <small data-i18n="cat_transport_desc">Dependable rides to and from the airport so your arrival and departure feel smooth and stress-free</small>
+              </span>
+              <span class="category-chevron" aria-hidden="true">▾</span>
+            </summary>
+            <div class="category-content">
+              <div class="product-card">
+                <img src="airport-transfer-isla-verde.jpg" alt="DP Transport airport transfer van">
+                <div class="product-card-body">
+                  <h3 data-i18n="prod_airport_title">Airport Transfers</h3>
+                  <div class="product-card-tags">
+                    <span data-i18n="prod_airport_price">$10 / Person</span>
+                    <span data-i18n="prod_airport_capacity">Up to 13 People</span>
+                  </div>
+                  <p data-i18n="prod_airport_area">For Drop-offs in the San Juan/Isla Verde area. To ensure the best experience possible, we recommend booking at least 48 to 72 hours in advance. If you are scheduling an airport pickup, please add your flight number and airline of choice.</p>
+                  <p style="font-size:0.84rem; color:#666;" data-i18n="prod_airport_quote">Request a free quote for drop-offs outside these areas</p>
+                  <div class="btn">
+                    <a href="#book" class="btn btn-primary" data-i18n="book_now">Book Now</a>
+                  </div>
+                  <div class="btn" style="padding-top:0;">
+                    <a href="#" class="btn btn-secondary open-quote-link" data-i18n="check_pricing">Check Pricing &amp; Availability</a>
+                  </div>
                 </div>
-              </details>
-              <div class="btn">
-                <a href="#book" class="btn btn-primary book-tour-link" data-tour="Old San Juan Tour" data-i18n="book_now">Book Now</a>
               </div>
-            </div>
-          </div>
-          <div class="product-card">
-            <div class="image-slider" id="cave-slider">
-              <div class="slider-track">
-                <img src="cave-swimming-1.png" alt="Cave swimming adventure in Vega Baja">
-                <img src="cave-swimming-2.png" alt="Exploring the natural river caves">
-                <img src="cave-swimming-3.png" alt="Hiking through lush mountain terrain">
-                <img src="cave-swimming-4.png" alt="Swimming through crystal-clear cave waters">
-              </div>
-              <button class="slider-btn prev" aria-label="Previous image">&#10094;</button>
-              <button class="slider-btn next" aria-label="Next image">&#10095;</button>
-              <div class="slider-dots">
-                <span class="active"></span>
-                <span></span>
-                <span></span>
-                <span></span>
-              </div>
-            </div>
-            <div class="product-card-body">
-              <h3 data-i18n="prod_cave_title">Cave Swimming Adventure</h3>
-              <p style="font-size:0.84rem; color:#666;" data-i18n="prod_cave_location">Vega Baja, PR</p>
-              <div class="product-card-tags">
-                <span data-i18n="prod_cave_price">$95 / Person</span>
-                <span data-i18n="prod_cave_duration">4 Hours</span>
-                <span data-i18n="prod_cave_min">Min. 2 People</span>
-                <span data-i18n="prod_cave_ages">Ages 5 up to 80</span>
-              </div>
-              <p class="card-desc" data-i18n="prod_cave_desc">Dive into one of Puerto Rico's most thrilling mountain adventures with a cave swimming experience surrounded by rugged scenery, crystal-clear waters, and unforgettable natural beauty.</p>
-              <details class="product-card-details">
-                <summary data-i18n="prod_cave_details">View Details</summary>
-                <div class="details-content">
-                  <strong data-i18n="prod_cave_exp_label">Experience</strong>
-                  <span data-i18n="prod_cave_exp_text">Experience one of Puerto Rico's hidden gems with our River Cave Swimming Adventure in the mountains of Vega Baja. Your experience includes round-trip transportation, so you can relax while we handle everything from start to finish. Once in Vega Baja, you'll hike through lush mountain terrain and swim through stunning natural caves—an unforgettable, off-the-beaten-path adventure. This is an intermediate-level activity perfect for those looking for a mix of excitement and exploration. We provide life jackets and bottled water for your safety and comfort. What to bring: sneakers (for hiking), a towel, and a change of clothes for after the tour.</span>
-                  <strong data-i18n="prod_cave_length_label">Tour Length</strong>
-                  <span data-i18n="prod_cave_length_text">The experience lasts approximately 4 hours, and we never rush—your designated driver stays with you, ensuring you can fully enjoy every moment at your own pace.</span>
+              <div class="product-card">
+                <img src="cruise-port-vans.png" alt="Two DP Transport Ford vans for cruise port and ferry transfers">
+                <div class="product-card-body">
+                  <h3 data-i18n="prod_cruise_title">Cruise Ports &amp; Ferry Transfers</h3>
+                  <div class="product-card-tags">
+                    <span data-i18n="prod_cruise_capacity">Max. 25 People</span>
+                  </div>
+                  <p data-i18n="prod_cruise_desc">Enjoy reliable, convenient transportation to cruise ports, hotels, car rentals, marinas, and destinations throughout Puerto Rico. Whether you're heading to a bioluminescent bay tour or catching a ferry to Culebra, Vieques, Palomino, or Icacos, we provide seamless round-trip transportation carefully scheduled around your activities for a smooth and stress-free experience.</p>
+                  <div class="btn">
+                    <a href="#book" class="btn btn-primary" data-i18n="book_now">Book Now</a>
+                  </div>
+                  <div class="btn" style="padding-top:0;">
+                    <a href="#" class="btn btn-secondary open-quote-link" data-i18n="check_pricing">Check Pricing &amp; Availability</a>
+                  </div>
                 </div>
-              </details>
-              <div class="btn">
-                <a href="#book" class="btn btn-primary book-tour-link" data-tour="Cave Swimming Adventure" data-i18n="book_now">Book Now</a>
+              </div>
+              <div class="product-card">
+                <img src="excursions-transport-bus.jpeg" alt="DP Transport white shuttle bus for excursion transportation">
+                <div class="product-card-body">
+                  <h3 data-i18n="prod_excursion_transport_title">Excursions Transport</h3>
+                  <div class="product-card-tags">
+                    <span data-i18n="prod_exc_capacity">Max. 25 People</span>
+                  </div>
+                  <p class="card-desc" style="color:#000;" data-i18n="prod_exc_desc">For your bioluminescent kayak tour, Toro Verde Zipline adventure, or any other excursion you've already booked, arrange your transportation below so you don't miss out.</p>
+                  <div class="btn">
+                    <a href="#book" class="btn btn-primary" data-i18n="book_now">Book Now</a>
+                  </div>
+                  <div class="btn" style="padding-top:0;">
+                    <a href="#" class="btn btn-secondary open-quote-link" data-i18n="check_pricing">Check Pricing &amp; Availability</a>
+                  </div>
+                </div>
               </div>
             </div>
-          </div>
+          </details>
+
+          <details class="category-accordion">
+            <summary class="category-summary">
+              <span class="category-icon" aria-hidden="true">🌴</span>
+              <span class="category-text">
+                <strong data-i18n="cat_tours_title">Tours &amp; Excursions</strong>
+                <small data-i18n="cat_tours_desc">Explore Puerto Rico beyond the ride. From historic Old San Juan and scenic rainforest adventures to cave swimming experiences and local winery visits</small>
+              </span>
+              <span class="category-chevron" aria-hidden="true">▾</span>
+            </summary>
+            <div class="category-content">
+              <div class="product-card">
+                <div class="image-slider" id="osj-slider">
+                  <div class="slider-track">
+                    <img src="old-san-juan-1.png" alt="Colorful cobblestone street in Old San Juan">
+                    <img src="old-san-juan-2.png" alt="Colorful street in Old San Juan">
+                    <img src="old-san-juan-3.png" alt="Colorful streets of Old San Juan">
+                  </div>
+                  <button class="slider-btn prev" aria-label="Previous image">&#10094;</button>
+                  <button class="slider-btn next" aria-label="Next image">&#10095;</button>
+                  <div class="slider-dots">
+                    <span class="active"></span>
+                    <span></span>
+                    <span></span>
+                  </div>
+                </div>
+                <div class="product-card-body">
+                  <h3 data-i18n="prod_tour_title">Old San Juan Tour</h3>
+                  <p style="font-size:0.84rem; color:#666;" data-i18n="prod_tour_location">San Juan, PR</p>
+                  <div class="product-card-tags">
+                    <span data-i18n="prod_tour_price">$70 / Person</span>
+                    <span data-i18n="prod_tour_duration">3 Hours</span>
+                    <span data-i18n="prod_tour_min">Min. 2 people</span>
+                    <span data-i18n="prod_tour_ages">Ages 5 up to 80</span>
+                  </div>
+                  <p class="card-desc" data-i18n="prod_tour_desc">Explore Old San Juan, enjoy historic landmarks and scenic views, and experience one of Puerto Rico's most iconic destinations.</p>
+                  <details class="product-card-details">
+                    <summary data-i18n="prod_tour_details">View Details</summary>
+                    <div class="details-content">
+                      <strong data-i18n="prod_tour_exp_label">Experience</strong>
+                      <span data-i18n="prod_tour_exp_text">We provide all transportation, starting with pick up and drop off. We take you around Old San Juan to show you the architecture, historical facts and even teach you a bit of the island's history. The tour can be a mixture of driving and walking with the opportunity of a restaurant recommendation (food not included). Make sure you bring a hat, sunscreen and wear comfortable shoes and clothes. Water bottles are provided by the tour guide.</span>
+                      <strong data-i18n="prod_tour_length_label">Tour Length</strong>
+                      <span data-i18n="prod_tour_length_text">3 hours plus transportation time.</span>
+                    </div>
+                  </details>
+                  <div class="btn">
+                    <a href="#book" class="btn btn-primary book-tour-link" data-tour="Old San Juan Tour" data-i18n="book_now">Book Now</a>
+                  </div>
+                </div>
+              </div>
+              <div class="product-card">
+                <div class="image-slider" id="cave-slider">
+                  <div class="slider-track">
+                    <img src="cave-swimming-1.png" alt="Cave swimming adventure in Vega Baja">
+                    <img src="cave-swimming-2.png" alt="Exploring the natural river caves">
+                    <img src="cave-swimming-3.png" alt="Hiking through lush mountain terrain">
+                    <img src="cave-swimming-4.png" alt="Swimming through crystal-clear cave waters">
+                  </div>
+                  <button class="slider-btn prev" aria-label="Previous image">&#10094;</button>
+                  <button class="slider-btn next" aria-label="Next image">&#10095;</button>
+                  <div class="slider-dots">
+                    <span class="active"></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                  </div>
+                </div>
+                <div class="product-card-body">
+                  <h3 data-i18n="prod_cave_title">Cave Swimming Adventure</h3>
+                  <p style="font-size:0.84rem; color:#666;" data-i18n="prod_cave_location">Vega Baja, PR</p>
+                  <div class="product-card-tags">
+                    <span data-i18n="prod_cave_price">$95 / Person</span>
+                    <span data-i18n="prod_cave_duration">4 Hours</span>
+                    <span data-i18n="prod_cave_min">Min. 2 People</span>
+                    <span data-i18n="prod_cave_ages">Ages 5 up to 80</span>
+                  </div>
+                  <p class="card-desc" data-i18n="prod_cave_desc">Dive into one of Puerto Rico's most thrilling mountain adventures with a cave swimming experience surrounded by rugged scenery, crystal-clear waters, and unforgettable natural beauty.</p>
+                  <details class="product-card-details">
+                    <summary data-i18n="prod_cave_details">View Details</summary>
+                    <div class="details-content">
+                      <strong data-i18n="prod_cave_exp_label">Experience</strong>
+                      <span data-i18n="prod_cave_exp_text">Experience one of Puerto Rico's hidden gems with our River Cave Swimming Adventure in the mountains of Vega Baja. Your experience includes round-trip transportation, so you can relax while we handle everything from start to finish. Once in Vega Baja, you'll hike through lush mountain terrain and swim through stunning natural caves—an unforgettable, off-the-beaten-path adventure. This is an intermediate-level activity perfect for those looking for a mix of excitement and exploration. We provide life jackets and bottled water for your safety and comfort. What to bring: sneakers (for hiking), a towel, and a change of clothes for after the tour.</span>
+                      <strong data-i18n="prod_cave_length_label">Tour Length</strong>
+                      <span data-i18n="prod_cave_length_text">The experience lasts approximately 4 hours, and we never rush—your designated driver stays with you, ensuring you can fully enjoy every moment at your own pace.</span>
+                    </div>
+                  </details>
+                  <div class="btn">
+                    <a href="#book" class="btn btn-primary book-tour-link" data-tour="Cave Swimming Adventure" data-i18n="book_now">Book Now</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </details>
+
+          <details class="category-accordion">
+            <summary class="category-summary">
+              <span class="category-icon" aria-hidden="true">⚓</span>
+              <span class="category-text">
+                <strong data-i18n="cat_boats_title">Boat Charters</strong>
+                <small data-i18n="cat_boats_desc">Private yachts and boats for unforgettable days at sea.</small>
+              </span>
+              <span class="category-chevron" aria-hidden="true">▾</span>
+            </summary>
+            <div class="category-content">
+              <div class="product-card boat-card">
+                <div class="product-card-body">
+                  <h3 data-i18n="prod_welcraft_title">Welcraft 30'</h3>
+                  <p class="boat-placeholder" data-i18n="prod_boat_more_info">More information coming soon.</p>
+                  <div class="btn">
+                    <a href="#book" class="btn btn-primary book-boat-link" data-boat="Welcraft 30'" data-i18n="book_now">Book Now</a>
+                  </div>
+                </div>
+              </div>
+              <div class="product-card boat-card">
+                <div class="product-card-body">
+                  <h3 data-i18n="prod_riviera_title">Riviera Yacht 40'</h3>
+                  <p class="boat-placeholder" data-i18n="prod_boat_more_info">More information coming soon.</p>
+                  <div class="btn">
+                    <a href="#book" class="btn btn-primary book-boat-link" data-boat="Riviera Yacht 40'" data-i18n="book_now">Book Now</a>
+                  </div>
+                </div>
+              </div>
+              <div class="product-card boat-card">
+                <div class="product-card-body">
+                  <h3 data-i18n="prod_lagoon_title">Luxury Lagoon 42'</h3>
+                  <p class="boat-placeholder" data-i18n="prod_boat_more_info">More information coming soon.</p>
+                  <div class="btn">
+                    <a href="#book" class="btn btn-primary book-boat-link" data-boat="Luxury Lagoon 42'" data-i18n="book_now">Book Now</a>
+                  </div>
+                </div>
+              </div>
+              <div class="product-card boat-card">
+                <div class="product-card-body">
+                  <h3 data-i18n="prod_cruiser_title">Cruiser 54' Yacht</h3>
+                  <p class="boat-placeholder" data-i18n="prod_boat_more_info">More information coming soon.</p>
+                  <div class="btn">
+                    <a href="#book" class="btn btn-primary book-boat-link" data-boat="Cruiser 54' Yacht" data-i18n="book_now">Book Now</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </details>
         </div>
       </div>
     </section>
@@ -1914,9 +2082,11 @@
                     <label for="boatSelect" data-i18n="label_select_boat">Boats and Charters</label>
                     <select id="boatSelect" name="charter" required>
                       <option value="" disabled selected data-i18n="ph_select_boat">Choose a charter</option>
-                      <option value="Fishing Trip" data-i18n="boat_option_fishing">Fishing Trip</option>
+                      <option value="Welcraft 30'" data-i18n="boat_option_welcraft">Welcraft 30'</option>
+                      <option value="Riviera Yacht 40'" data-i18n="boat_option_riviera">Riviera Yacht 40'</option>
                       <option value="Luxury Lagoon 42'" data-i18n="boat_option_lagoon">Luxury Lagoon 42'</option>
                       <option value="Cruiser 54' Yacht" data-i18n="boat_option_cruiser">Cruiser 54' Yacht</option>
+                      <option value="Fishing Trip" data-i18n="boat_option_fishing">Fishing Trip</option>
                     </select>
                   </div>
                 </div>
@@ -2343,6 +2513,22 @@
           });
         });
 
+        // Boat card "Book Now" buttons switch to Boats tab and preselect the charter
+        var boatLinks = document.querySelectorAll('.book-boat-link');
+        boatLinks.forEach(function (link) {
+          link.addEventListener('click', function () {
+            activateTab('panel-boats');
+            var boatName = link.getAttribute('data-boat');
+            var select = document.getElementById('boatSelect');
+            if (select && boatName) {
+              var options = select.querySelectorAll('option');
+              options.forEach(function (opt) {
+                if (opt.value === boatName) select.value = boatName;
+              });
+            }
+          });
+        });
+
         function buildExtraForm(config) {
           var formEl = document.getElementById(config.formId);
           if (!formEl) return;
@@ -2616,15 +2802,34 @@
         prod_airport_title: 'Traslados al/del Aeropuerto',
         prod_airport_price: '$10 / Persona',
         prod_airport_capacity: 'Hasta 13 Personas',
-        prod_airport_area: 'Dejadas en el área de San Juan/Isla Verde',
+        prod_airport_area: 'Para dejadas en el área de San Juan/Isla Verde. Para asegurar la mejor experiencia posible, recomendamos reservar con al menos 48 a 72 horas de anticipación. Si está programando una recogida en el aeropuerto, por favor incluya su número de vuelo y la aerolínea.',
         prod_airport_quote: 'Solicite una cotización gratis para dejadas fuera de estas áreas',
         book_now: 'Reserve Ahora',
         prod_excursion_title: 'Excursiones y Paseos Turísticos',
-        prod_exc_capacity: 'Máx. 15 personas',
+        prod_excursion_transport_title: 'Transporte para Excursiones',
+        prod_exc_capacity: 'Máx. 25 personas',
         prod_exc_desc: 'Para su kayak tour en la bahía bioluminiscente, aventura en el Zipline de Toro Verde, o cualquier otra excursión que ya haya reservado, organice su transporte a continuación para que no se lo pierda.',
-        prod_cruise_title: 'Puertos de Cruceros y Traslados de Ferry',
-        prod_cruise_desc: 'Los precios para recogidas y dejadas en puertos de cruceros/ferry varían según la distancia.',
+        prod_cruise_title: 'Traslados a Puertos de Cruceros y el Ferry',
+        prod_cruise_capacity: 'Máx. 25 personas',
+        prod_cruise_desc: 'Disfrute de transporte confiable y conveniente a puertos de cruceros, hoteles, alquiler de autos, marinas y destinos en todo Puerto Rico. Ya sea que vaya a un tour de bahía bioluminiscente o tome un ferry a Culebra, Vieques, Palomino o Icacos, proporcionamos transporte de ida y vuelta cuidadosamente programado alrededor de sus actividades para una experiencia tranquila y sin estrés.',
         check_pricing: 'Consultar Precios y Disponibilidad',
+
+        // Service categories
+        cat_transport_title: 'Transporte',
+        cat_transport_desc: 'Traslados confiables hacia y desde el aeropuerto para que su llegada y salida se sientan tranquilas y sin estrés',
+        cat_tours_title: 'Tours y Excursiones',
+        cat_tours_desc: 'Descubra Puerto Rico más allá del trayecto. Desde el histórico Viejo San Juan y aventuras en el bosque pluvial hasta experiencias de natación en cuevas y visitas a vinerías locales',
+        cat_boats_title: 'Chárters de Bote',
+        cat_boats_desc: 'Yates y botes privados para días inolvidables en el mar.',
+
+        // Boat cards
+        prod_welcraft_title: "Welcraft 30'",
+        prod_riviera_title: "Riviera Yacht 40'",
+        prod_lagoon_title: "Luxury Lagoon 42'",
+        prod_cruiser_title: "Cruiser 54' Yacht",
+        prod_boat_more_info: 'Más información próximamente.',
+        boat_option_welcraft: "Welcraft 30'",
+        boat_option_riviera: "Riviera Yacht 40'",
         prod_tour_title: 'Tour del Viejo San Juan',
         prod_tour_location: 'San Juan, PR',
         prod_tour_price: '$70 / Persona',
