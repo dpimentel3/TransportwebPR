@@ -580,9 +580,13 @@
       border-top: 1px solid var(--border);
       display: grid;
       grid-template-columns: repeat(2, 1fr);
-      align-items: start;
+      align-items: stretch;
       gap: 22px;
       background: #fafcfd;
+    }
+
+    .category-content:has(.product-card-details[open]) {
+      align-items: start;
     }
 
     .product-card.no-photo .product-card-body {
@@ -1672,7 +1676,7 @@
                   <p data-i18n="prod_airport_area">For Drop-offs in the San Juan/Isla Verde area. To ensure the best experience possible, we recommend booking at least 48 to 72 hours in advance. If you are scheduling an airport pickup, please add your flight number and airline of choice.</p>
                   <p style="font-size:0.84rem; color:#666;" data-i18n="prod_airport_quote">Request a free quote for drop-offs outside these areas</p>
                   <div class="btn">
-                    <a href="#book" class="btn btn-primary" data-i18n="book_now">Book Now</a>
+                    <a href="#book" class="btn btn-primary book-transport-link" data-i18n="book_now">Book Now</a>
                   </div>
                   <div class="btn" style="padding-top:0;">
                     <a href="#" class="btn btn-secondary open-quote-link" data-i18n="check_pricing">Check Pricing &amp; Availability</a>
@@ -1688,7 +1692,7 @@
                   </div>
                   <p data-i18n="prod_cruise_desc">Enjoy reliable, convenient transportation to cruise ports, hotels, car rentals, marinas, and destinations throughout Puerto Rico. Whether you're heading to a bioluminescent bay tour or catching a ferry to Culebra, Vieques, Palomino, or Icacos, we provide seamless round-trip transportation carefully scheduled around your activities for a smooth and stress-free experience.</p>
                   <div class="btn">
-                    <a href="#book" class="btn btn-primary" data-i18n="book_now">Book Now</a>
+                    <a href="#book" class="btn btn-primary book-transport-link" data-i18n="book_now">Book Now</a>
                   </div>
                   <div class="btn" style="padding-top:0;">
                     <a href="#" class="btn btn-secondary open-quote-link" data-i18n="check_pricing">Check Pricing &amp; Availability</a>
@@ -1704,7 +1708,7 @@
                   </div>
                   <p class="card-desc" style="color:#000;" data-i18n="prod_exc_desc">For your bioluminescent kayak tour, Toro Verde Zipline adventure, or any other excursion you've already booked, arrange your transportation below so you don't miss out.</p>
                   <div class="btn">
-                    <a href="#book" class="btn btn-primary" data-i18n="book_now">Book Now</a>
+                    <a href="#book" class="btn btn-primary book-transport-link" data-i18n="book_now">Book Now</a>
                   </div>
                   <div class="btn" style="padding-top:0;">
                     <a href="#" class="btn btn-secondary open-quote-link" data-i18n="check_pricing">Check Pricing &amp; Availability</a>
@@ -1767,9 +1771,9 @@
                 <div class="image-slider" id="cave-slider">
                   <div class="slider-track">
                     <img src="cave-swimming-1.png" alt="Cave swimming adventure in Vega Baja">
+                    <img src="cave-swimming-3.png" alt="Cave swimming adventure">
                     <img src="cave-swimming-2.png" alt="Exploring the natural river caves">
-                    <img src="cave-swimming-3.png" alt="Hiking through lush mountain terrain">
-                    <img src="cave-swimming-4.png" alt="Swimming through crystal-clear cave waters">
+                    <img src="cave-swimming-4.png" alt="Cave swimming adventure">
                   </div>
                   <button class="slider-btn prev" aria-label="Previous image">&#10094;</button>
                   <button class="slider-btn next" aria-label="Next image">&#10095;</button>
@@ -2627,6 +2631,14 @@
                 if (opt.value === tourName) select.value = tourName;
               });
             }
+          });
+        });
+
+        // Transportation card "Book Now" buttons switch to Transportation tab
+        var transportLinks = document.querySelectorAll('.book-transport-link');
+        transportLinks.forEach(function (link) {
+          link.addEventListener('click', function () {
+            activateTab('panel-transport');
           });
         });
 
