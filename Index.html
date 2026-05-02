@@ -2708,12 +2708,14 @@
                   titleEl.style.textAlign = 'center';
                   titleEl.setAttribute('data-i18n', 'book_form_success_title');
                 }
+                var successMsg = isEs ? config.successMsgEs : config.successMsgEn;
+                var successTip = isEs ? config.successTipEs : config.successTipEn;
                 formEl.innerHTML = '<div style="text-align:center;padding:24px 0;">' +
-                  '<p style="margin:0 0 12px;font-size:1.1rem;color:var(--primary);font-weight:600;" data-i18n="book_form_success_msg">' +
-                  (isEs ? 'El conductor se comunicará con usted pronto por mensaje de texto.' : 'The driver will reach out to you shortly via text message.') +
+                  '<p style="margin:0 0 12px;font-size:1.1rem;color:var(--primary);font-weight:600;" data-i18n="' + config.successMsgKey + '">' +
+                  successMsg +
                   '</p>' +
-                  '<p style="margin:0;font-size:0.95rem;color:var(--muted);line-height:1.6;" data-i18n="book_form_success_tip">' +
-                  (isEs ? 'Consejo: responda al mensaje del conductor para confirmar su viaje.' : 'Tip: reply to the driver\'s text message to confirm your trip.') +
+                  '<p style="margin:0;font-size:0.95rem;color:var(--muted);line-height:1.6;" data-i18n="' + config.successTipKey + '">' +
+                  successTip +
                   '</p></div>';
               } else {
                 alert(isEs ? 'Hubo un problema al enviar su solicitud. Por favor intente de nuevo.' : 'There was a problem sending your request. Please try again.');
@@ -2731,8 +2733,26 @@
           });
         }
 
-        buildExtraForm({ formId: 'toursForm', formName: 'tour-booking' });
-        buildExtraForm({ formId: 'boatsForm', formName: 'boat-charter-booking' });
+        buildExtraForm({
+          formId: 'toursForm',
+          formName: 'tour-booking',
+          successMsgKey: 'book_tour_success_msg',
+          successTipKey: 'book_tour_success_tip',
+          successMsgEn: 'The Tour Guide will reach out to you shortly via text message.',
+          successTipEn: 'Tip: reply to the guide\'s text message to confirm your trip.',
+          successMsgEs: 'El guía turístico se comunicará con usted pronto por mensaje de texto.',
+          successTipEs: 'Consejo: responda al mensaje de texto del guía para confirmar su viaje.'
+        });
+        buildExtraForm({
+          formId: 'boatsForm',
+          formName: 'boat-charter-booking',
+          successMsgKey: 'book_boat_success_msg',
+          successTipKey: 'book_boat_success_tip',
+          successMsgEn: 'The Captain will reach out to you shortly via text email.',
+          successTipEn: 'Tip: reply to the captain\'s email to confirm your trip.',
+          successMsgEs: 'El capitán se comunicará con usted pronto por correo electrónico.',
+          successTipEs: 'Consejo: responda al correo electrónico del capitán para confirmar su viaje.'
+        });
       })();
 
       // Quote modal
@@ -3118,7 +3138,11 @@
         quote_success_tip: 'Consejo: la mayoría de las cotizaciones son flexibles. Consulte con su conductor y le ayudarán.',
         book_form_success_title: '¡Solicitud de reserva enviada!',
         book_form_success_msg: 'El conductor se comunicará con usted pronto por mensaje de texto.',
-        book_form_success_tip: 'Consejo: responda al mensaje del conductor para confirmar su viaje.'
+        book_form_success_tip: 'Consejo: responda al mensaje del conductor para confirmar su viaje.',
+        book_tour_success_msg: 'El guía turístico se comunicará con usted pronto por mensaje de texto.',
+        book_tour_success_tip: 'Consejo: responda al mensaje de texto del guía para confirmar su viaje.',
+        book_boat_success_msg: 'El capitán se comunicará con usted pronto por correo electrónico.',
+        book_boat_success_tip: 'Consejo: responda al correo electrónico del capitán para confirmar su viaje.'
       };
 
       // Placeholder translations
@@ -3154,7 +3178,11 @@
         quote_success_tip: 'Pro tip: most quotes are flexible. Just check with your driver and they\'ll help you out.',
         book_form_success_title: 'Booking request sent!',
         book_form_success_msg: 'The driver will reach out to you shortly via text message.',
-        book_form_success_tip: 'Tip: reply to the driver\'s text message to confirm your trip.'
+        book_form_success_tip: 'Tip: reply to the driver\'s text message to confirm your trip.',
+        book_tour_success_msg: 'The Tour Guide will reach out to you shortly via text message.',
+        book_tour_success_tip: 'Tip: reply to the guide\'s text message to confirm your trip.',
+        book_boat_success_msg: 'The Captain will reach out to you shortly via text email.',
+        book_boat_success_tip: 'Tip: reply to the captain\'s email to confirm your trip.'
       };
 
       var enTexts = {};
