@@ -240,9 +240,35 @@
     .section-how::after,
     .section-book::after,
     .section-contact::after,
-    .section-faq::after {
+    .section-faq::after,
+    .section-reviews::after {
       background: linear-gradient(180deg, rgba(244,248,251,0.78), rgba(244,248,251,0.88));
     }
+
+    .section-reviews::before {
+      background-image:
+        linear-gradient(135deg, rgba(255,255,255,0), rgba(255,255,255,0)),
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1600 900'%3E%3Crect width='1600' height='900' fill='%23ecf7fd'/%3E%3Ccircle cx='200' cy='160' r='80' fill='%23dff0f9'/%3E%3Ccircle cx='1380' cy='200' r='110' fill='%23e3f2fa'/%3E%3Ccircle cx='1100' cy='110' r='60' fill='%23dff0f9'/%3E%3Cpath d='M0 640c220-70 430-90 690-60 200 22 460 80 910 30v290H0z' fill='%23e6f3fa'/%3E%3C/svg%3E");
+    }
+
+    .reviews-card {
+      background: rgba(255,255,255,0.86);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(220, 230, 238, 0.92);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-md);
+      padding: 32px 28px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      max-width: 560px;
+      margin: 0 auto;
+    }
+
+    .reviews-card .TA_cdswritereviewlg { margin: 0; }
+    .reviews-card .TA_links { margin: 0; padding: 0; list-style: none; display: flex; justify-content: center; }
+    .reviews-card .TA_links li { list-style: none; }
+    .reviews-card .TA_links img { max-width: 100%; height: auto; display: block; }
 
     .section-how::before {
       background-image:
@@ -461,7 +487,7 @@
       box-shadow: 0 0 0 4px rgba(227,176,75,0.18);
     }
 
-    section, #top, #book, #service, #how-it-works, #contact-us, #faq {
+    section, #top, #book, #service, #how-it-works, #reviews, #contact-us, #faq {
       scroll-margin-top: var(--header-offset);
     }
 
@@ -2033,6 +2059,19 @@
       </div>
     </section>
 
+    <section id="reviews" class="background-section section-reviews">
+      <div class="container section-shell">
+        <div class="section-intro">
+          <h2 data-i18n="reviews_title">Reviews on TripAdvisor</h2>
+          <p data-i18n="reviews_desc">Enjoyed your trip with us? Share your experience on TripAdvisor and help fellow travelers find their way.</p>
+        </div>
+        <div class="reviews-card">
+          <div id="TA_cdswritereviewlg555" class="TA_cdswritereviewlg"><ul id="FYY2Vi" class="TA_links DLOq4YDbvsFE"><li id="aGxlcHtCQcK" class="nhgAUTU"><a target="_blank" rel="noopener" href="https://www.tripadvisor.com/Attraction_Review-g1006845-d34340160-Reviews-DPTransport-Rio_Grande_Puerto_Rico.html"><img src="https://static.tacdn.com/img2/brand_refresh/Tripadvisor_lockup_horizontal_secondary_registered.svg" alt="TripAdvisor"/></a></li></ul></div>
+          <script async src="https://www.jscache.com/wejs?wtype=cdswritereviewlg&amp;uniq=555&amp;locationId=34340160&amp;lang=en_US&amp;display_version=2" data-loadtrk onload="this.loadtrk=true"></script>
+        </div>
+      </div>
+    </section>
+
     <section id="book" class="background-section section-book">
       <div class="container section-shell">
         <div class="section-grid two-col">
@@ -3072,6 +3111,10 @@
         step3_desc: 'Después de recibir su solicitud, nos comunicaremos con usted con los detalles de su viaje y los pasos de confirmación.',
         step4_title: 'Responda para confirmar el viaje',
         step4_desc: 'Responda al mensaje de texto o correo electrónico para confirmar los detalles. Una vez que responda, su viaje estará confirmado.',
+
+        // Reviews section
+        reviews_title: 'Reseñas en TripAdvisor',
+        reviews_desc: '¿Disfrutó su viaje con nosotros? Comparta su experiencia en TripAdvisor y ayude a otros viajeros a encontrar el camino.',
 
         // Book section
         book_title: 'Reservar',
