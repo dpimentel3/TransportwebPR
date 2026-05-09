@@ -2272,8 +2272,23 @@
 
                 <div class="field-grid">
                   <div>
-                    <label for="boatPassengers" data-i18n="label_passengers">Number of passengers</label>
-                    <input id="boatPassengers" name="passengers" type="number" min="1" max="50" data-i18n-placeholder="ph_passengers" placeholder="Example: 4" required />
+                    <label for="boatDepartureTime" data-i18n="label_departure_time">Departure time</label>
+                    <select id="boatDepartureTime" name="departureTime" required>
+                      <option value="" disabled selected data-i18n="ph_departure_time">Choose a time slot</option>
+                      <option value="9:00 AM">9:00 AM</option>
+                      <option value="9:30 AM">9:30 AM</option>
+                      <option value="10:00 AM">10:00 AM</option>
+                      <option value="10:30 AM">10:30 AM</option>
+                      <option value="11:00 AM">11:00 AM</option>
+                      <option value="11:30 AM">11:30 AM</option>
+                      <option value="12:00 PM">12:00 PM</option>
+                      <option value="12:30 PM">12:30 PM</option>
+                      <option value="1:00 PM">1:00 PM</option>
+                      <option value="1:30 PM">1:30 PM</option>
+                      <option value="2:00 PM">2:00 PM</option>
+                      <option value="2:30 PM">2:30 PM</option>
+                      <option value="3:00 PM">3:00 PM</option>
+                    </select>
                   </div>
                   <div>
                     <label for="boatTripLength" data-i18n="label_trip_length">Trip length</label>
@@ -2287,18 +2302,24 @@
 
                 <div class="field-grid">
                   <div>
+                    <label for="boatPassengers" data-i18n="label_passengers">Number of passengers</label>
+                    <input id="boatPassengers" name="passengers" type="number" min="1" max="50" data-i18n-placeholder="ph_passengers" placeholder="Example: 4" required />
+                  </div>
+                  <div>
                     <label for="boatPhone" data-i18n="label_phone">Phone number</label>
                     <input id="boatPhone" name="phone" type="tel" placeholder="787-214-2058" required />
                   </div>
+                </div>
+
+                <div class="field-grid">
                   <div>
                     <label for="boatEmail" data-i18n="label_email">Email</label>
                     <input id="boatEmail" name="email" type="email" placeholder="name@example.com" required />
                   </div>
-                </div>
-
-                <div>
-                  <label for="boatFirstName" data-i18n="label_name">First name</label>
-                  <input id="boatFirstName" name="firstName" type="text" required />
+                  <div>
+                    <label for="boatFirstName" data-i18n="label_name">First name</label>
+                    <input id="boatFirstName" name="firstName" type="text" required />
+                  </div>
                 </div>
 
                 <div>
@@ -3141,9 +3162,11 @@
         label_email: 'Correo electrónico',
         label_select_tour: 'Seleccione el tour',
         label_select_boat: 'Botes y Chárters',
+        label_departure_time: 'Hora de salida',
         label_trip_length: 'Duración del viaje',
         ph_select_tour: 'Elija un tour',
         ph_select_boat: 'Elija un chárter',
+        ph_departure_time: 'Elija un horario',
         ph_trip_length: 'Elija la duración del viaje',
         trip_length_4h: '4 horas',
         trip_length_6h: '6 horas',
