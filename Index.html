@@ -1563,6 +1563,102 @@
       .booking-card,
       .summary-box { padding: 22px; }
     }
+
+    /* Explore Section */
+    .section-explore::before {
+      background-image:
+        linear-gradient(135deg, rgba(255,255,255,0), rgba(255,255,255,0)),
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1600 900'%3E%3Cdefs%3E%3ClinearGradient id='sky' x1='0' y1='0' x2='0' y2='1'%3E%3Cstop offset='0%25' stop-color='%23a8e6ff'/%3E%3Cstop offset='100%25' stop-color='%23e6f8ff'/%3E%3C/linearGradient%3E%3ClinearGradient id='water' x1='0' y1='0' x2='0' y2='1'%3E%3Cstop offset='0%25' stop-color='%230ea5e9'/%3E%3Cstop offset='100%25' stop-color='%230284c7'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='1600' height='900' fill='url(%23sky)'/%3E%3Ccircle cx='200' cy='140' r='60' fill='%23ffd872'/%3E%3Crect y='460' width='1600' height='200' fill='url(%23water)'/%3E%3Crect y='640' width='1600' height='260' fill='%23efd7a7'/%3E%3C/svg%3E");
+    }
+    .section-explore::after {
+      background: linear-gradient(180deg, rgba(244,248,251,0.78), rgba(244,248,251,0.88));
+    }
+
+    .explore-map-wrapper {
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: var(--shadow-lg);
+      background: var(--surface-strong);
+    }
+
+    #explore-map {
+      width: 100%;
+      height: 520px;
+    }
+
+    .explore-categories {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: center;
+      margin-top: 24px;
+    }
+
+    .explore-filter-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 18px;
+      border-radius: 100px;
+      border: 2px solid var(--border);
+      background: var(--surface-strong);
+      color: var(--text);
+      font-size: 0.92rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .explore-filter-btn:hover {
+      border-color: var(--primary);
+      color: var(--primary);
+    }
+
+    .explore-filter-btn.active {
+      background: var(--primary);
+      border-color: var(--primary);
+      color: #fff;
+    }
+
+    .explore-filter-btn .filter-icon {
+      font-size: 1.1em;
+    }
+
+    .explore-legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      justify-content: center;
+      margin-top: 16px;
+      font-size: 0.88rem;
+      color: var(--muted);
+    }
+
+    .explore-legend-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .explore-legend-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      display: inline-block;
+    }
+
+    @media (max-width: 700px) {
+      #explore-map {
+        height: 380px;
+      }
+      .explore-categories {
+        gap: 8px;
+      }
+      .explore-filter-btn {
+        padding: 7px 14px;
+        font-size: 0.84rem;
+      }
+    }
   </style>
   <script type="application/ld+json">
     {
@@ -1621,6 +1717,7 @@
       <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="primary-nav" aria-label="Open menu">☰</button>
 
       <nav class="nav-links" id="primary-nav" aria-label="Primary navigation">
+        <a href="#explore" data-i18n="nav_explore">Explore</a>
         <a href="#service" data-i18n="nav_services">Services</a>
         <a href="#how-it-works" data-i18n="nav_how">How It Works</a>
         <a href="#book" data-i18n="nav_book">Book</a>
@@ -1671,6 +1768,36 @@
         </div>
       </div>
       <p class="hidden-seo">DP Transport serves travelers in Rio Grande, San Juan, cruise ports, airports, beach towns, hotels, resorts, and excursion destinations across Puerto Rico.</p>
+    </section>
+
+    <section id="explore" class="background-section section-explore">
+      <div class="container section-shell">
+        <div class="section-intro">
+          <h2 data-i18n="explore_title">Explore Puerto Rico</h2>
+          <p data-i18n="explore_desc">Discover our top recommendations across the island — from the best beaches and restaurants to must-see landmarks and hidden gems. Tap a pin for details.</p>
+        </div>
+
+        <div class="explore-categories">
+          <button class="explore-filter-btn active" data-filter="all"><span class="filter-icon" aria-hidden="true">🗺️</span> <span data-i18n="explore_filter_all">All</span></button>
+          <button class="explore-filter-btn" data-filter="beaches"><span class="filter-icon" aria-hidden="true">🏖️</span> <span data-i18n="explore_filter_beaches">Beaches</span></button>
+          <button class="explore-filter-btn" data-filter="food"><span class="filter-icon" aria-hidden="true">🍽️</span> <span data-i18n="explore_filter_food">Food &amp; Dining</span></button>
+          <button class="explore-filter-btn" data-filter="nature"><span class="filter-icon" aria-hidden="true">🌴</span> <span data-i18n="explore_filter_nature">Nature &amp; Adventure</span></button>
+          <button class="explore-filter-btn" data-filter="attractions"><span class="filter-icon" aria-hidden="true">🏛️</span> <span data-i18n="explore_filter_attractions">Attractions</span></button>
+          <button class="explore-filter-btn" data-filter="nightlife"><span class="filter-icon" aria-hidden="true">🌙</span> <span data-i18n="explore_filter_nightlife">Nightlife</span></button>
+        </div>
+
+        <div class="explore-map-wrapper" style="margin-top: 24px;">
+          <div id="explore-map"></div>
+        </div>
+
+        <div class="explore-legend">
+          <span class="explore-legend-item"><span class="explore-legend-dot" style="background:#2196F3;"></span> <span data-i18n="explore_leg_beaches">Beaches</span></span>
+          <span class="explore-legend-item"><span class="explore-legend-dot" style="background:#FF5722;"></span> <span data-i18n="explore_leg_food">Food & Dining</span></span>
+          <span class="explore-legend-item"><span class="explore-legend-dot" style="background:#4CAF50;"></span> <span data-i18n="explore_leg_nature">Nature & Adventure</span></span>
+          <span class="explore-legend-item"><span class="explore-legend-dot" style="background:#9C27B0;"></span> <span data-i18n="explore_leg_attractions">Attractions</span></span>
+          <span class="explore-legend-item"><span class="explore-legend-dot" style="background:#FF9800;"></span> <span data-i18n="explore_leg_nightlife">Nightlife</span></span>
+        </div>
+      </div>
     </section>
 
     <section id="service" class="background-section section-services">
@@ -2535,6 +2662,7 @@
         Rio Grande, Puerto Rico · 787-214-2058
       </div>
       <nav class="footer-nav" aria-label="Footer navigation">
+        <a href="#explore" data-i18n="nav_explore">Explore</a>
         <a href="#service" data-i18n="nav_services">Services</a>
         <a href="#how-it-works" data-i18n="nav_how">How It Works</a>
         <a href="#book" data-i18n="nav_book">Book</a>
@@ -3006,6 +3134,7 @@
 
       var esTranslations = {
         // Navigation
+        nav_explore: 'Explorar',
         nav_services: 'Servicios',
         nav_how: 'Cómo Funciona',
         nav_book: 'Reservar',
@@ -3035,6 +3164,21 @@
         stat_bilingual_desc: 'Comunicación fácil en inglés y español.',
         stat_fast_title: 'Confirmación Rápida',
         stat_fast_desc: 'Envíe sus detalles y confirme por mensaje de texto.',
+
+        // Explore
+        explore_title: 'Explora Puerto Rico',
+        explore_desc: 'Descubre nuestras mejores recomendaciones en toda la isla — desde las mejores playas y restaurantes hasta lugares emblemáticos y joyas escondidas. Toca un pin para más detalles.',
+        explore_filter_all: 'Todos',
+        explore_filter_beaches: 'Playas',
+        explore_filter_food: 'Gastronomía',
+        explore_filter_nature: 'Naturaleza y Aventura',
+        explore_filter_attractions: 'Atracciones',
+        explore_filter_nightlife: 'Vida Nocturna',
+        explore_leg_beaches: 'Playas',
+        explore_leg_food: 'Gastronomía',
+        explore_leg_nature: 'Naturaleza y Aventura',
+        explore_leg_attractions: 'Atracciones',
+        explore_leg_nightlife: 'Vida Nocturna',
 
         // Services
         svc_title: 'Servicios',
@@ -3852,9 +3996,129 @@
         bindAll();
       }
     })();
-  </script>
 
-  <!-- Google Maps JavaScript API for Places Autocomplete -->
+    /* Explore Map */
+    (function () {
+      var EXPLORE_PLACES = [
+        { name: 'Flamenco Beach', cat: 'beaches', lat: 18.3289, lng: -65.3163, desc: 'One of the world\'s top beaches on Culebra island with crystal-clear water and white sand.' },
+        { name: 'Playa Sucia (La Playuela)', cat: 'beaches', lat: 17.9318, lng: -67.1935, desc: 'Secluded beach in Cabo Rojo with turquoise waters and dramatic limestone cliffs.' },
+        { name: 'Condado Beach', cat: 'beaches', lat: 18.4567, lng: -66.0714, desc: 'Popular beach in San Juan\'s upscale Condado district, great for surfing and sunbathing.' },
+        { name: 'Luquillo Beach', cat: 'beaches', lat: 18.3856, lng: -65.7195, desc: 'Family-friendly crescent beach with calm waters and views of El Yunque.' },
+        { name: 'Crash Boat Beach', cat: 'beaches', lat: 18.4912, lng: -67.1647, desc: 'Colorful pier and stunning beach in Aguadilla, perfect for snorkeling.' },
+        { name: 'Playa Buyé', cat: 'beaches', lat: 18.0215, lng: -67.1539, desc: 'Quiet, palm-lined beach in Cabo Rojo, ideal for a relaxing getaway.' },
+        { name: 'La Placita de Santurce', cat: 'nightlife', lat: 18.4444, lng: -66.0627, desc: 'Vibrant market-turned-nightlife hub with salsa, cocktails, and street food.' },
+        { name: 'Bioluminescent Bay, Vieques', cat: 'nightlife', lat: 18.0926, lng: -65.4832, desc: 'Kayak through glowing waters at Mosquito Bay — the brightest bio bay on Earth.' },
+        { name: 'La Factoria', cat: 'nightlife', lat: 18.4653, lng: -66.1163, desc: 'Award-winning cocktail bar in Old San Juan with hidden back rooms and live music.' },
+        { name: 'El Yunque National Forest', cat: 'nature', lat: 18.2955, lng: -65.7866, desc: 'The only tropical rainforest in the US National Forest System with waterfalls and trails.' },
+        { name: 'Cueva Ventana', cat: 'nature', lat: 18.3267, lng: -66.7542, desc: 'A cave with a dramatic natural window overlooking the lush Río Grande de Arecibo valley.' },
+        { name: 'Toro Negro State Forest', cat: 'nature', lat: 18.1707, lng: -66.4928, desc: 'Mountain forest featuring the island\'s highest peak, Cerro de Punta, and serene trails.' },
+        { name: 'Cañón San Cristóbal', cat: 'nature', lat: 18.1637, lng: -66.6111, desc: 'Deepest canyon in Puerto Rico with breathtaking hikes and hidden waterfalls.' },
+        { name: 'Charco Azul', cat: 'nature', lat: 18.2736, lng: -65.7768, desc: 'Beautiful natural pool in the rainforest, perfect for a refreshing swim.' },
+        { name: 'Old San Juan', cat: 'attractions', lat: 18.4655, lng: -66.1157, desc: 'Historic colonial district with colorful streets, forts, and centuries of history.' },
+        { name: 'Castillo San Felipe del Morro', cat: 'attractions', lat: 18.4706, lng: -66.1239, desc: 'Iconic 16th-century Spanish fortress with stunning ocean views and rich history.' },
+        { name: 'Castillo San Cristóbal', cat: 'attractions', lat: 18.4676, lng: -66.1089, desc: 'Largest Spanish-built fortification in the Americas, overlooking Old San Juan.' },
+        { name: 'Arecibo Lighthouse', cat: 'attractions', lat: 18.4958, lng: -66.7016, desc: 'Historic lighthouse and park with a mini-zoo, playground, and coastal views.' },
+        { name: 'Ponce Historic District', cat: 'attractions', lat: 18.0115, lng: -66.6141, desc: 'The "Pearl of the South" with colorful architecture, museums, and the famous fire station.' },
+        { name: 'Kioskos de Luquillo', cat: 'food', lat: 18.3823, lng: -65.7151, desc: 'Beachside food stalls serving the best local street food — alcapurrias, pinchos, and seafood.' },
+        { name: 'La Casita de Rones', cat: 'food', lat: 18.4649, lng: -66.1171, desc: 'Rum-tasting bar in Old San Juan showcasing Puerto Rico\'s finest rum brands.' },
+        { name: 'Guavate Lechoneras', cat: 'food', lat: 18.1734, lng: -66.0851, desc: 'Famous strip of open-pit roast pork restaurants in the mountains of Cayey.' },
+        { name: 'Lote 23', cat: 'food', lat: 18.4434, lng: -66.0569, desc: 'Trendy food park in Santurce with diverse local food trucks and live events.' },
+        { name: 'Marmalade Restaurant', cat: 'food', lat: 18.4651, lng: -66.1187, desc: 'Upscale fine dining in Old San Juan with innovative Puerto Rican-fusion cuisine.' },
+        { name: 'El Jibarito', cat: 'food', lat: 18.4653, lng: -66.1179, desc: 'Beloved local restaurant known for authentic mofongo and Puerto Rican comfort food.' }
+      ];
+
+      var categoryColors = {
+        beaches: '#2196F3',
+        food: '#FF5722',
+        nature: '#4CAF50',
+        attractions: '#9C27B0',
+        nightlife: '#FF9800'
+      };
+
+      var map, markers = [], infoWindow;
+      var activeFilter = 'all';
+
+      function initExploreMap() {
+        if (!window.google || !window.google.maps) return;
+
+        map = new google.maps.Map(document.getElementById('explore-map'), {
+          center: { lat: 18.22, lng: -66.50 },
+          zoom: 9,
+          mapTypeControl: false,
+          streetViewControl: false,
+          fullscreenControl: true,
+          zoomControl: true,
+          styles: [
+            { featureType: 'water', elementType: 'geometry.fill', stylers: [{ color: '#a8d8ea' }] },
+            { featureType: 'landscape', elementType: 'geometry.fill', stylers: [{ color: '#f0f4e8' }] },
+            { featureType: 'poi.park', elementType: 'geometry.fill', stylers: [{ color: '#c8e6c9' }] }
+          ]
+        });
+
+        infoWindow = new google.maps.InfoWindow();
+
+        EXPLORE_PLACES.forEach(function (place) {
+          var color = categoryColors[place.cat] || '#666';
+          var marker = new google.maps.Marker({
+            position: { lat: place.lat, lng: place.lng },
+            map: map,
+            title: place.name,
+            icon: {
+              path: google.maps.SymbolPath.CIRCLE,
+              fillColor: color,
+              fillOpacity: 1,
+              strokeColor: '#fff',
+              strokeWeight: 2,
+              scale: 9
+            }
+          });
+          marker._cat = place.cat;
+          marker._place = place;
+
+          marker.addListener('click', function () {
+            var isEs = document.documentElement.getAttribute('lang') === 'es';
+            var content = '<div style="max-width:240px;font-family:Inter,Arial,sans-serif;">' +
+              '<strong style="font-size:1rem;color:#0d3557;">' + place.name + '</strong>' +
+              '<p style="margin:6px 0 0;font-size:0.88rem;color:#5f6e7c;line-height:1.5;">' + place.desc + '</p>' +
+              '</div>';
+            infoWindow.setContent(content);
+            infoWindow.open(map, marker);
+          });
+
+          markers.push(marker);
+        });
+      }
+
+      function filterMarkers(cat) {
+        markers.forEach(function (m) {
+          m.setVisible(cat === 'all' || m._cat === cat);
+        });
+        if (infoWindow) infoWindow.close();
+      }
+
+      var filterBtns = document.querySelectorAll('.explore-filter-btn');
+      filterBtns.forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          filterBtns.forEach(function (b) { b.classList.remove('active'); });
+          btn.classList.add('active');
+          activeFilter = btn.getAttribute('data-filter');
+          filterMarkers(activeFilter);
+        });
+      });
+
+      var prevInitExplore = window.initQuoteAutocomplete;
+      window.initQuoteAutocomplete = function () {
+        if (typeof prevInitExplore === 'function') {
+          try { prevInitExplore(); } catch (e) { /* no-op */ }
+        }
+        initExploreMap();
+      };
+
+      if (window.google && window.google.maps) {
+        initExploreMap();
+      }
+    })();
+  </script>
   <script async defer
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCGKJigzmudkBONv9YWQnXxfs9HCN1wLMI&libraries=places,geometry&callback=initQuoteAutocomplete"></script>
 </body>
