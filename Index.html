@@ -1779,11 +1779,9 @@
 
         <div class="explore-categories">
           <button class="explore-filter-btn active" data-filter="all"><span class="filter-icon" aria-hidden="true">🗺️</span> <span data-i18n="explore_filter_all">All</span></button>
-          <button class="explore-filter-btn" data-filter="beaches"><span class="filter-icon" aria-hidden="true">🏖️</span> <span data-i18n="explore_filter_beaches">Beaches</span></button>
-          <button class="explore-filter-btn" data-filter="food"><span class="filter-icon" aria-hidden="true">🍽️</span> <span data-i18n="explore_filter_food">Food &amp; Dining</span></button>
-          <button class="explore-filter-btn" data-filter="nature"><span class="filter-icon" aria-hidden="true">🌴</span> <span data-i18n="explore_filter_nature">Nature &amp; Adventure</span></button>
-          <button class="explore-filter-btn" data-filter="attractions"><span class="filter-icon" aria-hidden="true">🏛️</span> <span data-i18n="explore_filter_attractions">Attractions</span></button>
-          <button class="explore-filter-btn" data-filter="nightlife"><span class="filter-icon" aria-hidden="true">🌙</span> <span data-i18n="explore_filter_nightlife">Nightlife</span></button>
+          <button class="explore-filter-btn" data-filter="todo"><span class="filter-icon" aria-hidden="true">🎯</span> <span data-i18n="explore_filter_todo">Things To Do</span></button>
+          <button class="explore-filter-btn" data-filter="places"><span class="filter-icon" aria-hidden="true">📍</span> <span data-i18n="explore_filter_places">Places To Go</span></button>
+          <button class="explore-filter-btn" data-filter="eat"><span class="filter-icon" aria-hidden="true">🍽️</span> <span data-i18n="explore_filter_eat">Things To Eat</span></button>
         </div>
 
         <div class="explore-map-wrapper" style="margin-top: 24px;">
@@ -1791,11 +1789,9 @@
         </div>
 
         <div class="explore-legend">
-          <span class="explore-legend-item"><span class="explore-legend-dot" style="background:#2196F3;"></span> <span data-i18n="explore_leg_beaches">Beaches</span></span>
-          <span class="explore-legend-item"><span class="explore-legend-dot" style="background:#FF5722;"></span> <span data-i18n="explore_leg_food">Food & Dining</span></span>
-          <span class="explore-legend-item"><span class="explore-legend-dot" style="background:#4CAF50;"></span> <span data-i18n="explore_leg_nature">Nature & Adventure</span></span>
-          <span class="explore-legend-item"><span class="explore-legend-dot" style="background:#9C27B0;"></span> <span data-i18n="explore_leg_attractions">Attractions</span></span>
-          <span class="explore-legend-item"><span class="explore-legend-dot" style="background:#FF9800;"></span> <span data-i18n="explore_leg_nightlife">Nightlife</span></span>
+          <span class="explore-legend-item"><span class="explore-legend-dot" style="background:#FF9800;"></span> <span data-i18n="explore_leg_todo">Things To Do</span></span>
+          <span class="explore-legend-item"><span class="explore-legend-dot" style="background:#2196F3;"></span> <span data-i18n="explore_leg_places">Places To Go</span></span>
+          <span class="explore-legend-item"><span class="explore-legend-dot" style="background:#FF5722;"></span> <span data-i18n="explore_leg_eat">Things To Eat</span></span>
         </div>
       </div>
     </section>
@@ -4000,39 +3996,38 @@
     /* Explore Map */
     (function () {
       var EXPLORE_PLACES = [
-        { name: 'Flamenco Beach', cat: 'beaches', lat: 18.3289, lng: -65.3163, desc: 'One of the world\'s top beaches on Culebra island with crystal-clear water and white sand.' },
-        { name: 'Playa Sucia (La Playuela)', cat: 'beaches', lat: 17.9318, lng: -67.1935, desc: 'Secluded beach in Cabo Rojo with turquoise waters and dramatic limestone cliffs.' },
-        { name: 'Condado Beach', cat: 'beaches', lat: 18.4567, lng: -66.0714, desc: 'Popular beach in San Juan\'s upscale Condado district, great for surfing and sunbathing.' },
-        { name: 'Luquillo Beach', cat: 'beaches', lat: 18.3856, lng: -65.7195, desc: 'Family-friendly crescent beach with calm waters and views of El Yunque.' },
-        { name: 'Crash Boat Beach', cat: 'beaches', lat: 18.4912, lng: -67.1647, desc: 'Colorful pier and stunning beach in Aguadilla, perfect for snorkeling.' },
-        { name: 'Playa Buyé', cat: 'beaches', lat: 18.0215, lng: -67.1539, desc: 'Quiet, palm-lined beach in Cabo Rojo, ideal for a relaxing getaway.' },
-        { name: 'La Placita de Santurce', cat: 'nightlife', lat: 18.4444, lng: -66.0627, desc: 'Vibrant market-turned-nightlife hub with salsa, cocktails, and street food.' },
-        { name: 'Bioluminescent Bay, Vieques', cat: 'nightlife', lat: 18.0926, lng: -65.4832, desc: 'Kayak through glowing waters at Mosquito Bay — the brightest bio bay on Earth.' },
-        { name: 'La Factoria', cat: 'nightlife', lat: 18.4653, lng: -66.1163, desc: 'Award-winning cocktail bar in Old San Juan with hidden back rooms and live music.' },
-        { name: 'El Yunque National Forest', cat: 'nature', lat: 18.2955, lng: -65.7866, desc: 'The only tropical rainforest in the US National Forest System with waterfalls and trails.' },
-        { name: 'Cueva Ventana', cat: 'nature', lat: 18.3267, lng: -66.7542, desc: 'A cave with a dramatic natural window overlooking the lush Río Grande de Arecibo valley.' },
-        { name: 'Toro Negro State Forest', cat: 'nature', lat: 18.1707, lng: -66.4928, desc: 'Mountain forest featuring the island\'s highest peak, Cerro de Punta, and serene trails.' },
-        { name: 'Cañón San Cristóbal', cat: 'nature', lat: 18.1637, lng: -66.6111, desc: 'Deepest canyon in Puerto Rico with breathtaking hikes and hidden waterfalls.' },
-        { name: 'Charco Azul', cat: 'nature', lat: 18.2736, lng: -65.7768, desc: 'Beautiful natural pool in the rainforest, perfect for a refreshing swim.' },
-        { name: 'Old San Juan', cat: 'attractions', lat: 18.4655, lng: -66.1157, desc: 'Historic colonial district with colorful streets, forts, and centuries of history.' },
-        { name: 'Castillo San Felipe del Morro', cat: 'attractions', lat: 18.4706, lng: -66.1239, desc: 'Iconic 16th-century Spanish fortress with stunning ocean views and rich history.' },
-        { name: 'Castillo San Cristóbal', cat: 'attractions', lat: 18.4676, lng: -66.1089, desc: 'Largest Spanish-built fortification in the Americas, overlooking Old San Juan.' },
-        { name: 'Arecibo Lighthouse', cat: 'attractions', lat: 18.4958, lng: -66.7016, desc: 'Historic lighthouse and park with a mini-zoo, playground, and coastal views.' },
-        { name: 'Ponce Historic District', cat: 'attractions', lat: 18.0115, lng: -66.6141, desc: 'The "Pearl of the South" with colorful architecture, museums, and the famous fire station.' },
-        { name: 'Kioskos de Luquillo', cat: 'food', lat: 18.3823, lng: -65.7151, desc: 'Beachside food stalls serving the best local street food — alcapurrias, pinchos, and seafood.' },
-        { name: 'La Casita de Rones', cat: 'food', lat: 18.4649, lng: -66.1171, desc: 'Rum-tasting bar in Old San Juan showcasing Puerto Rico\'s finest rum brands.' },
-        { name: 'Guavate Lechoneras', cat: 'food', lat: 18.1734, lng: -66.0851, desc: 'Famous strip of open-pit roast pork restaurants in the mountains of Cayey.' },
-        { name: 'Lote 23', cat: 'food', lat: 18.4434, lng: -66.0569, desc: 'Trendy food park in Santurce with diverse local food trucks and live events.' },
-        { name: 'Marmalade Restaurant', cat: 'food', lat: 18.4651, lng: -66.1187, desc: 'Upscale fine dining in Old San Juan with innovative Puerto Rican-fusion cuisine.' },
-        { name: 'El Jibarito', cat: 'food', lat: 18.4653, lng: -66.1179, desc: 'Beloved local restaurant known for authentic mofongo and Puerto Rican comfort food.' }
+        { name: 'Old San Juan', cats: ['todo', 'places'], lat: 18.4655, lng: -66.1157, desc: 'Historic colonial district with colorful streets, forts, and centuries of Caribbean history.' },
+        { name: 'Culebra', cats: ['todo', 'places'], lat: 18.3009, lng: -65.3015, desc: 'Pristine island paradise known for Flamenco Beach and world-class snorkeling.' },
+        { name: 'Vieques', cats: ['todo', 'places'], lat: 18.1263, lng: -65.4401, desc: 'Island gem with bioluminescent bays, wild horses, and secluded beaches.' },
+        { name: 'Ceiba Ferry', cats: ['todo'], lat: 18.2566, lng: -65.6343, desc: 'Ferry terminal connecting to Vieques and Culebra from the main island.' },
+        { name: 'Playa Crash Boat', cats: ['places'], lat: 18.4912, lng: -67.1647, desc: 'Colorful pier and stunning beach in Aguadilla, perfect for snorkeling and cliff jumping.' },
+        { name: 'Playa Buye', cats: ['places'], lat: 18.0215, lng: -67.1539, desc: 'Quiet, palm-lined beach in Cabo Rojo ideal for a relaxing day.' },
+        { name: 'Playa Sucia', cats: ['places'], lat: 17.9318, lng: -67.1935, desc: 'Secluded beach in Cabo Rojo with turquoise waters and dramatic limestone cliffs.' },
+        { name: 'Playa Hobbie', cats: ['places'], lat: 18.5105, lng: -67.0680, desc: 'Local favorite beach spot with great waves and a laid-back atmosphere.' },
+        { name: 'Playa Ocean Park', cats: ['places'], lat: 18.4558, lng: -66.0787, desc: 'Trendy San Juan beach popular with locals for kitesurfing and weekend gatherings.' },
+        { name: 'Fly Dinning', cats: ['todo', 'eat'], lat: 18.4481, lng: -66.0615, desc: 'Unique dining experience combining great food with an unforgettable atmosphere.' },
+        { name: 'Toro Verde Adventure Park', cats: ['todo'], lat: 18.2207, lng: -66.3561, desc: 'Adventure park in Orocovis featuring one of the world\'s longest ziplines.' },
+        { name: 'Las Croabas', cats: ['todo'], lat: 18.3698, lng: -65.6285, desc: 'Charming fishing village in Fajardo known for fresh seafood and boat tours.' },
+        { name: 'Kayak Village', cats: ['todo'], lat: 18.3710, lng: -65.6300, desc: 'Launch point for kayaking adventures through mangroves and bioluminescent waters.' },
+        { name: 'La Placita Santurce', cats: ['todo', 'places'], lat: 18.4444, lng: -66.0627, desc: 'Vibrant market-turned-nightlife hub with salsa, cocktails, and street food.' },
+        { name: 'Playa Vacia Talega', cats: ['places'], lat: 18.4285, lng: -65.9025, desc: 'Beautiful beach in Loíza with golden sand and a relaxed local vibe.' },
+        { name: 'Charco Azul Vega Baja/Morovis', cats: ['todo', 'places'], lat: 18.3432, lng: -66.4167, desc: 'Stunning natural freshwater pool surrounded by lush greenery.' },
+        { name: 'Kioskos de Luquillo', cats: ['todo', 'eat'], lat: 18.3823, lng: -65.7151, desc: 'Beachside food stalls serving the best local street food — alcapurrias, pinchos, and seafood.' },
+        { name: 'Hacienda Carabali', cats: ['todo'], lat: 18.3485, lng: -65.7620, desc: 'Adventure ranch in Luquillo offering horseback riding, ATVs, and go-karts.' },
+        { name: 'El Yunque Rainforest', cats: ['todo', 'places'], lat: 18.2955, lng: -65.7866, desc: 'The only tropical rainforest in the US National Forest System with waterfalls and trails.' },
+        { name: 'El Viejo Almacen', cats: ['eat'], lat: 18.4652, lng: -66.1170, desc: 'Beloved restaurant offering authentic Puerto Rican and Spanish-inspired cuisine.' },
+        { name: 'Oceano en tu Mesa', cats: ['eat'], lat: 18.4637, lng: -66.3861, desc: 'Fresh seafood restaurant known for ocean-to-table dishes and coastal views.' },
+        { name: 'Musa Santurce', cats: ['eat'], lat: 18.4455, lng: -66.0598, desc: 'Trendy Santurce eatery with creative Caribbean-inspired dishes and craft cocktails.' },
+        { name: 'La Casita Blanca', cats: ['eat'], lat: 18.4370, lng: -66.0520, desc: 'Iconic home-style Puerto Rican restaurant in Santurce, famous for comida criolla.' },
+        { name: 'Luquillo Beach', cats: ['places'], lat: 18.3856, lng: -65.7195, desc: 'Family-friendly crescent beach with calm waters and views of El Yunque.' },
+        { name: 'Balneario Seven Seas', cats: ['places'], lat: 18.3728, lng: -65.6312, desc: 'Calm, shallow beach in Fajardo perfect for families and snorkeling.' },
+        { name: 'Mar Y Rosa San Juan', cats: ['eat'], lat: 18.4483, lng: -66.0670, desc: 'Popular San Juan restaurant with a creative menu and vibrant ambiance.' }
       ];
 
       var categoryColors = {
-        beaches: '#2196F3',
-        food: '#FF5722',
-        nature: '#4CAF50',
-        attractions: '#9C27B0',
-        nightlife: '#FF9800'
+        todo: '#FF9800',
+        places: '#2196F3',
+        eat: '#FF5722'
       };
 
       var map, markers = [], infoWindow;
@@ -4058,7 +4053,7 @@
         infoWindow = new google.maps.InfoWindow();
 
         EXPLORE_PLACES.forEach(function (place) {
-          var color = categoryColors[place.cat] || '#666';
+          var color = categoryColors[place.cats[0]] || '#666';
           var marker = new google.maps.Marker({
             position: { lat: place.lat, lng: place.lng },
             map: map,
@@ -4072,7 +4067,7 @@
               scale: 9
             }
           });
-          marker._cat = place.cat;
+          marker._cats = place.cats;
           marker._place = place;
 
           marker.addListener('click', function () {
@@ -4091,7 +4086,7 @@
 
       function filterMarkers(cat) {
         markers.forEach(function (m) {
-          m.setVisible(cat === 'all' || m._cat === cat);
+          m.setVisible(cat === 'all' || m._cats.indexOf(cat) !== -1);
         });
         if (infoWindow) infoWindow.close();
       }
