@@ -1836,7 +1836,7 @@
                   <p data-i18n="prod_airport_area">For Drop-offs in the San Juan/Isla Verde area. To ensure the best experience possible, we recommend booking at least 48 to 72 hours in advance. If you are scheduling an airport pickup, please add your flight number and airline of choice.</p>
                   <p style="font-size:0.84rem; color:#666;" data-i18n="prod_airport_quote">Request a free quote for drop-offs outside these areas</p>
                   <div class="btn">
-                    <a href="#book" class="btn btn-primary book-transport-link" data-i18n="book_now">Book Now</a>
+                    <a href="#book" class="btn btn-primary book-transport-link" data-service="Airport Transfers" data-i18n="book_now">Book Now</a>
                   </div>
                   <div class="btn" style="padding-top:0;">
                     <a href="#" class="btn btn-secondary open-quote-link" data-i18n="check_pricing">Check Pricing &amp; Availability</a>
@@ -1852,7 +1852,7 @@
                   </div>
                   <p data-i18n="prod_cruise_desc">Enjoy reliable, convenient transportation to cruise ports, hotels, car rentals, marinas, and destinations throughout Puerto Rico. Whether you're heading to a bioluminescent bay tour or catching a ferry to Culebra, Vieques, Palomino, or Icacos, we provide seamless round-trip transportation carefully scheduled around your activities for a smooth and stress-free experience.</p>
                   <div class="btn">
-                    <a href="#book" class="btn btn-primary book-transport-link" data-i18n="book_now">Book Now</a>
+                    <a href="#book" class="btn btn-primary book-transport-link" data-service="Cruise Ports &amp; Ferry Transfers" data-i18n="book_now">Book Now</a>
                   </div>
                   <div class="btn" style="padding-top:0;">
                     <a href="#" class="btn btn-secondary open-quote-link" data-i18n="check_pricing">Check Pricing &amp; Availability</a>
@@ -1868,7 +1868,7 @@
                   </div>
                   <p class="card-desc" style="color:#000;" data-i18n="prod_exc_desc">For your bioluminescent kayak tour, Toro Verde Zipline adventure, or any other excursion you've already booked, arrange your transportation below so you don't miss out.</p>
                   <div class="btn">
-                    <a href="#book" class="btn btn-primary book-transport-link" data-i18n="book_now">Book Now</a>
+                    <a href="#book" class="btn btn-primary book-transport-link" data-service="Excursions Transport" data-i18n="book_now">Book Now</a>
                   </div>
                   <div class="btn" style="padding-top:0;">
                     <a href="#" class="btn btn-secondary open-quote-link" data-i18n="check_pricing">Check Pricing &amp; Availability</a>
@@ -1899,7 +1899,7 @@
                   </div>
                   <p data-i18n="prod_luxury_desc">Travel around Puerto Rico with comfort, privacy, and peace of mind. Our luxury transportation service is designed for guests who want a smooth, professional, and elevated travel experience from start to finish. Whether you need airport pickup, hotel transfers, dinner transportation, private tours, cruise port transfers, or transportation for a special occasion, we help arrange reliable rides with experienced drivers and comfortable vehicles.</p>
                   <div class="btn">
-                    <a href="#book" class="btn btn-primary book-transport-link" data-i18n="book_now">Book Now</a>
+                    <a href="#book" class="btn btn-primary book-transport-link" data-service="Luxury Travel" data-i18n="book_now">Book Now</a>
                   </div>
                 </div>
               </div>
@@ -2260,6 +2260,17 @@
               <p class="hidden-field">
                 <label>Don’t fill this out if you’re human: <input name="bot-field" /></label>
               </p>
+              <div>
+                <label for="serviceType" data-i18n="label_service_type">Service type</label>
+                <select id="serviceType" name="serviceType" required>
+                  <option value="" disabled selected data-i18n="ph_service_type">Choose a service</option>
+                  <option value="Airport Transfers" data-i18n="service_airport">Airport Transfers</option>
+                  <option value="Cruise Ports &amp; Ferry Transfers" data-i18n="service_cruise">Cruise Ports &amp; Ferry Transfers</option>
+                  <option value="Excursions Transport" data-i18n="service_excursions">Excursions Transport</option>
+                  <option value="Luxury Travel" data-i18n="service_luxury">Luxury Travel</option>
+                </select>
+              </div>
+
               <div class="field-grid">
                 <div>
                   <label for="tripDate" data-i18n="label_date">Date (month/day)</label>
@@ -2857,11 +2868,19 @@
           });
         });
 
-        // Transportation card "Book Now" buttons switch to Transportation tab
+        // Transportation card "Book Now" buttons switch to Transportation tab and preselect the service
         var transportLinks = document.querySelectorAll('.book-transport-link');
         transportLinks.forEach(function (link) {
           link.addEventListener('click', function () {
             activateTab('panel-transport');
+            var serviceName = link.getAttribute('data-service');
+            var select = document.getElementById('serviceType');
+            if (select && serviceName) {
+              var options = select.querySelectorAll('option');
+              options.forEach(function (opt) {
+                if (opt.value === serviceName) select.value = serviceName;
+              });
+            }
           });
         });
 
@@ -3313,6 +3332,12 @@
         label_email: 'Correo electrónico',
         label_select_tour: 'Seleccione el tour',
         label_select_boat: 'Botes y Chárters',
+        label_service_type: 'Tipo de servicio',
+        ph_service_type: 'Elija un servicio',
+        service_airport: 'Traslados al Aeropuerto',
+        service_cruise: 'Puertos de Cruceros y Traslados de Ferry',
+        service_excursions: 'Transporte para Excursiones',
+        service_luxury: 'Viaje de Lujo',
         label_departure_time: 'Hora de salida',
         label_trip_length: 'Duración del viaje',
         ph_select_tour: 'Elija un tour',
