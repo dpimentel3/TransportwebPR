@@ -1624,29 +1624,6 @@
       font-size: 1.1em;
     }
 
-    .explore-legend {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 16px;
-      justify-content: center;
-      margin-top: 16px;
-      font-size: 0.88rem;
-      color: var(--muted);
-    }
-
-    .explore-legend-item {
-      display: inline-flex;
-      align-items: center;
-      gap: 5px;
-    }
-
-    .explore-legend-dot {
-      width: 12px;
-      height: 12px;
-      border-radius: 50%;
-      display: inline-block;
-    }
-
     @media (max-width: 700px) {
       #explore-map {
         height: 380px;
@@ -1788,11 +1765,6 @@
           <div id="explore-map"></div>
         </div>
 
-        <div class="explore-legend">
-          <span class="explore-legend-item"><span class="explore-legend-dot" style="background:#FF5722;"></span> <span data-i18n="explore_leg_eat">Things To Eat</span></span>
-          <span class="explore-legend-item"><span class="explore-legend-dot" style="background:#2196F3;"></span> <span data-i18n="explore_leg_places">Places To Go</span></span>
-          <span class="explore-legend-item"><span class="explore-legend-dot" style="background:#FF9800;"></span> <span data-i18n="explore_leg_todo">Things To Do</span></span>
-        </div>
       </div>
     </section>
 
@@ -4032,24 +4004,24 @@
         { name: 'La Casita Blanca', cats: ['eat'], lat: 18.4370, lng: -66.0520, desc: 'Iconic home-style Puerto Rican restaurant in Santurce, famous for comida criolla.', address: 'La Casita Blanca, 351 C. Tapia, San Juan, 00912' },
 
         // Places To Go (map pin symbol)
-        { name: 'Playa Santa', cats: ['places'], lat: 17.9560, lng: -66.9080, desc: 'Beautiful beach in Guánica with calm, clear waters and scenic coastal views.', address: 'Santa Beach, Guánica 00647' },
-        { name: 'Playa Buye', cats: ['places'], lat: 18.0215, lng: -67.1539, desc: 'Quiet, palm-lined beach in Cabo Rojo ideal for a relaxing day.', address: 'Buyé Beach, Cam Buye, Cabo Rojo, 00623' },
-        { name: 'Playa Sucia', cats: ['places'], lat: 17.9318, lng: -67.1935, desc: 'Secluded beach in Cabo Rojo with turquoise waters and dramatic limestone cliffs.', address: 'Playa Sucia, Cabo Rojo 00622' },
-        { name: 'Salinas de Cabo Rojo', cats: ['places'], lat: 17.9537, lng: -67.1880, desc: 'Stunning salt flats in Cabo Rojo with pink-hued waters and diverse wildlife.', address: 'Salinas de Cabo Rojo, XR24+C6X, Pole Ojea, Cabo Rojo 00622' },
+        { name: 'Playa Santa', cats: ['places'], lat: 17.9590, lng: -66.9075, desc: 'Beautiful beach in Guánica with calm, clear waters and scenic coastal views.', address: 'Santa Beach, Guánica 00647' },
+        { name: 'Playa Buye', cats: ['places'], lat: 18.0230, lng: -67.1520, desc: 'Quiet, palm-lined beach in Cabo Rojo ideal for a relaxing day.', address: 'Buyé Beach, Cam Buye, Cabo Rojo, 00623' },
+        { name: 'Playa Sucia', cats: ['places'], lat: 17.9350, lng: -67.1900, desc: 'Secluded beach in Cabo Rojo with turquoise waters and dramatic limestone cliffs.', address: 'Playa Sucia, Cabo Rojo 00622' },
+        { name: 'Salinas de Cabo Rojo', cats: ['places'], lat: 17.9570, lng: -67.1860, desc: 'Stunning salt flats in Cabo Rojo with pink-hued waters and diverse wildlife.', address: 'Salinas de Cabo Rojo, XR24+C6X, Pole Ojea, Cabo Rojo 00622' },
         { name: 'Faro De Rincon', cats: ['places'], lat: 18.3402, lng: -67.2633, desc: 'Historic lighthouse in Rincón offering breathtaking sunset views over the Caribbean.', address: 'El Faro de Rincón, Aguada, Rincón 00602' },
-        { name: 'Playa Crash Boat', cats: ['places'], lat: 18.4912, lng: -67.1647, desc: 'Colorful pier and stunning beach in Aguadilla, perfect for snorkeling and cliff jumping.', address: 'Crash Boat Beach, Borinquen, Aguadilla 00603' },
+        { name: 'Playa Crash Boat', cats: ['places'], lat: 18.4885, lng: -67.1640, desc: 'Colorful pier and stunning beach in Aguadilla, perfect for snorkeling and cliff jumping.', address: 'Crash Boat Beach, Borinquen, Aguadilla 00603' },
         { name: 'Gozalandia San Sebastián', cats: ['places'], lat: 18.3456, lng: -66.9926, desc: 'Breathtaking twin waterfalls in San Sebastián with natural pools perfect for swimming and cliff jumping.', address: 'Gozalandia Waterfalls Campground, Sec Rincon, San Sebastian, San Sebastián 00685' },
-        { name: 'Mar Chiquita', cats: ['places'], lat: 18.4897, lng: -66.5175, desc: 'Unique crescent-shaped beach in Manatí enclosed by dramatic rock formations creating a natural cove.', address: 'Mar Chiquita beach, FGF8+42C, Tierras Nuevas Poniente, 00674' },
-        { name: 'Poza Las Mujeres', cats: ['places'], lat: 18.4955, lng: -66.5050, desc: 'Secluded natural pool in Manatí with calm turquoise waters nestled between rocky limestone formations.', address: 'La Poza de las Mujeres, Tierras Nuevas Poniente, 00674' },
+        { name: 'Mar Chiquita', cats: ['places'], lat: 18.4870, lng: -66.5170, desc: 'Unique crescent-shaped beach in Manatí enclosed by dramatic rock formations creating a natural cove.', address: 'Mar Chiquita beach, FGF8+42C, Tierras Nuevas Poniente, 00674' },
+        { name: 'Poza Las Mujeres', cats: ['places'], lat: 18.4920, lng: -66.5045, desc: 'Secluded natural pool in Manatí with calm turquoise waters nestled between rocky limestone formations.', address: 'La Poza de las Mujeres, Tierras Nuevas Poniente, 00674' },
         { name: 'Ojo de Agua', cats: ['places'], lat: 18.4492, lng: -66.4183, desc: 'Crystal-clear natural spring pool surrounded by lush tropical vegetation — a hidden gem in the mountains.', address: 'Ojo De Agua, Vega Baja, 00693' },
         { name: 'Old San Juan', cats: ['places'], lat: 18.4655, lng: -66.1157, desc: 'Historic colonial district with colorful streets, forts, and centuries of Caribbean history.' },
-        { name: 'Playa Ocean Park', cats: ['places'], lat: 18.4558, lng: -66.0787, desc: 'Trendy San Juan beach popular with locals for kitesurfing and weekend gatherings.', address: 'Playa Ocean Park, San Juan' },
+        { name: 'Playa Ocean Park', cats: ['places'], lat: 18.4540, lng: -66.0787, desc: 'Trendy San Juan beach popular with locals for kitesurfing and weekend gatherings.', address: 'Playa Ocean Park, San Juan' },
         { name: 'Charco Prieto Bayamón', cats: ['places'], lat: 18.3588, lng: -66.1658, desc: 'Popular natural river pool in Bayamón where locals cool off among shaded rocks and flowing water.', address: 'Trailhead; Charco Prieto Waterfall, 7RQ6+5Q, Bayamón 00956' },
-        { name: 'Balneario Seven Seas', cats: ['places'], lat: 18.3728, lng: -65.6312, desc: 'Calm, shallow beach in Fajardo perfect for families and snorkeling.', address: 'Las Croabas, Fajardo 00738' },
-        { name: 'Luquillo Beach', cats: ['places'], lat: 18.3856, lng: -65.7195, desc: 'Family-friendly crescent beach with calm waters and views of El Yunque.' },
+        { name: 'Balneario Seven Seas', cats: ['places'], lat: 18.3712, lng: -65.6325, desc: 'Calm, shallow beach in Fajardo perfect for families and snorkeling.', address: 'Las Croabas, Fajardo 00738' },
+        { name: 'Luquillo Beach', cats: ['places'], lat: 18.3838, lng: -65.7188, desc: 'Family-friendly crescent beach with calm waters and views of El Yunque.' },
         { name: 'Vieques', cats: ['places'], lat: 18.1263, lng: -65.4401, desc: 'Island gem with bioluminescent bays, wild horses, and secluded beaches.' },
         { name: 'Culebra', cats: ['places'], lat: 18.3009, lng: -65.3015, desc: 'Pristine island paradise known for Flamenco Beach and world-class snorkeling.' },
-        { name: 'Playa Vacia Talega', cats: ['places'], lat: 18.4285, lng: -65.9025, desc: 'Beautiful beach in Loíza with golden sand and a relaxed local vibe.', address: 'Vacia Talega Beach, Carretera PR-187 Km 13 Hm 6, 00772' },
+        { name: 'Playa Vacia Talega', cats: ['places'], lat: 18.4265, lng: -65.9020, desc: 'Beautiful beach in Loíza with golden sand and a relaxed local vibe.', address: 'Vacia Talega Beach, Carretera PR-187 Km 13 Hm 6, 00772' },
         { name: 'Castillo San Felipe del Morro', cats: ['places'], lat: 18.4706, lng: -66.1240, desc: 'Iconic 16th-century Spanish fortress guarding San Juan Bay with stunning ocean views and rich history.', address: 'Castillo San Felipe del Morro, 501 Calle Norzagaray, San Juan, 00901' },
 
         // Things To Do (backpack symbol)
@@ -4068,7 +4040,7 @@
       var categoryColors = {
         eat: '#FF5722',
         places: '#2196F3',
-        todo: '#FF9800'
+        todo: '#D32F2F'
       };
 
       // SVG icon paths for each category
@@ -4108,7 +4080,7 @@
           var color = categoryColors[cat] || '#666';
           var iconPath = cat === 'todo' ? categoryIcons.backpack : (categoryIcons[cat] || categoryIcons.places);
 
-          var iconSize = cat === 'places' ? 0.9 : 0.7;
+          var iconSize = cat === 'places' ? 0.9 : (cat === 'todo' ? 1.0 : 0.7);
           var anchorY = cat === 'places' ? 0 : (cat === 'eat' ? -3 : -1);
 
           var marker = new google.maps.Marker({
@@ -4119,8 +4091,8 @@
               path: iconPath,
               fillColor: color,
               fillOpacity: 1,
-              strokeColor: '#fff',
-              strokeWeight: 1.5,
+              strokeColor: cat === 'todo' ? '#8B0000' : '#fff',
+              strokeWeight: cat === 'todo' ? 2 : 1.5,
               scale: iconSize,
               anchor: new google.maps.Point(12, anchorY)
             }
