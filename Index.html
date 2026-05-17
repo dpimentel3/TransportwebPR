@@ -4021,7 +4021,7 @@
     /* Explore Map */
     (function () {
       var EXPLORE_PLACES = [
-        { name: 'Old San Juan', cats: ['todo', 'places'], lat: 18.4655, lng: -66.1157, desc: 'Historic colonial district with colorful streets, forts, and centuries of Caribbean history.' },
+        { name: 'Old San Juan', cats: ['places'], lat: 18.4655, lng: -66.1157, desc: 'Historic colonial district with colorful streets, forts, and centuries of Caribbean history.' },
         { name: 'Culebra', cats: ['todo', 'places'], lat: 18.3009, lng: -65.3015, desc: 'Pristine island paradise known for Flamenco Beach and world-class snorkeling.' },
         { name: 'Vieques', cats: ['todo', 'places'], lat: 18.1263, lng: -65.4401, desc: 'Island gem with bioluminescent bays, wild horses, and secluded beaches.' },
         { name: 'Ceiba Ferry', cats: ['todo'], lat: 18.2566, lng: -65.6343, desc: 'Ferry terminal connecting to Vieques and Culebra from the main island.', address: 'Ceiba Ferry Terminal, 69HJ+XM4, Marina Dr, Roosevelt Roads, Ceiba 00735' },
@@ -4032,12 +4032,12 @@
         { name: 'Playa Ocean Park', cats: ['places'], lat: 18.4558, lng: -66.0787, desc: 'Trendy San Juan beach popular with locals for kitesurfing and weekend gatherings.', address: 'Playa Ocean Park, San Juan' },
         { name: 'Fly Dinning', cats: ['todo', 'eat'], lat: 18.4481, lng: -66.0615, desc: 'Unique dining experience combining great food with an unforgettable atmosphere.', address: 'FlyDining, 153 Av. Manuel Fernández Juncos, San Juan, 00901' },
         { name: 'Toro Verde Adventure Park', cats: ['todo'], lat: 18.2207, lng: -66.3561, desc: 'Adventure park in Orocovis featuring one of the world\'s longest ziplines.', address: 'Toro Verde Adventure Park, Bo Road 155, Orocovis' },
-        { name: 'La Placita Santurce', cats: ['todo', 'places'], lat: 18.4444, lng: -66.0627, desc: 'Vibrant market-turned-nightlife hub with salsa, cocktails, and street food.', address: 'La Placita de Santurce, 300 C. dos Hermanos, San Juan, 00909' },
+        { name: 'La Placita Santurce', cats: ['todo'], lat: 18.4444, lng: -66.0627, desc: 'Vibrant market-turned-nightlife hub with salsa, cocktails, and street food.', address: 'La Placita de Santurce, 300 C. dos Hermanos, San Juan, 00909' },
         { name: 'Playa Vacia Talega', cats: ['places'], lat: 18.4285, lng: -65.9025, desc: 'Beautiful beach in Loíza with golden sand and a relaxed local vibe.', address: 'Vacia Talega Beach, Carretera PR-187 Km 13 Hm 6, 00772' },
-        { name: 'Charco Azul Vega Baja/Morovis', cats: ['todo', 'places'], lat: 18.3432, lng: -66.4167, desc: 'Stunning natural freshwater pool surrounded by lush greenery.', address: 'Charco Azul, 9J66+G4V, Calle Los Ortega, Morovis, Vega Baja 00693' },
+        { name: 'Charco Azul Vega Baja/Morovis', cats: ['todo'], lat: 18.3432, lng: -66.4167, desc: 'Stunning natural freshwater pool surrounded by lush greenery.', address: 'Charco Azul, 9J66+G4V, Calle Los Ortega, Morovis, Vega Baja 00693' },
         { name: 'Kioskos de Luquillo', cats: ['todo'], lat: 18.3823, lng: -65.7151, desc: 'Beachside food stalls serving the best local street food — alcapurrias, pinchos, and seafood.' },
         { name: 'Hacienda Carabali', cats: ['todo'], lat: 18.3485, lng: -65.7620, desc: 'Adventure ranch in Luquillo offering horseback riding, ATVs, and go-karts.' },
-        { name: 'El Yunque Rainforest', cats: ['todo', 'places'], lat: 18.2955, lng: -65.7866, desc: 'The only tropical rainforest in the US National Forest System with waterfalls and trails.' },
+        { name: 'El Yunque Rainforest', cats: ['todo'], lat: 18.2955, lng: -65.7866, desc: 'The only tropical rainforest in the US National Forest System with waterfalls and trails.' },
         { name: 'El Viejo Almacen', cats: ['eat'], lat: 18.4652, lng: -66.1170, desc: 'Beloved restaurant offering authentic Puerto Rican and Spanish-inspired cuisine.', address: 'El Viejo Almacén, 251C C. del Cristo, San Juan, 00901' },
         { name: 'Musa Santurce', cats: ['eat'], lat: 18.4455, lng: -66.0598, desc: 'Trendy Santurce eatery with creative Caribbean-inspired dishes and craft cocktails.', address: 'MUSA, 613 Calle Cerra, San Juan, 00907' },
         { name: 'La Casita Blanca', cats: ['eat'], lat: 18.4370, lng: -66.0520, desc: 'Iconic home-style Puerto Rican restaurant in Santurce, famous for comida criolla.', address: 'La Casita Blanca, 351 C. Tapia, San Juan, 00912' },
@@ -4046,10 +4046,10 @@
         { name: 'Luquillo Beach', cats: ['places'], lat: 18.3856, lng: -65.7195, desc: 'Family-friendly crescent beach with calm waters and views of El Yunque.' },
         { name: 'Balneario Seven Seas', cats: ['places'], lat: 18.3728, lng: -65.6312, desc: 'Calm, shallow beach in Fajardo perfect for families and snorkeling.', address: 'Las Croabas, Fajardo 00738' },
         { name: 'Mar Y Rosa San Juan', cats: ['eat'], lat: 18.4665, lng: -66.1122, desc: 'Popular San Juan restaurant with a creative menu and vibrant ambiance.', address: 'Mar y Rosa, Rooftop, 405 C. de San Francisco, San Juan, 00901' },
-        { name: 'Gozalandia San Sebastián', cats: ['todo', 'places'], lat: 18.3456, lng: -66.9926, desc: 'Breathtaking twin waterfalls in San Sebastián with natural pools perfect for swimming and cliff jumping.', address: 'Gozalandia Waterfalls Campground, Sec Rincon, San Sebastian, San Sebastián 00685' },
-        { name: 'Ojo de Agua', cats: ['todo', 'places'], lat: 18.4492, lng: -66.4183, desc: 'Crystal-clear natural spring pool surrounded by lush tropical vegetation — a hidden gem in the mountains.', address: 'Ojo De Agua, Vega Baja, 00693' },
-        { name: 'Charco Prieto Bayamón', cats: ['todo', 'places'], lat: 18.3588, lng: -66.1658, desc: 'Popular natural river pool in Bayamón where locals cool off among shaded rocks and flowing water.', address: 'Trailhead; Charco Prieto Waterfall, 7RQ6+5Q, Bayamón 00956' },
-        { name: 'Castillo San Felipe del Morro', cats: ['todo', 'places'], lat: 18.4706, lng: -66.1240, desc: 'Iconic 16th-century Spanish fortress guarding San Juan Bay with stunning ocean views and rich history.', address: 'Castillo San Felipe del Morro, 501 Calle Norzagaray, San Juan, 00901' },
+        { name: 'Gozalandia San Sebastián', cats: ['places'], lat: 18.3456, lng: -66.9926, desc: 'Breathtaking twin waterfalls in San Sebastián with natural pools perfect for swimming and cliff jumping.', address: 'Gozalandia Waterfalls Campground, Sec Rincon, San Sebastian, San Sebastián 00685' },
+        { name: 'Ojo de Agua', cats: ['places'], lat: 18.4492, lng: -66.4183, desc: 'Crystal-clear natural spring pool surrounded by lush tropical vegetation — a hidden gem in the mountains.', address: 'Ojo De Agua, Vega Baja, 00693' },
+        { name: 'Charco Prieto Bayamón', cats: ['places'], lat: 18.3588, lng: -66.1658, desc: 'Popular natural river pool in Bayamón where locals cool off among shaded rocks and flowing water.', address: 'Trailhead; Charco Prieto Waterfall, 7RQ6+5Q, Bayamón 00956' },
+        { name: 'Castillo San Felipe del Morro', cats: ['places'], lat: 18.4706, lng: -66.1240, desc: 'Iconic 16th-century Spanish fortress guarding San Juan Bay with stunning ocean views and rich history.', address: 'Castillo San Felipe del Morro, 501 Calle Norzagaray, San Juan, 00901' },
         { name: 'Poza Las Mujeres', cats: ['places'], lat: 18.4955, lng: -66.5050, desc: 'Secluded natural pool in Manatí with calm turquoise waters nestled between rocky limestone formations.', address: 'La Poza de las Mujeres, Tierras Nuevas Poniente, 00674' },
         { name: 'Mar Chiquita', cats: ['places'], lat: 18.4897, lng: -66.5175, desc: 'Unique crescent-shaped beach in Manatí enclosed by dramatic rock formations creating a natural cove.', address: 'Mar Chiquita beach, FGF8+42C, Tierras Nuevas Poniente, 00674' },
         { name: 'Cerro Gordo Vega Alta', cats: ['places'], lat: 18.4930, lng: -66.3750, desc: 'Beautiful public beach in Vega Alta with calm waters, lush hills, and a peaceful atmosphere.', address: 'Balneario Cerro Gordo, Vega Alta 00692' },
@@ -4058,12 +4058,12 @@
         { name: 'Kikita Beach House', cats: ['eat'], lat: 18.4773, lng: -66.2596, desc: 'Laid-back beachfront restaurant offering fresh seafood and tropical drinks by the shore.', address: 'Kikita Beach House, v Ave Dr Pedro Albizu Campos/PR-698, Calle 13, Dorado, 00646' },
         { name: 'Bóveda Restaurante', cats: ['eat'], lat: 18.4267, lng: -66.0582, desc: 'Elegant dining experience in Old San Juan featuring refined Puerto Rican and international cuisine.', address: 'Bóveda Restaurante, Popular Center Building, 208 Av. Juan Ponce de León, San Juan, 00918' },
         { name: 'Kumo Rooftop', cats: ['eat'], lat: 18.4435, lng: -66.0230, desc: 'Trendy rooftop spot blending Asian-inspired flavors with craft cocktails and city views.', address: 'Kumo Rooftop, 2 José M. Tartak Ave, Carolina, 00979' },
-        { name: 'Calle Cerra Santurce', cats: ['todo', 'places'], lat: 18.4450, lng: -66.0600, desc: 'Vibrant street in Santurce known for its art, culture, and nightlife scene.', address: 'Calle Cerra, San Juan, 00907' },
-        { name: 'Faro De Rincon', cats: ['todo', 'places'], lat: 18.3402, lng: -67.2633, desc: 'Historic lighthouse in Rincón offering breathtaking sunset views over the Caribbean.', address: 'El Faro de Rincón, Aguada, Rincón 00602' },
+        { name: 'Calle Cerra Santurce', cats: ['todo'], lat: 18.4450, lng: -66.0600, desc: 'Vibrant street in Santurce known for its art, culture, and nightlife scene.', address: 'Calle Cerra, San Juan, 00907' },
+        { name: 'Faro De Rincon', cats: ['places'], lat: 18.3402, lng: -67.2633, desc: 'Historic lighthouse in Rincón offering breathtaking sunset views over the Caribbean.', address: 'El Faro de Rincón, Aguada, Rincón 00602' },
         { name: 'Playa Hobbie Isla Verde', cats: ['places'], lat: 18.4407, lng: -66.0096, desc: 'Popular beach in Isla Verde perfect for water sports and relaxation.', address: 'Hobie Beach, Puerto Rico, Carolina, 00979' },
         { name: 'The New Reef', cats: ['eat'], lat: 18.4600, lng: -65.9922, desc: 'Unique dining destination in Loíza offering fresh seafood with a beachfront atmosphere.', address: 'The New Reef, Carolina, Loíza 00772' },
-        { name: 'Vivo Beach Club', cats: ['todo', 'places'], lat: 18.4469, lng: -66.0001, desc: 'Beachfront entertainment venue with live music, pools, and a vibrant party atmosphere.', address: 'Vivo Beach Club, 7000 Carr. 187 RR2, Carolina, 00979' },
-        { name: 'Salinas de Cabo Rojo', cats: ['todo', 'places'], lat: 17.9537, lng: -67.1880, desc: 'Stunning salt flats in Cabo Rojo with pink-hued waters and diverse wildlife.', address: 'Salinas de Cabo Rojo, XR24+C6X, Pole Ojea, Cabo Rojo 00622' }
+        { name: 'Vivo Beach Club', cats: ['todo'], lat: 18.4469, lng: -66.0001, desc: 'Beachfront entertainment venue with live music, pools, and a vibrant party atmosphere.', address: 'Vivo Beach Club, 7000 Carr. 187 RR2, Carolina, 00979' },
+        { name: 'Salinas de Cabo Rojo', cats: ['places'], lat: 17.9537, lng: -67.1880, desc: 'Stunning salt flats in Cabo Rojo with pink-hued waters and diverse wildlife.', address: 'Salinas de Cabo Rojo, XR24+C6X, Pole Ojea, Cabo Rojo 00622' }
       ];
 
       var categoryColors = {
