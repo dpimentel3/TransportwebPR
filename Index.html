@@ -2900,6 +2900,32 @@
           });
         });
 
+        document.addEventListener('click', function (e) {
+          var btn = e.target.closest('.explore-popup-btn');
+          if (!btn) return;
+          if (btn.classList.contains('book-tour-link')) {
+            activateTab('panel-tours');
+            var tourName = btn.getAttribute('data-tour');
+            var select = document.getElementById('tourSelect');
+            if (select && tourName) {
+              var options = select.querySelectorAll('option');
+              options.forEach(function (opt) {
+                if (opt.value === tourName) select.value = tourName;
+              });
+            }
+          } else if (btn.classList.contains('book-transport-link')) {
+            activateTab('panel-transport');
+            var serviceName = btn.getAttribute('data-service');
+            var select = document.getElementById('serviceType');
+            if (select && serviceName) {
+              var options = select.querySelectorAll('option');
+              options.forEach(function (opt) {
+                if (opt.value === serviceName) select.value = serviceName;
+              });
+            }
+          }
+        });
+
         function buildExtraForm(config) {
           var formEl = document.getElementById(config.formId);
           if (!formEl) return;
@@ -4024,20 +4050,20 @@
         { name: 'Old San Juan', cats: ['places'], lat: 18.4655, lng: -66.1157, desc: 'Historic colonial district with colorful streets, forts, and centuries of Caribbean history.' },
         { name: 'Culebra', cats: ['todo', 'places'], lat: 18.3009, lng: -65.3015, desc: 'Pristine island paradise known for Flamenco Beach and world-class snorkeling.' },
         { name: 'Vieques', cats: ['todo', 'places'], lat: 18.1263, lng: -65.4401, desc: 'Island gem with bioluminescent bays, wild horses, and secluded beaches.' },
-        { name: 'Ceiba Ferry', cats: ['todo'], lat: 18.2566, lng: -65.6343, desc: 'Ferry terminal connecting to Vieques and Culebra from the main island.', address: 'Ceiba Ferry Terminal, 69HJ+XM4, Marina Dr, Roosevelt Roads, Ceiba 00735' },
+        { name: 'Ceiba Ferry', cats: ['todo'], lat: 18.2566, lng: -65.6343, desc: 'Ferry terminal connecting to Vieques and Culebra from the main island. Buy tickets on their website below, if sold out no worries tickets can be bought in person at the terminal.', address: 'Ceiba Ferry Terminal, 69HJ+XM4, Marina Dr, Roosevelt Roads, Ceiba 00735', buttons: [{ label: 'Buy Tickets', labelEs: 'Comprar Boletos', type: 'link', url: 'https://www.puertoricoferry.com' }, { label: 'Book Transport', labelEs: 'Reservar Transporte', type: 'transport', service: 'Cruise Ports & Ferry Transfers' }] },
         { name: 'Playa Crash Boat', cats: ['places'], lat: 18.4912, lng: -67.1647, desc: 'Colorful pier and stunning beach in Aguadilla, perfect for snorkeling and cliff jumping.', address: 'Crash Boat Beach, Borinquen, Aguadilla 00603' },
         { name: 'Playa Buye', cats: ['places'], lat: 18.0215, lng: -67.1539, desc: 'Quiet, palm-lined beach in Cabo Rojo ideal for a relaxing day.', address: 'Buyé Beach, Cam Buye, Cabo Rojo, 00623' },
         { name: 'Playa Santa', cats: ['places'], lat: 17.9560, lng: -66.9080, desc: 'Beautiful beach in Guánica with calm, clear waters and scenic coastal views.', address: 'Santa Beach, Guánica 00647' },
         { name: 'Playa Sucia', cats: ['places'], lat: 17.9318, lng: -67.1935, desc: 'Secluded beach in Cabo Rojo with turquoise waters and dramatic limestone cliffs.', address: 'Playa Sucia, Cabo Rojo 00622' },
         { name: 'Playa Ocean Park', cats: ['places'], lat: 18.4558, lng: -66.0787, desc: 'Trendy San Juan beach popular with locals for kitesurfing and weekend gatherings.', address: 'Playa Ocean Park, San Juan' },
         { name: 'Fly Dinning', cats: ['todo', 'eat'], lat: 18.4481, lng: -66.0615, desc: 'Unique dining experience combining great food with an unforgettable atmosphere.', address: 'FlyDining, 153 Av. Manuel Fernández Juncos, San Juan, 00901' },
-        { name: 'Toro Verde Adventure Park', cats: ['todo'], lat: 18.2207, lng: -66.3561, desc: 'Adventure park in Orocovis featuring one of the world\'s longest ziplines.', address: 'Toro Verde Adventure Park, Bo Road 155, Orocovis' },
+        { name: 'Toro Verde Adventure Park', cats: ['todo'], lat: 18.2207, lng: -66.3561, desc: 'Adventure park in Orocovis featuring one of the world\'s longest ziplines. There are no rideshare drivers around. Make sure you arrange transport or a car rental before hand. Don\'t be left stranded.', address: 'Toro Verde Adventure Park, Bo Road 155, Orocovis', buttons: [{ label: 'Book Transport', labelEs: 'Reservar Transporte', type: 'transport', service: 'Excursions Transport' }] },
         { name: 'La Placita Santurce', cats: ['todo'], lat: 18.4444, lng: -66.0627, desc: 'Vibrant market-turned-nightlife hub with salsa, cocktails, and street food.', address: 'La Placita de Santurce, 300 C. dos Hermanos, San Juan, 00909' },
         { name: 'Playa Vacia Talega', cats: ['places'], lat: 18.4285, lng: -65.9025, desc: 'Beautiful beach in Loíza with golden sand and a relaxed local vibe.', address: 'Vacia Talega Beach, Carretera PR-187 Km 13 Hm 6, 00772' },
-        { name: 'Charco Azul Vega Baja/Morovis', cats: ['todo'], lat: 18.3432, lng: -66.4167, desc: 'Stunning natural freshwater pool surrounded by lush greenery.', address: 'Charco Azul, 9J66+G4V, Calle Los Ortega, Morovis, Vega Baja 00693' },
+        { name: 'Charco Azul Vega Baja/Morovis', cats: ['todo'], lat: 18.3432, lng: -66.4167, desc: 'Stunning Sandstone Caves and fresh water. Top 3 rivers in the island. Book your tour. Or rent a car if you\'re trying to get there yourself.', address: 'Charco Azul, 9J66+G4V, Calle Los Ortega, Morovis, Vega Baja 00693', buttons: [{ label: 'Book Tour', labelEs: 'Reservar Tour', type: 'tour', tour: 'Cave Swimming Adventure' }] },
         { name: 'Kioskos de Luquillo', cats: ['todo'], lat: 18.3823, lng: -65.7151, desc: 'Beachside food stalls serving the best local street food — alcapurrias, pinchos, and seafood.' },
         { name: 'Hacienda Carabali', cats: ['todo'], lat: 18.3485, lng: -65.7620, desc: 'Adventure ranch in Luquillo offering horseback riding, ATVs, and go-karts.' },
-        { name: 'El Yunque Rainforest', cats: ['todo'], lat: 18.2955, lng: -65.7866, desc: 'The only tropical rainforest in the US National Forest System with waterfalls and trails.' },
+        { name: 'El Yunque Rainforest', cats: ['todo'], lat: 18.2955, lng: -65.7866, desc: 'The only tropical rainforest in the US National Forest System with waterfalls and trails. Neither taxis nor rideshares are allowed to drive all the way to the top. If your plan is to hike to the top we recommend either renting a car and driving yourself or booking a tour. There is parking available just get there early. For the most part there is no cellphone signal up there so keep that in mind.', address: 'El Yunque National Forest, Rio Grande, 00745', buttons: [{ label: 'Book Tour', labelEs: 'Reservar Tour', type: 'tour', tour: 'Cave Swimming Adventure' }] },
         { name: 'El Viejo Almacen', cats: ['eat'], lat: 18.4652, lng: -66.1170, desc: 'Beloved restaurant offering authentic Puerto Rican and Spanish-inspired cuisine.', address: 'El Viejo Almacén, 251C C. del Cristo, San Juan, 00901' },
         { name: 'Musa Santurce', cats: ['eat'], lat: 18.4455, lng: -66.0598, desc: 'Trendy Santurce eatery with creative Caribbean-inspired dishes and craft cocktails.', address: 'MUSA, 613 Calle Cerra, San Juan, 00907' },
         { name: 'La Casita Blanca', cats: ['eat'], lat: 18.4370, lng: -66.0520, desc: 'Iconic home-style Puerto Rican restaurant in Santurce, famous for comida criolla.', address: 'La Casita Blanca, 351 C. Tapia, San Juan, 00912' },
@@ -4058,7 +4084,7 @@
         { name: 'Kikita Beach House', cats: ['eat'], lat: 18.4773, lng: -66.2596, desc: 'Laid-back beachfront restaurant offering fresh seafood and tropical drinks by the shore.', address: 'Kikita Beach House, v Ave Dr Pedro Albizu Campos/PR-698, Calle 13, Dorado, 00646' },
         { name: 'Bóveda Restaurante', cats: ['eat'], lat: 18.4267, lng: -66.0582, desc: 'Elegant dining experience in Old San Juan featuring refined Puerto Rican and international cuisine.', address: 'Bóveda Restaurante, Popular Center Building, 208 Av. Juan Ponce de León, San Juan, 00918' },
         { name: 'Kumo Rooftop', cats: ['eat'], lat: 18.4435, lng: -66.0230, desc: 'Trendy rooftop spot blending Asian-inspired flavors with craft cocktails and city views.', address: 'Kumo Rooftop, 2 José M. Tartak Ave, Carolina, 00979' },
-        { name: 'Calle Cerra Santurce', cats: ['todo'], lat: 18.4450, lng: -66.0600, desc: 'Vibrant street in Santurce known for its art, culture, and nightlife scene.', address: 'Calle Cerra, San Juan, 00907' },
+        { name: 'Calle Cerra Santurce', cats: ['todo'], lat: 18.4450, lng: -66.0600, desc: 'Vibrant street in Santurce known for its art, culture, and nightlife scene. Perfect if you\'re looking to get away from tourist spots.', address: 'Calle Cerra, San Juan, 00907' },
         { name: 'Faro De Rincon', cats: ['places'], lat: 18.3402, lng: -67.2633, desc: 'Historic lighthouse in Rincón offering breathtaking sunset views over the Caribbean.', address: 'El Faro de Rincón, Aguada, Rincón 00602' },
         { name: 'Playa Hobbie Isla Verde', cats: ['places'], lat: 18.4407, lng: -66.0096, desc: 'Popular beach in Isla Verde perfect for water sports and relaxation.', address: 'Hobie Beach, Puerto Rico, Carolina, 00979' },
         { name: 'The New Reef', cats: ['eat'], lat: 18.4600, lng: -65.9922, desc: 'Unique dining destination in Loíza offering fresh seafood with a beachfront atmosphere.', address: 'The New Reef, Carolina, Loíza 00772' },
@@ -4114,16 +4140,32 @@
 
           marker.addListener('click', function () {
             var isEs = document.documentElement.getAttribute('lang') === 'es';
+            var buttonsHtml = '';
+            if (place.buttons) {
+              place.buttons.forEach(function (btn) {
+                var btnLabel = isEs ? btn.labelEs : btn.label;
+                if (btn.type === 'link') {
+                  buttonsHtml += '<a href="' + btn.url + '" target="_blank" rel="noopener" class="explore-popup-btn" style="display:inline-block;margin-top:8px;margin-right:6px;padding:5px 12px;background:#FF9800;color:#fff;border-radius:4px;font-size:0.82rem;text-decoration:none;font-weight:600;">' + btnLabel + '</a>';
+                } else if (btn.type === 'tour') {
+                  buttonsHtml += '<a href="#book" class="explore-popup-btn book-tour-link" data-tour="' + btn.tour + '" style="display:inline-block;margin-top:8px;margin-right:6px;padding:5px 12px;background:#FF9800;color:#fff;border-radius:4px;font-size:0.82rem;text-decoration:none;font-weight:600;">' + btnLabel + '</a>';
+                } else if (btn.type === 'transport') {
+                  buttonsHtml += '<a href="#book" class="explore-popup-btn book-transport-link" data-service="' + btn.service + '" style="display:inline-block;margin-top:8px;margin-right:6px;padding:5px 12px;background:#FF9800;color:#fff;border-radius:4px;font-size:0.82rem;text-decoration:none;font-weight:600;">' + btnLabel + '</a>';
+                }
+              });
+            }
             var addressHtml = '';
+            var directionsHtml = '';
             if (place.address) {
               var mapsUrl = 'https://www.google.com/maps/dir/?api=1&destination=' + encodeURIComponent(place.address);
-              addressHtml = '<p style="margin:6px 0 0;font-size:0.82rem;color:#8a959e;line-height:1.4;">' + place.address + '</p>' +
-                '<a href="' + mapsUrl + '" target="_blank" rel="noopener" style="display:inline-block;margin-top:8px;padding:5px 12px;background:#0d3557;color:#fff;border-radius:4px;font-size:0.82rem;text-decoration:none;">' + (isEs ? 'Cómo llegar' : 'Get Directions') + '</a>';
+              addressHtml = '<p style="margin:6px 0 0;font-size:0.82rem;color:#8a959e;line-height:1.4;">' + place.address + '</p>';
+              directionsHtml = '<a href="' + mapsUrl + '" target="_blank" rel="noopener" style="display:inline-block;margin-top:8px;padding:5px 12px;background:#0d3557;color:#fff;border-radius:4px;font-size:0.82rem;text-decoration:none;">' + (isEs ? 'Cómo llegar' : 'Get Directions') + '</a>';
             }
             var content = '<div style="max-width:260px;font-family:Inter,Arial,sans-serif;">' +
               '<strong style="font-size:1rem;color:#0d3557;">' + place.name + '</strong>' +
               '<p style="margin:6px 0 0;font-size:0.88rem;color:#5f6e7c;line-height:1.5;">' + place.desc + '</p>' +
               addressHtml +
+              buttonsHtml +
+              directionsHtml +
               '</div>';
             infoWindow.setContent(content);
             infoWindow.open(map, marker);
