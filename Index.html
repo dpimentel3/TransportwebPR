@@ -3210,16 +3210,12 @@
         explore_title: 'Explora Puerto Rico',
         explore_desc: 'Descubre nuestras mejores recomendaciones en toda la isla — desde las mejores playas y restaurantes hasta lugares emblemáticos y joyas escondidas. Toca un pin para más detalles.',
         explore_filter_all: 'Todos',
-        explore_filter_beaches: 'Playas',
-        explore_filter_food: 'Gastronomía',
-        explore_filter_nature: 'Naturaleza y Aventura',
-        explore_filter_attractions: 'Atracciones',
-        explore_filter_nightlife: 'Vida Nocturna',
-        explore_leg_beaches: 'Playas',
-        explore_leg_food: 'Gastronomía',
-        explore_leg_nature: 'Naturaleza y Aventura',
-        explore_leg_attractions: 'Atracciones',
-        explore_leg_nightlife: 'Vida Nocturna',
+        explore_filter_todo: 'Cosas Que Hacer',
+        explore_filter_places: 'Lugares Para Ir',
+        explore_filter_eat: 'Cosas Para Comer',
+        explore_leg_todo: 'Cosas Que Hacer',
+        explore_leg_places: 'Lugares Para Ir',
+        explore_leg_eat: 'Cosas Para Comer',
 
         // Services
         svc_title: 'Servicios',
@@ -4092,6 +4088,52 @@
         { name: 'Salinas de Cabo Rojo', cats: ['places'], lat: 17.9537, lng: -67.1880, desc: 'Stunning salt flats in Cabo Rojo with pink-hued waters and diverse wildlife.', address: 'Salinas de Cabo Rojo, XR24+C6X, Pole Ojea, Cabo Rojo 00622' }
       ];
 
+      var EXPLORE_PLACES_ES = {
+        'Old San Juan': { name: 'Viejo San Juan', desc: 'Distrito colonial histórico con calles coloridas, fortalezas y siglos de historia caribeña.' },
+        'Culebra': { name: 'Culebra', desc: 'Paraíso isleño prístino conocido por Playa Flamenco y snorkel de clase mundial.' },
+        'Vieques': { name: 'Vieques', desc: 'Joya isleña con bahías bioluminiscentes, caballos salvajes y playas aisladas.' },
+        'Ceiba Ferry': { name: 'Ferry de Ceiba', desc: 'Terminal de ferry que conecta con Vieques y Culebra desde la isla principal. Compre boletos en su sitio web abajo, si están agotados no se preocupe, los boletos se pueden comprar en persona en la terminal.' },
+        'Playa Crash Boat': { name: 'Playa Crash Boat', desc: 'Muelle colorido y playa impresionante en Aguadilla, perfecto para snorkel y saltos de acantilado.' },
+        'Playa Buye': { name: 'Playa Buyé', desc: 'Playa tranquila bordeada de palmeras en Cabo Rojo, ideal para un día relajante.' },
+        'Playa Santa': { name: 'Playa Santa', desc: 'Hermosa playa en Guánica con aguas tranquilas y cristalinas y vistas panorámicas de la costa.' },
+        'Playa Sucia': { name: 'Playa Sucia', desc: 'Playa aislada en Cabo Rojo con aguas turquesas y dramáticos acantilados de piedra caliza.' },
+        'Playa Ocean Park': { name: 'Playa Ocean Park', desc: 'Playa de moda en San Juan popular entre los locales para kitesurfing y reuniones de fin de semana.' },
+        'Fly Dinning': { name: 'Fly Dinning', desc: 'Experiencia gastronómica única que combina buena comida con un ambiente inolvidable.' },
+        'Toro Verde Adventure Park': { name: 'Parque de Aventuras Toro Verde', desc: 'Parque de aventuras en Orocovis con una de las tirolesas más largas del mundo. No hay conductores de rideshare en la zona. Asegúrese de coordinar transporte o alquiler de auto con anticipación. No se quede varado.' },
+        'La Placita Santurce': { name: 'La Placita de Santurce', desc: 'Vibrante mercado convertido en centro de vida nocturna con salsa, cócteles y comida callejera.' },
+        'Playa Vacia Talega': { name: 'Playa Vacía Talega', desc: 'Hermosa playa en Loíza con arena dorada y un ambiente local relajado.' },
+        'Charco Azul Vega Baja/Morovis': { name: 'Charco Azul Vega Baja/Morovis', desc: 'Impresionantes cuevas de piedra arenisca y agua dulce. Top 3 ríos de la isla. Reserve su tour. O alquile un auto si quiere llegar por su cuenta.' },
+        'Kioskos de Luquillo': { name: 'Kioskos de Luquillo', desc: 'Puestos de comida playeros sirviendo la mejor comida callejera local — alcapurrias, pinchos y mariscos.' },
+        'Hacienda Carabali': { name: 'Hacienda Carabalí', desc: 'Rancho de aventuras en Luquillo que ofrece paseos a caballo, ATVs y go-karts.' },
+        'El Yunque Rainforest': { name: 'Bosque Lluvioso El Yunque', desc: 'El único bosque tropical en el Sistema de Bosques Nacionales de EE.UU. con cascadas y senderos. Ni taxis ni rideshares pueden subir hasta la cima. Si planeas caminar hasta arriba, recomendamos alquilar un auto o reservar un tour. Hay estacionamiento disponible, solo llega temprano. En su mayoría no hay señal de celular allá arriba, tenlo en cuenta.' },
+        'El Viejo Almacen': { name: 'El Viejo Almacén', desc: 'Querido restaurante que ofrece auténtica cocina puertorriqueña e inspirada en la española.' },
+        'Musa Santurce': { name: 'Musa Santurce', desc: 'Restaurante de moda en Santurce con platos creativos inspirados en el Caribe y cócteles artesanales.' },
+        'La Casita Blanca': { name: 'La Casita Blanca', desc: 'Icónico restaurante de comida casera puertorriqueña en Santurce, famoso por su comida criolla.' },
+        'La Parrilla': { name: 'La Parrilla', desc: 'Popular restaurante al aire libre en la PR-193 en Luquillo, conocido por sus carnes a la parrilla y ambiente animado.' },
+        'El Terruño': { name: 'El Terruño', desc: 'Cocina artesanal creativa en Luquillo, mezclando sabores locales con un toque moderno.' },
+        'Luquillo Beach': { name: 'Playa de Luquillo', desc: 'Playa familiar en forma de media luna con aguas tranquilas y vistas de El Yunque.' },
+        'Balneario Seven Seas': { name: 'Balneario Seven Seas', desc: 'Playa tranquila y poco profunda en Fajardo, perfecta para familias y snorkel.' },
+        'Mar Y Rosa San Juan': { name: 'Mar y Rosa San Juan', desc: 'Popular restaurante en San Juan con un menú creativo y ambiente vibrante.' },
+        'Gozalandia San Sebastián': { name: 'Gozalandia San Sebastián', desc: 'Impresionantes cascadas gemelas en San Sebastián con piscinas naturales perfectas para nadar y saltar de acantilados.' },
+        'Ojo de Agua': { name: 'Ojo de Agua', desc: 'Piscina natural de manantial cristalino rodeada de exuberante vegetación tropical — una joya escondida en las montañas.' },
+        'Charco Prieto Bayamón': { name: 'Charco Prieto Bayamón', desc: 'Popular piscina natural de río en Bayamón donde los locales se refrescan entre rocas sombreadas y agua corriente.' },
+        'Castillo San Felipe del Morro': { name: 'Castillo San Felipe del Morro', desc: 'Icónica fortaleza española del siglo XVI que protege la Bahía de San Juan con impresionantes vistas al océano y rica historia.' },
+        'Poza Las Mujeres': { name: 'Poza Las Mujeres', desc: 'Piscina natural aislada en Manatí con aguas turquesas tranquilas entre formaciones rocosas de piedra caliza.' },
+        'Mar Chiquita': { name: 'Mar Chiquita', desc: 'Playa única en forma de media luna en Manatí rodeada por dramáticas formaciones rocosas que crean una cala natural.' },
+        'Cerro Gordo Vega Alta': { name: 'Cerro Gordo Vega Alta', desc: 'Hermosa playa pública en Vega Alta con aguas tranquilas, colinas verdes y un ambiente pacífico.' },
+        "Annie's Place": { name: "Annie's Place", desc: 'Querido restaurante local que sirve platos abundantes con un ambiente cálido y acogedor.' },
+        'Eter Rooftop': { name: 'Eter Rooftop', desc: 'Restaurante elegante en azotea con vistas panorámicas y un menú de cócteles inventivo.' },
+        'Kikita Beach House': { name: 'Kikita Beach House', desc: 'Restaurante relajado frente a la playa que ofrece mariscos frescos y bebidas tropicales junto al mar.' },
+        'Bóveda Restaurante': { name: 'Bóveda Restaurante', desc: 'Experiencia gastronómica elegante en el Viejo San Juan con refinada cocina puertorriqueña e internacional.' },
+        'Kumo Rooftop': { name: 'Kumo Rooftop', desc: 'Lugar de moda en azotea que mezcla sabores de inspiración asiática con cócteles artesanales y vistas de la ciudad.' },
+        'Calle Cerra Santurce': { name: 'Calle Cerra Santurce', desc: 'Vibrante calle en Santurce conocida por su arte, cultura y vida nocturna. Perfecto si buscas alejarte de los lugares turísticos.' },
+        'Faro De Rincon': { name: 'Faro de Rincón', desc: 'Faro histórico en Rincón que ofrece impresionantes vistas del atardecer sobre el Caribe.' },
+        'Playa Hobbie Isla Verde': { name: 'Playa Hobbie Isla Verde', desc: 'Popular playa en Isla Verde perfecta para deportes acuáticos y relajación.' },
+        'The New Reef': { name: 'The New Reef', desc: 'Destino gastronómico único en Loíza que ofrece mariscos frescos con ambiente frente a la playa.' },
+        'Vivo Beach Club': { name: 'Vivo Beach Club', desc: 'Centro de entretenimiento frente a la playa con música en vivo, piscinas y un ambiente de fiesta vibrante.' },
+        'Salinas de Cabo Rojo': { name: 'Salinas de Cabo Rojo', desc: 'Impresionantes salinas en Cabo Rojo con aguas de tonos rosados y diversa vida silvestre.' }
+      };
+
       var categoryColors = {
         todo: '#FF9800',
         places: '#2196F3',
@@ -4140,6 +4182,9 @@
 
           marker.addListener('click', function () {
             var isEs = document.documentElement.getAttribute('lang') === 'es';
+            var placeEs = isEs && EXPLORE_PLACES_ES[place.name] ? EXPLORE_PLACES_ES[place.name] : null;
+            var displayName = placeEs ? placeEs.name : place.name;
+            var displayDesc = placeEs ? placeEs.desc : place.desc;
             var buttonsHtml = '';
             if (place.buttons) {
               place.buttons.forEach(function (btn) {
@@ -4161,8 +4206,8 @@
               directionsHtml = '<a href="' + mapsUrl + '" target="_blank" rel="noopener" style="display:inline-block;margin-top:8px;padding:5px 12px;background:#0d3557;color:#fff;border-radius:4px;font-size:0.82rem;text-decoration:none;">' + (isEs ? 'Cómo llegar' : 'Get Directions') + '</a>';
             }
             var content = '<div style="max-width:260px;font-family:Inter,Arial,sans-serif;">' +
-              '<strong style="font-size:1rem;color:#0d3557;">' + place.name + '</strong>' +
-              '<p style="margin:6px 0 0;font-size:0.88rem;color:#5f6e7c;line-height:1.5;">' + place.desc + '</p>' +
+              '<strong style="font-size:1rem;color:#0d3557;">' + displayName + '</strong>' +
+              '<p style="margin:6px 0 0;font-size:0.88rem;color:#5f6e7c;line-height:1.5;">' + displayDesc + '</p>' +
               addressHtml +
               buttonsHtml +
               directionsHtml +
@@ -4172,6 +4217,12 @@
           });
 
           markers.push(marker);
+        });
+
+        markers.forEach(function (m) {
+          if (m._place && m._place.name === 'Ceiba Ferry') {
+            google.maps.event.trigger(m, 'click');
+          }
         });
       }
 
