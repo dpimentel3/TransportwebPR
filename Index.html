@@ -4231,6 +4231,16 @@
             google.maps.event.trigger(m, 'click');
           }
         });
+
+        if (window.innerWidth <= 700) {
+          var exploreSection = document.getElementById('explore');
+          if (exploreSection) {
+            var header = document.querySelector('header');
+            var headerHeight = header ? header.offsetHeight : 0;
+            var targetPosition = exploreSection.getBoundingClientRect().top + window.pageYOffset - headerHeight - 12;
+            window.scrollTo({ top: targetPosition, behavior: 'smooth' });
+          }
+        }
       }
 
       function filterMarkers(cat) {
