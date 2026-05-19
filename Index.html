@@ -2278,6 +2278,14 @@
                 </select>
               </div>
 
+              <div>
+                <label for="roundTrip" data-i18n="label_round_trip">Round trip</label>
+                <select id="roundTrip" name="roundTrip">
+                  <option value="No" data-i18n="round_trip_no">No</option>
+                  <option value="Yes" data-i18n="round_trip_yes">Yes</option>
+                </select>
+              </div>
+
               <div class="field-grid">
                 <div>
                   <label for="tripDate" data-i18n="label_date">Date (month/day)</label>
@@ -2930,6 +2938,20 @@
                 if (opt.value === serviceName) select.value = serviceName;
               });
             }
+          } else if (btn.classList.contains('book-charter-link')) {
+            activateTab('panel-boats');
+          } else if (btn.classList.contains('book-roundtrip-link')) {
+            activateTab('panel-transport');
+            var serviceName = btn.getAttribute('data-service');
+            var serviceSelect = document.getElementById('serviceType');
+            if (serviceSelect && serviceName) {
+              var options = serviceSelect.querySelectorAll('option');
+              options.forEach(function (opt) {
+                if (opt.value === serviceName) serviceSelect.value = serviceName;
+              });
+            }
+            var roundTripSelect = document.getElementById('roundTrip');
+            if (roundTripSelect) roundTripSelect.value = 'Yes';
           }
         });
 
@@ -3362,6 +3384,9 @@
         label_select_tour: 'Seleccione el tour',
         label_select_boat: 'Botes y Chárters',
         label_service_type: 'Tipo de servicio',
+        label_round_trip: 'Ida y vuelta',
+        round_trip_no: 'No',
+        round_trip_yes: 'Sí',
         ph_service_type: 'Elija un servicio',
         service_airport: 'Traslados al Aeropuerto',
         service_cruise: 'Puertos de Cruceros y Traslados de Ferry',
@@ -4050,19 +4075,19 @@
     /* Explore Map */
     (function () {
       var EXPLORE_PLACES = [
-        { name: 'Old San Juan', cats: ['places'], lat: 18.4655, lng: -66.1157, desc: 'Historic colonial district with colorful streets, forts, and centuries of Caribbean history.' },
-        { name: 'Culebra', cats: ['todo', 'places'], lat: 18.3009, lng: -65.3015, desc: 'Pristine island paradise known for Flamenco Beach and world-class snorkeling.' },
-        { name: 'Vieques', cats: ['todo', 'places'], lat: 18.1263, lng: -65.4401, desc: 'Island gem with bioluminescent bays, wild horses, and secluded beaches.' },
+        { name: 'Old San Juan', cats: ['places'], lat: 18.4655, lng: -66.1157, desc: 'Historic colonial district with colorful streets, forts, and centuries of Caribbean history. People of all ages can come and enjoy of the highlights of the island from historic sights to awesome nightlife there\'s a bit of everything for everyone. You can even book tours so you get inside scoop on the places to visit while there.', buttons: [{ label: 'Book Tour', labelEs: 'Reservar Tour', type: 'tour', tour: 'Old San Juan Tour' }, { label: 'Book Transport', labelEs: 'Reservar Transporte', type: 'transport', service: 'Excursions Transport' }] },
+        { name: 'Culebra', cats: ['todo', 'places'], lat: 18.3009, lng: -65.3015, desc: 'Pristine island paradise known for Flamenco Beach, classified as one of the top beaches in the world with incredible snorkeling spots. You can visit by plane, ferry and private boat charters. Once you arrive at the port there are taxis that can take you to the different locations in the island. Car and golf cart rental available.', buttons: [{ label: 'Buy Tickets', labelEs: 'Comprar Boletos', type: 'link', url: 'https://www.puertoricoferry.com' }, { label: 'Book Charter', labelEs: 'Reservar Chárter', type: 'charter' }] },
+        { name: 'Vieques', cats: ['todo', 'places'], lat: 18.1263, lng: -65.4401, desc: 'Formerly used by the US Navy as a shooting range for their gunships Vieques still offers the best bioluminescent bay in the world, wild horses, and even a secluded black sand beach. Similar to Culebra you can get there by plane, ferry or private boat charter.', buttons: [{ label: 'Buy Tickets', labelEs: 'Comprar Boletos', type: 'link', url: 'https://www.puertoricoferry.com' }, { label: 'Book Charter', labelEs: 'Reservar Chárter', type: 'charter' }] },
         { name: 'Ceiba Ferry', cats: ['todo'], lat: 18.2566, lng: -65.6343, desc: 'Ferry terminal connecting to Vieques and Culebra from the main island. Buy tickets on their website below, if sold out no worries tickets can be bought in person at the terminal.', address: 'Ceiba Ferry Terminal, 69HJ+XM4, Marina Dr, Roosevelt Roads, Ceiba 00735', buttons: [{ label: 'Buy Tickets', labelEs: 'Comprar Boletos', type: 'link', url: 'https://www.puertoricoferry.com' }, { label: 'Book Transport', labelEs: 'Reservar Transporte', type: 'transport', service: 'Cruise Ports & Ferry Transfers' }] },
-        { name: 'Playa Crash Boat', cats: ['places'], lat: 18.4912, lng: -67.1647, desc: 'Colorful pier and stunning beach in Aguadilla, perfect for snorkeling and cliff jumping.', address: 'Crash Boat Beach, Borinquen, Aguadilla 00603' },
+        { name: 'Playa Crash Boat', cats: ['places'], lat: 18.4912, lng: -67.1647, desc: 'Colorful pier and stunning beach in Aguadilla, perfect for snorkeling and jumping off the pier. Look for the jets and banana boat rental. Easily one of the most complete beaches in the island.', address: 'Crash Boat Beach, Borinquen, Aguadilla 00603' },
         { name: 'Playa Buye', cats: ['places'], lat: 18.0215, lng: -67.1539, desc: 'Quiet, palm-lined beach in Cabo Rojo ideal for a relaxing day.', address: 'Buyé Beach, Cam Buye, Cabo Rojo, 00623' },
-        { name: 'Playa Santa', cats: ['places'], lat: 17.9560, lng: -66.9080, desc: 'Beautiful beach in Guánica with calm, clear waters and scenic coastal views.', address: 'Santa Beach, Guánica 00647' },
+        { name: 'Playa Santa', cats: ['places'], lat: 17.9560, lng: -66.9080, desc: 'Beautiful beach in Guánica with calm, clear waters and scenic coastal views. Jetski rental available.', address: 'Santa Beach, Guánica 00647' },
         { name: 'Playa Sucia', cats: ['places'], lat: 17.9318, lng: -67.1935, desc: 'Secluded beach in Cabo Rojo with turquoise waters and dramatic limestone cliffs.', address: 'Playa Sucia, Cabo Rojo 00622' },
         { name: 'Playa Ocean Park', cats: ['places'], lat: 18.4558, lng: -66.0787, desc: 'Trendy San Juan beach popular with locals for kitesurfing and weekend gatherings.', address: 'Playa Ocean Park, San Juan' },
         { name: 'Fly Dinning', cats: ['todo', 'eat'], lat: 18.4481, lng: -66.0615, desc: 'Unique dining experience combining great food with an unforgettable atmosphere as you hang 100 feet in the air and get a 360 degree view of San Juan.', address: 'FlyDining, 153 Av. Manuel Fernández Juncos, San Juan, 00901', buttons: [{ label: 'Visit Page', labelEs: 'Visitar Página', type: 'link', url: 'https://www.instagram.com/flydiningpr/' }] },
         { name: 'Toro Verde Adventure Park', cats: ['todo'], lat: 18.2207, lng: -66.3561, desc: 'Adventure park in Orocovis featuring one of the world\'s longest ziplines. There are no rideshare drivers around. Make sure you arrange transport or a car rental before hand. Don\'t be left stranded.', address: 'Toro Verde Adventure Park, Bo Road 155, Orocovis', buttons: [{ label: 'Book Transport', labelEs: 'Reservar Transporte', type: 'transport', service: 'Excursions Transport' }] },
         { name: 'La Placita Santurce', cats: ['todo'], lat: 18.4444, lng: -66.0627, desc: 'Vibrant market-turned-nightlife hub with salsa, cocktails, and street food.', address: 'La Placita de Santurce, 300 C. dos Hermanos, San Juan, 00909' },
-        { name: 'Playa Vacia Talega', cats: ['places'], lat: 18.4285, lng: -65.9025, desc: 'Beautiful beach in Loíza with golden sand and a relaxed local vibe.', address: 'Vacia Talega Beach, Carretera PR-187 Km 13 Hm 6, 00772' },
+        { name: 'Playa Vacia Talega', cats: ['places'], lat: 18.4285, lng: -65.9025, desc: 'Beautiful beach in Loíza with golden sand and a relaxed local vibe. Parking can be tricky.', address: 'Vacia Talega Beach, Carretera PR-187 Km 13 Hm 6, 00772' },
         { name: 'Charco Azul Vega Baja/Morovis', cats: ['todo'], lat: 18.3432, lng: -66.4167, desc: 'Stunning Sandstone Caves and fresh water. Top 3 rivers in the island. Book your tour. Or rent a car if you\'re trying to get there yourself.', address: 'Charco Azul, 9J66+G4V, Calle Los Ortega, Morovis, Vega Baja 00693', buttons: [{ label: 'Book Tour', labelEs: 'Reservar Tour', type: 'tour', tour: 'Cave Swimming Adventure' }] },
         { name: 'Kioskos de Luquillo', cats: ['todo'], lat: 18.3823, lng: -65.7151, desc: 'Beachside food stalls serving the best local street food — alcapurrias, pinchos, and seafood.' },
         { name: 'Hacienda Carabali', cats: ['todo'], lat: 18.3485, lng: -65.7620, desc: 'Adventure ranch in Luquillo offering horseback riding, ATVs, and go-karts.' },
@@ -4072,15 +4097,15 @@
         { name: 'La Casita Blanca', cats: ['eat'], lat: 18.4370, lng: -66.0520, desc: 'Iconic home-style Puerto Rican restaurant in Santurce, famous for comida criolla.', address: 'La Casita Blanca, 351 C. Tapia, San Juan, 00912', buttons: [{ label: 'Visit Page', labelEs: 'Visitar Página', type: 'link', url: 'https://www.instagram.com/casitablancapr/' }] },
         { name: 'La Parrilla', cats: ['eat'], lat: 18.3740, lng: -65.7195, desc: 'Popular open-air restaurant on PR-193 in Luquillo, known for grilled meats and lively atmosphere.', address: 'La Parrilla, PR-193, Luquillo, 00773', buttons: [{ label: 'Visit Page', labelEs: 'Visitar Página', type: 'link', url: 'https://www.instagram.com/laparrillapr/' }] },
         { name: 'El Terruño', cats: ['eat'], lat: 18.3804, lng: -65.7367, desc: 'Creative artisan cuisine at Luquillo, blending local flavors with live Puerto Rican music during weekends.', address: 'El Terruño, PR-193, Luquillo, 00773', buttons: [{ label: 'Visit Page', labelEs: 'Visitar Página', type: 'link', url: 'https://www.instagram.com/terrunorestaurant/' }] },
-        { name: 'Luquillo Beach', cats: ['places'], lat: 18.3856, lng: -65.7195, desc: 'Family-friendly crescent beach with calm waters and views of El Yunque.' },
+        { name: 'Luquillo Beach', cats: ['places'], lat: 18.3856, lng: -65.7195, desc: 'Family-friendly crescent beach with calm waters and views of El Yunque. And if that wasn\'t enough you have the Luquillo Kiosks right there so you can have your pick from 30 different restaurants, bars and gift shops. Jetski and kayak rental available.', buttons: [{ label: 'Book Transport', labelEs: 'Reservar Transporte', type: 'transport', service: 'Excursions Transport' }] },
         { name: 'Balneario Seven Seas', cats: ['places'], lat: 18.3728, lng: -65.6312, desc: 'Calm, shallow beach in Fajardo perfect for families and snorkeling.', address: 'Las Croabas, Fajardo 00738' },
         { name: 'Mar Y Rosa San Juan', cats: ['eat'], lat: 18.4665, lng: -66.1122, desc: 'One of the few rooftops restaurants in Old San Juan, just opened recently.', address: 'Mar y Rosa, Rooftop, 405 C. de San Francisco, San Juan, 00901', buttons: [{ label: 'Book With OpenTable', labelEs: 'Reservar en OpenTable', type: 'link', url: 'https://www.opentable.com/r/mar-y-rosa-san-juan?corrid=2e40c7b5-68d3-4aca-9c56-6fd0213e2d99&avt=eyJ2IjozLCJtIjowLCJwIjowLCJzIjowLCJuIjowfQ&p=2&sd=2026-05-18T19%3A00%3A00' }] },
-        { name: 'Gozalandia San Sebastián', cats: ['places'], lat: 18.3456, lng: -66.9926, desc: 'Breathtaking twin waterfalls in San Sebastián with natural pools perfect for swimming and cliff jumping.', address: 'Gozalandia Waterfalls Campground, Sec Rincon, San Sebastian, San Sebastián 00685' },
-        { name: 'Ojo de Agua', cats: ['places'], lat: 18.4492, lng: -66.4183, desc: 'Crystal-clear natural spring pool surrounded by lush tropical vegetation — a hidden gem in the mountains.', address: 'Ojo De Agua, Vega Baja, 00693' },
-        { name: 'Charco Prieto Bayamón', cats: ['places'], lat: 18.3588, lng: -66.1658, desc: 'Popular natural river pool in Bayamón where locals cool off among shaded rocks and flowing water.', address: 'Trailhead; Charco Prieto Waterfall, 7RQ6+5Q, Bayamón 00956' },
+        { name: 'Gozalandia San Sebastián', cats: ['places'], lat: 18.3456, lng: -66.9926, desc: 'Breathtaking twin waterfalls in San Sebastián with natural pools perfect for swimming and cliff jumping. There\'s even a rope swing. Parking available.', address: 'Gozalandia Waterfalls Campground, Sec Rincon, San Sebastian, San Sebastián 00685' },
+        { name: 'Ojo de Agua', cats: ['places'], lat: 18.4492, lng: -66.4183, desc: 'Crystal-clear natural spring pool surrounded by el barrio. Perfect for kids during hot summer days. There are small local venders that offer different types of foods and you can even rent a kayak and paddle around the pond. Rideshares not recommended as you can be left stranded. Book your roundtrip starting at $160.', address: 'Ojo De Agua, Vega Baja, 00693', buttons: [{ label: 'Book Roundtrip', labelEs: 'Reservar Ida y Vuelta', type: 'roundtrip', service: 'Excursions Transport' }] },
+        { name: 'Charco Prieto Bayamón', cats: ['places'], lat: 18.3588, lng: -66.1658, desc: 'One of the top hidden gems in the island and its located in the metro area not too far from San Juan, it offers a 45 minute hike that ends at one of the tallest waterfalls in the island. The trail is mark with orange bands wrap around tree branches so that you don\'t get lost. Parking spots are limited.', address: 'Trailhead; Charco Prieto Waterfall, 7RQ6+5Q, Bayamón 00956' },
         { name: 'Castillo San Felipe del Morro', cats: ['places'], lat: 18.4706, lng: -66.1240, desc: 'Iconic 16th-century Spanish fortress guarding San Juan Bay with stunning ocean views and rich history.', address: 'Castillo San Felipe del Morro, 501 Calle Norzagaray, San Juan, 00901' },
-        { name: 'Poza Las Mujeres', cats: ['places'], lat: 18.4955, lng: -66.5050, desc: 'Secluded natural pool in Manatí with calm turquoise waters nestled between rocky limestone formations.', address: 'La Poza de las Mujeres, Tierras Nuevas Poniente, 00674' },
-        { name: 'Mar Chiquita', cats: ['places'], lat: 18.4897, lng: -66.5175, desc: 'Unique crescent-shaped beach in Manatí enclosed by dramatic rock formations creating a natural cove.', address: 'Mar Chiquita beach, FGF8+42C, Tierras Nuevas Poniente, 00674' },
+        { name: 'Poza Las Mujeres', cats: ['places'], lat: 18.4955, lng: -66.5050, desc: 'Secluded natural pool in Manatí with calm turquoise waters nestled between rocky limestone formations. Parking can be far from the beach so travel light if you\'re thinking visiting.', address: 'La Poza de las Mujeres, Tierras Nuevas Poniente, 00674' },
+        { name: 'Mar Chiquita', cats: ['places'], lat: 18.4897, lng: -66.5175, desc: 'Unique crescent-shaped beach in Manatí enclosed by dramatic rock formations creating a natural cove. One of the most stunning views in the island. Not the best for spending the day as it can dangerous but definitely a cool spot to stop by and take a few pictures.', address: 'Mar Chiquita beach, FGF8+42C, Tierras Nuevas Poniente, 00674' },
         { name: 'Cerro Gordo Vega Alta', cats: ['places'], lat: 18.4930, lng: -66.3750, desc: 'Beautiful public beach in Vega Alta with calm waters, lush hills, and a peaceful atmosphere.', address: 'Balneario Cerro Gordo, Vega Alta 00692' },
         { name: 'Annie\'s Place', cats: ['eat'], lat: 18.0285, lng: -67.1690, desc: 'Beloved local eatery serving hearty dishes with a warm, welcoming atmosphere. Make sure you taste the mofongo with octopus, one of the best in the island.', address: 'Annie\'s Place, 3.0 Km, 3301 PR-3301, Boquerón, 00622', buttons: [{ label: 'Visit Page', labelEs: 'Visitar Página', type: 'link', url: 'https://www.instagram.com/anniesplaces/' }] },
         { name: 'Eter Rooftop', cats: ['eat'], lat: 18.4525, lng: -66.0843, desc: 'Stylish rooftop dining with panoramic views of Santurce and an inventive cocktail menu. It even has pool. right in the middle of the restaurant.', address: 'Eter Rooftop & Lounge, 752 Av. Manuel Fernández Juncos, San Juan, 00907', buttons: [{ label: 'Book With OpenTable', labelEs: 'Reservar en OpenTable', type: 'link', url: 'https://www.opentable.com/r/eter-rooftop-lounge-ciqala-luxury-suites-san-juan?corrid=f9feebfe-ea96-4f15-9b5c-a28c965fabc7&avt=eyJ2IjozLCJtIjowLCJwIjowLCJzIjowLCJuIjowfQ&p=2&sd=2026-05-18T19%3A00%3A00' }] },
@@ -4088,27 +4113,27 @@
         { name: 'Bóveda Restaurante', cats: ['eat'], lat: 18.4267, lng: -66.0582, desc: 'Elegant dining experience in the heart of Puerto Rico\'s financial district featuring refined Puerto Rican and international cuisine. Ask for their signature steak.', address: 'Bóveda Restaurante, Popular Center Building, 208 Av. Juan Ponce de León, San Juan, 00918', buttons: [{ label: 'Book With OpenTable', labelEs: 'Reservar en OpenTable', type: 'link', url: 'https://www.opentable.com/r/boveda-chef-carol-reyes-san-juan?corrid=b1461e3e-dd49-4457-8b93-dd7d118309de&avt=eyJ2IjozLCJtIjowLCJwIjowLCJzIjoxLCJuIjowfQ&p=2&sd=2026-05-18T19%3A00%3A00' }] },
         { name: 'Kumo Rooftop', cats: ['eat'], lat: 18.4435, lng: -66.0230, desc: 'Trendy rooftop spot blending Asian-inspired flavors with craft cocktails and city views.', address: 'Kumo Rooftop, 2 José M. Tartak Ave, Carolina, 00979', buttons: [{ label: 'Book With OpenTable', labelEs: 'Reservar en OpenTable', type: 'link', url: 'https://www.opentable.com/r/kumo-rooftop-carolina?corrid=5841624c-0778-4865-941a-7274743ad90b&avt=eyJ2IjozLCJtIjowLCJwIjowLCJzIjowLCJuIjowfQ&p=2&sd=2026-05-18T19%3A00%3A00' }] },
         { name: 'Calle Cerra Santurce', cats: ['todo'], lat: 18.4450, lng: -66.0600, desc: 'Vibrant street in Santurce known for its art, culture, and nightlife scene. Perfect if you\'re looking to get away from tourist spots.', address: 'Calle Cerra, San Juan, 00907' },
-        { name: 'Faro De Rincon', cats: ['places'], lat: 18.3402, lng: -67.2633, desc: 'Historic lighthouse in Rincón offering breathtaking sunset views over the Caribbean.', address: 'El Faro de Rincón, Aguada, Rincón 00602' },
-        { name: 'Playa Hobbie Isla Verde', cats: ['places'], lat: 18.4407, lng: -66.0096, desc: 'Popular beach in Isla Verde perfect for water sports and relaxation.', address: 'Hobie Beach, Puerto Rico, Carolina, 00979' },
+        { name: 'Faro De Rincon', cats: ['places'], lat: 18.3402, lng: -67.2633, desc: 'Historic lighthouse in Rincón offering breathtaking sunset views over the Caribbean. Pay attention to the abandon Nuclear reactor in the beach below.', address: 'El Faro de Rincón, Aguada, Rincón 00602' },
+        { name: 'Playa Hobbie Isla Verde', cats: ['places'], lat: 18.4407, lng: -66.0096, desc: 'Popular beach in Isla Verde perfect for water sports and relaxation. The closest thing to Miami Beach. Probably the best beach in the metro area. Beach umbrellas and chairs available for rental.', address: 'Hobie Beach, Puerto Rico, Carolina, 00979' },
         { name: 'The New Reef', cats: ['eat'], lat: 18.4600, lng: -65.9922, desc: 'Unique dining destination in Loíza offering fresh seafood with a beachfront atmosphere. Pro tip: stick around for the sunset.', address: 'The New Reef, Carolina, Loíza 00772', buttons: [{ label: 'Visit Page', labelEs: 'Visitar Página', type: 'link', url: 'https://www.instagram.com/thenewreefbargrill/' }] },
         { name: 'Vivo Beach Club', cats: ['todo'], lat: 18.4469, lng: -66.0001, desc: 'Beachfront entertainment venue with live music, pools, and a vibrant party atmosphere.', address: 'Vivo Beach Club, 7000 Carr. 187 RR2, Carolina, 00979' },
         { name: 'Salinas de Cabo Rojo', cats: ['places'], lat: 17.9537, lng: -67.1880, desc: 'Stunning salt flats in Cabo Rojo with pink-hued waters and diverse wildlife.', address: 'Salinas de Cabo Rojo, XR24+C6X, Pole Ojea, Cabo Rojo 00622' }
       ];
 
       var EXPLORE_PLACES_ES = {
-        'Old San Juan': { name: 'Viejo San Juan', desc: 'Distrito colonial histórico con calles coloridas, fortalezas y siglos de historia caribeña.' },
-        'Culebra': { name: 'Culebra', desc: 'Paraíso isleño prístino conocido por Playa Flamenco y snorkel de clase mundial.' },
-        'Vieques': { name: 'Vieques', desc: 'Joya isleña con bahías bioluminiscentes, caballos salvajes y playas aisladas.' },
+        'Old San Juan': { name: 'Viejo San Juan', desc: 'Distrito colonial histórico con calles coloridas, fortalezas y siglos de historia caribeña. Personas de todas las edades pueden venir y disfrutar de lo mejor de la isla, desde sitios históricos hasta una vida nocturna increíble, hay un poco de todo para todos. Incluso puedes reservar tours para conocer los mejores lugares para visitar.' },
+        'Culebra': { name: 'Culebra', desc: 'Paraíso isleño prístino conocido por Playa Flamenco, clasificada como una de las mejores playas del mundo con increíbles puntos de snorkel. Puedes visitar por avión, ferry y chárters privados de bote. Una vez llegas al puerto hay taxis que te pueden llevar a los diferentes lugares de la isla. Alquiler de autos y carritos de golf disponible.' },
+        'Vieques': { name: 'Vieques', desc: 'Anteriormente utilizada por la Marina de EE.UU. como campo de tiro para sus buques de guerra, Vieques aún ofrece la mejor bahía bioluminiscente del mundo, caballos salvajes e incluso una playa aislada de arena negra. Similar a Culebra, puedes llegar por avión, ferry o chárter privado de bote.' },
         'Ceiba Ferry': { name: 'Ferry de Ceiba', desc: 'Terminal de ferry que conecta con Vieques y Culebra desde la isla principal. Compre boletos en su sitio web abajo, si están agotados no se preocupe, los boletos se pueden comprar en persona en la terminal.' },
-        'Playa Crash Boat': { name: 'Playa Crash Boat', desc: 'Muelle colorido y playa impresionante en Aguadilla, perfecto para snorkel y saltos de acantilado.' },
+        'Playa Crash Boat': { name: 'Playa Crash Boat', desc: 'Muelle colorido y playa impresionante en Aguadilla, perfecto para snorkel y saltar del muelle. Busca los jets y el alquiler de banana boat. Fácilmente una de las playas más completas de la isla.' },
         'Playa Buye': { name: 'Playa Buyé', desc: 'Playa tranquila bordeada de palmeras en Cabo Rojo, ideal para un día relajante.' },
-        'Playa Santa': { name: 'Playa Santa', desc: 'Hermosa playa en Guánica con aguas tranquilas y cristalinas y vistas panorámicas de la costa.' },
+        'Playa Santa': { name: 'Playa Santa', desc: 'Hermosa playa en Guánica con aguas tranquilas y cristalinas y vistas panorámicas de la costa. Alquiler de jetski disponible.' },
         'Playa Sucia': { name: 'Playa Sucia', desc: 'Playa aislada en Cabo Rojo con aguas turquesas y dramáticos acantilados de piedra caliza.' },
         'Playa Ocean Park': { name: 'Playa Ocean Park', desc: 'Playa de moda en San Juan popular entre los locales para kitesurfing y reuniones de fin de semana.' },
         'Fly Dinning': { name: 'Fly Dinning', desc: 'Experiencia gastronómica única que combina buena comida con un ambiente inolvidable mientras cuelgas a 100 pies en el aire y obtienes una vista de 360 grados de San Juan.' },
         'Toro Verde Adventure Park': { name: 'Parque de Aventuras Toro Verde', desc: 'Parque de aventuras en Orocovis con una de las tirolesas más largas del mundo. No hay conductores de rideshare en la zona. Asegúrese de coordinar transporte o alquiler de auto con anticipación. No se quede varado.' },
         'La Placita Santurce': { name: 'La Placita de Santurce', desc: 'Vibrante mercado convertido en centro de vida nocturna con salsa, cócteles y comida callejera.' },
-        'Playa Vacia Talega': { name: 'Playa Vacía Talega', desc: 'Hermosa playa en Loíza con arena dorada y un ambiente local relajado.' },
+        'Playa Vacia Talega': { name: 'Playa Vacía Talega', desc: 'Hermosa playa en Loíza con arena dorada y un ambiente local relajado. El estacionamiento puede ser complicado.' },
         'Charco Azul Vega Baja/Morovis': { name: 'Charco Azul Vega Baja/Morovis', desc: 'Impresionantes cuevas de piedra arenisca y agua dulce. Top 3 ríos de la isla. Reserve su tour. O alquile un auto si quiere llegar por su cuenta.' },
         'Kioskos de Luquillo': { name: 'Kioskos de Luquillo', desc: 'Puestos de comida playeros sirviendo la mejor comida callejera local — alcapurrias, pinchos y mariscos.' },
         'Hacienda Carabali': { name: 'Hacienda Carabalí', desc: 'Rancho de aventuras en Luquillo que ofrece paseos a caballo, ATVs y go-karts.' },
@@ -4118,15 +4143,15 @@
         'La Casita Blanca': { name: 'La Casita Blanca', desc: 'Icónico restaurante de comida casera puertorriqueña en Santurce, famoso por su comida criolla.' },
         'La Parrilla': { name: 'La Parrilla', desc: 'Popular restaurante al aire libre en la PR-193 en Luquillo, conocido por sus carnes a la parrilla y ambiente animado.' },
         'El Terruño': { name: 'El Terruño', desc: 'Cocina artesanal creativa en Luquillo, mezclando sabores locales con música puertorriqueña en vivo durante los fines de semana.' },
-        'Luquillo Beach': { name: 'Playa de Luquillo', desc: 'Playa familiar en forma de media luna con aguas tranquilas y vistas de El Yunque.' },
+        'Luquillo Beach': { name: 'Playa de Luquillo', desc: 'Playa familiar en forma de media luna con aguas tranquilas y vistas de El Yunque. Y si eso no fuera suficiente, tienes los Kioskos de Luquillo justo ahí para que elijas entre 30 restaurantes, bares y tiendas de regalos diferentes. Alquiler de jetski y kayak disponible.' },
         'Balneario Seven Seas': { name: 'Balneario Seven Seas', desc: 'Playa tranquila y poco profunda en Fajardo, perfecta para familias y snorkel.' },
         'Mar Y Rosa San Juan': { name: 'Mar y Rosa San Juan', desc: 'Uno de los pocos restaurantes con terraza en el Viejo San Juan, abierto recientemente.' },
-        'Gozalandia San Sebastián': { name: 'Gozalandia San Sebastián', desc: 'Impresionantes cascadas gemelas en San Sebastián con piscinas naturales perfectas para nadar y saltar de acantilados.' },
-        'Ojo de Agua': { name: 'Ojo de Agua', desc: 'Piscina natural de manantial cristalino rodeada de exuberante vegetación tropical — una joya escondida en las montañas.' },
-        'Charco Prieto Bayamón': { name: 'Charco Prieto Bayamón', desc: 'Popular piscina natural de río en Bayamón donde los locales se refrescan entre rocas sombreadas y agua corriente.' },
+        'Gozalandia San Sebastián': { name: 'Gozalandia San Sebastián', desc: 'Impresionantes cascadas gemelas en San Sebastián con piscinas naturales perfectas para nadar y saltar de acantilados. Incluso hay un columpio de cuerda. Estacionamiento disponible.' },
+        'Ojo de Agua': { name: 'Ojo de Agua', desc: 'Piscina natural de manantial cristalino rodeada por el barrio. Perfecto para niños durante los días calurosos de verano. Hay pequeños vendedores locales que ofrecen diferentes tipos de comidas e incluso puedes alquilar un kayak y remar por el estanque. No se recomiendan rideshares ya que te pueden dejar varado. Reserva tu ida y vuelta desde $160.' },
+        'Charco Prieto Bayamón': { name: 'Charco Prieto Bayamón', desc: 'Una de las joyas escondidas de la isla y está ubicada en el área metro no muy lejos de San Juan, ofrece una caminata de 45 minutos que termina en una de las cascadas más altas de la isla. El sendero está marcado con bandas naranjas envueltas alrededor de las ramas de los árboles para que no te pierdas. Los espacios de estacionamiento son limitados.' },
         'Castillo San Felipe del Morro': { name: 'Castillo San Felipe del Morro', desc: 'Icónica fortaleza española del siglo XVI que protege la Bahía de San Juan con impresionantes vistas al océano y rica historia.' },
-        'Poza Las Mujeres': { name: 'Poza Las Mujeres', desc: 'Piscina natural aislada en Manatí con aguas turquesas tranquilas entre formaciones rocosas de piedra caliza.' },
-        'Mar Chiquita': { name: 'Mar Chiquita', desc: 'Playa única en forma de media luna en Manatí rodeada por dramáticas formaciones rocosas que crean una cala natural.' },
+        'Poza Las Mujeres': { name: 'Poza Las Mujeres', desc: 'Piscina natural aislada en Manatí con aguas turquesas tranquilas entre formaciones rocosas de piedra caliza. El estacionamiento puede estar lejos de la playa así que viaja ligero si piensas visitar.' },
+        'Mar Chiquita': { name: 'Mar Chiquita', desc: 'Playa única en forma de media luna en Manatí rodeada por dramáticas formaciones rocosas que crean una cala natural. Una de las vistas más impresionantes de la isla. No es la mejor para pasar el día ya que puede ser peligrosa pero definitivamente un lugar genial para parar y tomar algunas fotos.' },
         'Cerro Gordo Vega Alta': { name: 'Cerro Gordo Vega Alta', desc: 'Hermosa playa pública en Vega Alta con aguas tranquilas, colinas verdes y un ambiente pacífico.' },
         "Annie's Place": { name: "Annie's Place", desc: 'Querido restaurante local que sirve platos abundantes con un ambiente cálido y acogedor. Asegúrate de probar el mofongo con pulpo, uno de los mejores de la isla.' },
         'Eter Rooftop': { name: 'Eter Rooftop', desc: 'Restaurante elegante en azotea con vistas panorámicas de Santurce y un menú de cócteles inventivo. Incluso tiene piscina justo en el medio del restaurante.' },
@@ -4134,8 +4159,8 @@
         'Bóveda Restaurante': { name: 'Bóveda Restaurante', desc: 'Experiencia gastronómica elegante en el corazón del distrito financiero de Puerto Rico con refinada cocina puertorriqueña e internacional. Pide su bistec insignia.' },
         'Kumo Rooftop': { name: 'Kumo Rooftop', desc: 'Lugar de moda en azotea que mezcla sabores de inspiración asiática con cócteles artesanales y vistas de la ciudad.' },
         'Calle Cerra Santurce': { name: 'Calle Cerra Santurce', desc: 'Vibrante calle en Santurce conocida por su arte, cultura y vida nocturna. Perfecto si buscas alejarte de los lugares turísticos.' },
-        'Faro De Rincon': { name: 'Faro de Rincón', desc: 'Faro histórico en Rincón que ofrece impresionantes vistas del atardecer sobre el Caribe.' },
-        'Playa Hobbie Isla Verde': { name: 'Playa Hobbie Isla Verde', desc: 'Popular playa en Isla Verde perfecta para deportes acuáticos y relajación.' },
+        'Faro De Rincon': { name: 'Faro de Rincón', desc: 'Faro histórico en Rincón que ofrece impresionantes vistas del atardecer sobre el Caribe. Presta atención al reactor nuclear abandonado en la playa de abajo.' },
+        'Playa Hobbie Isla Verde': { name: 'Playa Hobbie Isla Verde', desc: 'Popular playa en Isla Verde perfecta para deportes acuáticos y relajación. Lo más parecido a Miami Beach. Probablemente la mejor playa del área metro. Sombrillas y sillas de playa disponibles para alquiler.' },
         'The New Reef': { name: 'The New Reef', desc: 'Destino gastronómico único en Loíza que ofrece mariscos frescos con ambiente frente a la playa. Consejo: quédate para el atardecer.' },
         'Vivo Beach Club': { name: 'Vivo Beach Club', desc: 'Centro de entretenimiento frente a la playa con música en vivo, piscinas y un ambiente de fiesta vibrante.' },
         'Salinas de Cabo Rojo': { name: 'Salinas de Cabo Rojo', desc: 'Impresionantes salinas en Cabo Rojo con aguas de tonos rosados y diversa vida silvestre.' }
@@ -4202,6 +4227,10 @@
                   buttonsHtml += '<a href="#book" class="explore-popup-btn book-tour-link" data-tour="' + btn.tour + '" style="display:inline-block;margin-top:8px;margin-right:6px;padding:5px 12px;background:#FF9800;color:#fff;border-radius:4px;font-size:0.82rem;text-decoration:none;font-weight:600;">' + btnLabel + '</a>';
                 } else if (btn.type === 'transport') {
                   buttonsHtml += '<a href="#book" class="explore-popup-btn book-transport-link" data-service="' + btn.service + '" style="display:inline-block;margin-top:8px;margin-right:6px;padding:5px 12px;background:#FF9800;color:#fff;border-radius:4px;font-size:0.82rem;text-decoration:none;font-weight:600;">' + btnLabel + '</a>';
+                } else if (btn.type === 'charter') {
+                  buttonsHtml += '<a href="#book" class="explore-popup-btn book-charter-link" style="display:inline-block;margin-top:8px;margin-right:6px;padding:5px 12px;background:#FF9800;color:#fff;border-radius:4px;font-size:0.82rem;text-decoration:none;font-weight:600;">' + btnLabel + '</a>';
+                } else if (btn.type === 'roundtrip') {
+                  buttonsHtml += '<a href="#book" class="explore-popup-btn book-roundtrip-link" data-service="' + btn.service + '" style="display:inline-block;margin-top:8px;margin-right:6px;padding:5px 12px;background:#FF9800;color:#fff;border-radius:4px;font-size:0.82rem;text-decoration:none;font-weight:600;">' + btnLabel + '</a>';
                 }
               });
             }
