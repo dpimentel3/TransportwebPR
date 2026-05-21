@@ -2003,6 +2003,44 @@
                   </div>
                 </div>
               </div>
+              <div class="product-card">
+                <div class="image-slider" id="bio-kayak-slider">
+                  <div class="slider-track">
+                    <img src="bio-kayak-1.jpeg" alt="Bioluminescent kayak tour in Fajardo">
+                    <img src="bio-kayak-2.jpeg" alt="Glowing bioluminescent waters in Fajardo">
+                    <img src="bio-kayak-3.jpeg" alt="Night kayak experience in bioluminescent bay">
+                  </div>
+                  <button class="slider-btn prev" aria-label="Previous image">&#10094;</button>
+                  <button class="slider-btn next" aria-label="Next image">&#10095;</button>
+                  <div class="slider-dots">
+                    <span class="active"></span>
+                    <span></span>
+                    <span></span>
+                  </div>
+                </div>
+                <div class="product-card-body">
+                  <h3 data-i18n="prod_biokayak_title">Bioluminescent Kayak Tour</h3>
+                  <p style="font-size:0.84rem; color:#666;" data-i18n="prod_biokayak_location">Fajardo, Puerto Rico</p>
+                  <div class="product-card-tags">
+                    <span data-i18n="prod_biokayak_price">$90 / Person</span>
+                    <span data-i18n="prod_biokayak_duration">1.5 to 2 Hours</span>
+                    <span data-i18n="prod_biokayak_min">Min. 2 people</span>
+                  </div>
+                  <p class="card-desc" data-i18n="prod_biokayak_desc">Experience one of Puerto Rico's most magical nights on a bioluminescent bay tour. Paddle through glowing waters, enjoy the peaceful natural surroundings, and watch every movement light up beneath you. It's a unique, unforgettable adventure perfect for couples, families, and anyone looking to make their trip truly special.</p>
+                  <details class="product-card-details">
+                    <summary data-i18n="prod_biokayak_details">View Details</summary>
+                    <div class="details-content">
+                      <strong data-i18n="prod_biokayak_exp_label">Experience</strong>
+                      <span data-i18n="prod_biokayak_exp_text">Visit one of the three bioluminescent spots in the island, located in Laguna Grande in Fajardo. This guided nighttime kayak tour takes you through a peaceful mangrove channel before reaching the bioluminescent bay, where the water glows with every movement of your paddle. Your tour guides are well-trained, knowledgeable, and committed to protecting the delicate bioluminescence, making sure you enjoy a safe, memorable, and environmentally responsible experience. Guests should bring a change of clothes, as you may get wet during the tour. For safety and equipment protection, all guests must weigh 220 lbs or less. Kayak companies strictly enforce this limit because the canal is shallow, and exceeding the weight limit can cause the kayaks to scrape along the bottom. 2 people per kayak. For this tour transportation is included, make sure you add the correct pick up location on the booking form. Latest you can book is 1 to 2 days beforehand.</span>
+                      <strong data-i18n="prod_biokayak_length_label">Tour Length</strong>
+                      <span data-i18n="prod_biokayak_length_text">3+ hours depending on pick up location.</span>
+                    </div>
+                  </details>
+                  <div class="btn">
+                    <a href="#book" class="btn btn-primary book-tour-link" data-tour="Bioluminescent Kayak Tour" data-i18n="book_now">Book Now</a>
+                  </div>
+                </div>
+              </div>
             </div>
           </details>
 
@@ -2363,6 +2401,7 @@
                       <option value="" disabled selected data-i18n="ph_select_tour">Choose a tour</option>
                       <option value="Old San Juan Tour" data-i18n="tour_option_osj">Old San Juan Tour</option>
                       <option value="Cave Swimming Adventure" data-i18n="tour_option_cave">Cave Swimming Adventure</option>
+                      <option value="Bioluminescent Kayak Tour" data-i18n="tour_option_biokayak">Bioluminescent Kayak Tour</option>
                     </select>
                   </div>
                 </div>
@@ -3342,6 +3381,19 @@
         prod_cave_length_label: 'Duración del Tour',
         prod_cave_length_text: 'La experiencia dura aproximadamente 4 horas, y nunca apuramos—tu conductor designado se queda contigo, asegurando que puedas disfrutar cada momento a tu propio ritmo.',
 
+        // Bioluminescent Kayak Tour card
+        prod_biokayak_title: 'Tour de Kayak Bioluminiscente',
+        prod_biokayak_location: 'Fajardo, Puerto Rico',
+        prod_biokayak_price: '$90 / Persona',
+        prod_biokayak_duration: '1.5 a 2 Horas',
+        prod_biokayak_min: 'Mín. 2 personas',
+        prod_biokayak_desc: 'Vive una de las noches más mágicas de Puerto Rico en un tour por la bahía bioluminiscente. Rema a través de aguas brillantes, disfruta del entorno natural tranquilo y observa cómo cada movimiento ilumina el agua debajo de ti. Es una aventura única e inolvidable perfecta para parejas, familias y cualquiera que busque hacer su viaje verdaderamente especial.',
+        prod_biokayak_details: 'Ver Detalles',
+        prod_biokayak_exp_label: 'Experiencia',
+        prod_biokayak_exp_text: 'Visita uno de los tres puntos bioluminiscentes de la isla, ubicado en Laguna Grande en Fajardo. Este tour guiado nocturno en kayak te lleva a través de un tranquilo canal de manglares antes de llegar a la bahía bioluminiscente, donde el agua brilla con cada movimiento de tu remo. Tus guías turísticos están bien entrenados, son conocedores y están comprometidos con la protección de la delicada bioluminiscencia, asegurando que disfrutes de una experiencia segura, memorable y ambientalmente responsable. Los huéspedes deben traer ropa de cambio, ya que pueden mojarse durante el tour. Por seguridad y protección del equipo, todos los huéspedes deben pesar 220 libras o menos. Las compañías de kayak aplican estrictamente este límite porque el canal es poco profundo y exceder el límite de peso puede causar que los kayaks raspen el fondo. 2 personas por kayak. Para este tour el transporte está incluido, asegúrate de agregar la ubicación de recogida correcta en el formulario de reserva. Lo más tarde que puedes reservar es 1 a 2 días antes.',
+        prod_biokayak_length_label: 'Duración del Tour',
+        prod_biokayak_length_text: '3+ horas dependiendo de la ubicación de recogida.',
+
         // How it works
         how_title: 'Cómo funciona',
         how_desc: 'Cada paso está explicado claramente para que organizar su transporte sea rápido y sencillo.',
@@ -3402,6 +3454,7 @@
         trip_length_6h: '6 horas',
         tour_option_osj: 'Tour del Viejo San Juan',
         tour_option_cave: 'Aventura de Natación en Cueva',
+        tour_option_biokayak: 'Tour de Kayak Bioluminiscente',
         boat_option_fishing: 'Viaje de Pesca',
         boat_option_lagoon: "Luxury Lagoon 42'",
         boat_option_cruiser: "Cruiser 54' Yacht",
