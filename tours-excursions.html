@@ -2448,6 +2448,18 @@
           });
         });
 
+        // On page load, preselect the booking form that matches this service page
+        (function () {
+          var path = (window.location.pathname || '').toLowerCase();
+          if (path.indexOf('tours-excursions') !== -1) {
+            activateTab('panel-tours');
+          } else if (path.indexOf('boat-charters') !== -1) {
+            activateTab('panel-boats');
+          } else if (path.indexOf('transportation') !== -1) {
+            activateTab('panel-transport');
+          }
+        })();
+
         // Tour card "Book Now" buttons switch to Tours tab and preselect the tour
         var tourLinks = document.querySelectorAll('.book-tour-link');
         tourLinks.forEach(function (link) {
