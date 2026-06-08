@@ -1900,6 +1900,45 @@
                   </div>
                 </div>
               </div>
+              <div class="product-card">
+                <div class="image-slider" id="whaler-slider">
+                  <div class="slider-track">
+                    <img src="boston-whaler-3.jpeg" alt="Boston Whaler 24' at Icacos and Palomino islands">
+                    <img src="boston-whaler-1.jpeg" alt="Boston Whaler 24' boat charter in Puerto Rico">
+                    <img src="boston-whaler-2.jpeg" alt="Boston Whaler 24' cruising in Puerto Rico waters">
+                    <img src="boston-whaler-4.jpeg" alt="Boston Whaler 24' snorkeling day at sea">
+                    <img src="boston-whaler-5.jpeg" alt="Boston Whaler 24' private charter in Puerto Rico">
+                  </div>
+                  <button class="slider-btn prev" aria-label="Previous image">&#10094;</button>
+                  <button class="slider-btn next" aria-label="Next image">&#10095;</button>
+                  <div class="slider-dots">
+                    <span class="active"></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                  </div>
+                </div>
+                <div class="product-card-body">
+                  <h3 data-i18n="prod_whaler_title">Boston Whaler 24'</h3>
+                  <div class="product-card-tags">
+                    <span data-i18n="prod_whaler_capacity">Max. 6 people</span>
+                    <span data-i18n="prod_whaler_duration">5 or 7 Hours</span>
+                  </div>
+                  <details class="product-card-details">
+                    <summary data-i18n="prod_whaler_details">View Details</summary>
+                    <div class="details-content">
+                      <strong data-i18n="prod_whaler_pkg_label">Package includes</strong>
+                      <span data-i18n="prod_whaler_pkg_text">Choose from two convenient departure times: 8:30 AM to 1:00 PM or 1:30 PM to 6:30 PM. This private boating experience includes a visit to either Icacos Island or Palomino Island, where you'll enjoy crystal-clear waters, beautiful beaches, and excellent snorkeling opportunities. Your charter includes a licensed captain, fuel, a cooler stocked with ice, water, soft drinks, and 12 Medalla beers. A variety of snacks are also provided, including dip and chips, quesitos, fresh fruit, and sandwiches. Guests will have access to floating devices, snorkeling equipment, a Sunchill floating ring, and a Bluetooth sound system onboard so you can enjoy your favorite music throughout the trip. Our full-day charter offers three departure options: 9:00 AM to 4:00 PM, 10:00 AM to 5:00 PM, or 11:00 AM to 6:00 PM. During your trip, you'll visit both Icacos Island and Palomino Island, giving you plenty of time to relax, swim, snorkel. Your charter includes all the amenities from the half day option plus a lunch is included with a choice of traditional Puerto Rican meal featuring rice with pigeon peas, roasted chicken, and sweet potatoes, or a BBQ option with hot dogs and hamburgers.</span>
+                      <strong data-i18n="prod_whaler_length_label">Trip Length</strong>
+                      <span data-i18n-html="prod_whaler_length_text">$750 — 5 Hours (Half-Day)<br>$950 — 7 Hours (Full-Day)</span>
+                    </div>
+                  </details>
+                  <div class="btn">
+                    <a href="#book" class="btn btn-primary book-boat-link" data-boat="Boston Whaler 24'" data-i18n="book_now">Book Now</a>
+                  </div>
+                </div>
+              </div>
           </div>
         </div>
       </div>
@@ -2118,6 +2157,7 @@
                       <option value="Riviera Yacht 40'" data-i18n="boat_option_riviera">Riviera Yacht 40'</option>
                       <option value="Luxury Lagoon 42'" data-i18n="boat_option_lagoon">Luxury Lagoon 42'</option>
                       <option value="Cruiser 54' Yacht" data-i18n="boat_option_cruiser">Cruiser 54' Yacht</option>
+                      <option value="Boston Whaler 24'" data-i18n="boat_option_whaler">Boston Whaler 24'</option>
                       <option value="Fishing Trip" data-i18n="boat_option_fishing">Fishing Trip</option>
                     </select>
                   </div>
@@ -2531,6 +2571,10 @@
                 if (opt.value === boatName) select.value = boatName;
               });
             }
+            // Limit/restore the departure-time and trip-length menus for this charter.
+            if (typeof window.applyCharterFieldOptions === 'function') {
+              window.applyCharterFieldOptions(boatName);
+            }
           });
         });
 
@@ -2934,6 +2978,13 @@
         prod_cruiser_pkg_label: 'El paquete incluye',
         prod_cruiser_pkg_text: 'Yate Cruiser de 54 pies. Capitán experimentado y certificado, música por bluetooth, bote con aire acondicionado, baño, mat de agua Sunchill, fideos para nadar, equipo de snorkel. Agua, refrescos, cóctel de frutas, snacks, cerveza local, 1 botella de ron o vodka y almuerzo incluido en los viajes de 6 horas. Visite 1 o 2 islas (Icacos y Palomino). Salida desde Puerto del Rey Marina en Fajardo. Estacionamiento gratis, solo traiga su bloqueador solar y toalla. Disponible mejorar a Culebra o Vieques. Chef privado, alquiler de Jet ski y Seabob también disponibles (cargos aparte aplican). El transporte se puede coordinar en la sección de transporte.',
         prod_cruiser_length_label: 'Duración del Viaje',
+        prod_whaler_title: "Boston Whaler 24'",
+        prod_whaler_capacity: 'Máx. 6 personas',
+        prod_whaler_duration: '5 o 7 horas',
+        prod_whaler_details: 'Ver Detalles',
+        prod_whaler_pkg_label: 'El paquete incluye',
+        prod_whaler_pkg_text: 'Elija entre dos horarios de salida convenientes: de 8:30 AM a 1:00 PM o de 1:30 PM a 6:30 PM. Esta experiencia privada en bote incluye una visita a la Isla Icacos o a la Isla Palomino, donde disfrutará de aguas cristalinas, hermosas playas y excelentes oportunidades para hacer snorkel. Su chárter incluye un capitán licenciado, combustible, una nevera con hielo, agua, refrescos y 12 cervezas Medalla. También se ofrece una variedad de snacks, incluyendo dip y chips, quesitos, fruta fresca y sándwiches. Los huéspedes tendrán acceso a dispositivos flotantes, equipo de snorkel, un flotador Sunchill y un sistema de sonido Bluetooth a bordo para que disfrute de su música favorita durante todo el viaje. Nuestro chárter de día completo ofrece tres opciones de salida: de 9:00 AM a 4:00 PM, de 10:00 AM a 5:00 PM, o de 11:00 AM a 6:00 PM. Durante su viaje visitará tanto la Isla Icacos como la Isla Palomino, dándole mucho tiempo para relajarse, nadar y hacer snorkel. Su chárter incluye todas las comodidades de la opción de medio día más un almuerzo a elegir entre una comida tradicional puertorriqueña de arroz con gandules, pollo asado y batata, o una opción de BBQ con hot dogs y hamburguesas.',
+        prod_whaler_length_label: 'Duración del Viaje',
         prod_boat_more_info: 'Más información próximamente.',
         boat_option_welcraft: "Welcraft 30'",
         boat_option_riviera: "Riviera Yacht 40'",
@@ -3033,14 +3084,19 @@
         ph_select_boat: 'Elija un chárter',
         ph_departure_time: 'Elija un horario',
         ph_trip_length: 'Elija la duración del viaje',
+        whaler_departure_morning: '8:30 AM a 1:00 PM',
+        whaler_departure_afternoon: '1:30 PM a 6:30 PM',
         trip_length_4h: '4 horas',
+        trip_length_5h: '5 horas (Medio Día)',
         trip_length_6h: '6 horas',
+        trip_length_7h: '7 horas (Día Completo)',
         tour_option_osj: 'Tour del Viejo San Juan',
         tour_option_cave: 'Aventura de Natación en Cueva',
         tour_option_biokayak: 'Tour de Kayak Bioluminiscente(Transporte incluido)',
         boat_option_fishing: 'Viaje de Pesca',
         boat_option_lagoon: "Luxury Lagoon 42'",
         boat_option_cruiser: "Cruiser 54' Yacht",
+        boat_option_whaler: "Boston Whaler 24'",
         helper_destination: 'Use un nombre de lugar o dirección para que el conductor entienda claramente su destino.',
         btn_send_booking: 'Enviar Solicitud de Reserva',
         booking_note: 'No se realizan pagos a través del sitio web.',
@@ -3131,7 +3187,8 @@
         prod_welcraft_length_text: '$900 — viaje de 4 horas<br>$1,100 — viaje de 6 horas',
         prod_riviera_length_text: '$1,850 — viaje de 4 horas<br>$2,200 — viaje de 6 horas',
         prod_lagoon_length_text: '$2,325 — viaje de 4 horas<br>$2,825 — viaje de 6 horas',
-        prod_cruiser_length_text: '$3,450 — viaje de 4 horas<br>$4,100 — viaje de 6 horas'
+        prod_cruiser_length_text: '$3,450 — viaje de 4 horas<br>$4,100 — viaje de 6 horas',
+        prod_whaler_length_text: '$750 — 5 horas (Medio Día)<br>$950 — 7 horas (Día Completo)'
       };
 
       // English translations for dynamically added elements
@@ -3145,7 +3202,9 @@
         book_tour_success_msg: 'The Tour Guide will reach out to you shortly via text message.',
         book_tour_success_tip: 'Tip: reply to the guide\'s text message to confirm your trip.',
         book_boat_success_msg: 'The Captain will reach out to you shortly via email.',
-        book_boat_success_tip: 'Tip: reply to the captain\'s text email to confirm your trip.'
+        book_boat_success_tip: 'Tip: reply to the captain\'s text email to confirm your trip.',
+        whaler_departure_morning: '8:30 AM to 1:00 PM',
+        whaler_departure_afternoon: '1:30 PM to 6:30 PM'
       };
 
       var enTexts = {};
@@ -3216,6 +3275,50 @@
 
       allLangEnBtns.forEach(function(b) { if(b) b.addEventListener('click', function () { setLanguage('en'); }); });
       allLangEsBtns.forEach(function(b) { if(b) b.addEventListener('click', function () { setLanguage('es'); }); });
+
+      // Charter-specific booking field options.
+      // The Boston Whaler 24' only runs a 5-hour half-day or 7-hour full-day,
+      // each tied to a single departure window. Selecting that charter (via its
+      // Book Now button or the charter dropdown) limits the departure-time and
+      // trip-length menus to just those choices; any other charter restores the
+      // full default list. Defined here so it can re-apply translations.
+      (function () {
+        var departureSelect = document.getElementById('boatDepartureTime');
+        var tripLengthSelect = document.getElementById('boatTripLength');
+        var boatSelect = document.getElementById('boatSelect');
+        if (!departureSelect || !tripLengthSelect) return;
+
+        var defaultDepartureHTML = departureSelect.innerHTML;
+        var defaultTripLengthHTML = tripLengthSelect.innerHTML;
+
+        var whalerDepartureHTML =
+          '<option value="" disabled selected data-i18n="ph_departure_time">Choose a time slot</option>' +
+          '<option value="8:30 AM to 1:00 PM" data-i18n="whaler_departure_morning">8:30 AM to 1:00 PM</option>' +
+          '<option value="1:30 PM to 6:30 PM" data-i18n="whaler_departure_afternoon">1:30 PM to 6:30 PM</option>';
+
+        var whalerTripLengthHTML =
+          '<option value="" disabled selected data-i18n="ph_trip_length">Choose trip length</option>' +
+          '<option value="5 hours" data-i18n="trip_length_5h">5 hours (Half-Day)</option>' +
+          '<option value="7 hours" data-i18n="trip_length_7h">7 hours (Full-Day)</option>';
+
+        window.applyCharterFieldOptions = function (boatName) {
+          if (boatName === "Boston Whaler 24'") {
+            departureSelect.innerHTML = whalerDepartureHTML;
+            tripLengthSelect.innerHTML = whalerTripLengthHTML;
+          } else {
+            departureSelect.innerHTML = defaultDepartureHTML;
+            tripLengthSelect.innerHTML = defaultTripLengthHTML;
+          }
+          setLanguage(currentLang);
+        };
+
+        // Keep the menus in sync when the charter dropdown is changed directly.
+        if (boatSelect) {
+          boatSelect.addEventListener('change', function () {
+            window.applyCharterFieldOptions(boatSelect.value);
+          });
+        }
+      })();
     })();
 
     /* Image Slider */
