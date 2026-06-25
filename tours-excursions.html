@@ -12,12 +12,12 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Tours & Excursions in Puerto Rico | DP Transport</title>
-  <meta name="description" content="Explore Puerto Rico beyond the ride. Old San Juan tours, rainforest adventures, cave swimming, bioluminescent kayak tours and more." />
+  <meta name="description" content="Book tours and excursions to El Yunque, Bio Bay, Old San Juan, cave swimming, snorkeling, and more with transportation options available." />
   <meta name="keywords" content="Puerto Rico transportation, airport transfer Puerto Rico, Rio Grande taxi, excursion transportation, port transportation, tourist transportation Puerto Rico, DP Transport" />
   <meta name="author" content="DP Transport" />
   <meta name="robots" content="index, follow" />
   <meta property="og:title" content="Tours & Excursions in Puerto Rico | DP Transport" />
-  <meta property="og:description" content="Explore Puerto Rico beyond the ride. Old San Juan tours, rainforest adventures, cave swimming, bioluminescent kayak tours and more." />
+  <meta property="og:description" content="Book tours and excursions to El Yunque, Bio Bay, Old San Juan, cave swimming, snorkeling, and more with transportation options available." />
   <meta property="og:type" content="website" />
   <meta name="theme-color" content="#0d3557" />
   <link rel="canonical" href="https://www.dptransportpr.com/tours-excursions.html" />
@@ -82,9 +82,9 @@
       position: sticky;
       top: 0;
       z-index: 100;
-      background: rgba(255,255,255,0.82);
+      background: rgba(7, 29, 49, 0.96);
       backdrop-filter: blur(14px);
-      border-bottom: 1px solid rgba(220, 230, 238, 0.92);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.10);
     }
 
     .nav {
@@ -117,7 +117,7 @@
       align-items: center;
       gap: 12px;
       font-weight: 800;
-      color: var(--primary);
+      color: #ffffff;
       font-size: 1.08rem;
       letter-spacing: -0.01em;
     }
@@ -146,7 +146,7 @@
     }
 
     .nav-links a {
-      color: var(--primary-dark);
+      color: rgba(255,255,255,0.88);
       font-weight: 600;
       font-size: 0.95rem;
       opacity: 0.92;
@@ -157,8 +157,8 @@
 
     .nav-links a:hover {
       opacity: 1;
-      background: rgba(13, 53, 87, 0.08);
-      color: var(--primary);
+      background: rgba(255,255,255,0.10);
+      color: #ffffff;
       transform: translateY(-1px);
     }
 
@@ -698,6 +698,235 @@
 
     .product-card:hover {
       box-shadow: var(--shadow-md);
+    }
+
+    body.service-page {
+      background: #ffffff;
+    }
+
+    .service-page .section-services {
+      background: #ffffff;
+    }
+
+    .service-page .lang-toggle {
+      border-color: rgba(255,255,255,0.34);
+    }
+
+    .service-page .lang-toggle button {
+      color: rgba(255,255,255,0.88);
+    }
+
+    .service-page .lang-toggle button.active {
+      background: #ffffff;
+      color: var(--primary-dark);
+    }
+
+    .service-page .section-services::before,
+    .service-page .section-services::after {
+      display: none;
+    }
+
+    .service-page .section-services .section-shell {
+      padding: 112px 0 84px;
+    }
+
+    .service-page .section-intro {
+      max-width: 980px;
+      margin: 0 auto 54px;
+      text-align: center;
+    }
+
+    .service-page .section-intro h1,
+    .service-page .section-intro h2 {
+      color: #111827;
+      font-size: clamp(3.3rem, 8vw, 7.4rem);
+      font-weight: 900;
+      line-height: 0.95;
+      letter-spacing: 0;
+      text-transform: uppercase;
+      margin-bottom: 24px;
+    }
+
+    .service-page .section-services .section-intro h1 {
+      max-width: 1040px;
+      margin-left: auto;
+      margin-right: auto;
+      font-size: clamp(2.05rem, 5.1vw, 4.85rem);
+      line-height: 1.02;
+    }
+
+    .service-page #book .section-intro h2 {
+      font-size: clamp(1.75rem, 3vw, 2.5rem);
+      line-height: 1.1;
+      text-align: left;
+    }
+
+    .service-page .section-intro p {
+      max-width: 720px;
+      margin: 0 auto;
+      color: #283241;
+      font-size: clamp(1.15rem, 2vw, 1.65rem);
+      line-height: 1.45;
+    }
+
+    .service-page .service-categories {
+      margin-top: 0;
+    }
+
+    .service-page .category-content {
+      max-width: 1060px;
+      margin: 0 auto;
+      padding: 0;
+      border: 0;
+      background: transparent;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 24px;
+    }
+
+    .service-page .product-card {
+      display: grid;
+      grid-template-columns: minmax(260px, 0.72fr) 1fr;
+      align-items: stretch;
+      border: 1px solid #e5eaf0;
+      border-radius: 8px;
+      box-shadow: none;
+      overflow: hidden;
+    }
+
+    .service-page .product-card:hover {
+      box-shadow: 0 16px 38px rgba(8, 37, 61, 0.10);
+    }
+
+    .service-page .image-slider,
+    .service-page .image-slider .slider-track img,
+    .service-page .product-card img {
+      height: 100%;
+      min-height: 320px;
+    }
+
+    .service-page .product-card-body {
+      padding: 32px;
+      gap: 10px;
+    }
+
+    .service-page .product-card-body h3 {
+      color: #111827;
+      font-size: clamp(1.65rem, 3vw, 2.45rem);
+      line-height: 1;
+      letter-spacing: 0;
+      text-transform: uppercase;
+      margin-bottom: 0;
+    }
+
+    .service-page .product-card-tags {
+      margin: 8px 0 10px;
+      gap: 8px;
+    }
+
+    .service-page .product-card-tags span {
+      background: #f4f7fa;
+      border: 1px solid #e4ebf1;
+      color: var(--primary-dark);
+      border-radius: 999px;
+      padding: 7px 12px;
+    }
+
+    .service-page .product-card-body .card-desc,
+    .service-page .product-card-body p {
+      color: #374151;
+      font-size: 0.98rem;
+    }
+
+    .service-page .product-card-details {
+      border-top-color: #e5eaf0;
+    }
+
+    .service-page .product-card-details .details-content {
+      color: #4b5563;
+    }
+
+    .service-page .product-card-body > .btn {
+      display: block;
+      padding: 0;
+      margin-top: auto;
+      box-shadow: none;
+      border-radius: 0;
+    }
+
+    .service-page .product-card-body > .btn:hover {
+      transform: none;
+    }
+
+    .service-page .product-card-body .btn-primary,
+    .service-page .booking-card .btn-primary,
+    .service-page .cta .btn-primary {
+      border-radius: 999px;
+      padding: 15px 24px;
+      background: var(--accent);
+      color: #121212;
+      font-weight: 800;
+    }
+
+    .service-page .section-book::before,
+    .service-page .section-book::after,
+    .service-page .section-faq::before,
+    .service-page .section-faq::after {
+      display: none;
+    }
+
+    .service-page .section-book {
+      background: #f6f8fb;
+      border-top: 1px solid #e5eaf0;
+      border-bottom: 1px solid #e5eaf0;
+    }
+
+    .service-page .section-book .section-shell,
+    .service-page .section-faq .section-shell {
+      padding: 86px 0;
+    }
+
+    .service-page .summary-box,
+    .service-page .booking-card,
+    .service-page .faq-item {
+      border-radius: 8px;
+      box-shadow: none;
+      background: #ffffff;
+    }
+
+    .service-page .faq-item {
+      border-color: #e5eaf0;
+    }
+
+    @media (max-width: 820px) {
+      .service-page .section-services .section-shell {
+        padding: 72px 0 56px;
+      }
+
+      .service-page .section-intro {
+        text-align: left;
+        margin-bottom: 34px;
+      }
+
+      .service-page .section-intro p {
+        margin: 0;
+        font-size: 1.08rem;
+      }
+
+      .service-page .product-card {
+        grid-template-columns: 1fr;
+      }
+
+      .service-page .image-slider,
+      .service-page .image-slider .slider-track img,
+      .service-page .product-card img {
+        min-height: 240px;
+        height: 240px;
+      }
+
+      .service-page .product-card-body {
+        padding: 24px;
+      }
     }
 
     .product-card img {
@@ -1531,6 +1760,28 @@
         box-shadow: var(--shadow-lg);
       }
 
+      .service-page .nav-links a {
+        color: var(--primary-dark);
+      }
+
+      .service-page .nav-links a:hover {
+        color: var(--primary);
+        background: rgba(13, 53, 87, 0.08);
+      }
+
+      .service-page .lang-toggle-menu {
+        border-color: var(--primary);
+      }
+
+      .service-page .lang-toggle-menu button {
+        color: var(--primary);
+      }
+
+      .service-page .lang-toggle-menu button.active {
+        background: var(--primary);
+        color: #ffffff;
+      }
+
       .nav-links.open { display: flex; }
 
       .nav-links a {
@@ -1730,7 +1981,7 @@
   /></noscript>
   <!-- End Meta Pixel Code -->
 </head>
-<body>
+<body class="service-page">
   <a class="skip-link" href="#book">Skip to booking form</a>
 
   <header>
@@ -1768,17 +2019,17 @@
     <section id="service" class="background-section section-services">
       <div class="container section-shell">
         <div class="section-intro">
-          <h2 data-i18n="cat_tours_title">Tours &amp; Excursions</h2>
-          <p data-i18n="cat_tours_desc">Explore Puerto Rico beyond the ride. From historic Old San Juan and scenic rainforest adventures to cave swimming experiences and local winery visits</p>
+          <h1 data-i18n="cat_tours_title">Do you want to explore Puerto Rico without planning everything yourself?</h1>
+          <p data-i18n="cat_tours_desc">Book tours and excursions to El Yunque, Bio Bay, Old San Juan, cave swimming, snorkeling, and more — with transportation options available.</p>
         </div>
         <div class="service-categories">
           <div class="category-content" style="border-top:none;">
               <div class="product-card">
                 <div class="image-slider" id="osj-slider">
                   <div class="slider-track">
-                    <img src="old-san-juan-1.png" alt="Colorful cobblestone street in Old San Juan">
-                    <img src="old-san-juan-2.png" alt="Colorful street in Old San Juan">
-                    <img src="old-san-juan-3.png" alt="Colorful streets of Old San Juan">
+                    <img src="old-san-juan-1.png" alt="Colorful cobblestone street in Old San Juan" loading="lazy" decoding="async">
+                    <img src="old-san-juan-2.png" alt="Colorful street in Old San Juan" loading="lazy" decoding="async">
+                    <img src="old-san-juan-3.png" alt="Colorful streets of Old San Juan" loading="lazy" decoding="async">
                   </div>
                   <button class="slider-btn prev" aria-label="Previous image">&#10094;</button>
                   <button class="slider-btn next" aria-label="Next image">&#10095;</button>
@@ -1798,7 +2049,7 @@
                     <span data-i18n="prod_tour_ages">Ages 5 up to 80</span>
                   </div>
                   <p class="card-desc" data-i18n="prod_tour_desc">Explore Old San Juan, enjoy historic landmarks and scenic views, and experience one of Puerto Rico's most iconic destinations.</p>
-                  <details class="product-card-details">
+                  <details class="product-card-details" open>
                     <summary data-i18n="prod_tour_details">View Details</summary>
                     <div class="details-content">
                       <strong data-i18n="prod_tour_exp_label">Experience</strong>
@@ -1815,10 +2066,10 @@
               <div class="product-card">
                 <div class="image-slider" id="cave-slider">
                   <div class="slider-track">
-                    <img src="cave-swimming-1.png" alt="Cave swimming adventure in Vega Baja">
-                    <img src="cave-swimming-3.png" alt="Cave swimming adventure">
-                    <img src="cave-swimming-2.png" alt="Exploring the natural river caves">
-                    <img src="cave-swimming-4.png" alt="Cave swimming adventure">
+                    <img src="cave-swimming-1.png" alt="Cave swimming adventure in Vega Baja" loading="lazy" decoding="async">
+                    <img src="cave-swimming-3.png" alt="Cave swimming adventure" loading="lazy" decoding="async">
+                    <img src="cave-swimming-2.png" alt="Exploring the natural river caves" loading="lazy" decoding="async">
+                    <img src="cave-swimming-4.png" alt="Cave swimming adventure" loading="lazy" decoding="async">
                   </div>
                   <button class="slider-btn prev" aria-label="Previous image">&#10094;</button>
                   <button class="slider-btn next" aria-label="Next image">&#10095;</button>
@@ -1839,7 +2090,7 @@
                     <span data-i18n="prod_cave_ages">Ages 5 up to 80</span>
                   </div>
                   <p class="card-desc" data-i18n="prod_cave_desc">Dive into one of Puerto Rico's most thrilling mountain adventures with a cave swimming experience surrounded by rugged scenery, crystal-clear waters, and unforgettable natural beauty.</p>
-                  <details class="product-card-details">
+                  <details class="product-card-details" open>
                     <summary data-i18n="prod_cave_details">View Details</summary>
                     <div class="details-content">
                       <strong data-i18n="prod_cave_exp_label">Experience</strong>
@@ -1856,9 +2107,9 @@
               <div class="product-card">
                 <div class="image-slider" id="bio-kayak-slider">
                   <div class="slider-track">
-                    <img src="bio-kayak-1.jpeg" alt="Bioluminescent kayak tour in Fajardo">
-                    <img src="bio-kayak-2.jpeg" alt="Glowing bioluminescent waters in Fajardo">
-                    <img src="bio-kayak-3.jpeg" alt="Night kayak experience in bioluminescent bay">
+                    <img src="bio-kayak-1.jpeg" alt="Bioluminescent kayak tour in Fajardo" loading="lazy" decoding="async">
+                    <img src="bio-kayak-2.jpeg" alt="Glowing bioluminescent waters in Fajardo" loading="lazy" decoding="async">
+                    <img src="bio-kayak-3.jpeg" alt="Night kayak experience in bioluminescent bay" loading="lazy" decoding="async">
                   </div>
                   <button class="slider-btn prev" aria-label="Previous image">&#10094;</button>
                   <button class="slider-btn next" aria-label="Next image">&#10095;</button>
@@ -1877,7 +2128,7 @@
                     <span data-i18n="prod_biokayak_min">Min. 2 people</span>
                   </div>
                   <p class="card-desc" data-i18n="prod_biokayak_desc">Experience one of Puerto Rico's most magical nights on a bioluminescent bay tour. Paddle through glowing waters, enjoy the peaceful natural surroundings, and watch every movement light up beneath you. It's a unique, unforgettable adventure perfect for couples, families, and anyone looking to make their trip truly special.</p>
-                  <details class="product-card-details">
+                  <details class="product-card-details" open>
                     <summary data-i18n="prod_biokayak_details">View Details</summary>
                     <div class="details-content">
                       <strong data-i18n="prod_biokayak_exp_label">Experience</strong>
@@ -1894,8 +2145,8 @@
               <div class="product-card">
                 <div class="image-slider" id="snorkel-slider">
                   <div class="slider-track">
-                    <img src="snorkel-turtles-1.jpg" alt="Snorkeler swimming next to a sea turtle in San Juan">
-                    <img src="snorkel-turtles-2.jpg" alt="Snorkeler exploring a coral reef with sea turtles in San Juan">
+                    <img src="snorkel-turtles-1.jpg" alt="Snorkeler swimming next to a sea turtle in San Juan" loading="lazy" decoding="async">
+                    <img src="snorkel-turtles-2.jpg" alt="Snorkeler exploring a coral reef with sea turtles in San Juan" loading="lazy" decoding="async">
                   </div>
                   <button class="slider-btn prev" aria-label="Previous image">&#10094;</button>
                   <button class="slider-btn next" aria-label="Next image">&#10095;</button>
@@ -1914,7 +2165,7 @@
                     <span data-i18n="prod_snorkel_ages">Ages 8+</span>
                   </div>
                   <p class="card-desc" data-i18n="prod_snorkel_desc">Explore the crystal-clear waters of San Juan, Puerto Rico on this beginner-friendly snorkeling adventure. Accompanied by experienced local guides, you'll visit beautiful coral reef ecosystems teeming with tropical marine life. Swim through calm, pristine waters and keep an eye out for majestic sea turtles in their natural habitat. With no previous snorkeling experience required, this tour is perfect for families, first-time snorkelers, and anyone looking to experience Puerto Rico's underwater beauty.</p>
-                  <details class="product-card-details">
+                  <details class="product-card-details" open>
                     <summary data-i18n="prod_snorkel_details">View Details</summary>
                     <div class="details-content">
                       <strong data-i18n="prod_snorkel_exp_label">Experience</strong>
@@ -1931,8 +2182,8 @@
               <div class="product-card">
                 <div class="image-slider" id="scuba-slider">
                   <div class="slider-track">
-                    <img src="scuba-diving-1.jpg" alt="Scuba diver exploring a coral reef surrounded by tropical fish in San Juan">
-                    <img src="scuba-diving-2.jpg" alt="Scuba divers giving a shaka among rock formations underwater in San Juan">
+                    <img src="scuba-diving-1.jpg" alt="Scuba diver exploring a coral reef surrounded by tropical fish in San Juan" loading="lazy" decoding="async">
+                    <img src="scuba-diving-2.jpg" alt="Scuba divers giving a shaka among rock formations underwater in San Juan" loading="lazy" decoding="async">
                   </div>
                   <button class="slider-btn prev" aria-label="Previous image">&#10094;</button>
                   <button class="slider-btn next" aria-label="Next image">&#10095;</button>
@@ -1951,7 +2202,7 @@
                     <span data-i18n="prod_scuba_ages">Ages 10+</span>
                   </div>
                   <p class="card-desc" data-i18n="prod_scuba_desc">Experience the excitement of breathing underwater and exploring the Caribbean Sea on this beginner-friendly scuba diving adventure in San Juan, Puerto Rico. No certification or previous diving experience is required—just basic swimming ability and a sense of adventure. Under the guidance of experienced instructors, you'll discover colorful tropical fish, fascinating marine ecosystems, and beautiful underwater scenery in a safe and welcoming environment. To make the experience even more memorable, complimentary videos of your dive are included so you can share and relive your first underwater adventure.</p>
-                  <details class="product-card-details">
+                  <details class="product-card-details" open>
                     <summary data-i18n="prod_scuba_details">View Details</summary>
                     <div class="details-content">
                       <strong data-i18n="prod_scuba_exp_label">Experience</strong>
@@ -3007,8 +3258,8 @@
         cat_transport_title: 'Transporte',
         cat_transport_desc: 'Transporte confiable para traslados al aeropuerto, recogidas en hoteles, viajes a excursiones, restaurantes, puertos de ferry y cruceros, y viajes privados por todo Puerto Rico',
         svc_transport_page_title: 'Servicios de Transporte en Puerto Rico en los que Puede Confiar',
-        cat_tours_title: 'Tours y Excursiones',
-        cat_tours_desc: 'Descubra Puerto Rico más allá del trayecto. Desde el histórico Viejo San Juan y aventuras en el bosque pluvial hasta experiencias de natación en cuevas y visitas a vinerías locales',
+        cat_tours_title: '¿Quiere explorar Puerto Rico sin planificar todo usted mismo?',
+        cat_tours_desc: 'Reserve tours y excursiones a El Yunque, la Bahía Bioluminiscente, el Viejo San Juan, natación en cuevas, snorkeling y más, con opciones de transporte disponibles.',
         cat_boats_title: 'Chárters de Bote',
         cat_boats_desc: 'Yates y botes privados para días inolvidables en el mar.',
 
