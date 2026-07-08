@@ -1999,17 +1999,17 @@
 
     .reviews-collage {
       display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      align-items: flex-start;
-      gap: 22px;
+      flex-direction: column;
+      flex-wrap: nowrap;
+      align-items: center;
+      gap: 26px;
       max-width: 1040px;
       margin: 0 auto;
     }
 
     .review-shot {
       margin: 0;
-      width: min(320px, 84vw);
+      width: min(460px, 92vw);
       background: #ffffff;
       border: 1px solid #e5eaf0;
       border-radius: 18px;
@@ -2025,6 +2025,10 @@
 
     @media (min-width: 900px) {
       .reviews-collage {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: flex-start;
         gap: 0;
         padding: 22px 0 44px;
       }
