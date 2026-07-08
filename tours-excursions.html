@@ -2294,7 +2294,7 @@
                     <summary data-i18n="prod_snorkel_details">View Details</summary>
                     <div class="details-content">
                       <strong data-i18n="prod_snorkel_exp_label">Experience</strong>
-                      <span data-i18n="prod_snorkel_exp_text">Your snorkeling adventure begins with a brief introduction on the beach, where your professional guide will cover the fundamentals of snorkeling and ensure you feel comfortable with the equipment. You'll then move into shallow, waist-deep water to practice basic techniques and build confidence at your own pace. Once you're ready, your guide will lead you on a memorable snorkeling tour through the crystal-clear waters, pointing out colorful fish, marine life, and other underwater highlights while capturing free of charge photos and videos so you can relive the experience long after the tour ends.</span>
+                      <span data-i18n="prod_snorkel_exp_text">Your snorkeling adventure begins with a brief introduction on the beach, where your professional guide will cover the fundamentals of snorkeling and ensure you feel comfortable with the equipment. You'll then move into shallow, waist-deep water to practice basic techniques and build confidence at your own pace. Once you're ready, your guide will lead you on a memorable snorkeling tour through the crystal-clear waters, pointing out colorful fish, marine life, and other underwater highlights while capturing free of charge photos and videos so you can relive the experience long after the tour ends. Meeting Point: Escambron Beach, San Juan, Puerto Rico. Uber is recommended for this tour. Arrive at least 30 minutes before hand.</span>
                       <strong data-i18n="prod_snorkel_length_label">Tour Length</strong>
                       <span data-i18n="prod_snorkel_length_text">Can last up to 2 hours, transport can be booked on the transportation page.</span>
                     </div>
@@ -2331,7 +2331,7 @@
                     <summary data-i18n="prod_scuba_details">View Details</summary>
                     <div class="details-content">
                       <strong data-i18n="prod_scuba_exp_label">Experience</strong>
-                      <span data-i18n="prod_scuba_exp_text">Your scuba diving experience begins with a brief beachside introduction, where a certified instructor will explain the equipment, safety procedures, and essential diving techniques. After the orientation, you'll enter shallow water (3ft) to practice key skills and become comfortable breathing underwater at your own pace. Once you feel confident, your guide will lead you on an unforgettable underwater adventure through the clear waters of San Juan, where you'll encounter tropical fish, fascinating marine life, and beautiful underwater scenery. To help you remember the experience, videos of your dive are included at no additional cost.</span>
+                      <span data-i18n="prod_scuba_exp_text">Your scuba diving experience begins with a brief beachside introduction, where a certified instructor will explain the equipment, safety procedures, and essential diving techniques. After the orientation, you'll enter shallow water (3ft) to practice key skills and become comfortable breathing underwater at your own pace. Once you feel confident, your guide will lead you on an unforgettable underwater adventure through the clear waters of San Juan, where you'll encounter tropical fish, fascinating marine life, and beautiful underwater scenery. To help you remember the experience, videos of your dive are included at no additional cost. Meeting Point: Escambron Beach, San Juan, Puerto Rico. Uber is recommended for this tour. Arrive at least 30 minutes before hand.</span>
                       <strong data-i18n="prod_scuba_length_label">Tour Length</strong>
                       <span data-i18n="prod_scuba_length_text">Up to an hour and a half. Transport can be booked through the transportation page.</span>
                     </div>
@@ -2503,12 +2503,23 @@
                   </div>
                 </div>
 
-                <div>
+                <div id="tourPickupField">
                   <label for="tourPickup" data-i18n="label_pickup">Pick up location</label>
                   <div class="iq-input-wrap">
                     <input id="tourPickup" name="pickupLocation" type="text" data-i18n-placeholder="ph_pickup" placeholder="Example: SJU Airport or hotel name" required />
                     <button type="button" class="iq-clear" data-target="tourPickup" aria-label="Clear pick up location">&times;</button>
                   </div>
+                </div>
+
+                <div id="tourTimeSlotField" hidden>
+                  <label for="tourTimeSlot" data-i18n="label_time_slot">Time slot</label>
+                  <select id="tourTimeSlot" name="timeSlot" disabled>
+                    <option value="" disabled selected data-i18n="ph_time_slot">Choose a time slot</option>
+                    <option value="9:00am">9:00am</option>
+                    <option value="11:00am">11:00am</option>
+                    <option value="1:00pm">1:00pm</option>
+                    <option value="3:00pm">3:00pm</option>
+                  </select>
                 </div>
 
                 <div class="field-grid">
@@ -2969,6 +2980,26 @@
           }
         })();
 
+        // Some tours use a fixed set of departure time slots instead of a pick up location
+        var TIME_SLOT_TOURS = ['Snorkel With Turtles', 'Scuba Diving Tour'];
+        function updateTourFields() {
+          var select = document.getElementById('tourSelect');
+          var pickupField = document.getElementById('tourPickupField');
+          var pickupInput = document.getElementById('tourPickup');
+          var timeSlotField = document.getElementById('tourTimeSlotField');
+          var timeSlotInput = document.getElementById('tourTimeSlot');
+          if (!select || !pickupField || !pickupInput || !timeSlotField || !timeSlotInput) return;
+          var usesTimeSlot = TIME_SLOT_TOURS.indexOf(select.value) !== -1;
+          // Pick up location: hidden and excluded from submission for time-slot tours
+          pickupField.hidden = usesTimeSlot;
+          pickupInput.disabled = usesTimeSlot;
+          pickupInput.required = !usesTimeSlot;
+          // Time slot: shown, enabled and required only for time-slot tours
+          timeSlotField.hidden = !usesTimeSlot;
+          timeSlotInput.disabled = !usesTimeSlot;
+          timeSlotInput.required = usesTimeSlot;
+        }
+
         // Tour card "Book Now" buttons switch to Tours tab and preselect the tour
         var tourLinks = document.querySelectorAll('.book-tour-link');
         tourLinks.forEach(function (link) {
@@ -2981,9 +3012,19 @@
               options.forEach(function (opt) {
                 if (opt.value === tourName) select.value = tourName;
               });
+              updateTourFields();
             }
           });
         });
+
+        // Toggle pick up / time slot fields whenever the selected tour changes
+        (function () {
+          var tourSelect = document.getElementById('tourSelect');
+          if (tourSelect) {
+            tourSelect.addEventListener('change', updateTourFields);
+            updateTourFields();
+          }
+        })();
 
         // Transportation card "Book Now" buttons switch to Transportation tab and preselect the service
         var transportLinks = document.querySelectorAll('.book-transport-link');
@@ -3029,6 +3070,7 @@
               options.forEach(function (opt) {
                 if (opt.value === tourName) select.value = tourName;
               });
+              updateTourFields();
             }
           } else if (btn.classList.contains('book-transport-link')) {
             activateTab('panel-transport');
@@ -3470,7 +3512,7 @@
         prod_snorkel_desc: 'Explore las aguas cristalinas de San Juan, Puerto Rico en esta aventura de snorkel apta para principiantes. Acompañado por guías locales experimentados, visitará hermosos ecosistemas de arrecifes de coral llenos de vida marina tropical. Nade a través de aguas tranquilas y prístinas y esté atento a las majestuosas tortugas marinas en su hábitat natural. Sin necesidad de experiencia previa en snorkel, este tour es perfecto para familias, principiantes y cualquiera que quiera disfrutar de la belleza submarina de Puerto Rico.',
         prod_snorkel_details: 'Ver Detalles',
         prod_snorkel_exp_label: 'Experiencia',
-        prod_snorkel_exp_text: 'Su aventura de snorkel comienza con una breve introducción en la playa, donde su guía profesional cubrirá los fundamentos del snorkel y se asegurará de que se sienta cómodo con el equipo. Luego entrará en aguas poco profundas, hasta la cintura, para practicar técnicas básicas y ganar confianza a su propio ritmo. Cuando esté listo, su guía lo llevará en un memorable tour de snorkel a través de las aguas cristalinas, señalando peces coloridos, vida marina y otros puntos destacados bajo el agua, mientras captura fotos y videos sin cargo adicional para que pueda revivir la experiencia mucho después de que termine el tour.',
+        prod_snorkel_exp_text: 'Su aventura de snorkel comienza con una breve introducción en la playa, donde su guía profesional cubrirá los fundamentos del snorkel y se asegurará de que se sienta cómodo con el equipo. Luego entrará en aguas poco profundas, hasta la cintura, para practicar técnicas básicas y ganar confianza a su propio ritmo. Cuando esté listo, su guía lo llevará en un memorable tour de snorkel a través de las aguas cristalinas, señalando peces coloridos, vida marina y otros puntos destacados bajo el agua, mientras captura fotos y videos sin cargo adicional para que pueda revivir la experiencia mucho después de que termine el tour. Punto de encuentro: Playa del Escambrón, San Juan, Puerto Rico. Se recomienda usar Uber para este tour. Llegue al menos 30 minutos antes.',
         prod_snorkel_length_label: 'Duración del Tour',
         prod_snorkel_length_text: 'Puede durar hasta 2 horas, el transporte se puede reservar en la página de transporte.',
         prod_scuba_title: 'Tour de Buceo',
@@ -3482,9 +3524,9 @@
         prod_scuba_desc: 'Vive la emoción de respirar bajo el agua y explorar el Mar Caribe en esta aventura de buceo apta para principiantes en San Juan, Puerto Rico. No se requiere certificación ni experiencia previa en buceo, solo habilidad básica para nadar y un espíritu aventurero. Bajo la guía de instructores experimentados, descubrirás coloridos peces tropicales, fascinantes ecosistemas marinos y hermosos paisajes submarinos en un ambiente seguro y acogedor. Para hacer la experiencia aún más memorable, se incluyen videos de cortesía de tu inmersión para que puedas compartir y revivir tu primera aventura bajo el agua.',
         prod_scuba_details: 'Ver Detalles',
         prod_scuba_exp_label: 'Experiencia',
-        prod_scuba_exp_text: 'Tu experiencia de buceo comienza con una breve introducción en la playa, donde un instructor certificado te explicará el equipo, los procedimientos de seguridad y las técnicas esenciales de buceo. Después de la orientación, entrarás en aguas poco profundas (3 pies) para practicar habilidades clave y sentirte cómodo respirando bajo el agua a tu propio ritmo. Una vez que te sientas seguro, tu guía te llevará en una inolvidable aventura submarina a través de las aguas cristalinas de San Juan, donde encontrarás peces tropicales, fascinante vida marina y hermosos paisajes submarinos. Para ayudarte a recordar la experiencia, los videos de tu inmersión se incluyen sin costo adicional.',
+        prod_scuba_exp_text: 'Tu experiencia de buceo comienza con una breve introducción en la playa, donde un instructor certificado te explicará el equipo, los procedimientos de seguridad y las técnicas esenciales de buceo. Después de la orientación, entrarás en aguas poco profundas (3 pies) para practicar habilidades clave y sentirte cómodo respirando bajo el agua a tu propio ritmo. Una vez que te sientas seguro, tu guía te llevará en una inolvidable aventura submarina a través de las aguas cristalinas de San Juan, donde encontrarás peces tropicales, fascinante vida marina y hermosos paisajes submarinos. Para ayudarte a recordar la experiencia, los videos de tu inmersión se incluyen sin costo adicional. Punto de encuentro: Playa del Escambrón, San Juan, Puerto Rico. Se recomienda usar Uber para este tour. Llegue al menos 30 minutos antes.',
         prod_scuba_length_label: 'Duración del Tour',
-        prod_scuba_length_text: 'Hasta una hora y media. El transporte se puede reservar en la página de transporte.',
+        prod_scuba_length_text: 'Hasta una hora y media. El transporte se puede reservar a través de la página de transporte.',
 
         // How it works
         how_title: 'Cómo funciona',
@@ -3519,6 +3561,8 @@
         label_date: 'Fecha (mes/día)',
         label_pickup: 'Lugar de recogida',
         label_time: 'Hora de recogida',
+        label_time_slot: 'Horario',
+        ph_time_slot: 'Elija un horario',
         label_destination: 'Destino',
         label_passengers: 'Número de pasajeros',
         label_phone: 'Número de teléfono',
