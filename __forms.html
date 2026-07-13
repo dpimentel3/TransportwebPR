@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<!--
+  Static form definition for Netlify's build-time form detection only.
+  This page is not linked anywhere and is not meant to be viewed by visitors.
+  The real, interactive booking form lives on the tour pages and submits via
+  AJAX; this file guarantees Netlify registers every field the form can send,
+  including the "Time slot" field used by tours like Scuba Diving and Snorkel
+  With Turtles.
+-->
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Form definitions</title>
+  </head>
+  <body>
+    <form name="tour-booking" method="POST" data-netlify="true" netlify-honeypot="bot-field" hidden>
+      <input type="hidden" name="form-name" value="tour-booking" />
+      <label for="tb_bot">Don't fill this out if you're human: <input id="tb_bot" name="bot-field" /></label>
+      <label for="tb_tripDate">Date (month/day)</label>
+      <input id="tb_tripDate" name="tripDate" type="date" />
+      <label for="tb_tour">Select tour</label>
+      <input id="tb_tour" name="tour" type="text" />
+      <label for="tb_pickupLocation">Pick up location</label>
+      <input id="tb_pickupLocation" name="pickupLocation" type="text" />
+      <label for="tb_timeSlot">Time slot</label>
+      <input id="tb_timeSlot" name="timeSlot" type="text" />
+      <label for="tb_passengers">Number of passengers</label>
+      <input id="tb_passengers" name="passengers" type="number" />
+      <label for="tb_phone">Phone number</label>
+      <input id="tb_phone" name="phone" type="tel" />
+      <label for="tb_firstName">First name</label>
+      <input id="tb_firstName" name="firstName" type="text" />
+      <label for="tb_comments">Comments</label>
+      <textarea id="tb_comments" name="comments"></textarea>
+    </form>
+  </body>
+</html>
