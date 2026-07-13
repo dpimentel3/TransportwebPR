@@ -2748,10 +2748,13 @@
 
       const form = document.getElementById('bookingForm');
 
-      if (form) {
+      // This page may have only the tour/boat booking forms (no main "bookingForm"),
+      // so run this block whenever any of those forms is present and guard the
+      // bookingForm-specific handler on its own.
+      if (form || document.getElementById('toursForm') || document.getElementById('boatsForm')) {
         var isSubmitting = false;
 
-        form.addEventListener('submit', function (event) {
+        if (form) form.addEventListener('submit', function (event) {
           event.preventDefault();
           var submitBtn = form.querySelector('button[type="submit"]');
 
@@ -4096,7 +4099,7 @@
       var bookingPickup = document.getElementById('pickupLocation');
       var bookingDestination = document.getElementById('destination');
       var tourPickup = document.getElementById('tourPickup');
-      if (!bookingPickup || !bookingDestination) return;
+      if (!bookingPickup && !bookingDestination && !tourPickup) return;
 
       function updateBookingClearVisibility(input) {
         var wrap = input.parentElement;
@@ -4105,10 +4108,10 @@
         else wrap.classList.remove('has-value');
       }
 
-      bookingPickup.addEventListener('input', function() {
+      if (bookingPickup) bookingPickup.addEventListener('input', function() {
         updateBookingClearVisibility(bookingPickup);
       });
-      bookingDestination.addEventListener('input', function() {
+      if (bookingDestination) bookingDestination.addEventListener('input', function() {
         updateBookingClearVisibility(bookingDestination);
       });
       if (tourPickup) {
@@ -4117,8 +4120,8 @@
         });
       }
 
-      updateBookingClearVisibility(bookingPickup);
-      updateBookingClearVisibility(bookingDestination);
+      if (bookingPickup) updateBookingClearVisibility(bookingPickup);
+      if (bookingDestination) updateBookingClearVisibility(bookingDestination);
       if (tourPickup) updateBookingClearVisibility(tourPickup);
 
       function bindBookingAutocomplete(input) {
