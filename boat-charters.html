@@ -2574,8 +2574,8 @@
 
             <div class="booking-panel" id="panel-tours" role="tabpanel" aria-labelledby="tab-tours" hidden>
               <h2 id="tours-title" data-i18n="book_tours_title">Book your tour</h2>
-              <form id="toursForm" name="tour-booking" method="POST" data-netlify="true" netlify-honeypot="bot-field">
-                <input type="hidden" name="form-name" value="tour-booking" />
+              <form id="toursForm" name="tour-booking-v2" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+                <input type="hidden" name="form-name" value="tour-booking-v2" />
                 <p class="hidden-field">
                   <label>Don’t fill this out if you’re human: <input name="bot-field" /></label>
                 </p>
@@ -3233,7 +3233,7 @@
 
         buildExtraForm({
           formId: 'toursForm',
-          formName: 'tour-booking',
+          formName: 'tour-booking-v2',
           successMsgKey: 'book_tour_success_msg',
           successTipKey: 'book_tour_success_tip',
           successMsgEn: 'The Tour Guide will reach out to you shortly via text message.',
