@@ -2231,12 +2231,27 @@
 
     .tour-widget-cta {
       margin-top: auto;
-      padding-top: 4px;
+      align-self: stretch;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 12px 18px;
+      border-radius: 999px;
+      background: var(--accent, #e3b04b);
+      color: #1a1a1a;
       font-size: 0.8rem;
       font-weight: 800;
       text-transform: uppercase;
       letter-spacing: 0.06em;
-      color: var(--primary-dark, #0d3557);
+      box-shadow: 0 8px 18px rgba(8, 37, 61, 0.12);
+      transition: background 0.18s ease, box-shadow 0.18s ease;
+    }
+
+    .tour-widget:hover .tour-widget-cta,
+    .tour-widget:focus-visible .tour-widget-cta {
+      background: var(--accent-dark, #c9932a);
+      box-shadow: 0 12px 24px rgba(8, 37, 61, 0.18);
     }
 
     /* Individual tour landing page — gallery + description layout */
@@ -2424,10 +2439,10 @@
             <img src="review-chris-d.jpeg" alt="Five-star review from Chris D praising driver Eliot and Captain Jose for a great tour and boat experience" loading="lazy" decoding="async" width="1170" height="1227">
           </figure>
           <figure class="review-shot review-shot-2">
-            <img src="review-juliel-m.jpg" alt="Review from Juliel M about easy last-minute snorkeling and bio bay bookings with hotel transport included" loading="lazy" decoding="async" width="1170" height="941">
+            <img src="review-adianes-e.jpg" alt="Five-star review from Adianes E praising the professional service and unforgettable Bio Bay tour" loading="lazy" decoding="async" width="1170" height="1617">
           </figure>
           <figure class="review-shot review-shot-3">
-            <img src="review-adianes-e.jpg" alt="Five-star review from Adianes E praising the professional service and unforgettable Bio Bay tour" loading="lazy" decoding="async" width="1170" height="1617">
+            <img src="review-juliel-m.jpg" alt="Review from Juliel M about easy last-minute snorkeling and bio bay bookings with hotel transport included" loading="lazy" decoding="async" width="1170" height="941">
           </figure>
         </div>
       </div>
