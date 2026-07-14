@@ -993,6 +993,19 @@
       flex-shrink: 0;
       pointer-events: none;
     }
+    .image-slider .slider-track .slider-video {
+      min-width: 100%;
+      max-width: 100%;
+      height: 200px;
+      flex-shrink: 0;
+      background: #000;
+    }
+    .image-slider .slider-track .slider-video iframe {
+      display: block;
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
     .slider-btn {
       position: absolute;
       top: 50%;
@@ -2259,12 +2272,14 @@
     }
 
     .service-page .tour-landing-gallery.image-slider,
-    .service-page .tour-landing-gallery.image-slider .slider-track img {
+    .service-page .tour-landing-gallery.image-slider .slider-track img,
+    .service-page .tour-landing-gallery.image-slider .slider-track .slider-video {
       min-height: 0;
       height: auto;
     }
 
-    .tour-landing-gallery.image-slider .slider-track img {
+    .tour-landing-gallery.image-slider .slider-track img,
+    .tour-landing-gallery.image-slider .slider-track .slider-video {
       aspect-ratio: 4 / 3;
       object-fit: cover;
     }
@@ -2414,6 +2429,9 @@
       <div class="container section-shell tour-landing-shell">
       <div class="tour-landing-gallery image-slider" id="lp-slider">
         <div class="slider-track">
+            <div class="slider-video">
+              <iframe src="https://www.youtube.com/embed/ACvTmQ1Xots?si=qwhoVSNZTqyWWD-p&amp;start=40" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+            </div>
             <img src="cave-swimming-1.png" alt="Cave swimming adventure in Vega Baja" loading="lazy" decoding="async">
             <img src="cave-swimming-3.png" alt="Cave swimming adventure" loading="lazy" decoding="async">
             <img src="cave-swimming-2.png" alt="Exploring the natural river caves" loading="lazy" decoding="async">
@@ -2423,6 +2441,7 @@
         <button class="slider-btn next" aria-label="Next image">&#10095;</button>
         <div class="slider-dots">
           <span class="active"></span>
+          <span></span>
           <span></span>
           <span></span>
           <span></span>
@@ -3667,12 +3686,12 @@
     (function() {
       document.querySelectorAll('.image-slider').forEach(function(slider) {
         var track = slider.querySelector('.slider-track');
-        var imgs = track.querySelectorAll('img');
+        var slides = track.children;
         var dots = slider.querySelectorAll('.slider-dots span');
         var prevBtn = slider.querySelector('.slider-btn.prev');
         var nextBtn = slider.querySelector('.slider-btn.next');
         var current = 0;
-        var count = imgs.length;
+        var count = slides.length;
 
         function goTo(idx) {
           if (idx < 0) idx = count - 1;
