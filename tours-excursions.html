@@ -3206,6 +3206,14 @@
           timeSlotField.hidden = !usesTimeSlot;
           timeSlotInput.disabled = !usesTimeSlot;
           timeSlotInput.required = usesTimeSlot;
+          // Route time-slot tours (Snorkel With Turtles / Scuba Diving Tour) to their dedicated Netlify form
+          var toursForm = document.getElementById('toursForm');
+          if (toursForm) {
+            var formNameInput = toursForm.querySelector('input[name="form-name"]');
+            var targetFormName = usesTimeSlot ? 'tour-booking-timeslots' : 'tour-booking-v2';
+            if (formNameInput) formNameInput.value = targetFormName;
+            toursForm.setAttribute('name', targetFormName);
+          }
         }
 
         // Tour card "Book Now" buttons switch to Tours tab and preselect the tour

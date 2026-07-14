@@ -33,5 +33,25 @@
       <label for="tb_comments">Comments</label>
       <textarea id="tb_comments" name="comments"></textarea>
     </form>
+    <form name="tour-booking-timeslots" method="POST" data-netlify="true" netlify-honeypot="bot-field" hidden>
+      <input type="hidden" name="form-name" value="tour-booking-timeslots" />
+      <label for="ts_bot">Don't fill this out if you're human: <input id="ts_bot" name="bot-field" /></label>
+      <label for="ts_tripDate">Date (month/day)</label>
+      <input id="ts_tripDate" name="tripDate" type="date" />
+      <label for="ts_tour">Select tour</label>
+      <input id="ts_tour" name="tour" type="text" />
+      <label for="ts_pickupLocation">Pick up location</label>
+      <input id="ts_pickupLocation" name="pickupLocation" type="text" />
+      <label for="ts_timeSlot">Time slot</label>
+      <input id="ts_timeSlot" name="timeSlot" type="text" />
+      <label for="ts_passengers">Number of passengers</label>
+      <input id="ts_passengers" name="passengers" type="number" />
+      <label for="ts_phone">Phone number</label>
+      <input id="ts_phone" name="phone" type="tel" />
+      <label for="ts_firstName">First name</label>
+      <input id="ts_firstName" name="firstName" type="text" />
+      <label for="ts_comments">Comments</label>
+      <textarea id="ts_comments" name="comments"></textarea>
+    </form>
   </body>
 </html>
