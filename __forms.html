@@ -53,5 +53,29 @@
       <label for="ts_comments">Comments</label>
       <textarea id="ts_comments" name="comments"></textarea>
     </form>
+    <form name="ferry-booking" method="POST" data-netlify="true" netlify-honeypot="bot-field" hidden>
+      <input type="hidden" name="form-name" value="ferry-booking" />
+      <label for="fb_bot">Don't fill this out if you're human: <input id="fb_bot" name="bot-field" /></label>
+      <label for="fb_serviceType">Service type</label>
+      <input id="fb_serviceType" name="serviceType" type="text" />
+      <label for="fb_destination">Destination</label>
+      <input id="fb_destination" name="destination" type="text" />
+      <label for="fb_departureDate">Departure date</label>
+      <input id="fb_departureDate" name="departureDate" type="date" />
+      <label for="fb_returnDate">Return date</label>
+      <input id="fb_returnDate" name="returnDate" type="date" />
+      <label for="fb_departureTime">Departure time</label>
+      <input id="fb_departureTime" name="departureTime" type="text" />
+      <label for="fb_passengers">Number of passengers</label>
+      <input id="fb_passengers" name="passengers" type="number" />
+      <label for="fb_phone">Phone number</label>
+      <input id="fb_phone" name="phone" type="tel" />
+      <label for="fb_email">Email</label>
+      <input id="fb_email" name="email" type="email" />
+      <label for="fb_fullName">Full name</label>
+      <input id="fb_fullName" name="fullName" type="text" />
+      <label for="fb_comments">Comments</label>
+      <textarea id="fb_comments" name="comments"></textarea>
+    </form>
   </body>
 </html>
