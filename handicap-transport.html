@@ -11,7 +11,7 @@
   </script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Puerto Rico Transportation Services You Can Rely On | DP Transport</title>
+  <title>Handicap Transport | DP Transport</title>
   <meta name="description" content="Dependable transportation for airport transfers, hotel pickups, rides to excursions, restaurants, ferry and cruise ports, and private trips across Puerto Rico." />
   <meta name="keywords" content="Puerto Rico transportation, airport transfer Puerto Rico, Rio Grande taxi, excursion transportation, port transportation, tourist transportation Puerto Rico, DP Transport" />
   <meta name="author" content="DP Transport" />
@@ -1867,131 +1867,93 @@
         box-shadow: 0 28px 60px rgba(8, 37, 61, 0.26);
       }
     }
-      /* Service widgets (link cards to individual landing pages) */
-    /* Widget container spans full width so the service cards flow 4 per row (like the Tours page) */
-    .category-content:has(.tour-widgets) {
-      max-width: 1060px;
-      margin: 0 auto;
-      padding: 0;
-      border-top: none;
-      background: transparent;
-      grid-template-columns: 1fr;
-      gap: 24px;
-    }
-
-    .tour-widgets {
+      /* Individual transportation service landing page */
+    .tour-landing-shell {
+      display: grid;
+      grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
+      gap: 40px;
+      align-items: start;
       max-width: 1100px;
       margin: 0 auto;
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(min(240px, 100%), 1fr));
-      gap: 24px;
+      padding-top: 8px;
     }
-    .tour-widget {
-      display: flex;
-      flex-direction: column;
-      background: #fff;
-      border: 1px solid #e5eaf0;
-      border-radius: 12px;
+    .tour-landing-gallery {
+      border-radius: 14px;
       overflow: hidden;
-      text-decoration: none;
-      color: inherit;
-      box-shadow: 0 1px 2px rgba(8, 37, 61, 0.06);
-      transition: box-shadow 0.2s ease, transform 0.2s ease;
+      box-shadow: 0 18px 40px rgba(8, 37, 61, 0.14);
     }
-    .tour-widget:hover,
-    .tour-widget:focus-visible {
-      box-shadow: 0 18px 40px rgba(8, 37, 61, 0.16);
-      transform: translateY(-4px);
-      outline: none;
-    }
-    .tour-widget-media {
-      aspect-ratio: 4 / 3;
-      background: #eef3f8;
-      overflow: hidden;
-    }
-    .tour-widget-media img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
+    .tour-landing-gallery img {
       display: block;
-      transition: transform 0.4s ease;
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      object-fit: cover;
     }
-    .tour-widget:hover .tour-widget-media img {
-      transform: scale(1.06);
-    }
-    .tour-widget-body {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-      padding: 18px 20px 22px;
-      flex: 1;
-    }
-    .tour-widget-body h3 {
+    .tour-landing-info h2 {
       color: #111827;
-      font-size: 1.15rem;
-      font-weight: 800;
-      line-height: 1.15;
+      font-size: clamp(1.7rem, 3.4vw, 2.6rem);
+      font-weight: 900;
+      line-height: 1.02;
       text-transform: uppercase;
-      letter-spacing: 0.01em;
-      margin: 0;
+      margin: 0 0 14px;
     }
-    .tour-widget-specs {
-      list-style: none;
-      margin: 0;
-      padding: 0;
+    .tour-landing-info .card-desc {
+      color: #374151;
+      font-size: 1.02rem;
+      line-height: 1.6;
+      margin: 0 0 20px;
+    }
+    .tour-landing-details {
       display: flex;
       flex-direction: column;
-      gap: 7px;
+      gap: 6px;
+      padding: 20px 0 4px;
+      border-top: 1px solid #e5eaf0;
     }
-    .tour-widget-specs li {
-      display: flex;
-      justify-content: space-between;
-      align-items: baseline;
-      gap: 12px;
-      font-size: 0.9rem;
-      color: #6b7280;
-      padding-bottom: 7px;
-      border-bottom: 1px solid #f0f3f7;
-    }
-    .tour-widget-specs li:last-child {
-      padding-bottom: 0;
-      border-bottom: none;
-    }
-    .tour-widget-specs li .spec-label {
-      text-transform: uppercase;
-      letter-spacing: 0.04em;
-      font-size: 0.72rem;
-      font-weight: 700;
-    }
-    .tour-widget-specs li .spec-value {
+    .tour-landing-details strong {
       color: #0d3557;
-      font-weight: 700;
-      text-align: right;
-    }
-    .tour-widget-cta {
-      margin-top: auto;
-      align-self: stretch;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      padding: 12px 18px;
-      border-radius: 999px;
-      background: var(--accent, #e3b04b);
-      color: #1a1a1a;
-      font-size: 0.8rem;
-      font-weight: 800;
+      font-size: 0.78rem;
       text-transform: uppercase;
-      letter-spacing: 0.06em;
-      box-shadow: 0 8px 18px rgba(8, 37, 61, 0.12);
-      transition: background 0.18s ease, box-shadow 0.18s ease;
+      letter-spacing: 0.05em;
+      margin-top: 10px;
     }
-    .tour-widget:hover .tour-widget-cta,
-    .tour-widget:focus-visible .tour-widget-cta {
-      background: var(--accent-dark, #c9932a);
-      box-shadow: 0 12px 24px rgba(8, 37, 61, 0.18);
+    .tour-landing-details p {
+      color: #4b5563;
+      font-size: 0.97rem;
+      line-height: 1.6;
+      margin: 0;
     }
-      /* Stacked booking options (all forms shown, no tabs) */
+    .tour-landing-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 24px;
+    }
+    .tour-landing-actions .btn {
+      margin-top: 0;
+      border-radius: 999px;
+      padding: 15px 28px;
+      font-weight: 800;
+      text-decoration: none;
+    }
+    @media (max-width: 860px) {
+      .tour-landing-shell {
+        grid-template-columns: 1fr;
+        gap: 28px;
+      }
+    }
+      /* Multi-image gallery on service landing pages */
+    .tour-landing-gallery.image-slider {
+      height: auto;
+      border-radius: 14px;
+      overflow: hidden;
+      box-shadow: 0 18px 40px rgba(8, 37, 61, 0.14);
+    }
+    .tour-landing-gallery.image-slider .slider-track img {
+      height: auto;
+      aspect-ratio: 4 / 3;
+      object-fit: cover;
+    }
+    /* Stacked booking options (all forms shown, no tabs) */
     .booking-tabs { display: none; }
     .booking-panel + .booking-panel {
       margin-top: 30px;
@@ -2083,89 +2045,29 @@
           </div>
         </div>
       </div>
-      <div class="container section-shell reviews-collage-shell" aria-label="Guest reviews">
-        <div class="section-intro">
-          <h2 data-i18n="guest_reviews_title">Loved by travelers across the island</h2>
-          <p data-i18n="guest_reviews_desc">Real reviews from guests who explored Puerto Rico with DP Transport.</p>
+      <div class="container section-shell tour-landing-shell">
+        <div class="tour-landing-gallery image-slider" id="lp-slider">
+          <div class="slider-track">
+            <img src="handicap-transport-1.jpeg" alt="DP Transport wheelchair-accessible van with rear lift platform lowered to the ground in Old San Juan" loading="lazy" decoding="async">
+            <img src="handicap-transport-2.jpeg" alt="Front view of DP Transport wheelchair-accessible taxi van with accessibility markings" loading="lazy" decoding="async">
+            <img src="handicap-transport-3.jpeg" alt="DP Transport accessible transport van parked in front of the Puerto Rico Capitol" loading="lazy" decoding="async">
+          </div>
+          <button class="slider-btn prev" aria-label="Previous image">&#10094;</button>
+          <button class="slider-btn next" aria-label="Next image">&#10095;</button>
+          <div class="slider-dots">
+            <span class="active"></span>
+            <span></span>
+            <span></span>
+          </div>
         </div>
-        <div class="reviews-collage">
-          <figure class="review-shot review-shot-1">
-            <img src="review-jose-f.jpeg" alt="Five-star review from Jose F describing an excellent, attentive and reliable transportation experience with a professional driver" loading="lazy" decoding="async" width="1170" height="867">
-          </figure>
-          <figure class="review-shot review-shot-2">
-            <img src="review-empress-a.jpeg" alt="Five-star review from Empress A praising driver Hector for excellent San Juan airport pickup service and personalized touches on a birthday trip" loading="lazy" decoding="async" width="1170" height="1923">
-          </figure>
-          <figure class="review-shot review-shot-3">
-            <img src="review-marco-p.jpeg" alt="Four-star review from Marco P praising driver Gianny for great service, professionalism and detailed local knowledge of Puerto Rico" loading="lazy" decoding="async" width="1170" height="823">
-          </figure>
-        </div>
-      </div>
-      <div class="container section-shell service-categories-shell">
-        <div class="service-categories">
-          <div class="category-content" style="border-top:none;">
-            <div class="tour-widgets">
-              <a class="tour-widget" href="airport-transfers.html">
-                <div class="tour-widget-media">
-                  <img src="airport-transfer-isla-verde.jpg" alt="DP Transport airport transfer van in Isla Verde" loading="lazy" decoding="async">
-                </div>
-                <div class="tour-widget-body">
-                  <h3 data-i18n="prod_airport_title">Airport Transfers</h3>
-                  <ul class="tour-widget-specs">
-                    <li><span class="spec-label" data-i18n="spec_cost">Cost</span><span class="spec-value" data-i18n="prod_airport_price">$10 / Person</span></li>
-                    <li><span class="spec-label">Capacity</span><span class="spec-value" data-i18n="prod_airport_capacity">Up to 13 People</span></li>
-                  </ul>
-                  <span class="tour-widget-cta">View service &amp; book &rarr;</span>
-                </div>
-              </a>
-              <a class="tour-widget" href="cruise-port-transfers.html">
-                <div class="tour-widget-media">
-                  <img src="cruise-port-vans.png" alt="Two DP Transport Ford vans for cruise port and ferry transfers" loading="lazy" decoding="async">
-                </div>
-                <div class="tour-widget-body">
-                  <h3 data-i18n="prod_cruise_title">Cruise Ports &amp; Ferry Transfers</h3>
-                  <ul class="tour-widget-specs">
-                    <li><span class="spec-label">Capacity</span><span class="spec-value" data-i18n="prod_cruise_capacity">Max. 25 People</span></li>
-                  </ul>
-                  <span class="tour-widget-cta">View service &amp; book &rarr;</span>
-                </div>
-              </a>
-              <a class="tour-widget" href="excursions-transport.html">
-                <div class="tour-widget-media">
-                  <img src="excursions-transport-bus.jpeg" alt="DP Transport white shuttle bus for excursion transportation" loading="lazy" decoding="async">
-                </div>
-                <div class="tour-widget-body">
-                  <h3 data-i18n="prod_excursion_transport_title">Excursions Transport</h3>
-                  <ul class="tour-widget-specs">
-                    <li><span class="spec-label">Capacity</span><span class="spec-value" data-i18n="prod_exc_capacity">Max. 25 People</span></li>
-                  </ul>
-                  <span class="tour-widget-cta">View service &amp; book &rarr;</span>
-                </div>
-              </a>
-              <a class="tour-widget" href="luxury-travel.html">
-                <div class="tour-widget-media">
-                  <img src="luxury-travel-1.jpeg" alt="Black Chevrolet Suburban luxury SUV at a Puerto Rico resort entrance" loading="lazy" decoding="async">
-                </div>
-                <div class="tour-widget-body">
-                  <h3 data-i18n="prod_luxury_title">Luxury Travel</h3>
-                  <ul class="tour-widget-specs">
-                    <li><span class="spec-label">Capacity</span><span class="spec-value" data-i18n="prod_luxury_capacity">Max. 14 people</span></li>
-                  </ul>
-                  <span class="tour-widget-cta">View service &amp; book &rarr;</span>
-                </div>
-              </a>
-              <a class="tour-widget" href="handicap-transport.html">
-                <div class="tour-widget-media">
-                  <img src="handicap-transport-1.jpeg" alt="DP Transport wheelchair-accessible van with rear lift platform lowered to the ground in Old San Juan" loading="lazy" decoding="async">
-                </div>
-                <div class="tour-widget-body">
-                  <h3 data-i18n="prod_handicap_title">Handicap Transport</h3>
-                  <ul class="tour-widget-specs">
-                    <li><span class="spec-label">Capacity</span><span class="spec-value" data-i18n="prod_handicap_capacity">Max. 12 people</span></li>
-                  </ul>
-                  <span class="tour-widget-cta">View service &amp; book &rarr;</span>
-                </div>
-              </a>
-            </div>
+        <div class="tour-landing-info">
+          <h2 data-i18n="prod_handicap_title">Handicap Transport</h2>
+          <div class="product-card-tags">
+            <span data-i18n="prod_handicap_capacity">Max. 12 people</span>
+          </div>
+          <p class="card-desc" data-i18n="prod_handicap_desc">Travel around Puerto Rico with comfort, safety, and peace of mind. Our accessible transportation services are designed for families traveling with someone who uses a wheelchair or has limited mobility. We provide reliable airport transfers, private excursions, and regular transportation in vehicles equipped with a wheelchair-accessible lift. The rear platform is lowered to ground level, allowing the passenger to roll onto it safely. It then raises the wheelchair into the vehicle, where it is securely positioned before the trip begins. Whether you need transportation from the airport to your hotel, a comfortable ride to an appointment, or an accessible way to explore Puerto Rico&rsquo;s attractions, our team is ready to assist. Enjoy a private, family-friendly experience tailored to your group&rsquo;s mobility needs.</p>
+          <div class="tour-landing-actions">
+            <a href="#book" class="btn btn-primary book-transport-link" data-service="Handicap Transport" data-i18n="book_now">Book Now</a>
           </div>
         </div>
       </div>
@@ -2228,12 +2130,12 @@
               <div>
                 <label for="serviceType" data-i18n="label_service_type">Service type</label>
                 <select id="serviceType" name="serviceType" required>
-                  <option value="" disabled selected data-i18n="ph_service_type">Choose a service</option>
+                  <option value="" disabled data-i18n="ph_service_type">Choose a service</option>
                   <option value="Airport Transfers" data-i18n="service_airport">Airport Transfers</option>
                   <option value="Cruise Ports &amp; Ferry Transfers" data-i18n="service_cruise">Cruise Ports &amp; Ferry Transfers</option>
                   <option value="Excursions Transport" data-i18n="service_excursions">Excursions Transport</option>
                   <option value="Luxury Travel" data-i18n="service_luxury">Luxury Travel</option>
-                  <option value="Handicap Transport" data-i18n="service_handicap">Handicap Transport</option>
+                  <option value="Handicap Transport" selected data-i18n="service_handicap">Handicap Transport</option>
                 </select>
               </div>
 
