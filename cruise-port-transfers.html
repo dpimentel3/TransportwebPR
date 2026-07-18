@@ -11,7 +11,7 @@
   </script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Cruise Ports & Ferry Transfers | DP Transport</title>
+  <title>Ferry Tickets | DP Transport</title>
   <meta name="description" content="Dependable transportation for airport transfers, hotel pickups, rides to excursions, restaurants, ferry and cruise ports, and private trips across Puerto Rico." />
   <meta name="keywords" content="Puerto Rico transportation, airport transfer Puerto Rico, Rio Grande taxi, excursion transportation, port transportation, tourist transportation Puerto Rico, DP Transport" />
   <meta name="author" content="DP Transport" />
@@ -1960,6 +1960,85 @@
       padding-top: 30px;
       border-top: 1px solid var(--border);
     }
+
+    /* Compact "How it works" (transport landing pages) */
+    .section-how-compact .section-shell {
+      padding-top: 60px;
+      padding-bottom: 60px;
+    }
+
+    .section-how-compact .section-intro {
+      margin-bottom: 26px;
+    }
+
+    .service-page .section-how-compact .section-intro h2 {
+      font-size: clamp(1.8rem, 4.5vw, 2.6rem);
+      line-height: 1.05;
+      margin-bottom: 12px;
+    }
+
+    .steps-compact {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .step-compact {
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+      padding: 18px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.92), rgba(255,255,255,0.84));
+      border: 1px solid rgba(220, 230, 238, 0.92);
+      border-radius: 16px;
+      box-shadow: var(--shadow-md);
+    }
+
+    .step-compact-num {
+      flex: 0 0 auto;
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: var(--accent);
+      color: #1d1d1d;
+      font-weight: 800;
+      box-shadow: 0 8px 18px rgba(227,176,75,0.24);
+    }
+
+    .step-compact-text h3 {
+      font-size: 1rem;
+      line-height: 1.3;
+      margin: 3px 0 5px;
+    }
+
+    .step-compact-text p {
+      font-size: 0.88rem;
+      line-height: 1.45;
+      margin: 0;
+      color: var(--muted);
+    }
+
+    @media (max-width: 900px) {
+      .steps-compact { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+
+    @media (max-width: 720px) {
+      .section-how-compact .section-shell {
+        padding-top: 44px;
+        padding-bottom: 44px;
+      }
+      .section-how-compact .section-intro { margin-bottom: 18px; }
+      .steps-compact { grid-template-columns: 1fr; gap: 10px; }
+      .step-compact { padding: 13px 15px; gap: 12px; }
+      .step-compact-num { width: 30px; height: 30px; font-size: 0.9rem; }
+      .step-compact-text h3 { font-size: 0.95rem; margin: 2px 0 3px; }
+      .step-compact-text p { font-size: 0.85rem; line-height: 1.4; }
+    }
 </style>
   <script type="application/ld+json">
     {
@@ -2023,7 +2102,7 @@
       <nav class="nav-links" id="primary-nav" aria-label="Primary navigation">
         <a href="Index.html#explore" data-i18n="nav_explore">Explore</a>
         <a href="Index.html#service" data-i18n="nav_services">Services</a>
-        <a href="Index.html#how-it-works" data-i18n="nav_how">How It Works</a>
+        <a href="#how-it-works" data-i18n="nav_how">How It Works</a>
         <a href="#book" data-i18n="nav_book">Book</a>
         <a href="#faq" data-i18n="nav_faq">FAQ</a>
         <a href="Index.html#contact-us" data-i18n="nav_contact">Contact Us</a>
@@ -2040,35 +2119,65 @@
       <div class="service-hero background-section">
         <div class="container section-shell">
           <div class="section-intro">
-            <h1 data-i18n="svc_transport_page_title">Is your Puerto Rico trip planned… except for how you’re getting around?</h1>
-            <p data-i18n="cat_transport_desc">We make getting around Puerto Rico simple with reliable private transportation for airport transfers, hotels, excursions, and special plans — so you can arrive, relax, and enjoy your trip without worrying about the ride.</p>
+            <h1 data-i18n="svc_transport_page_title">FERRY TICKETS SOLD OUT… AND NOW YOUR CULEBRA OR VIEQUES PLANS FEEL RUINED?</h1>
+            <p data-i18n="cat_transport_desc">Even when tickets appear sold out online, we can help you secure ferry tickets to Culebra or Vieques so you don’t have to cancel your island plans.</p>
           </div>
         </div>
       </div>
       <div class="container section-shell tour-landing-shell">
-        <div class="tour-landing-gallery image-slider" id="lp-slider">
-          <div class="slider-track">
-            <img src="cruise-port-vans.png" alt="Two DP Transport Ford vans for cruise port and ferry transfers" loading="lazy" decoding="async">
-            <img src="cruise-port-transfers.png" alt="DP Transport vehicles ready for cruise port and ferry transfers in Puerto Rico" loading="lazy" decoding="async">
-          </div>
-          <button class="slider-btn prev" aria-label="Previous image">&#10094;</button>
-          <button class="slider-btn next" aria-label="Next image">&#10095;</button>
-          <div class="slider-dots">
-            <span class="active"></span>
-            <span></span>
-          </div>
+        <div class="tour-landing-gallery">
+          <img src="ferry-tickets.jpg" alt="Schoodic Explorer ferry docked in Puerto Rico for ferry tickets to Culebra and Vieques" loading="lazy" decoding="async">
         </div>
         <div class="tour-landing-info">
-          <h2 data-i18n="prod_cruise_title">Cruise Ports &amp; Ferry Transfers</h2>
+          <h2 data-i18n="prod_cruise_title">Ferry Tickets</h2>
           <div class="product-card-tags">
-            <span data-i18n="prod_cruise_capacity">Max. 25 People</span>
+            <span data-i18n="prod_ferry_price_culebra">Culebra $32 Round Trip per person</span>
+            <span data-i18n="prod_ferry_price_vieques">Vieques $30 Round Trip per person</span>
           </div>
-          <p class="card-desc" data-i18n="prod_cruise_desc">Enjoy reliable, convenient transportation to cruise ports, hotels, car rentals, marinas, and destinations throughout Puerto Rico. Whether you're heading to a bioluminescent bay tour or catching a ferry to Culebra, Vieques, Palomino, or Icacos, we provide seamless round-trip transportation carefully scheduled around your activities for a smooth and stress-free experience.</p>
+          <p class="card-desc" data-i18n="prod_cruise_desc">First, we check ferry ticket availability based on your destination, travel date, and number of passengers. Once availability is confirmed, you send payment through PayPal or Venmo for the tickets and our service fee. We then purchase and confirm your tickets at the ferry terminal, and Puerto Rico Ferry sends the tickets directly to you electronically via text message. Once you have the tickets you would need to arrive at ferry terminal 1 hour before departure to begin onboarding procedures.</p>
           <div class="tour-landing-actions">
-            <a href="#book" class="btn btn-primary book-transport-link" data-service="Cruise Ports &amp; Ferry Transfers" data-i18n="book_now">Book Now</a>
-            <a href="#" class="btn btn-secondary open-quote-link" data-i18n="check_pricing">Check Pricing &amp; Availability</a>
+            <a href="#book" class="btn btn-primary book-transport-link" data-service="Ferry Tickets" data-i18n="book_now">Book Now</a>
           </div>
         </div>
+      </div>
+    </section>
+
+    <section id="how-it-works" class="background-section section-how section-how-compact">
+      <div class="container section-shell">
+        <div class="section-intro">
+          <h2 data-i18n="how_title">How it works</h2>
+          <p data-i18n="how_desc">Every step is laid out clearly so arranging your transportation feels quick and straightforward.</p>
+        </div>
+        <ol class="steps-compact">
+          <li class="step-compact">
+            <span class="step-compact-num">1</span>
+            <div class="step-compact-text">
+              <h3 data-i18n="step1_title">Fill in your trip details</h3>
+              <p data-i18n="step1_desc">Enter your date, pickup time and location, destination, number of passengers, first name, and phone number. Email if necessary.</p>
+            </div>
+          </li>
+          <li class="step-compact">
+            <span class="step-compact-num">2</span>
+            <div class="step-compact-text">
+              <h3 data-i18n="step2_title">Send the request</h3>
+              <p data-i18n="step2_desc">Tap the booking button to send your request with all the details included.</p>
+            </div>
+          </li>
+          <li class="step-compact">
+            <span class="step-compact-num">3</span>
+            <div class="step-compact-text">
+              <h3 data-i18n="step3_title">Receive a text from your Driver, Captain or Tour Guide</h3>
+              <p data-i18n="step3_desc">After your request is received, we will contact you with your trip details and confirmation steps.</p>
+            </div>
+          </li>
+          <li class="step-compact">
+            <span class="step-compact-num">4</span>
+            <div class="step-compact-text">
+              <h3 data-i18n="step4_title">Reply to confirm the trip</h3>
+              <p data-i18n="step4_desc">Answer the text or email to confirm the details. Once you reply, your trip is confirmed.</p>
+            </div>
+          </li>
+        </ol>
       </div>
     </section>
 
@@ -2102,27 +2211,12 @@
                 </svg>
                 <span data-i18n="tab_transport">Transportation</span>
               </button>
-              <button type="button" class="booking-tab" id="tab-tours" role="tab" aria-selected="false" aria-controls="panel-tours" data-panel="panel-tours">
-                <svg class="booking-tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                  <path d="M4 7.5h2.7l1.5-2h7.6l1.5 2H20a1 1 0 0 1 1 1v9.5a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V8.5a1 1 0 0 1 1-1z"/>
-                  <circle cx="12" cy="13" r="3.8"/>
-                </svg>
-                <span data-i18n="tab_tours">Tours</span>
-              </button>
-              <button type="button" class="booking-tab" id="tab-boats" role="tab" aria-selected="false" aria-controls="panel-boats" data-panel="panel-boats">
-                <svg class="booking-tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                  <path d="M3 17.5c1.5 1 3 1.3 4.5 1s2.5-1.2 4.5-1.2 3 1 4.5 1.2 3-.1 4.5-1"/>
-                  <path d="M5 14.5l7-8.5 7 8.5"/>
-                  <path d="M12 6v8.5"/>
-                </svg>
-                <span data-i18n="tab_boats">Boat Charters</span>
-              </button>
             </div>
 
             <div class="booking-panel" id="panel-transport" role="tabpanel" aria-labelledby="tab-transport">
               <h2 id="booking-title" data-i18n="book_form_title">Book your transportation</h2>
-              <form id="bookingForm" name="booking" method="POST" data-netlify="true" netlify-honeypot="bot-field">
-              <input type="hidden" name="form-name" value="booking" />
+              <form id="ferryBookingForm" name="ferry-booking" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+              <input type="hidden" name="form-name" value="ferry-booking" />
               <p class="hidden-field">
                 <label>Don’t fill this out if you’re human: <input name="bot-field" /></label>
               </p>
@@ -2131,7 +2225,7 @@
                 <select id="serviceType" name="serviceType" required>
                   <option value="" disabled data-i18n="ph_service_type">Choose a service</option>
                   <option value="Airport Transfers" data-i18n="service_airport">Airport Transfers</option>
-                  <option value="Cruise Ports &amp; Ferry Transfers" selected data-i18n="service_cruise">Cruise Ports &amp; Ferry Transfers</option>
+                  <option value="Ferry Tickets" selected data-i18n="service_cruise">Ferry Tickets</option>
                   <option value="Excursions Transport" data-i18n="service_excursions">Excursions Transport</option>
                   <option value="Luxury Travel" data-i18n="service_luxury">Luxury Travel</option>
                   <option value="Handicap Transport" data-i18n="service_handicap">Handicap Transport</option>
@@ -2139,40 +2233,29 @@
               </div>
 
               <div>
-                <label for="roundTrip" data-i18n="label_round_trip">Round trip</label>
-                <select id="roundTrip" name="roundTrip">
-                  <option value="No" data-i18n="round_trip_no">No</option>
-                  <option value="Yes" data-i18n="round_trip_yes">Yes</option>
+                <label for="destination" data-i18n="label_destination">Destination</label>
+                <select id="destination" name="destination" required>
+                  <option value="" disabled selected data-i18n="ph_destination_select">Choose a destination</option>
+                  <option value="Vieques">Vieques</option>
+                  <option value="Culebra">Culebra</option>
                 </select>
               </div>
 
               <div class="field-grid">
                 <div>
-                  <label for="tripDate" data-i18n="label_date">Date (month/day)</label>
-                  <input id="tripDate" name="tripDate" type="date" required />
+                  <label for="departureDate" data-i18n="label_departure_date">Departure date</label>
+                  <input id="departureDate" name="departureDate" type="date" required />
                 </div>
                 <div>
-                  <label for="pickupLocation" data-i18n="label_pickup">Pick up location</label>
-                  <div class="iq-input-wrap">
-                    <input id="pickupLocation" name="pickupLocation" type="text" data-i18n-placeholder="ph_pickup" placeholder="Example: SJU Airport or hotel name" required />
-                    <button type="button" class="iq-clear" data-target="pickupLocation" aria-label="Clear pick up location">&times;</button>
-                  </div>
+                  <label for="returnDate" data-i18n="label_return_date">Return date</label>
+                  <input id="returnDate" name="returnDate" type="date" required />
                 </div>
               </div>
 
               <div>
-                <label for="pickupTime" data-i18n="label_time">Time of pick up</label>
-                <input id="pickupTime" type="time" required />
-                <input type="hidden" id="pickupTimeFormatted" name="pickupTime" value="" />
-              </div>
-
-              <div>
-                <label for="destination" data-i18n="label_destination">Destination</label>
-                <div class="iq-input-wrap">
-                  <input id="destination" name="destination" type="text" data-i18n-placeholder="ph_destination" placeholder="Example: San Juan Cruise Port" required />
-                  <button type="button" class="iq-clear" data-target="destination" aria-label="Clear destination">&times;</button>
-                </div>
-                <div class="helper" data-i18n="helper_destination">Use a place name or address so the driver clearly understands your destination.</div>
+                <label for="departureTime" data-i18n="label_departure_time">Departure time</label>
+                <input id="departureTime" type="time" required />
+                <input type="hidden" id="departureTimeFormatted" name="departureTime" value="" />
               </div>
 
               <div class="field-grid">
@@ -2186,14 +2269,20 @@
                 </div>
               </div>
 
-              <div>
-                <label for="firstName" data-i18n="label_name">First name</label>
-                <input id="firstName" name="firstName" type="text" required />
+              <div class="field-grid">
+                <div>
+                  <label for="email" data-i18n="label_email">Email</label>
+                  <input id="email" name="email" type="email" placeholder="name@example.com" required />
+                </div>
+                <div>
+                  <label for="fullName" data-i18n="label_full_name">Full name</label>
+                  <input id="fullName" name="fullName" type="text" required />
+                </div>
               </div>
 
               <div>
                 <label for="comments" data-i18n="label_comments">Comments</label>
-                <textarea id="comments" name="comments" data-i18n-placeholder="ph_comments" placeholder="Add any extra details about your trip if necessary (flight number/airline, need/have car seat, number of bags or golf bags)"></textarea>
+                <textarea id="comments" name="comments" data-i18n-placeholder="ph_comments_ferry" placeholder="Add any extra details about your ferry trip if necessary"></textarea>
               </div>
 
               <div class="hero-actions" style="margin: 6px 0 0;">
@@ -2205,157 +2294,6 @@
             </form>
             </div>
 
-            <div class="booking-panel" id="panel-tours" role="tabpanel" aria-labelledby="tab-tours">
-              <h2 id="tours-title" data-i18n="book_tours_title">Book your tour</h2>
-              <form id="toursForm" name="tour-booking-v2" method="POST" data-netlify="true" netlify-honeypot="bot-field">
-                <input type="hidden" name="form-name" value="tour-booking-v2" />
-                <p class="hidden-field">
-                  <label>Don’t fill this out if you’re human: <input name="bot-field" /></label>
-                </p>
-                <div class="field-grid">
-                  <div>
-                    <label for="tourDate" data-i18n="label_date">Date (month/day)</label>
-                    <input id="tourDate" name="tripDate" type="date" required />
-                  </div>
-                  <div>
-                    <label for="tourSelect" data-i18n="label_select_tour">Select tour</label>
-                    <select id="tourSelect" name="tour" required>
-                      <option value="" disabled selected data-i18n="ph_select_tour">Choose a tour</option>
-                      <option value="Old San Juan Tour" data-i18n="tour_option_osj">Old San Juan Tour</option>
-                      <option value="Cave Swimming Adventure" data-i18n="tour_option_cave">Cave Swimming Adventure</option>
-                      <option value="Bioluminescent Kayak Tour(Transport included)" data-i18n="tour_option_biokayak">Bioluminescent Kayak Tour(Transport included)</option>
-                    </select>
-                  </div>
-                </div>
-
-                <div>
-                  <label for="tourPickup" data-i18n="label_pickup">Pick up location</label>
-                  <div class="iq-input-wrap">
-                    <input id="tourPickup" name="pickupLocation" type="text" data-i18n-placeholder="ph_pickup" placeholder="Example: SJU Airport or hotel name" required />
-                    <button type="button" class="iq-clear" data-target="tourPickup" aria-label="Clear pick up location">&times;</button>
-                  </div>
-                </div>
-
-                <div class="field-grid">
-                  <div>
-                    <label for="tourPassengers" data-i18n="label_passengers">Number of passengers</label>
-                    <input id="tourPassengers" name="passengers" type="number" min="1" max="50" data-i18n-placeholder="ph_passengers" placeholder="Example: 4" required />
-                  </div>
-                  <div>
-                    <label for="tourPhone" data-i18n="label_phone">Phone number</label>
-                    <input id="tourPhone" name="phone" type="tel" placeholder="787-214-2058" required />
-                  </div>
-                </div>
-
-                <div>
-                  <label for="tourFirstName" data-i18n="label_name">First name</label>
-                  <input id="tourFirstName" name="firstName" type="text" required />
-                </div>
-
-                <div>
-                  <label for="tourComments" data-i18n="label_comments">Comments</label>
-                  <textarea id="tourComments" name="comments" data-i18n-placeholder="ph_comments_tour" placeholder="Add any extra details about your tour if necessary"></textarea>
-                </div>
-
-                <div class="hero-actions" style="margin: 6px 0 0;">
-                  <button type="submit" class="btn btn-primary" data-i18n="btn_send_booking">Send Booking Request</button>
-                </div>
-                <div class="booking-note" data-i18n="booking_note">
-                  No payments are made through the website
-                </div>
-              </form>
-            </div>
-
-            <div class="booking-panel" id="panel-boats" role="tabpanel" aria-labelledby="tab-boats">
-              <h2 id="boats-title" data-i18n="book_boats_title">Book a boat charter</h2>
-              <form id="boatsForm" name="boat-charter-booking" method="POST" data-netlify="true" netlify-honeypot="bot-field">
-                <input type="hidden" name="form-name" value="boat-charter-booking" />
-                <p class="hidden-field">
-                  <label>Don’t fill this out if you’re human: <input name="bot-field" /></label>
-                </p>
-                <div class="field-grid">
-                  <div>
-                    <label for="boatDate" data-i18n="label_date">Date (month/day)</label>
-                    <input id="boatDate" name="tripDate" type="date" required />
-                  </div>
-                  <div>
-                    <label for="boatSelect" data-i18n="label_select_boat">Boats and Charters</label>
-                    <select id="boatSelect" name="charter" required>
-                      <option value="" disabled selected data-i18n="ph_select_boat">Choose a charter</option>
-                      <option value="Welcraft 30'" data-i18n="boat_option_welcraft">Welcraft 30'</option>
-                      <option value="Riviera Yacht 40'" data-i18n="boat_option_riviera">Riviera Yacht 40'</option>
-                      <option value="Luxury Lagoon 42'" data-i18n="boat_option_lagoon">Luxury Lagoon 42'</option>
-                      <option value="Cruiser 54' Yacht" data-i18n="boat_option_cruiser">Cruiser 54' Yacht</option>
-                      <option value="Fishing Trip" data-i18n="boat_option_fishing">Fishing Trip</option>
-                    </select>
-                  </div>
-                </div>
-
-                <div class="field-grid">
-                  <div>
-                    <label for="boatDepartureTime" data-i18n="label_departure_time">Departure time</label>
-                    <select id="boatDepartureTime" name="departureTime" required>
-                      <option value="" disabled selected data-i18n="ph_departure_time">Choose a time slot</option>
-                      <option value="9:00 AM">9:00 AM</option>
-                      <option value="9:30 AM">9:30 AM</option>
-                      <option value="10:00 AM">10:00 AM</option>
-                      <option value="10:30 AM">10:30 AM</option>
-                      <option value="11:00 AM">11:00 AM</option>
-                      <option value="11:30 AM">11:30 AM</option>
-                      <option value="12:00 PM">12:00 PM</option>
-                      <option value="12:30 PM">12:30 PM</option>
-                      <option value="1:00 PM">1:00 PM</option>
-                      <option value="1:30 PM">1:30 PM</option>
-                      <option value="2:00 PM">2:00 PM</option>
-                      <option value="2:30 PM">2:30 PM</option>
-                      <option value="3:00 PM">3:00 PM</option>
-                    </select>
-                  </div>
-                  <div>
-                    <label for="boatTripLength" data-i18n="label_trip_length">Trip length</label>
-                    <select id="boatTripLength" name="tripLength" required>
-                      <option value="" disabled selected data-i18n="ph_trip_length">Choose trip length</option>
-                      <option value="4 hours" data-i18n="trip_length_4h">4 hours</option>
-                      <option value="6 hours" data-i18n="trip_length_6h">6 hours</option>
-                    </select>
-                  </div>
-                </div>
-
-                <div class="field-grid">
-                  <div>
-                    <label for="boatPassengers" data-i18n="label_passengers">Number of passengers</label>
-                    <input id="boatPassengers" name="passengers" type="number" min="1" max="50" data-i18n-placeholder="ph_passengers" placeholder="Example: 4" required />
-                  </div>
-                  <div>
-                    <label for="boatPhone" data-i18n="label_phone">Phone number</label>
-                    <input id="boatPhone" name="phone" type="tel" placeholder="787-214-2058" required />
-                  </div>
-                </div>
-
-                <div class="field-grid">
-                  <div>
-                    <label for="boatEmail" data-i18n="label_email">Email</label>
-                    <input id="boatEmail" name="email" type="email" placeholder="name@example.com" required />
-                  </div>
-                  <div>
-                    <label for="boatFirstName" data-i18n="label_name">First name</label>
-                    <input id="boatFirstName" name="firstName" type="text" required />
-                  </div>
-                </div>
-
-                <div>
-                  <label for="boatComments" data-i18n="label_comments">Comments</label>
-                  <textarea id="boatComments" name="comments" data-i18n-placeholder="ph_comments_boat" placeholder="Add any extra details about your charter if necessary"></textarea>
-                </div>
-
-                <div class="hero-actions" style="margin: 6px 0 0;">
-                  <button type="submit" class="btn btn-primary" data-i18n="btn_send_booking">Send Booking Request</button>
-                </div>
-                <div class="booking-note" data-i18n="booking_note">
-                  No payments are made through the website
-                </div>
-              </form>
-            </div>
           </aside>
         </div>
       </div>
@@ -2501,7 +2439,7 @@
       <nav class="footer-nav" aria-label="Footer navigation">
         <a href="Index.html#explore" data-i18n="nav_explore">Explore</a>
         <a href="Index.html#service" data-i18n="nav_services">Services</a>
-        <a href="Index.html#how-it-works" data-i18n="nav_how">How It Works</a>
+        <a href="#how-it-works" data-i18n="nav_how">How It Works</a>
         <a href="#book" data-i18n="nav_book">Book</a>
         <a href="#faq" data-i18n="nav_faq">FAQ</a>
         <a href="Index.html#contact-us" data-i18n="nav_contact">Contact Us</a>
@@ -2565,7 +2503,7 @@
         return hours + ':' + minutes + ampm;
       }
 
-      var timeInput = document.getElementById('pickupTime');
+      var timeInput = document.getElementById('departureTime');
 
       if (timeInput) {
         timeInput.addEventListener('change', function () {
@@ -2573,7 +2511,7 @@
         });
       }
 
-      const form = document.getElementById('bookingForm');
+      const form = document.getElementById('ferryBookingForm');
 
       if (form) {
         var isSubmitting = false;
@@ -2586,15 +2524,17 @@
             return;
           }
 
-          const tripDate = document.getElementById('tripDate').value;
-          const pickupLocation = document.getElementById('pickupLocation').value.trim();
-          const pickupTime = document.getElementById('pickupTime').value;
-          const destination = document.getElementById('destination').value.trim();
+          const serviceType = document.getElementById('serviceType').value;
+          const destination = document.getElementById('destination').value;
+          const departureDate = document.getElementById('departureDate').value;
+          const returnDate = document.getElementById('returnDate').value;
+          const departureTime = document.getElementById('departureTime').value;
           const passengers = document.getElementById('passengers').value;
-          const firstName = document.getElementById('firstName').value.trim();
           const phone = document.getElementById('phone').value.trim();
+          const email = document.getElementById('email').value.trim();
+          const fullName = document.getElementById('fullName').value.trim();
 
-          if (!tripDate || !pickupLocation || !pickupTime || !destination || !passengers || !firstName || !phone) {
+          if (!serviceType || !destination || !departureDate || !returnDate || !departureTime || !passengers || !phone || !email || !fullName) {
             var alertMsg = document.documentElement.getAttribute('lang') === 'es'
               ? 'Por favor complete todos los campos requeridos antes de enviar su solicitud de reserva.'
               : 'Please complete all required fields before sending your booking request.';
@@ -2602,8 +2542,8 @@
             return;
           }
 
-          var rawTime = timeInput.getAttribute('data-raw') || pickupTime;
-          document.getElementById('pickupTimeFormatted').value = formatTimeTo12Hour(rawTime);
+          var rawTime = timeInput.getAttribute('data-raw') || departureTime;
+          document.getElementById('departureTimeFormatted').value = formatTimeTo12Hour(rawTime);
 
           isSubmitting = true;
           submitBtn.disabled = true;
@@ -2617,15 +2557,13 @@
           }).then(function (response) {
             isEs = document.documentElement.getAttribute('lang') === 'es';
             if (response.ok) {
-              gtag('event', 'form_submit', {
-                form_id: 'bookingForm',
-                form_name: 'booking',
-                form_destination: 'https://www.dptransportpr.com/?gtm_debug=177622796021' +
-                                  '1#book',
-                form_length: 12,
-                form_submit_text: undefined,
-                send_to: 'AW-18039811113'
-              });
+              if (typeof gtag === 'function') {
+                gtag('event', 'form_submit', {
+                  form_id: 'ferryBookingForm',
+                  form_name: 'ferry-booking',
+                  send_to: 'AW-18039811113'
+                });
+              }
               var bookingCard = form.closest('.booking-card');
               var titleEl = bookingCard ? bookingCard.querySelector('#booking-title') : null;
               if (titleEl) {
@@ -2635,11 +2573,11 @@
                 titleEl.setAttribute('data-i18n', 'book_form_success_title');
               }
               form.innerHTML = '<div style="text-align:center;padding:24px 0;">' +
-                '<p style="margin:0 0 12px;font-size:1.1rem;color:var(--primary);font-weight:600;" data-i18n="book_form_success_msg">' +
-                (isEs ? 'El conductor se comunicará con usted pronto por mensaje de texto.' : 'The driver will reach out to you shortly via text message.') +
+                '<p style="margin:0 0 12px;font-size:1.1rem;color:var(--primary);font-weight:600;" data-i18n="book_ferry_success_msg">' +
+                (isEs ? 'Verificaremos la disponibilidad de boletos y nos comunicaremos con usted pronto por mensaje de texto.' : 'We will check ticket availability and reach out to you shortly via text message.') +
                 '</p>' +
-                '<p style="margin:0;font-size:0.95rem;color:var(--muted);line-height:1.6;" data-i18n="book_form_success_tip">' +
-                (isEs ? 'Consejo: responda al mensaje del conductor para confirmar su viaje.' : 'Tip: reply to the driver\'s text message to confirm your trip.') +
+                '<p style="margin:0;font-size:0.95rem;color:var(--muted);line-height:1.6;" data-i18n="book_ferry_success_tip">' +
+                (isEs ? 'Consejo: responda al mensaje de texto para confirmar sus boletos de ferry.' : 'Tip: reply to the text message to confirm your ferry tickets.') +
                 '</p></div>';
             } else {
               var errMsg = isEs ? 'Hubo un problema al enviar su solicitud. Por favor intente de nuevo.' : 'There was a problem sending your request. Please try again.';
@@ -3101,15 +3039,17 @@
         prod_handicap_title: 'Transporte para Personas con Discapacidad',
         prod_handicap_capacity: 'Máx. 12 personas',
         prod_handicap_desc: 'Viaje por Puerto Rico con comodidad, seguridad y tranquilidad. Nuestros servicios de transporte accesible están diseñados para familias que viajan con alguien que usa silla de ruedas o tiene movilidad reducida. Ofrecemos traslados confiables al aeropuerto, excursiones privadas y transporte regular en vehículos equipados con una plataforma elevadora accesible para sillas de ruedas. La plataforma trasera se baja hasta el nivel del suelo, permitiendo que el pasajero suba de manera segura. Luego eleva la silla de ruedas hacia el interior del vehículo, donde se asegura firmemente antes de comenzar el viaje. Ya sea que necesite transporte del aeropuerto a su hotel, un viaje cómodo a una cita, o una forma accesible de explorar las atracciones de Puerto Rico, nuestro equipo está listo para ayudar. Disfrute de una experiencia privada y familiar adaptada a las necesidades de movilidad de su grupo.',
-        prod_cruise_title: 'Traslados a Puertos de Cruceros y el Ferry',
+        prod_cruise_title: 'Boletos de Ferry',
         prod_cruise_capacity: 'Máx. 25 personas',
-        prod_cruise_desc: 'Disfrute de transporte confiable y conveniente a puertos de cruceros, hoteles, alquiler de autos, marinas y destinos en todo Puerto Rico. Ya sea que vaya a un tour de bahía bioluminiscente o tome un ferry a Culebra, Vieques, Palomino o Icacos, proporcionamos transporte de ida y vuelta cuidadosamente programado alrededor de sus actividades para una experiencia tranquila y sin estrés.',
+        prod_ferry_price_culebra: 'Culebra $32 ida y vuelta por persona',
+        prod_ferry_price_vieques: 'Vieques $30 ida y vuelta por persona',
+        prod_cruise_desc: 'Primero, verificamos la disponibilidad de boletos de ferry según su destino, fecha de viaje y número de pasajeros. Una vez confirmada la disponibilidad, usted envía el pago a través de PayPal o Venmo por los boletos y nuestra tarifa de servicio. Luego compramos y confirmamos sus boletos en el terminal del ferry, y Puerto Rico Ferry le envía los boletos directamente de forma electrónica por mensaje de texto. Una vez que tenga los boletos, deberá llegar al terminal del ferry 1 hora antes de la salida para comenzar los procedimientos de abordaje.',
         check_pricing: 'Consultar Precios y Disponibilidad',
 
         // Service categories
         cat_transport_title: 'Transporte',
-        cat_transport_desc: 'Hacemos que moverte por Puerto Rico sea fácil con transporte privado y confiable para traslados al aeropuerto, hoteles, excursiones y planes especiales — para que puedas llegar, relajarte y disfrutar tu viaje sin preocuparte por el transporte.',
-        svc_transport_page_title: '¿Tu viaje a Puerto Rico está planificado… excepto cómo te vas a mover?',
+        cat_transport_desc: 'Incluso cuando los boletos aparecen agotados en línea, podemos ayudarte a conseguir boletos de ferry a Culebra o Vieques para que no tengas que cancelar tus planes en la isla.',
+        svc_transport_page_title: '¿BOLETOS DE FERRY AGOTADOS… Y AHORA SIENTES QUE TUS PLANES A CULEBRA O VIEQUES SE ARRUINARON?',
         cat_tours_title: 'Tours y Excursiones',
         cat_tours_desc: 'Descubra Puerto Rico más allá del trayecto. Desde el histórico Viejo San Juan y aventuras en el bosque pluvial hasta experiencias de natación en cuevas y visitas a vinerías locales',
         cat_boats_title: 'Chárters de Bote',
@@ -3228,6 +3168,13 @@
         label_name: 'Nombre',
         label_comments: 'Comentarios',
         label_email: 'Correo electrónico',
+        label_departure_date: 'Fecha de salida',
+        label_return_date: 'Fecha de regreso',
+        label_full_name: 'Nombre completo',
+        ph_destination_select: 'Elija un destino',
+        ph_comments_ferry: 'Agregue cualquier detalle adicional sobre su viaje en ferry si es necesario',
+        book_ferry_success_msg: 'Verificaremos la disponibilidad de boletos y nos comunicaremos con usted pronto por mensaje de texto.',
+        book_ferry_success_tip: 'Consejo: responda al mensaje de texto para confirmar sus boletos de ferry.',
         label_select_tour: 'Seleccione el tour',
         label_select_boat: 'Botes y Chárters',
         label_service_type: 'Tipo de servicio',
@@ -3236,7 +3183,7 @@
         round_trip_yes: 'Sí',
         ph_service_type: 'Elija un servicio',
         service_airport: 'Traslados al Aeropuerto',
-        service_cruise: 'Puertos de Cruceros y Traslados de Ferry',
+        service_cruise: 'Boletos de Ferry',
         service_excursions: 'Transporte para Excursiones',
         service_luxury: 'Viaje de Lujo',
         service_handicap: 'Transporte para Personas con Discapacidad',
@@ -3355,6 +3302,8 @@
         book_form_success_title: 'Booking request sent!',
         book_form_success_msg: 'The driver will reach out to you shortly via text message.',
         book_form_success_tip: 'Tip: reply to the driver\'s text message to confirm your trip.',
+        book_ferry_success_msg: 'We will check ticket availability and reach out to you shortly via text message.',
+        book_ferry_success_tip: 'Tip: reply to the text message to confirm your ferry tickets.',
         book_tour_success_msg: 'The Tour Guide will reach out to you shortly via text message.',
         book_tour_success_tip: 'Tip: reply to the guide\'s text message to confirm your trip.',
         book_boat_success_msg: 'The Captain will reach out to you shortly via email.',
@@ -3932,7 +3881,7 @@
         { name: 'Old San Juan', cats: ['places'], lat: 18.4655, lng: -66.1157, desc: 'Historic colonial district with colorful streets, forts, and centuries of Caribbean history. People of all ages can come and enjoy of the highlights of the island from historic sights to awesome nightlife there\'s a bit of everything for everyone. You can even book tours so you get inside scoop on the places to visit while there.', buttons: [{ label: 'Book Tour', labelEs: 'Reservar Tour', type: 'tour', tour: 'Old San Juan Tour' }, { label: 'Book Transport', labelEs: 'Reservar Transporte', type: 'transport', service: 'Excursions Transport' }] },
         { name: 'Culebra', cats: ['todo', 'places'], lat: 18.3009, lng: -65.3015, desc: 'Pristine island paradise known for Flamenco Beach, classified as one of the top beaches in the world with incredible snorkeling spots. You can visit by plane, ferry and private boat charters. Once you arrive at the port there are taxis that can take you to the different locations in the island. Car and golf cart rental available.', buttons: [{ label: 'Buy Tickets', labelEs: 'Comprar Boletos', type: 'link', url: 'https://www.puertoricoferry.com' }, { label: 'Book Charter', labelEs: 'Reservar Chárter', type: 'charter' }] },
         { name: 'Vieques', cats: ['todo', 'places'], lat: 18.1263, lng: -65.4401, desc: 'Formerly used by the US Navy as a shooting range for their gunships Vieques still offers the best bioluminescent bay in the world, wild horses, and even a secluded black sand beach. Similar to Culebra you can get there by plane, ferry or private boat charter.', buttons: [{ label: 'Buy Tickets', labelEs: 'Comprar Boletos', type: 'link', url: 'https://www.puertoricoferry.com' }, { label: 'Book Charter', labelEs: 'Reservar Chárter', type: 'charter' }] },
-        { name: 'Ceiba Ferry', cats: ['todo'], lat: 18.2566, lng: -65.6343, desc: 'Ferry terminal connecting to Vieques and Culebra from the main island. Buy tickets on their website below, if sold out no worries tickets can be bought in person at the terminal.', address: 'Ceiba Ferry Terminal, 69HJ+XM4, Marina Dr, Roosevelt Roads, Ceiba 00735', buttons: [{ label: 'Buy Tickets', labelEs: 'Comprar Boletos', type: 'link', url: 'https://www.puertoricoferry.com' }, { label: 'Book Transport', labelEs: 'Reservar Transporte', type: 'transport', service: 'Cruise Ports & Ferry Transfers' }] },
+        { name: 'Ceiba Ferry', cats: ['todo'], lat: 18.2566, lng: -65.6343, desc: 'Ferry terminal connecting to Vieques and Culebra from the main island. Buy tickets on their website below, if sold out no worries tickets can be bought in person at the terminal.', address: 'Ceiba Ferry Terminal, 69HJ+XM4, Marina Dr, Roosevelt Roads, Ceiba 00735', buttons: [{ label: 'Buy Tickets', labelEs: 'Comprar Boletos', type: 'link', url: 'https://www.puertoricoferry.com' }, { label: 'Book Transport', labelEs: 'Reservar Transporte', type: 'transport', service: 'Ferry Tickets' }] },
         { name: 'Playa Crash Boat', cats: ['places'], lat: 18.4912, lng: -67.1647, desc: 'Colorful pier and stunning beach in Aguadilla, perfect for snorkeling and jumping off the pier. Look for the jets and banana boat rental. Easily one of the most complete beaches in the island.', address: 'Crash Boat Beach, Borinquen, Aguadilla 00603' },
         { name: 'Playa Buye', cats: ['places'], lat: 18.0215, lng: -67.1539, desc: 'Quiet, palm-lined beach in Cabo Rojo ideal for a relaxing day.', address: 'Buyé Beach, Cam Buye, Cabo Rojo, 00623' },
         { name: 'Playa Santa', cats: ['places'], lat: 17.9560, lng: -66.9080, desc: 'Beautiful beach in Guánica with calm, clear waters and scenic coastal views. Jetski rental available.', address: 'Santa Beach, Guánica 00647' },
