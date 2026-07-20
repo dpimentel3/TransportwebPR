@@ -309,9 +309,9 @@
     /* Service hero header (matches Boat Charters & Tours pages) */
     .service-hero::before {
       display: block;
-      background-image: url("transportation-header.jpg");
+      background-image: url("ferry-tickets-header.png");
       background-size: cover;
-      background-position: center 42%;
+      background-position: center 50%;
       opacity: 1;
       transform: none;
     }
@@ -1081,6 +1081,20 @@
       padding: 86px 0;
     }
 
+    .book-headline {
+      max-width: 920px;
+      margin: 0 auto 44px;
+      text-align: center;
+      font-size: clamp(1.15rem, 2.1vw, 1.55rem);
+      line-height: 1.5;
+      font-weight: 700;
+      color: var(--primary);
+    }
+
+    @media (max-width: 860px) {
+      .book-headline { margin-bottom: 30px; }
+    }
+
     .summary-box,
     .booking-card {
       border-radius: 8px;
@@ -1099,7 +1113,7 @@
 
     .booking-tabs {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(2, 1fr);
       margin: -8px -8px 22px;
       border-bottom: 1px solid var(--border);
     }
@@ -1953,13 +1967,8 @@
       aspect-ratio: 4 / 3;
       object-fit: cover;
     }
-    /* Stacked booking options (all forms shown, no tabs) */
-    .booking-tabs { display: none; }
-    .booking-panel + .booking-panel {
-      margin-top: 30px;
-      padding-top: 30px;
-      border-top: 1px solid var(--border);
-    }
+    /* Tabbed booking options (Ferry Tickets / Transportation) */
+    .booking-tabs { display: grid; }
 
     /* Compact "How it works" (transport landing pages) */
     .section-how-compact .section-shell {
@@ -2159,22 +2168,22 @@
           <li class="step-compact">
             <span class="step-compact-num">2</span>
             <div class="step-compact-text">
-              <h3 data-i18n="step2_title">Send the request</h3>
-              <p data-i18n="step2_desc">Tap the booking button to send your request with all the details included.</p>
+              <h3 data-i18n="step2_title">Receive a text from us</h3>
+              <p data-i18n="step2_desc">After your request is received, we will contact you with your trip details and confirmation steps.</p>
             </div>
           </li>
           <li class="step-compact">
             <span class="step-compact-num">3</span>
             <div class="step-compact-text">
-              <h3 data-i18n="step3_title">Receive a text from your Driver, Captain or Tour Guide</h3>
-              <p data-i18n="step3_desc">After your request is received, we will contact you with your trip details and confirmation steps.</p>
+              <h3 data-i18n="step3_title">Evaluate and pay</h3>
+              <p data-i18n="step3_desc">We will send you a PayPal or Venmo secure payment link, after payment is processed tickets will be bought at the ferry terminal.</p>
             </div>
           </li>
           <li class="step-compact">
             <span class="step-compact-num">4</span>
             <div class="step-compact-text">
-              <h3 data-i18n="step4_title">Reply to confirm the trip</h3>
-              <p data-i18n="step4_desc">Answer the text or email to confirm the details. Once you reply, your trip is confirmed.</p>
+              <h3 data-i18n="step4_title">Receive your tickets</h3>
+              <p data-i18n="step4_desc">You will receive your tickets via text from puertoricoferry.com. Use the barcode on the tickets to onboard once you arrive at the terminal.</p>
             </div>
           </li>
         </ol>
@@ -2183,6 +2192,7 @@
 
     <section id="book" class="background-section section-book">
       <div class="container section-shell">
+        <p class="book-headline" data-i18n="book_headline">Don't know how to get to and come back from the ferry terminal? Arrange your transport below and save yourself the headache of figuring everything out alone — combine both services for a stress-free experience for your family or group.</p>
         <div class="section-grid two-col">
           <div>
             <div class="section-intro">
@@ -2202,7 +2212,16 @@
 
           <aside class="booking-card" aria-labelledby="booking-title">
             <div class="booking-tabs" role="tablist" aria-label="Booking options">
-              <button type="button" class="booking-tab active" id="tab-transport" role="tab" aria-selected="true" aria-controls="panel-transport" data-panel="panel-transport">
+              <button type="button" class="booking-tab active" id="tab-ferry" role="tab" aria-selected="true" aria-controls="panel-ferry" data-panel="panel-ferry">
+                <svg class="booking-tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M3 15l1.3 3.3a2 2 0 0 0 1.9 1.2h11.6a2 2 0 0 0 1.9-1.2L22 15"/>
+                  <path d="M5 15V9a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v6"/>
+                  <path d="M12 7V4"/>
+                  <path d="M9 4h6"/>
+                </svg>
+                <span data-i18n="tab_ferry">Ferry Tickets</span>
+              </button>
+              <button type="button" class="booking-tab" id="tab-transport" role="tab" aria-selected="false" aria-controls="panel-transport" data-panel="panel-transport">
                 <svg class="booking-tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                   <path d="M4 13l1.6-4.8A2 2 0 0 1 7.5 7h9a2 2 0 0 1 1.9 1.2L20 13"/>
                   <path d="M3 13h18v4a1 1 0 0 1-1 1h-1.5a1 1 0 0 1-1-1v-1h-11v1a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1v-4z"/>
@@ -2213,25 +2232,13 @@
               </button>
             </div>
 
-            <div class="booking-panel" id="panel-transport" role="tabpanel" aria-labelledby="tab-transport">
-              <h2 id="booking-title" data-i18n="book_form_title">Book your transportation</h2>
+            <div class="booking-panel" id="panel-ferry" role="tabpanel" aria-labelledby="tab-ferry">
+              <h2 id="booking-title" data-i18n="book_ferry_form_title">Book your tickets</h2>
               <form id="ferryBookingForm" name="ferry-booking" method="POST" data-netlify="true" netlify-honeypot="bot-field">
               <input type="hidden" name="form-name" value="ferry-booking" />
               <p class="hidden-field">
                 <label>Don’t fill this out if you’re human: <input name="bot-field" /></label>
               </p>
-              <div>
-                <label for="serviceType" data-i18n="label_service_type">Service type</label>
-                <select id="serviceType" name="serviceType" required>
-                  <option value="" disabled data-i18n="ph_service_type">Choose a service</option>
-                  <option value="Airport Transfers" data-i18n="service_airport">Airport Transfers</option>
-                  <option value="Ferry Tickets" selected data-i18n="service_cruise">Ferry Tickets</option>
-                  <option value="Excursions Transport" data-i18n="service_excursions">Excursions Transport</option>
-                  <option value="Luxury Travel" data-i18n="service_luxury">Luxury Travel</option>
-                  <option value="Handicap Transport" data-i18n="service_handicap">Handicap Transport</option>
-                </select>
-              </div>
-
               <div>
                 <label for="destination" data-i18n="label_destination">Destination</label>
                 <select id="destination" name="destination" required>
@@ -2283,6 +2290,92 @@
               <div>
                 <label for="comments" data-i18n="label_comments">Comments</label>
                 <textarea id="comments" name="comments" data-i18n-placeholder="ph_comments_ferry" placeholder="Add any extra details about your ferry trip if necessary"></textarea>
+              </div>
+
+              <div class="hero-actions" style="margin: 6px 0 0;">
+                <button type="submit" class="btn btn-primary" data-i18n="btn_send_booking">Send Booking Request</button>
+              </div>
+              <div class="booking-note" data-i18n="booking_note">
+                No payments are made through the website
+              </div>
+            </form>
+            </div>
+
+            <div class="booking-panel" id="panel-transport" role="tabpanel" aria-labelledby="tab-transport" hidden>
+              <h2 id="transport-booking-title" data-i18n="book_form_title">Book your transportation</h2>
+              <form id="transportBookingForm" name="booking" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+              <input type="hidden" name="form-name" value="booking" />
+              <p class="hidden-field">
+                <label>Don’t fill this out if you’re human: <input name="bot-field" /></label>
+              </p>
+              <div>
+                <label for="t_serviceType" data-i18n="label_service_type">Service type</label>
+                <select id="t_serviceType" name="serviceType" required>
+                  <option value="" disabled data-i18n="ph_service_type">Choose a service</option>
+                  <option value="Airport Transfers" data-i18n="service_airport">Airport Transfers</option>
+                  <option value="Ferry Transfer" selected data-i18n="service_cruise">Ferry Transfer</option>
+                  <option value="Excursions Transport" data-i18n="service_excursions">Excursions Transport</option>
+                  <option value="Luxury Travel" data-i18n="service_luxury">Luxury Travel</option>
+                  <option value="Handicap Transport" data-i18n="service_handicap">Handicap Transport</option>
+                </select>
+              </div>
+
+              <div>
+                <label for="t_roundTrip" data-i18n="label_round_trip">Round trip</label>
+                <select id="t_roundTrip" name="roundTrip">
+                  <option value="No" data-i18n="round_trip_no">No</option>
+                  <option value="Yes" data-i18n="round_trip_yes">Yes</option>
+                </select>
+              </div>
+
+              <div class="field-grid">
+                <div>
+                  <label for="t_tripDate" data-i18n="label_date">Date (month/day)</label>
+                  <input id="t_tripDate" name="tripDate" type="date" required />
+                </div>
+                <div>
+                  <label for="t_pickupLocation" data-i18n="label_pickup">Pick up location</label>
+                  <div class="iq-input-wrap">
+                    <input id="t_pickupLocation" name="pickupLocation" type="text" data-i18n-placeholder="ph_pickup" placeholder="Example: SJU Airport or hotel name" required />
+                    <button type="button" class="iq-clear" data-target="t_pickupLocation" aria-label="Clear pick up location">&times;</button>
+                  </div>
+                </div>
+              </div>
+
+              <div>
+                <label for="t_pickupTime" data-i18n="label_time">Time of pick up</label>
+                <input id="t_pickupTime" type="time" required />
+                <input type="hidden" id="t_pickupTimeFormatted" name="pickupTime" value="" />
+              </div>
+
+              <div>
+                <label for="t_destination" data-i18n="label_destination">Destination</label>
+                <div class="iq-input-wrap">
+                  <input id="t_destination" name="destination" type="text" data-i18n-placeholder="ph_destination" placeholder="Example: San Juan Cruise Port" required />
+                  <button type="button" class="iq-clear" data-target="t_destination" aria-label="Clear destination">&times;</button>
+                </div>
+                <div class="helper" data-i18n="helper_destination">Use a place name or address so the driver clearly understands your destination.</div>
+              </div>
+
+              <div class="field-grid">
+                <div>
+                  <label for="t_passengers" data-i18n="label_passengers">Number of passengers</label>
+                  <input id="t_passengers" name="passengers" type="number" min="1" max="50" data-i18n-placeholder="ph_passengers" placeholder="Example: 4" required />
+                </div>
+                <div>
+                  <label for="t_phone" data-i18n="label_phone">Phone number</label>
+                  <input id="t_phone" name="phone" type="tel" placeholder="787-214-2058" required />
+                </div>
+              </div>
+
+              <div>
+                <label for="t_firstName" data-i18n="label_name">First name</label>
+                <input id="t_firstName" name="firstName" type="text" required />
+              </div>
+
+              <div>
+                <label for="t_comments" data-i18n="label_comments">Comments</label>
+                <textarea id="t_comments" name="comments" data-i18n-placeholder="ph_comments" placeholder="Add any extra details about your trip if necessary (flight number/airline, need/have car seat, number of bags or golf bags)"></textarea>
               </div>
 
               <div class="hero-actions" style="margin: 6px 0 0;">
@@ -2524,7 +2617,6 @@
             return;
           }
 
-          const serviceType = document.getElementById('serviceType').value;
           const destination = document.getElementById('destination').value;
           const departureDate = document.getElementById('departureDate').value;
           const returnDate = document.getElementById('returnDate').value;
@@ -2534,7 +2626,7 @@
           const email = document.getElementById('email').value.trim();
           const fullName = document.getElementById('fullName').value.trim();
 
-          if (!serviceType || !destination || !departureDate || !returnDate || !departureTime || !passengers || !phone || !email || !fullName) {
+          if (!destination || !departureDate || !returnDate || !departureTime || !passengers || !phone || !email || !fullName) {
             var alertMsg = document.documentElement.getAttribute('lang') === 'es'
               ? 'Por favor complete todos los campos requeridos antes de enviar su solicitud de reserva.'
               : 'Please complete all required fields before sending your booking request.';
@@ -2597,6 +2689,97 @@
         });
       }
 
+      // Transportation booking form (general transport, submits to the "booking" form)
+      var tPickupTime = document.getElementById('t_pickupTime');
+      if (tPickupTime) {
+        tPickupTime.addEventListener('change', function () {
+          tPickupTime.setAttribute('data-raw', tPickupTime.value);
+        });
+      }
+
+      var transportForm = document.getElementById('transportBookingForm');
+      if (transportForm) {
+        var isTransportSubmitting = false;
+
+        transportForm.addEventListener('submit', function (event) {
+          event.preventDefault();
+          var submitBtn = transportForm.querySelector('button[type="submit"]');
+
+          if (isTransportSubmitting) {
+            return;
+          }
+
+          var serviceType = document.getElementById('t_serviceType').value;
+          var tripDate = document.getElementById('t_tripDate').value;
+          var pickupLocation = document.getElementById('t_pickupLocation').value.trim();
+          var pickupTime = document.getElementById('t_pickupTime').value;
+          var destination = document.getElementById('t_destination').value.trim();
+          var passengers = document.getElementById('t_passengers').value;
+          var phone = document.getElementById('t_phone').value.trim();
+          var firstName = document.getElementById('t_firstName').value.trim();
+
+          if (!serviceType || !tripDate || !pickupLocation || !pickupTime || !destination || !passengers || !phone || !firstName) {
+            var alertMsg = document.documentElement.getAttribute('lang') === 'es'
+              ? 'Por favor complete todos los campos requeridos antes de enviar su solicitud de reserva.'
+              : 'Please complete all required fields before sending your booking request.';
+            alert(alertMsg);
+            return;
+          }
+
+          var rawTime = tPickupTime.getAttribute('data-raw') || pickupTime;
+          document.getElementById('t_pickupTimeFormatted').value = formatTimeTo12Hour(rawTime);
+
+          isTransportSubmitting = true;
+          submitBtn.disabled = true;
+          var isEs = document.documentElement.getAttribute('lang') === 'es';
+          submitBtn.textContent = isEs ? 'Enviando…' : 'Sending…';
+
+          fetch('/', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            body: new URLSearchParams(new FormData(transportForm)).toString()
+          }).then(function (response) {
+            isEs = document.documentElement.getAttribute('lang') === 'es';
+            if (response.ok) {
+              if (typeof gtag === 'function') {
+                gtag('event', 'form_submit', {
+                  form_id: 'transportBookingForm',
+                  form_name: 'booking',
+                  send_to: 'AW-18039811113'
+                });
+              }
+              var titleEl = document.getElementById('transport-booking-title');
+              if (titleEl) {
+                titleEl.textContent = isEs ? '¡Solicitud de reserva enviada!' : 'Booking request sent!';
+                titleEl.style.color = 'var(--primary)';
+                titleEl.style.textAlign = 'center';
+                titleEl.setAttribute('data-i18n', 'book_form_success_title');
+              }
+              transportForm.innerHTML = '<div style="text-align:center;padding:24px 0;">' +
+                '<p style="margin:0 0 12px;font-size:1.1rem;color:var(--primary);font-weight:600;" data-i18n="book_form_success_msg">' +
+                (isEs ? 'El conductor se comunicará con usted pronto por mensaje de texto.' : 'The driver will reach out to you shortly via text message.') +
+                '</p>' +
+                '<p style="margin:0;font-size:0.95rem;color:var(--muted);line-height:1.6;" data-i18n="book_form_success_tip">' +
+                (isEs ? 'Consejo: responda al mensaje del conductor para confirmar su viaje.' : 'Tip: reply to the driver\'s text message to confirm your trip.') +
+                '</p></div>';
+            } else {
+              var errMsg = isEs ? 'Hubo un problema al enviar su solicitud. Por favor intente de nuevo.' : 'There was a problem sending your request. Please try again.';
+              alert(errMsg);
+              isTransportSubmitting = false;
+              submitBtn.disabled = false;
+              submitBtn.textContent = isEs ? 'Enviar Solicitud de Reserva' : 'Send Booking Request';
+            }
+          }).catch(function () {
+            var isEs2 = document.documentElement.getAttribute('lang') === 'es';
+            var errMsg = isEs2 ? 'Hubo un problema al enviar su solicitud. Por favor intente de nuevo.' : 'There was a problem sending your request. Please try again.';
+            alert(errMsg);
+            isTransportSubmitting = false;
+            submitBtn.disabled = false;
+            submitBtn.textContent = isEs2 ? 'Enviar Solicitud de Reserva' : 'Send Booking Request';
+          });
+        });
+      }
+
       // Booking tabs + Tour/Boat charter forms
       (function () {
         var tabs = document.querySelectorAll('.booking-tab');
@@ -2610,6 +2793,7 @@
           });
           panels.forEach(function (p) {
             if (p.id === panelId) p.removeAttribute('hidden');
+            else p.setAttribute('hidden', '');
           });
         }
 
@@ -2647,13 +2831,17 @@
           });
         });
 
-        // Transportation card "Book Now" buttons switch to Transportation tab and preselect the service
+        // Transportation card "Book Now" buttons switch to the matching tab and preselect the service
         var transportLinks = document.querySelectorAll('.book-transport-link');
         transportLinks.forEach(function (link) {
           link.addEventListener('click', function () {
-            activateTab('panel-transport');
             var serviceName = link.getAttribute('data-service');
-            var select = document.getElementById('serviceType');
+            if (serviceName === 'Ferry Tickets') {
+              activateTab('panel-ferry');
+              return;
+            }
+            activateTab('panel-transport');
+            var select = document.getElementById('t_serviceType');
             if (select && serviceName) {
               var options = select.querySelectorAll('option');
               options.forEach(function (opt) {
@@ -2693,28 +2881,32 @@
               });
             }
           } else if (btn.classList.contains('book-transport-link')) {
-            activateTab('panel-transport');
             var serviceName = btn.getAttribute('data-service');
-            var select = document.getElementById('serviceType');
-            if (select && serviceName) {
-              var options = select.querySelectorAll('option');
-              options.forEach(function (opt) {
-                if (opt.value === serviceName) select.value = serviceName;
-              });
+            if (serviceName === 'Ferry Tickets') {
+              activateTab('panel-ferry');
+            } else {
+              activateTab('panel-transport');
+              var select = document.getElementById('t_serviceType');
+              if (select && serviceName) {
+                var options = select.querySelectorAll('option');
+                options.forEach(function (opt) {
+                  if (opt.value === serviceName) select.value = serviceName;
+                });
+              }
             }
           } else if (btn.classList.contains('book-charter-link')) {
             activateTab('panel-boats');
           } else if (btn.classList.contains('book-roundtrip-link')) {
             activateTab('panel-transport');
             var serviceName = btn.getAttribute('data-service');
-            var serviceSelect = document.getElementById('serviceType');
+            var serviceSelect = document.getElementById('t_serviceType');
             if (serviceSelect && serviceName) {
               var options = serviceSelect.querySelectorAll('option');
               options.forEach(function (opt) {
                 if (opt.value === serviceName) serviceSelect.value = serviceName;
               });
             }
-            var roundTripSelect = document.getElementById('roundTrip');
+            var roundTripSelect = document.getElementById('t_roundTrip');
             if (roundTripSelect) roundTripSelect.value = 'Yes';
           }
         });
@@ -3132,12 +3324,12 @@
         how_desc: 'Cada paso está explicado claramente para que organizar su transporte sea rápido y sencillo.',
         step1_title: 'Complete los detalles de su viaje',
         step1_desc: 'Ingrese la fecha, hora y lugar de recogida, destino, número de pasajeros, nombre y número de teléfono. Correo electrónico si es necesario.',
-        step2_title: 'Envíe la solicitud',
-        step2_desc: 'Presione el botón de reserva para enviar su solicitud con todos los detalles incluidos.',
-        step3_title: 'Reciba un mensaje de su Conductor, Capitán o Guía Turístico',
-        step3_desc: 'Después de recibir su solicitud, nos comunicaremos con usted con los detalles de su viaje y los pasos de confirmación.',
-        step4_title: 'Responda para confirmar el viaje',
-        step4_desc: 'Responda al mensaje de texto o correo electrónico para confirmar los detalles. Una vez que responda, su viaje estará confirmado.',
+        step2_title: 'Reciba un mensaje de texto de nosotros',
+        step2_desc: 'Después de recibir su solicitud, nos comunicaremos con usted con los detalles de su viaje y los pasos de confirmación.',
+        step3_title: 'Evalúe y pague',
+        step3_desc: 'Le enviaremos un enlace de pago seguro de PayPal o Venmo; una vez procesado el pago, los boletos se comprarán en la terminal del ferry.',
+        step4_title: 'Reciba sus boletos',
+        step4_desc: 'Recibirá sus boletos por mensaje de texto de puertoricoferry.com. Use el código de barras de los boletos para abordar una vez que llegue a la terminal.',
 
         // Reviews section
         reviews_title: 'Reseñas en TripAdvisor',
@@ -3146,6 +3338,7 @@
         guest_reviews_desc: 'Reseñas reales de huéspedes que exploraron Puerto Rico con DP Transport.',
 
         // Book section
+        book_headline: '¿No sabe cómo llegar y regresar de la terminal del ferry? Organice su transporte a continuación y ahórrese el dolor de cabeza de resolver todo por su cuenta: combine ambos servicios para una experiencia sin estrés para su familia o grupo.',
         book_title: 'Reservar',
         book_desc: 'Complete el formulario para que podamos dar seguimiento y confirmar su viaje.',
         book_before_title: 'Antes de enviar la solicitud',
@@ -3154,8 +3347,10 @@
         book_check2: 'Ingrese el destino exacto o nombre del lugar',
         book_check3: 'Asegúrese de que su número de teléfono y correo electrónico sean correctos',
         book_form_title: 'Reserve su transporte',
+        book_ferry_form_title: 'Reserve sus boletos',
         book_tours_title: 'Reserve su tour',
         book_boats_title: 'Reserve un chárter de bote',
+        tab_ferry: 'Boletos de Ferry',
         tab_transport: 'Transporte',
         tab_tours: 'Tours',
         tab_boats: 'Chárters de Bote',
@@ -3183,7 +3378,7 @@
         round_trip_yes: 'Sí',
         ph_service_type: 'Elija un servicio',
         service_airport: 'Traslados al Aeropuerto',
-        service_cruise: 'Boletos de Ferry',
+        service_cruise: 'Traslado en Ferry',
         service_excursions: 'Transporte para Excursiones',
         service_luxury: 'Viaje de Lujo',
         service_handicap: 'Transporte para Personas con Discapacidad',
@@ -3759,9 +3954,11 @@
       var bookNowBtn = document.getElementById('quoteBookNow');
       if (bookNowBtn) {
         bookNowBtn.addEventListener('click', function() {
-          // Copy whatever the user typed in the quote widget into the booking form
-          var bookingPickupField = document.getElementById('pickupLocation');
-          var bookingDestinationField = document.getElementById('destination');
+          // Switch to the Transportation tab and copy whatever the user typed in the quote widget
+          var transportTab = document.getElementById('tab-transport');
+          if (transportTab) transportTab.click();
+          var bookingPickupField = document.getElementById('t_pickupLocation');
+          var bookingDestinationField = document.getElementById('t_destination');
           if (bookingPickupField) {
             bookingPickupField.value = pickupInput.value || '';
             bookingPickupField.dispatchEvent(new Event('input', { bubbles: true }));
