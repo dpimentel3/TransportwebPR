@@ -3016,6 +3016,17 @@
               }
             }
 
+            // Enforce minimum passengers for tours
+            if (config.minPassengers) {
+              var passengersField = formEl.querySelector('[name="passengers"]');
+              if (passengersField && parseInt(passengersField.value, 10) < config.minPassengers) {
+                alert(isEs
+                  ? 'El tour requiere un mínimo de ' + config.minPassengers + ' personas.'
+                  : 'Tour requires a minimum of ' + config.minPassengers + ' people');
+                return;
+              }
+            }
+
             submitting = true;
             submitBtn.disabled = true;
             submitBtn.textContent = isEs ? 'Enviando…' : 'Sending…';
@@ -3071,6 +3082,7 @@
         buildExtraForm({
           formId: 'toursForm',
           formName: 'tour-booking-v2',
+          minPassengers: 2,
           successMsgKey: 'book_tour_success_msg',
           successTipKey: 'book_tour_success_tip',
           successMsgEn: 'The Tour Guide will reach out to you shortly via text message.',
