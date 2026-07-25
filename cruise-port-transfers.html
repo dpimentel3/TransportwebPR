@@ -2259,10 +2259,17 @@
                 </div>
               </div>
 
-              <div>
-                <label for="departureTime" data-i18n="label_departure_time">Departure time</label>
-                <input id="departureTime" type="time" required />
-                <input type="hidden" id="departureTimeFormatted" name="departureTime" value="" />
+              <div class="field-grid">
+                <div>
+                  <label for="departureTime" data-i18n="label_departure_time">Departure time</label>
+                  <input id="departureTime" type="time" required />
+                  <input type="hidden" id="departureTimeFormatted" name="departureTime" value="" />
+                </div>
+                <div>
+                  <label for="returnTime" data-i18n="label_return_time">Return time</label>
+                  <input id="returnTime" type="time" required />
+                  <input type="hidden" id="returnTimeFormatted" name="returnTime" value="" />
+                </div>
               </div>
 
               <div class="field-grid">
@@ -2289,7 +2296,7 @@
 
               <div>
                 <label for="comments" data-i18n="label_comments">Comments</label>
-                <textarea id="comments" name="comments" data-i18n-placeholder="ph_comments_ferry" placeholder="Add any extra details about your ferry trip if necessary"></textarea>
+                <textarea id="comments" name="comments" data-i18n-placeholder="ph_comments_ferry" placeholder="Write the full name of all passengers"></textarea>
               </div>
 
               <div class="hero-actions" style="margin: 6px 0 0;">
@@ -2604,6 +2611,14 @@
         });
       }
 
+      var returnTimeInput = document.getElementById('returnTime');
+
+      if (returnTimeInput) {
+        returnTimeInput.addEventListener('change', function () {
+          returnTimeInput.setAttribute('data-raw', returnTimeInput.value);
+        });
+      }
+
       const form = document.getElementById('ferryBookingForm');
 
       if (form) {
@@ -2621,12 +2636,13 @@
           const departureDate = document.getElementById('departureDate').value;
           const returnDate = document.getElementById('returnDate').value;
           const departureTime = document.getElementById('departureTime').value;
+          const returnTime = document.getElementById('returnTime').value;
           const passengers = document.getElementById('passengers').value;
           const phone = document.getElementById('phone').value.trim();
           const email = document.getElementById('email').value.trim();
           const fullName = document.getElementById('fullName').value.trim();
 
-          if (!destination || !departureDate || !returnDate || !departureTime || !passengers || !phone || !email || !fullName) {
+          if (!destination || !departureDate || !returnDate || !departureTime || !returnTime || !passengers || !phone || !email || !fullName) {
             var alertMsg = document.documentElement.getAttribute('lang') === 'es'
               ? 'Por favor complete todos los campos requeridos antes de enviar su solicitud de reserva.'
               : 'Please complete all required fields before sending your booking request.';
@@ -2636,6 +2652,9 @@
 
           var rawTime = timeInput.getAttribute('data-raw') || departureTime;
           document.getElementById('departureTimeFormatted').value = formatTimeTo12Hour(rawTime);
+
+          var rawReturnTime = returnTimeInput.getAttribute('data-raw') || returnTime;
+          document.getElementById('returnTimeFormatted').value = formatTimeTo12Hour(rawReturnTime);
 
           isSubmitting = true;
           submitBtn.disabled = true;
@@ -3367,7 +3386,7 @@
         label_return_date: 'Fecha de regreso',
         label_full_name: 'Nombre completo',
         ph_destination_select: 'Elija un destino',
-        ph_comments_ferry: 'Agregue cualquier detalle adicional sobre su viaje en ferry si es necesario',
+        ph_comments_ferry: 'Escriba el nombre completo de todos los pasajeros',
         book_ferry_success_msg: 'Verificaremos la disponibilidad de boletos y nos comunicaremos con usted pronto por mensaje de texto.',
         book_ferry_success_tip: 'Consejo: responda al mensaje de texto para confirmar sus boletos de ferry.',
         label_select_tour: 'Seleccione el tour',
@@ -3383,6 +3402,7 @@
         service_luxury: 'Viaje de Lujo',
         service_handicap: 'Transporte para Personas con Discapacidad',
         label_departure_time: 'Hora de salida',
+        label_return_time: 'Hora de regreso',
         label_trip_length: 'Duración del viaje',
         ph_select_tour: 'Elija un tour',
         ph_select_boat: 'Elija un chárter',
