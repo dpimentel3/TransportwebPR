@@ -3128,6 +3128,8 @@
         ph_trip_length: 'Elija la duración del viaje',
         trip_length_4h: '4 horas',
         trip_length_6h: '6 horas',
+        six_hour_departure_1: '9:00 AM a 3:00 PM',
+        six_hour_departure_2: '10:00 AM a 4:00 PM',
         tour_option_osj: 'Tour del Viejo San Juan',
         tour_option_cave: 'Aventura de Natación en Cueva',
         tour_option_biokayak: 'Tour de Kayak Bioluminiscente(Transporte incluido)',
@@ -3238,7 +3240,9 @@
         book_tour_success_msg: 'The Tour Guide will reach out to you shortly via text message.',
         book_tour_success_tip: 'Tip: reply to the guide\'s text message to confirm your trip.',
         book_boat_success_msg: 'The Captain will reach out to you shortly via email.',
-        book_boat_success_tip: 'Tip: reply to the captain\'s text email to confirm your trip.'
+        book_boat_success_tip: 'Tip: reply to the captain\'s text email to confirm your trip.',
+        six_hour_departure_1: '9:00 AM to 3:00 PM',
+        six_hour_departure_2: '10:00 AM to 4:00 PM'
       };
 
       var enTexts = {};
@@ -3309,6 +3313,50 @@
 
       allLangEnBtns.forEach(function(b) { if(b) b.addEventListener('click', function () { setLanguage('en'); }); });
       allLangEsBtns.forEach(function(b) { if(b) b.addEventListener('click', function () { setLanguage('es'); }); });
+
+      // Welcraft 30', Riviera Yacht 40', Luxury Lagoon 42' and Cruiser 54' Yacht
+      // keep the full departure list for their 4-hour trip, but only run two
+      // windows for the 6-hour one, so narrow the departure menu whenever one of
+      // those charters is paired with a 6-hour trip length.
+      (function () {
+        var departureSelect = document.getElementById('boatDepartureTime');
+        var tripLengthSelect = document.getElementById('boatTripLength');
+        var boatSelect = document.getElementById('boatSelect');
+        if (!departureSelect || !tripLengthSelect || !boatSelect) return;
+
+        var defaultDepartureHTML = departureSelect.innerHTML;
+
+        var sixHourDepartureHTML =
+          '<option value="" disabled selected data-i18n="ph_departure_time">Choose a time slot</option>' +
+          '<option value="9:00 AM to 3:00 PM" data-i18n="six_hour_departure_1">9:00 AM to 3:00 PM</option>' +
+          '<option value="10:00 AM to 4:00 PM" data-i18n="six_hour_departure_2">10:00 AM to 4:00 PM</option>';
+
+        var SIX_HOUR_WINDOW_CHARTERS = [
+          "Welcraft 30'",
+          "Riviera Yacht 40'",
+          "Luxury Lagoon 42'",
+          "Cruiser 54' Yacht"
+        ];
+
+        // Only rewrite the menu when the mode actually flips, so an already valid
+        // departure choice is not cleared out from under the visitor.
+        var currentMode = 'default';
+
+        function syncDepartureOptions() {
+          var mode = SIX_HOUR_WINDOW_CHARTERS.indexOf(boatSelect.value) !== -1 &&
+            tripLengthSelect.value === '6 hours' ? 'sixHour' : 'default';
+          if (mode === currentMode) return;
+          currentMode = mode;
+          departureSelect.innerHTML = mode === 'sixHour'
+            ? sixHourDepartureHTML
+            : defaultDepartureHTML;
+          setLanguage(currentLang);
+        }
+
+        tripLengthSelect.addEventListener('change', syncDepartureOptions);
+        boatSelect.addEventListener('change', syncDepartureOptions);
+        syncDepartureOptions();
+      })();
     })();
 
     /* Image Slider */
