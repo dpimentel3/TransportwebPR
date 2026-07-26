@@ -5,7 +5,8 @@
   The real, interactive booking form lives on the tour pages and submits via
   AJAX; this file guarantees Netlify registers every field the form can send,
   including the "Time slot" field used by tours like Scuba Diving and Snorkel
-  With Turtles.
+  With Turtles, and the "Departure time" / "Trip length" pair sent by the boat
+  charter form.
 -->
 <html lang="en">
   <head>
@@ -52,6 +53,28 @@
       <input id="ts_firstName" name="firstName" type="text" />
       <label for="ts_comments">Comments</label>
       <textarea id="ts_comments" name="comments"></textarea>
+    </form>
+    <form name="boat-charter-booking" method="POST" data-netlify="true" netlify-honeypot="bot-field" hidden>
+      <input type="hidden" name="form-name" value="boat-charter-booking" />
+      <label for="bc_bot">Don't fill this out if you're human: <input id="bc_bot" name="bot-field" /></label>
+      <label for="bc_tripDate">Date (month/day)</label>
+      <input id="bc_tripDate" name="tripDate" type="date" />
+      <label for="bc_charter">Boats and Charters</label>
+      <input id="bc_charter" name="charter" type="text" />
+      <label for="bc_departureTime">Departure time</label>
+      <input id="bc_departureTime" name="departureTime" type="text" />
+      <label for="bc_tripLength">Trip length</label>
+      <input id="bc_tripLength" name="tripLength" type="text" />
+      <label for="bc_passengers">Number of passengers</label>
+      <input id="bc_passengers" name="passengers" type="number" />
+      <label for="bc_phone">Phone number</label>
+      <input id="bc_phone" name="phone" type="tel" />
+      <label for="bc_email">Email</label>
+      <input id="bc_email" name="email" type="email" />
+      <label for="bc_firstName">First name</label>
+      <input id="bc_firstName" name="firstName" type="text" />
+      <label for="bc_comments">Comments</label>
+      <textarea id="bc_comments" name="comments"></textarea>
     </form>
     <form name="ferry-booking" method="POST" data-netlify="true" netlify-honeypot="bot-field" hidden>
       <input type="hidden" name="form-name" value="ferry-booking" />

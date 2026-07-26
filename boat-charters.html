@@ -3830,6 +3830,8 @@
         shaefer_departure_2: '10:00 AM a 4:00 PM',
         shaefer_departure_3: '11:00 AM a 5:00 PM',
         shaefer_departure_4: '12:00 PM a 6:00 PM',
+        six_hour_departure_1: '9:00 AM a 3:00 PM',
+        six_hour_departure_2: '10:00 AM a 4:00 PM',
         trip_length_4h: '4 horas',
         trip_length_5h: '5 horas (Medio Día)',
         trip_length_6h: '6 horas',
@@ -3961,7 +3963,9 @@
         shaefer_departure_1: '9:00 AM to 3:00 PM',
         shaefer_departure_2: '10:00 AM to 4:00 PM',
         shaefer_departure_3: '11:00 AM to 5:00 PM',
-        shaefer_departure_4: '12:00 PM to 6:00 PM'
+        shaefer_departure_4: '12:00 PM to 6:00 PM',
+        six_hour_departure_1: '9:00 AM to 3:00 PM',
+        six_hour_departure_2: '10:00 AM to 4:00 PM'
       };
 
       var enTexts = {};
@@ -4039,8 +4043,11 @@
       // once the 7-hour trip length is chosen). The Shaefer 40" Luxury Charter
       // runs a single 6-hour trip with its own four departure windows. Selecting
       // either charter (via its Book Now button or the charter dropdown) limits
-      // the departure-time and trip-length menus accordingly; any other charter
-      // restores the full default list. Defined here so it can re-apply translations.
+      // the departure-time and trip-length menus accordingly. The four standard
+      // charters keep the full departure list for their 4-hour trip but only run
+      // two windows for the 6-hour one, so their departure menu narrows as soon as
+      // 6 hours is chosen. Any other charter restores the full default list.
+      // Defined here so it can re-apply translations.
       (function () {
         var departureSelect = document.getElementById('boatDepartureTime');
         var tripLengthSelect = document.getElementById('boatTripLength');
@@ -4078,6 +4085,23 @@
           '<option value="" disabled selected data-i18n="ph_trip_length">Choose trip length</option>' +
           '<option value="6 hours" data-i18n="trip_length_6h">6 hours</option>';
 
+        // The two windows the standard charters run their 6-hour trip on.
+        var sixHourDepartureHTML =
+          '<option value="" disabled selected data-i18n="ph_departure_time">Choose a time slot</option>' +
+          '<option value="9:00 AM to 3:00 PM" data-i18n="six_hour_departure_1">9:00 AM to 3:00 PM</option>' +
+          '<option value="10:00 AM to 4:00 PM" data-i18n="six_hour_departure_2">10:00 AM to 4:00 PM</option>';
+
+        var SIX_HOUR_WINDOW_CHARTERS = [
+          "Welcraft 30'",
+          "Riviera Yacht 40'",
+          "Luxury Lagoon 42'",
+          "Cruiser 54' Yacht"
+        ];
+
+        function hasSixHourWindows(boatName) {
+          return SIX_HOUR_WINDOW_CHARTERS.indexOf(boatName) !== -1;
+        }
+
         var jetskiTripLengthHTML =
           '<option value="" disabled selected data-i18n="ph_trip_length">Choose trip length</option>' +
           '<option value="30 minutes" data-i18n="trip_length_30min">30 minutes</option>' +
@@ -4106,19 +4130,32 @@
             departureSelect.removeAttribute('required');
             if (departureField) departureField.style.display = 'none';
           } else {
-            departureSelect.innerHTML = defaultDepartureHTML;
             tripLengthSelect.innerHTML = defaultTripLengthHTML;
+            // Restoring the default trip lengths clears any earlier choice, so this
+            // only keeps the narrowed windows when 6 hours survives the reset.
+            departureSelect.innerHTML =
+              hasSixHourWindows(boatName) && tripLengthSelect.value === '6 hours'
+                ? sixHourDepartureHTML
+                : defaultDepartureHTML;
           }
           setLanguage(currentLang);
         };
 
         // For the Boston Whaler, the departure windows depend on the trip length:
-        // the half-day uses its two windows, the full-day its three.
+        // the half-day uses its two windows, the full-day its three. The four
+        // standard charters swap between the full list and their two 6-hour
+        // windows the same way.
         tripLengthSelect.addEventListener('change', function () {
-          if (boatSelect && boatSelect.value === "Boston Whaler 24'") {
+          if (!boatSelect) return;
+          if (boatSelect.value === "Boston Whaler 24'") {
             departureSelect.innerHTML = tripLengthSelect.value === '7 hours'
               ? whalerFullDayDepartureHTML
               : whalerHalfDayDepartureHTML;
+            setLanguage(currentLang);
+          } else if (hasSixHourWindows(boatSelect.value)) {
+            departureSelect.innerHTML = tripLengthSelect.value === '6 hours'
+              ? sixHourDepartureHTML
+              : defaultDepartureHTML;
             setLanguage(currentLang);
           }
         });
