@@ -784,6 +784,61 @@
       text-shadow: 0 1px 12px rgba(255, 255, 255, 0.92), 0 1px 2px rgba(255, 255, 255, 0.8);
     }
 
+    .service-page #also-like {
+      background: #ffffff;
+      border-top: 1px solid #e5eaf0;
+    }
+
+    .service-page #also-like .category-content,
+    .service-page #also-like .tour-widgets {
+      max-width: 1120px;
+    }
+
+    .service-page #also-like .tour-widgets {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 20px;
+    }
+
+    @media (max-width: 1080px) {
+      .service-page #also-like .tour-widgets {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 560px) {
+      .service-page #also-like .tour-widgets {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    .service-page #also-like .tour-widget-cta {
+      align-self: flex-start;
+      margin-top: auto;
+      padding: 11px 18px;
+      border-radius: 999px;
+      background: var(--accent);
+      color: #1a1a1a;
+      box-shadow: 0 6px 14px rgba(8, 37, 61, 0.12);
+      transition: background 0.18s ease, box-shadow 0.18s ease;
+    }
+
+    .service-page #also-like .tour-widget:hover .tour-widget-cta,
+    .service-page #also-like .tour-widget:focus-visible .tour-widget-cta {
+      background: var(--accent-dark);
+      color: #1a1a1a;
+      box-shadow: 0 8px 18px rgba(8, 37, 61, 0.18);
+    }
+
+    .service-page #also-like .section-intro h2 {
+      font-size: clamp(1.75rem, 3vw, 2.5rem);
+      line-height: 1.1;
+      margin-bottom: 16px;
+    }
+
+    .service-page #also-like .section-intro {
+      margin-bottom: 40px;
+    }
+
     .service-page #book .section-intro h2 {
       font-size: clamp(1.75rem, 3vw, 2.5rem);
       line-height: 1.1;
@@ -2608,6 +2663,73 @@
         </div>
       </div>
     </section>
+    <section id="also-like" class="section-services section-also-like">
+      <div class="container section-shell">
+        <div class="section-intro">
+          <h2 data-i18n="also_like_title">Experiences you may also like</h2>
+          <p data-i18n="also_like_desc">Pair your tour with another of our most requested experiences.</p>
+        </div>
+        <div class="service-categories">
+          <div class="category-content" style="border-top:none;">
+            <div class="tour-widgets">
+              <a class="tour-widget" href="cruise-port-transfers.html">
+                <div class="tour-widget-media">
+                  <img src="ferry-tickets.jpg" alt="Schoodic Explorer ferry docked in Puerto Rico for ferry tickets to Culebra and Vieques" loading="lazy" decoding="async">
+                </div>
+                <div class="tour-widget-body">
+                  <h3 data-i18n="prod_cruise_title">Ferry Tickets</h3>
+                  <ul class="tour-widget-specs">
+                    <li><span class="spec-label" data-i18n="spec_destinations">Destinations</span><span class="spec-value" data-i18n="prod_cruise_destinations">Culebra/Vieques</span></li>
+                  </ul>
+                  <span class="tour-widget-cta" data-i18n="view_service_book">View service &amp; book &rarr;</span>
+                </div>
+              </a>
+              <a class="tour-widget" href="boston-whaler-24.html">
+                <div class="tour-widget-media">
+                  <img src="boston-whaler-3.jpeg" alt="Boston Whaler 24' at Icacos and Palomino islands" loading="lazy" decoding="async">
+                </div>
+                <div class="tour-widget-body">
+                  <h3 data-i18n="prod_whaler_title">Boston Whaler 24'</h3>
+                  <ul class="tour-widget-specs">
+                    <li><span class="spec-label" data-i18n="spec_capacity">Capacity</span><span class="spec-value" data-i18n="prod_whaler_capacity">Max. 6 people</span></li>
+                    <li><span class="spec-label" data-i18n="spec_duration">Duration</span><span class="spec-value" data-i18n="prod_whaler_duration">5 or 7 Hours</span></li>
+                  </ul>
+                  <span class="tour-widget-cta" data-i18n="view_boat_book">View boat &amp; book &rarr;</span>
+                </div>
+              </a>
+              <a class="tour-widget" href="snorkel-with-turtles.html">
+                <div class="tour-widget-media">
+                  <img src="snorkel-turtles-1.jpg" alt="Snorkeler swimming next to a sea turtle in San Juan" loading="lazy" decoding="async">
+                </div>
+                <div class="tour-widget-body">
+                  <h3 data-i18n="prod_snorkel_title">Snorkel With Turtles</h3>
+                  <ul class="tour-widget-specs">
+                    <li><span class="spec-label" data-i18n="spec_cost">Cost</span><span class="spec-value" data-i18n="prod_snorkel_price">$39 / Person</span></li>
+                    <li><span class="spec-label" data-i18n="spec_duration">Duration</span><span class="spec-value" data-i18n="prod_snorkel_duration">1 to 2 Hours</span></li>
+                    <li><span class="spec-label" data-i18n="spec_minimum">Minimum</span><span class="spec-value" data-i18n="prod_snorkel_min">Min. 2 person</span></li>
+                    <li><span class="spec-label" data-i18n="spec_ages">Ages</span><span class="spec-value" data-i18n="prod_snorkel_ages">Ages 8+</span></li>
+                  </ul>
+                  <span class="tour-widget-cta" data-i18n="view_tour_book">View tour &amp; book &rarr;</span>
+                </div>
+              </a>
+              <a class="tour-widget" href="jetski-rental.html">
+                <div class="tour-widget-media">
+                  <img src="jetski-1.jpg" alt="Yamaha WaveRunner jet ski rental rider on clear turquoise water in Puerto Rico" loading="lazy" decoding="async">
+                </div>
+                <div class="tour-widget-body">
+                  <h3 data-i18n="prod_jetski_title">Jetski Rental (Metro Area)</h3>
+                  <ul class="tour-widget-specs">
+                    <li><span class="spec-label" data-i18n="spec_capacity">Capacity</span><span class="spec-value" data-i18n="prod_jetski_capacity">Max. 4 people</span></li>
+                    <li><span class="spec-label" data-i18n="spec_duration">Duration</span><span class="spec-value" data-i18n="prod_jetski_duration">30 Minutes or 1 Hour</span></li>
+                  </ul>
+                  <span class="tour-widget-cta" data-i18n="view_rental_book">View rental &amp; book &rarr;</span>
+                </div>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
   </main>
 
   <!-- Free Quote Modal -->
@@ -3452,6 +3574,27 @@
         prod_scuba_exp_text: 'Tu experiencia de buceo comienza con una breve introducción en la playa, donde un instructor certificado te explicará el equipo, los procedimientos de seguridad y las técnicas esenciales de buceo. Después de la orientación, entrarás en aguas poco profundas (3 pies) para practicar habilidades clave y sentirte cómodo respirando bajo el agua a tu propio ritmo. Una vez que te sientas seguro, tu guía te llevará en una inolvidable aventura submarina a través de las aguas cristalinas de San Juan, donde encontrarás peces tropicales, fascinante vida marina y hermosos paisajes submarinos. Para ayudarte a recordar la experiencia, los videos de tu inmersión se incluyen sin costo adicional. Punto de encuentro: Playa del Escambrón, San Juan, Puerto Rico. Se recomienda usar Uber para este tour. Llegue al menos 30 minutos antes.',
         prod_scuba_length_label: 'Duración del Tour',
         prod_scuba_length_text: 'Hasta una hora y media. El transporte se puede reservar a través de la página de transporte.',
+
+        // Experiences you may also like
+        prod_jetski_title: 'Alquiler de Jetski (Área Metro)',
+        prod_jetski_capacity: 'Máx. 4 personas',
+        prod_jetski_duration: '30 minutos o 1 hora',
+        view_rental_book: 'Ver alquiler y reservar →',
+        also_like_title: 'Experiencias que también te pueden gustar',
+        also_like_desc: 'Combina tu tour con otra de nuestras experiencias más solicitadas.',
+        spec_cost: 'Costo',
+        spec_duration: 'Duración',
+        spec_minimum: 'Mínimo',
+        spec_ages: 'Edad',
+        spec_capacity: 'Capacidad',
+        spec_destinations: 'Destinos',
+        view_tour_book: 'Ver tour y reservar →',
+        view_boat_book: 'Ver barco y reservar →',
+        view_service_book: 'Ver servicio y reservar →',
+        prod_cruise_destinations: 'Culebra/Vieques',
+        prod_whaler_title: 'Boston Whaler 24\'',
+        prod_whaler_capacity: 'Máx. 6 personas',
+        prod_whaler_duration: '5 o 7 horas',
 
         // How it works
         how_title: 'Cómo funciona',
