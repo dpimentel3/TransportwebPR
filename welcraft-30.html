@@ -1377,9 +1377,23 @@
       color: var(--muted);
     }
 
+    .book-headline {
+      max-width: 920px;
+      margin: 0 auto 44px;
+      text-align: center;
+      font-size: clamp(1.15rem, 2.1vw, 1.55rem);
+      line-height: 1.5;
+      font-weight: 700;
+      color: var(--primary);
+    }
+
+    @media (max-width: 860px) {
+      .book-headline { margin-bottom: 30px; }
+    }
+
     .booking-tabs {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(2, 1fr);
       margin: -8px -8px 22px;
       border-bottom: 1px solid var(--border);
     }
@@ -2556,6 +2570,7 @@
 
     <section id="book" class="background-section section-book">
       <div class="container section-shell">
+        <p class="book-headline" data-i18n="book_headline">Don't know how to get to and come back from your boat day? Arrange your transport below and save yourself the headache of figuring everything out alone — combine both services for a stress-free experience for your family or group.</p>
         <div class="section-grid two-col">
           <div>
             <div class="section-intro">
@@ -2574,7 +2589,27 @@
           </div>
 
           <aside class="booking-card" aria-labelledby="boats-title">
-<div class="booking-panel" id="panel-boats" role="tabpanel" aria-labelledby="boats-title">
+            <div class="booking-tabs" role="tablist" aria-label="Booking options">
+              <button type="button" class="booking-tab active" id="tab-boats" role="tab" aria-selected="true" aria-controls="panel-boats" data-panel="panel-boats">
+                <svg class="booking-tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M3 17.5c1.5 1 3 1.3 4.5 1s2.5-1.2 4.5-1.2 3 1 4.5 1.2 3-.1 4.5-1"/>
+                  <path d="M5 14.5l7-8.5 7 8.5"/>
+                  <path d="M12 6v8.5"/>
+                </svg>
+                <span data-i18n="tab_boats">Boat Charters</span>
+              </button>
+              <button type="button" class="booking-tab" id="tab-transport" role="tab" aria-selected="false" aria-controls="panel-transport" data-panel="panel-transport">
+                <svg class="booking-tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M4 13l1.6-4.8A2 2 0 0 1 7.5 7h9a2 2 0 0 1 1.9 1.2L20 13"/>
+                  <path d="M3 13h18v4a1 1 0 0 1-1 1h-1.5a1 1 0 0 1-1-1v-1h-11v1a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1v-4z"/>
+                  <circle cx="7.5" cy="16" r="1.2"/>
+                  <circle cx="16.5" cy="16" r="1.2"/>
+                </svg>
+                <span data-i18n="tab_transport">Transportation</span>
+              </button>
+            </div>
+
+            <div class="booking-panel" id="panel-boats" role="tabpanel" aria-labelledby="tab-boats">
               <h2 id="boats-title" data-i18n="book_boats_title">Book a boat charter</h2>
               <form id="boatsForm" name="boat-charter-booking" method="POST" data-netlify="true" netlify-honeypot="bot-field">
                 <input type="hidden" name="form-name" value="boat-charter-booking" />
@@ -2667,6 +2702,92 @@
                 </div>
               </form>
             </div>
+
+            <div class="booking-panel" id="panel-transport" role="tabpanel" aria-labelledby="tab-transport" hidden>
+              <h2 id="booking-title" data-i18n="book_form_title">Book your transportation</h2>
+              <form id="bookingForm" name="booking" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+              <input type="hidden" name="form-name" value="booking" />
+              <p class="hidden-field">
+                <label>Don’t fill this out if you’re human: <input name="bot-field" /></label>
+              </p>
+              <div>
+                <label for="serviceType" data-i18n="label_service_type">Service type</label>
+                <select id="serviceType" name="serviceType" required>
+                  <option value="" disabled data-i18n="ph_service_type">Choose a service</option>
+                  <option value="Airport Transfers" data-i18n="service_airport">Airport Transfers</option>
+                  <option value="Ferry Tickets" data-i18n="service_cruise">Ferry Tickets</option>
+                  <option value="Excursions Transport" selected data-i18n="service_excursions">Excursions Transport</option>
+                  <option value="Luxury Travel" data-i18n="service_luxury">Luxury Travel</option>
+                </select>
+              </div>
+
+              <div>
+                <label for="roundTrip" data-i18n="label_round_trip">Round trip</label>
+                <select id="roundTrip" name="roundTrip">
+                  <option value="No" data-i18n="round_trip_no">No</option>
+                  <option value="Yes" data-i18n="round_trip_yes">Yes</option>
+                </select>
+              </div>
+
+              <div class="field-grid">
+                <div>
+                  <label for="tripDate" data-i18n="label_date">Date (month/day)</label>
+                  <input id="tripDate" name="tripDate" type="date" required />
+                </div>
+                <div>
+                  <label for="pickupLocation" data-i18n="label_pickup">Pick up location</label>
+                  <div class="iq-input-wrap">
+                    <input id="pickupLocation" name="pickupLocation" type="text" data-i18n-placeholder="ph_pickup" placeholder="Example: SJU Airport or hotel name" required />
+                    <button type="button" class="iq-clear" data-target="pickupLocation" aria-label="Clear pick up location">&times;</button>
+                  </div>
+                </div>
+              </div>
+
+              <div>
+                <label for="pickupTime" data-i18n="label_time">Time of pick up</label>
+                <input id="pickupTime" type="time" required />
+                <input type="hidden" id="pickupTimeFormatted" name="pickupTime" value="" />
+              </div>
+
+              <div>
+                <label for="destination" data-i18n="label_destination">Destination</label>
+                <div class="iq-input-wrap">
+                  <input id="destination" name="destination" type="text" data-i18n-placeholder="ph_destination" placeholder="Example: San Juan Cruise Port" required />
+                  <button type="button" class="iq-clear" data-target="destination" aria-label="Clear destination">&times;</button>
+                </div>
+                <div class="helper" data-i18n="helper_destination">Use a place name or address so the driver clearly understands your destination.</div>
+              </div>
+
+              <div class="field-grid">
+                <div>
+                  <label for="passengers" data-i18n="label_passengers">Number of passengers</label>
+                  <input id="passengers" name="passengers" type="number" min="1" max="50" data-i18n-placeholder="ph_passengers" placeholder="Example: 4" required />
+                </div>
+                <div>
+                  <label for="phone" data-i18n="label_phone">Phone number</label>
+                  <input id="phone" name="phone" type="tel" placeholder="787-214-2058" required />
+                </div>
+              </div>
+
+              <div>
+                <label for="firstName" data-i18n="label_name">First name</label>
+                <input id="firstName" name="firstName" type="text" required />
+              </div>
+
+              <div>
+                <label for="comments" data-i18n="label_comments">Comments</label>
+                <textarea id="comments" name="comments" data-i18n-placeholder="ph_comments" placeholder="Add any extra details about your trip if necessary (flight number/airline, need/have car seat, number of bags or golf bags)"></textarea>
+              </div>
+
+              <div class="hero-actions" style="margin: 6px 0 0;">
+                <button type="submit" class="btn btn-primary" data-i18n="btn_send_booking">Send Booking Request</button>
+              </div>
+              <div class="booking-note" data-i18n="booking_note">
+                No payments are made through the website
+              </div>
+            </form>
+            </div>
+
           </aside>
         </div>
       </div>
@@ -3489,6 +3610,7 @@
         // Book section
         book_title: 'Reservar',
         book_desc: 'Complete el formulario para que podamos dar seguimiento y confirmar su viaje.',
+        book_headline: '¿No sabe cómo llegar y regresar de su día en bote? Organice su transporte a continuación y ahórrese el dolor de cabeza de resolver todo por su cuenta: combine ambos servicios para una experiencia sin estrés para su familia o grupo.',
         book_before_title: 'Antes de enviar la solicitud',
         book_before_desc: 'Tener estos detalles listos hace que la confirmación sea más rápida.',
         book_check1: 'Elija la fecha y hora/lugar de recogida correctos',
@@ -4254,7 +4376,9 @@
       var bookNowBtn = document.getElementById('quoteBookNow');
       if (bookNowBtn) {
         bookNowBtn.addEventListener('click', function() {
-          // Copy whatever the user typed in the quote widget into the booking form
+          // Switch to the Transportation tab and copy whatever the user typed in the quote widget
+          var transportTab = document.getElementById('tab-transport');
+          if (transportTab) transportTab.click();
           var bookingPickupField = document.getElementById('pickupLocation');
           var bookingDestinationField = document.getElementById('destination');
           if (bookingPickupField) {
