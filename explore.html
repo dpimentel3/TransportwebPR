@@ -2408,7 +2408,7 @@
         <a href="#top" data-i18n="nav_explore" aria-current="page">Explore</a>
         <a href="Index.html#service" data-i18n="nav_services">Services</a>
         <a href="Index.html#how-it-works" data-i18n="nav_how">How It Works</a>
-        <a href="Index.html#book" data-i18n="nav_book">Book</a>
+        <a href="#book" data-i18n="nav_book">Book</a>
         <a href="Index.html#faq" data-i18n="nav_faq">FAQ</a>
         <a href="Index.html#contact-us" data-i18n="nav_contact">Contact Us</a>
         <div class="lang-toggle lang-toggle-menu" aria-label="Language switcher">
@@ -2448,6 +2448,294 @@
         </div>
       </div>
     </section>
+
+    <section id="book" class="background-section section-book">
+      <div class="container section-shell">
+        <div class="section-grid two-col">
+          <div>
+            <div class="section-intro">
+              <h2 data-i18n="book_title">Book</h2>
+              <p data-i18n="book_desc">Fill out the form so we can follow up and confirm your trip.</p>
+            </div>
+            <div class="summary-box">
+              <h3 data-i18n="book_before_title">Before you send the request</h3>
+              <p class="muted" style="margin:0;" data-i18n="book_before_desc">Having these details ready makes confirmation faster.</p>
+              <ul class="summary-list">
+                <li data-i18n="book_check1">Choose the correct date and pickup time/location</li>
+                <li data-i18n="book_check2">Enter the exact destination or place name</li>
+                <li data-i18n="book_check3">Make sure your phone number and email is correct</li>
+              </ul>
+            </div>
+          </div>
+
+          <aside class="booking-card" aria-labelledby="booking-title">
+            <div class="booking-tabs" role="tablist" aria-label="Booking options">
+              <button type="button" class="booking-tab active" id="tab-transport" role="tab" aria-selected="true" aria-controls="panel-transport" data-panel="panel-transport">
+                <svg class="booking-tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M4 13l1.6-4.8A2 2 0 0 1 7.5 7h9a2 2 0 0 1 1.9 1.2L20 13"/>
+                  <path d="M3 13h18v4a1 1 0 0 1-1 1h-1.5a1 1 0 0 1-1-1v-1h-11v1a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1v-4z"/>
+                  <circle cx="7.5" cy="16" r="1.2"/>
+                  <circle cx="16.5" cy="16" r="1.2"/>
+                </svg>
+                <span data-i18n="tab_transport">Transportation</span>
+              </button>
+              <button type="button" class="booking-tab" id="tab-tours" role="tab" aria-selected="false" aria-controls="panel-tours" data-panel="panel-tours">
+                <svg class="booking-tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M4 7.5h2.7l1.5-2h7.6l1.5 2H20a1 1 0 0 1 1 1v9.5a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V8.5a1 1 0 0 1 1-1z"/>
+                  <circle cx="12" cy="13" r="3.8"/>
+                </svg>
+                <span data-i18n="tab_tours">Tours</span>
+              </button>
+              <button type="button" class="booking-tab" id="tab-boats" role="tab" aria-selected="false" aria-controls="panel-boats" data-panel="panel-boats">
+                <svg class="booking-tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M3 17.5c1.5 1 3 1.3 4.5 1s2.5-1.2 4.5-1.2 3 1 4.5 1.2 3-.1 4.5-1"/>
+                  <path d="M5 14.5l7-8.5 7 8.5"/>
+                  <path d="M12 6v8.5"/>
+                </svg>
+                <span data-i18n="tab_boats">Boat Charters</span>
+              </button>
+            </div>
+
+            <div class="booking-panel" id="panel-transport" role="tabpanel" aria-labelledby="tab-transport">
+              <h2 id="booking-title" data-i18n="book_form_title">Book your transportation</h2>
+              <form id="bookingForm" name="booking" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+              <input type="hidden" name="form-name" value="booking" />
+              <p class="hidden-field">
+                <label>Don’t fill this out if you’re human: <input name="bot-field" /></label>
+              </p>
+              <div>
+                <label for="serviceType" data-i18n="label_service_type">Service type</label>
+                <select id="serviceType" name="serviceType" required>
+                  <option value="" disabled selected data-i18n="ph_service_type">Choose a service</option>
+                  <option value="Airport Transfers" data-i18n="service_airport">Airport Transfers</option>
+                  <option value="Ferry Tickets" data-i18n="service_cruise">Ferry Tickets</option>
+                  <option value="Excursions Transport" data-i18n="service_excursions">Excursions Transport</option>
+                  <option value="Luxury Travel" data-i18n="service_luxury">Luxury Travel</option>
+                </select>
+              </div>
+
+              <div>
+                <label for="roundTrip" data-i18n="label_round_trip">Round trip</label>
+                <select id="roundTrip" name="roundTrip">
+                  <option value="No" data-i18n="round_trip_no">No</option>
+                  <option value="Yes" data-i18n="round_trip_yes">Yes</option>
+                </select>
+              </div>
+
+              <div class="field-grid">
+                <div>
+                  <label for="tripDate" data-i18n="label_date">Date (month/day)</label>
+                  <input id="tripDate" name="tripDate" type="date" required />
+                </div>
+                <div>
+                  <label for="pickupLocation" data-i18n="label_pickup">Pick up location</label>
+                  <div class="iq-input-wrap">
+                    <input id="pickupLocation" name="pickupLocation" type="text" data-i18n-placeholder="ph_pickup" placeholder="Example: SJU Airport or hotel name" required />
+                    <button type="button" class="iq-clear" data-target="pickupLocation" aria-label="Clear pick up location">&times;</button>
+                  </div>
+                </div>
+              </div>
+
+              <div>
+                <label for="pickupTime" data-i18n="label_time">Time of pick up</label>
+                <input id="pickupTime" type="time" required />
+                <input type="hidden" id="pickupTimeFormatted" name="pickupTime" value="" />
+              </div>
+
+              <div>
+                <label for="destination" data-i18n="label_destination">Destination</label>
+                <div class="iq-input-wrap">
+                  <input id="destination" name="destination" type="text" data-i18n-placeholder="ph_destination" placeholder="Example: San Juan Cruise Port" required />
+                  <button type="button" class="iq-clear" data-target="destination" aria-label="Clear destination">&times;</button>
+                </div>
+                <div class="helper" data-i18n="helper_destination">Use a place name or address so the driver clearly understands your destination.</div>
+              </div>
+
+              <div class="field-grid">
+                <div>
+                  <label for="passengers" data-i18n="label_passengers">Number of passengers</label>
+                  <input id="passengers" name="passengers" type="number" min="1" max="50" data-i18n-placeholder="ph_passengers" placeholder="Example: 4" required />
+                </div>
+                <div>
+                  <label for="phone" data-i18n="label_phone">Phone number</label>
+                  <input id="phone" name="phone" type="tel" placeholder="787-214-2058" required />
+                </div>
+              </div>
+
+              <div>
+                <label for="firstName" data-i18n="label_name">First name</label>
+                <input id="firstName" name="firstName" type="text" required />
+              </div>
+
+              <div>
+                <label for="comments" data-i18n="label_comments">Comments</label>
+                <textarea id="comments" name="comments" data-i18n-placeholder="ph_comments" placeholder="Add any extra details about your trip if necessary (flight number/airline, need/have car seat, number of bags or golf bags)"></textarea>
+              </div>
+
+              <div class="hero-actions" style="margin: 6px 0 0;">
+                <button type="submit" class="btn btn-primary" data-i18n="btn_send_booking">Send Booking Request</button>
+              </div>
+              <div class="booking-note" data-i18n="booking_note">
+                No payments are made through the website
+              </div>
+            </form>
+            </div>
+
+            <div class="booking-panel" id="panel-tours" role="tabpanel" aria-labelledby="tab-tours" hidden>
+              <h2 id="tours-title" data-i18n="book_tours_title">Book your tour</h2>
+              <form id="toursForm" name="tour-booking-v2" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+                <input type="hidden" name="form-name" value="tour-booking-v2" />
+                <p class="hidden-field">
+                  <label>Don’t fill this out if you’re human: <input name="bot-field" /></label>
+                </p>
+                <div class="field-grid">
+                  <div>
+                    <label for="tourDate" data-i18n="label_date">Date (month/day)</label>
+                    <input id="tourDate" name="tripDate" type="date" required />
+                  </div>
+                  <div>
+                    <label for="tourSelect" data-i18n="label_select_tour">Select tour</label>
+                    <select id="tourSelect" name="tour" required>
+                      <option value="" disabled selected data-i18n="ph_select_tour">Choose a tour</option>
+                      <option value="Old San Juan Tour" data-i18n="tour_option_osj">Old San Juan Tour</option>
+                      <option value="Cave Swimming Adventure" data-i18n="tour_option_cave">Cave Swimming Adventure</option>
+                      <option value="Bioluminescent Kayak Tour(Transport included)" data-i18n="tour_option_biokayak">Bioluminescent Kayak Tour(Transport included)</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div>
+                  <label for="tourPickup" data-i18n="label_pickup">Pick up location</label>
+                  <div class="iq-input-wrap">
+                    <input id="tourPickup" name="pickupLocation" type="text" data-i18n-placeholder="ph_pickup" placeholder="Example: SJU Airport or hotel name" required />
+                    <button type="button" class="iq-clear" data-target="tourPickup" aria-label="Clear pick up location">&times;</button>
+                  </div>
+                </div>
+
+                <div class="field-grid">
+                  <div>
+                    <label for="tourPassengers" data-i18n="label_passengers">Number of passengers</label>
+                    <input id="tourPassengers" name="passengers" type="number" min="1" max="50" data-i18n-placeholder="ph_passengers" placeholder="Example: 4" required />
+                  </div>
+                  <div>
+                    <label for="tourPhone" data-i18n="label_phone">Phone number</label>
+                    <input id="tourPhone" name="phone" type="tel" placeholder="787-214-2058" required />
+                  </div>
+                </div>
+
+                <div>
+                  <label for="tourFirstName" data-i18n="label_name">First name</label>
+                  <input id="tourFirstName" name="firstName" type="text" required />
+                </div>
+
+                <div>
+                  <label for="tourComments" data-i18n="label_comments">Comments</label>
+                  <textarea id="tourComments" name="comments" data-i18n-placeholder="ph_comments_tour" placeholder="Add any extra details about your tour if necessary"></textarea>
+                </div>
+
+                <div class="hero-actions" style="margin: 6px 0 0;">
+                  <button type="submit" class="btn btn-primary" data-i18n="btn_send_booking">Send Booking Request</button>
+                </div>
+                <div class="booking-note" data-i18n="booking_note">
+                  No payments are made through the website
+                </div>
+              </form>
+            </div>
+
+            <div class="booking-panel" id="panel-boats" role="tabpanel" aria-labelledby="tab-boats" hidden>
+              <h2 id="boats-title" data-i18n="book_boats_title">Book a boat charter</h2>
+              <form id="boatsForm" name="boat-charter-booking" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+                <input type="hidden" name="form-name" value="boat-charter-booking" />
+                <p class="hidden-field">
+                  <label>Don’t fill this out if you’re human: <input name="bot-field" /></label>
+                </p>
+                <div class="field-grid">
+                  <div>
+                    <label for="boatDate" data-i18n="label_date">Date (month/day)</label>
+                    <input id="boatDate" name="tripDate" type="date" required />
+                  </div>
+                  <div>
+                    <label for="boatSelect" data-i18n="label_select_boat">Boats and Charters</label>
+                    <select id="boatSelect" name="charter" required>
+                      <option value="" disabled selected data-i18n="ph_select_boat">Choose a charter</option>
+                      <option value="Welcraft 30'" data-i18n="boat_option_welcraft">Welcraft 30'</option>
+                      <option value="Riviera Yacht 40'" data-i18n="boat_option_riviera">Riviera Yacht 40'</option>
+                      <option value="Luxury Lagoon 42'" data-i18n="boat_option_lagoon">Luxury Lagoon 42'</option>
+                      <option value="Cruiser 54' Yacht" data-i18n="boat_option_cruiser">Cruiser 54' Yacht</option>
+                      <option value="Fishing Trip" data-i18n="boat_option_fishing">Fishing Trip</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="field-grid">
+                  <div>
+                    <label for="boatDepartureTime" data-i18n="label_departure_time">Departure time</label>
+                    <select id="boatDepartureTime" name="departureTime" required>
+                      <option value="" disabled selected data-i18n="ph_departure_time">Choose a time slot</option>
+                      <option value="9:00 AM">9:00 AM</option>
+                      <option value="9:30 AM">9:30 AM</option>
+                      <option value="10:00 AM">10:00 AM</option>
+                      <option value="10:30 AM">10:30 AM</option>
+                      <option value="11:00 AM">11:00 AM</option>
+                      <option value="11:30 AM">11:30 AM</option>
+                      <option value="12:00 PM">12:00 PM</option>
+                      <option value="12:30 PM">12:30 PM</option>
+                      <option value="1:00 PM">1:00 PM</option>
+                      <option value="1:30 PM">1:30 PM</option>
+                      <option value="2:00 PM">2:00 PM</option>
+                      <option value="2:30 PM">2:30 PM</option>
+                      <option value="3:00 PM">3:00 PM</option>
+                    </select>
+                  </div>
+                  <div>
+                    <label for="boatTripLength" data-i18n="label_trip_length">Trip length</label>
+                    <select id="boatTripLength" name="tripLength" required>
+                      <option value="" disabled selected data-i18n="ph_trip_length">Choose trip length</option>
+                      <option value="4 hours" data-i18n="trip_length_4h">4 hours</option>
+                      <option value="6 hours" data-i18n="trip_length_6h">6 hours</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="field-grid">
+                  <div>
+                    <label for="boatPassengers" data-i18n="label_passengers">Number of passengers</label>
+                    <input id="boatPassengers" name="passengers" type="number" min="1" max="50" data-i18n-placeholder="ph_passengers" placeholder="Example: 4" required />
+                  </div>
+                  <div>
+                    <label for="boatPhone" data-i18n="label_phone">Phone number</label>
+                    <input id="boatPhone" name="phone" type="tel" placeholder="787-214-2058" required />
+                  </div>
+                </div>
+
+                <div class="field-grid">
+                  <div>
+                    <label for="boatEmail" data-i18n="label_email">Email</label>
+                    <input id="boatEmail" name="email" type="email" placeholder="name@example.com" required />
+                  </div>
+                  <div>
+                    <label for="boatFirstName" data-i18n="label_name">First name</label>
+                    <input id="boatFirstName" name="firstName" type="text" required />
+                  </div>
+                </div>
+
+                <div>
+                  <label for="boatComments" data-i18n="label_comments">Comments</label>
+                  <textarea id="boatComments" name="comments" data-i18n-placeholder="ph_comments_boat" placeholder="Add any extra details about your charter if necessary"></textarea>
+                </div>
+
+                <div class="hero-actions" style="margin: 6px 0 0;">
+                  <button type="submit" class="btn btn-primary" data-i18n="btn_send_booking">Send Booking Request</button>
+                </div>
+                <div class="booking-note" data-i18n="booking_note">
+                  No payments are made through the website
+                </div>
+              </form>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
   </main>
 
   <!-- Free Quote Modal -->
@@ -2477,7 +2765,7 @@
           <label for="quoteInstantFare" data-i18n="iq_fare">Trip Fare</label>
           <input id="quoteInstantFare" class="fare-input" type="text" readonly data-i18n-placeholder="iq_ph_fare" placeholder="Select both locations to see fare" />
           <div class="hero-actions" style="margin: 12px 0 0;">
-            <a href="Index.html#book" class="btn btn-primary" id="quoteBookNow" data-i18n="book_now">Book Now</a>
+            <a href="#book" class="btn btn-primary" id="quoteBookNow" data-i18n="book_now">Book Now</a>
           </div>
         </div>
       </div>
@@ -2538,7 +2826,7 @@
         <a href="#top" data-i18n="nav_explore" aria-current="page">Explore</a>
         <a href="Index.html#service" data-i18n="nav_services">Services</a>
         <a href="Index.html#how-it-works" data-i18n="nav_how">How It Works</a>
-        <a href="Index.html#book" data-i18n="nav_book">Book</a>
+        <a href="#book" data-i18n="nav_book">Book</a>
         <a href="Index.html#faq" data-i18n="nav_faq">FAQ</a>
         <a href="Index.html#contact-us" data-i18n="nav_contact">Contact Us</a>
       </nav>
@@ -2816,9 +3104,23 @@
           });
         });
 
+        // Map pin popup buttons scroll to the booking card on this page
+        function scrollToBooking() {
+          var bookSection = document.getElementById('book');
+          if (!bookSection) return;
+          var header = document.querySelector('header');
+          var headerHeight = header ? header.offsetHeight : 0;
+          var top = bookSection.getBoundingClientRect().top + window.pageYOffset - headerHeight - 12;
+          window.scrollTo({ top: top, behavior: 'smooth' });
+        }
+
         document.addEventListener('click', function (e) {
           var btn = e.target.closest('.explore-popup-btn');
           if (!btn) return;
+          if (btn.getAttribute('href') === '#book') {
+            e.preventDefault();
+            scrollToBooking();
+          }
           if (btn.classList.contains('book-tour-link')) {
             activateTab('panel-tours');
             var tourName = btn.getAttribute('data-tour');
@@ -4215,6 +4517,13 @@
 
         infoWindow = new google.maps.InfoWindow();
 
+        // Booking buttons inside a popup send the visitor to the booking card,
+        // so close the popup on the way there
+        document.addEventListener('click', function (e) {
+          var btn = e.target.closest('.explore-popup-btn[href="#book"]');
+          if (btn && infoWindow) infoWindow.close();
+        });
+
         EXPLORE_PLACES.forEach(function (place) {
           var color = categoryColors[place.cats[0]] || '#666';
           var marker = new google.maps.Marker({
@@ -4245,13 +4554,13 @@
                 if (btn.type === 'link') {
                   buttonsHtml += '<a href="' + btn.url + '" target="_blank" rel="noopener" class="explore-popup-btn" style="display:inline-block;margin-top:8px;margin-right:6px;padding:5px 12px;background:#FF9800;color:#fff;border-radius:4px;font-size:0.82rem;text-decoration:none;font-weight:600;">' + btnLabel + '</a>';
                 } else if (btn.type === 'tour') {
-                  buttonsHtml += '<a href="Index.html?tab=tours&tour=' + encodeURIComponent(btn.tour) + '#book" class="explore-popup-btn" style="display:inline-block;margin-top:8px;margin-right:6px;padding:5px 12px;background:#FF9800;color:#fff;border-radius:4px;font-size:0.82rem;text-decoration:none;font-weight:600;">' + btnLabel + '</a>';
+                  buttonsHtml += '<a href="#book" class="explore-popup-btn book-tour-link" data-tour="' + btn.tour + '" style="display:inline-block;margin-top:8px;margin-right:6px;padding:5px 12px;background:#FF9800;color:#fff;border-radius:4px;font-size:0.82rem;text-decoration:none;font-weight:600;">' + btnLabel + '</a>';
                 } else if (btn.type === 'transport') {
-                  buttonsHtml += '<a href="Index.html?tab=transport&service=' + encodeURIComponent(btn.service) + '#book" class="explore-popup-btn" style="display:inline-block;margin-top:8px;margin-right:6px;padding:5px 12px;background:#FF9800;color:#fff;border-radius:4px;font-size:0.82rem;text-decoration:none;font-weight:600;">' + btnLabel + '</a>';
+                  buttonsHtml += '<a href="#book" class="explore-popup-btn book-transport-link" data-service="' + btn.service + '" style="display:inline-block;margin-top:8px;margin-right:6px;padding:5px 12px;background:#FF9800;color:#fff;border-radius:4px;font-size:0.82rem;text-decoration:none;font-weight:600;">' + btnLabel + '</a>';
                 } else if (btn.type === 'charter') {
-                  buttonsHtml += '<a href="Index.html?tab=boats#book" class="explore-popup-btn" style="display:inline-block;margin-top:8px;margin-right:6px;padding:5px 12px;background:#FF9800;color:#fff;border-radius:4px;font-size:0.82rem;text-decoration:none;font-weight:600;">' + btnLabel + '</a>';
+                  buttonsHtml += '<a href="#book" class="explore-popup-btn book-charter-link" style="display:inline-block;margin-top:8px;margin-right:6px;padding:5px 12px;background:#FF9800;color:#fff;border-radius:4px;font-size:0.82rem;text-decoration:none;font-weight:600;">' + btnLabel + '</a>';
                 } else if (btn.type === 'roundtrip') {
-                  buttonsHtml += '<a href="Index.html?tab=transport&roundTrip=Yes&service=' + encodeURIComponent(btn.service) + '#book" class="explore-popup-btn" style="display:inline-block;margin-top:8px;margin-right:6px;padding:5px 12px;background:#FF9800;color:#fff;border-radius:4px;font-size:0.82rem;text-decoration:none;font-weight:600;">' + btnLabel + '</a>';
+                  buttonsHtml += '<a href="#book" class="explore-popup-btn book-roundtrip-link" data-service="' + btn.service + '" style="display:inline-block;margin-top:8px;margin-right:6px;padding:5px 12px;background:#FF9800;color:#fff;border-radius:4px;font-size:0.82rem;text-decoration:none;font-weight:600;">' + btnLabel + '</a>';
                 }
               });
             }
