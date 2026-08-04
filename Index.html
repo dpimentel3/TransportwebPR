@@ -21,6 +21,7 @@
   <meta property="og:type" content="website" />
   <meta name="theme-color" content="#0d3557" />
   <link rel="canonical" href="https://www.dptransportpr.com/" />
+  <link rel="preload" as="image" href="home-header.jpg" fetchpriority="high" />
   <style>
     :root {
       --primary: #0d3557;
@@ -82,9 +83,30 @@
       position: sticky;
       top: 0;
       z-index: 100;
-      background: rgba(255,255,255,0.82);
-      backdrop-filter: blur(14px);
+      background: #ffffff;
       border-bottom: 1px solid rgba(220, 230, 238, 0.92);
+    }
+
+    .announce-bar {
+      background: var(--primary);
+      color: #fff;
+      text-align: center;
+      padding: 12px 0;
+    }
+
+    .announce-bar p {
+      margin: 0 auto;
+      max-width: 900px;
+      font-size: 0.86rem;
+      font-weight: 800;
+      line-height: 1.4;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    @media (max-width: 720px) {
+      .announce-bar { padding: 10px 0; }
+      .announce-bar p { font-size: 0.76rem; letter-spacing: 0.04em; }
     }
 
     .nav {
@@ -147,8 +169,10 @@
 
     .nav-links a {
       color: var(--primary-dark);
-      font-weight: 600;
-      font-size: 0.95rem;
+      font-weight: 800;
+      font-size: 0.82rem;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
       opacity: 0.92;
       padding: 8px 12px;
       border-radius: 999px;
@@ -226,13 +250,16 @@
     }
 
     .hero::before {
-      background-image:
-        linear-gradient(135deg, rgba(13,53,87,0.40), rgba(13,53,87,0.18)),
-        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1600 900'%3E%3Cdefs%3E%3ClinearGradient id='sky' x1='0' y1='0' x2='0' y2='1'%3E%3Cstop offset='0%25' stop-color='%2393dfff'/%3E%3Cstop offset='100%25' stop-color='%23daf5ff'/%3E%3C/linearGradient%3E%3ClinearGradient id='sea' x1='0' y1='0' x2='0' y2='1'%3E%3Cstop offset='0%25' stop-color='%233ab5e7'/%3E%3Cstop offset='100%25' stop-color='%231486c7'/%3E%3C/linearGradient%3E%3CradialGradient id='sun' cx='50%25' cy='50%25' r='50%25'%3E%3Cstop offset='0%25' stop-color='%23ffe89b'/%3E%3Cstop offset='100%25' stop-color='%23ffd669'/%3E%3C/radialGradient%3E%3C/defs%3E%3Crect width='1600' height='900' fill='url(%23sky)'/%3E%3Ccircle cx='1255' cy='135' r='72' fill='url(%23sun)'/%3E%3Crect y='395' width='1600' height='255' fill='url(%23sea)'/%3E%3Cpath d='M0 432c87-19 167-22 242-7 88 18 144 54 229 56 81 1 142-24 222-41 99-21 181-12 281 18 92 28 186 37 318 4 117-29 208-30 308-8v196H0z' fill='%235bc9ef'/%3E%3Crect y='612' width='1600' height='288' fill='%23efd7a7'/%3E%3Cellipse cx='268' cy='660' rx='225' ry='45' fill='%23f5dfb4'/%3E%3Crect x='300' y='600' width='50' height='170' rx='18' fill='%236a4a2a'/%3E%3Ccircle cx='325' cy='560' r='74' fill='%233f9442'/%3E%3Ccircle cx='260' cy='580' r='56' fill='%234aa549'/%3E%3Ccircle cx='395' cy='586' r='52' fill='%23358f3f'/%3E%3Cpath d='M930 900c72-146 168-257 297-355h123c-190 147-283 262-325 355z' fill='%23545c63'/%3E%3Cpath d='M1048 900c47-112 110-215 198-305h37c-101 97-150 191-182 305z' fill='%23ffffff' fill-opacity='.72'/%3E%3C/svg%3E");
+      background-image: url("home-header.jpg");
+      background-size: cover;
+      background-position: center 55%;
+      transform: none;
     }
 
     .hero::after {
-      background: linear-gradient(135deg, rgba(8,37,61,0.62), rgba(8,37,61,0.42));
+      background:
+        linear-gradient(180deg, rgba(4,24,42,0.62) 0%, rgba(4,24,42,0.34) 34%, rgba(4,24,42,0.10) 58%, rgba(4,24,42,0.00) 74%),
+        linear-gradient(180deg, rgba(242,247,251,0) 84%, rgba(242,247,251,0.55) 94%, #f2f7fb 100%);
     }
 
     .section-services::before {
@@ -306,16 +333,32 @@
     }
 
     .hero-grid {
-      display: grid;
-      grid-template-columns: 1.15fr 0.9fr;
-      gap: 44px;
+      display: flex;
+      flex-direction: column;
       align-items: center;
-      min-height: 90vh;
-      padding: 58px 0 92px;
+      justify-content: flex-start;
+      text-align: center;
+      min-height: min(84vh, 860px);
+      padding: clamp(46px, 8vh, 104px) 0 44px;
     }
 
     .section-shell {
       padding: 90px 0;
+    }
+
+    .home-highlights {
+      background: linear-gradient(180deg, #f2f7fb 0%, #ffffff 100%);
+    }
+
+    .home-highlights .section-shell {
+      padding: 64px 0 72px;
+    }
+
+    .home-highlights .quick-actions { margin-top: 0; }
+
+    .home-highlights .hero-stats {
+      max-width: none;
+      margin-top: 18px;
     }
 
     .eyebrow {
@@ -337,11 +380,23 @@
     h2 { font-size: clamp(1.8rem, 3vw, 2.6rem); color: var(--primary); letter-spacing: -0.03em; }
     h3 { font-size: 1.16rem; color: var(--primary); }
 
+    .hero h1 {
+      max-width: 1040px;
+      margin: 0 auto 20px;
+      font-size: clamp(1.95rem, 4.4vw, 3.9rem);
+      font-weight: 900;
+      line-height: 1.03;
+      letter-spacing: 0;
+      text-transform: uppercase;
+      text-shadow: 0 2px 26px rgba(4, 24, 42, 0.55), 0 1px 3px rgba(4, 24, 42, 0.45);
+    }
+
     .hero p {
-      font-size: 1.05rem;
-      max-width: 650px;
-      color: rgba(255,255,255,0.92);
-      margin: 0 0 20px;
+      font-size: clamp(1.02rem, 1.5vw, 1.28rem);
+      max-width: 780px;
+      color: rgba(255,255,255,0.96);
+      margin: 0 auto;
+      text-shadow: 0 2px 18px rgba(4, 24, 42, 0.6), 0 1px 2px rgba(4, 24, 42, 0.45);
     }
 
     .hero-actions {
@@ -350,6 +405,16 @@
       gap: 14px;
       margin: 28px 0 22px;
     }
+
+    .hero .hero-actions { justify-content: center; }
+
+    .hero .btn-light {
+      background: rgba(4, 24, 42, 0.52);
+      border: 1px solid rgba(255, 255, 255, 0.35);
+      backdrop-filter: blur(6px);
+    }
+
+    .hero .btn-light:hover { background: rgba(4, 24, 42, 0.68); }
 
     .hero-mobile-note {
       display: none;
@@ -539,6 +604,89 @@
       display: grid;
       gap: 18px;
       margin-top: 36px;
+    }
+
+    /* Services section: alternating symbol + copy rows */
+    .section-services-alt {
+      background: #ffffff;
+    }
+
+    .service-alt-intro {
+      max-width: 720px;
+      margin: 0 auto 12px;
+      text-align: center;
+    }
+
+    .service-alt-intro h2 {
+      text-transform: uppercase;
+      font-weight: 900;
+      letter-spacing: 0;
+    }
+
+    .service-rows {
+      display: grid;
+      gap: clamp(56px, 7vw, 96px);
+      margin-top: clamp(48px, 6vw, 84px);
+    }
+
+    .service-row {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 0.85fr);
+      align-items: center;
+      gap: clamp(28px, 5vw, 72px);
+    }
+
+    .service-row:nth-child(even) .service-row-copy { order: 2; }
+    .service-row:nth-child(even) .service-row-art { order: 1; }
+
+    .service-row-copy h3 {
+      font-size: clamp(1.35rem, 2.5vw, 2.1rem);
+      font-weight: 900;
+      line-height: 1.08;
+      text-transform: uppercase;
+      letter-spacing: 0;
+      color: var(--primary-dark);
+      margin: 0 0 16px;
+    }
+
+    .service-row-copy p {
+      color: var(--muted);
+      font-size: 1.05rem;
+      margin: 0 0 24px;
+      max-width: 46ch;
+    }
+
+    .service-row-art {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .service-symbol {
+      width: clamp(140px, 20vw, 230px);
+      height: auto;
+      color: var(--primary);
+    }
+
+    @media (max-width: 820px) {
+      .service-row {
+        grid-template-columns: 1fr;
+        gap: 20px;
+        text-align: center;
+      }
+
+      .service-row:nth-child(even) .service-row-copy,
+      .service-row .service-row-copy { order: 2; }
+
+      .service-row:nth-child(even) .service-row-art,
+      .service-row .service-row-art { order: 1; }
+
+      .service-row-copy p {
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .service-symbol { width: clamp(120px, 34vw, 170px); }
     }
 
     .category-accordion {
@@ -1508,8 +1656,8 @@
       }
 
       .hero-grid {
-        min-height: auto;
-        padding: 42px 0 82px;
+        min-height: min(78vh, 640px);
+        padding: 42px 0 40px;
       }
     }
 
@@ -1556,21 +1704,22 @@
       }
 
       .hero-grid {
-        min-height: auto;
-        gap: 24px;
-        padding: 30px 0 60px;
+        min-height: min(76vh, 560px);
+        gap: 0;
+        padding: 30px 0 32px;
       }
 
-      .hero h1 { font-size: clamp(2rem, 8vw, 2.8rem); }
+      .hero h1 { font-size: clamp(1.75rem, 7.6vw, 2.5rem); }
 
       .hero p {
         font-size: 1rem;
-        margin-bottom: 16px;
+        margin-bottom: 0;
       }
 
-      .hero-actions { margin: 20px 0 16px; }
-      .quick-actions { display: none; }
-      .hero-mobile-note { display: block; }
+      .hero-actions { margin: 20px 0 0; }
+      .hero-mobile-note { display: block; margin: 18px auto 0; max-width: 520px; }
+
+      .home-highlights .section-shell { padding: 44px 0 48px; }
 
       .hero-stats {
         gap: 10px;
@@ -1666,85 +1815,98 @@
     </div>
   </header>
 
+  <div class="announce-bar">
+    <div class="container">
+      <p data-i18n="hero_eyebrow">Seamless Island Travel: From Airport Arrivals To Late Night Bio Bay Tours &amp; Private Boat Charters</p>
+    </div>
+  </div>
+
   <main id="top">
     <section class="hero" aria-labelledby="hero-title">
       <div class="container hero-grid">
-        <div>
-          <span class="eyebrow" data-i18n="hero_eyebrow">Seamless Island Travel: From Airport Arrivals To Late Night Bio Bay Tours & Private Boat Charters</span>
-          <h1 id="hero-title" data-i18n="hero_title">Your trip, handled. Reliable Puerto Rico transport, handpicked excursions, and boat charters for every kind of traveler.</h1>
-          <p data-i18n="hero_desc">
-            Your all-in-one connection for island travel. Whether it's a direct port transfer, hidden gem excursion, or a luxury boat day, we make booking effortless. Professional drivers, transparent pricing and instant text confirmation. Don't just get there-arrive with confidence.
-          </p>
-          <div class="hero-actions">
-            <a class="btn btn-primary" href="#book" data-i18n="hero_book">Book Your Ride</a>
-            <a class="btn btn-light" href="tel:7872142058" data-i18n="hero_call">Call 787-214-2058</a>
-            <button class="btn btn-quote" id="openQuoteModal" type="button" data-i18n="hero_quote">Get a Free Quote</button>
-          </div>
-          <div class="hero-mobile-note" data-i18n-html="hero_mobile_note">Quickest option: tap <strong>Book Your Ride</strong> and complete the form in under a minute.</div>
-          <div class="quick-actions" aria-label="Quick actions">
-            <a class="quick-action" href="#how-it-works">
-              <strong data-i18n="qa_how_title">See how it works</strong>
-              <p data-i18n="qa_how_desc">Understand the booking process in 4 quick steps.</p>
-            </a>
-            <a class="quick-action" href="#book">
-              <strong data-i18n="qa_book_title">Book in under 1 minute</strong>
-              <p data-i18n="qa_book_desc">Fill out the form and send your trip details.</p>
-            </a>
-            <a class="quick-action" href="#contact-us">
-              <strong data-i18n="qa_help_title">Need help first?</strong>
-              <p data-i18n="qa_help_desc">Call or text us directly before booking.</p>
-            </a>
-          </div>
-          <div class="hero-stats" aria-label="Business highlights">
-            <div class="hero-stat"><strong data-i18n="stat_safe_title">Safe &amp; On Time</strong><span data-i18n="stat_safe_desc">Reliable rides for visitors, families, and groups.</span></div>
-            <div class="hero-stat"><strong data-i18n="stat_bilingual_title">Bilingual Drivers, Tour Guides & Captains</strong><span data-i18n="stat_bilingual_desc">Easy communication in English and Spanish.</span></div>
-            <div class="hero-stat"><strong data-i18n="stat_fast_title">Fast Confirmation</strong><span data-i18n="stat_fast_desc">Send your details and confirm by text.</span></div>
-          </div>
-        </div>
+        <h1 id="hero-title" data-i18n="hero_title">Your trip, handled. Reliable Puerto Rico transport, handpicked excursions, and boat charters for every kind of traveler.</h1>
+        <p data-i18n="hero_desc">
+          Your all-in-one connection for island travel. Whether it's a direct port transfer, hidden gem excursion, or a luxury boat day, we make booking effortless. Professional drivers, Captains and Tour Guides, transparent pricing and instant text confirmation. Don't just get there-arrive with confidence.
+        </p>
       </div>
       <p class="hidden-seo">DP Transport serves travelers in Rio Grande, San Juan, cruise ports, airports, beach towns, hotels, resorts, and excursion destinations across Puerto Rico.</p>
     </section>
 
-    <section id="service" class="background-section section-services">
+    <section class="home-highlights" aria-label="Booking highlights">
       <div class="container section-shell">
-        <div class="section-intro">
+        <div class="quick-actions" aria-label="Quick actions">
+          <a class="quick-action" href="#how-it-works">
+            <strong data-i18n="qa_how_title">See how it works</strong>
+            <p data-i18n="qa_how_desc">Understand the booking process in 4 quick steps.</p>
+          </a>
+          <a class="quick-action" href="#book">
+            <strong data-i18n="qa_book_title">Book in under 1 minute</strong>
+            <p data-i18n="qa_book_desc">Fill out the form and send your trip details.</p>
+          </a>
+          <a class="quick-action" href="#contact-us">
+            <strong data-i18n="qa_help_title">Need help first?</strong>
+            <p data-i18n="qa_help_desc">Call or text us directly before booking.</p>
+          </a>
+        </div>
+        <div class="hero-stats" aria-label="Business highlights">
+          <div class="hero-stat"><strong data-i18n="stat_safe_title">Safe &amp; On Time</strong><span data-i18n="stat_safe_desc">Reliable rides for visitors, families, and groups.</span></div>
+          <div class="hero-stat"><strong data-i18n="stat_bilingual_title">Bilingual Drivers, Tour Guides &amp; Captains</strong><span data-i18n="stat_bilingual_desc">Easy communication in English and Spanish.</span></div>
+          <div class="hero-stat"><strong data-i18n="stat_fast_title">Fast Confirmation</strong><span data-i18n="stat_fast_desc">Send your details and confirm by text.</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="service" class="section-services-alt">
+      <div class="container section-shell">
+        <div class="section-intro service-alt-intro">
           <h2 data-i18n="svc_title">Services</h2>
-          <p data-i18n="svc_desc">Clear communication, dependable pickups, and comfortable rides for airport travel, excursions, cruise ports, and custom island transportation.</p>
         </div>
 
-        <div class="service-categories">
-          <a class="category-accordion category-link" href="transportation.html">
-            <span class="category-summary">
-              <span class="category-icon" aria-hidden="true">🚐</span>
-              <span class="category-text">
-                <strong data-i18n="cat_transport_title">Transportation</strong>
-                <small data-i18n="cat_transport_desc">Dependable transportation for airport transfers, hotel pickups, ride to excursions, restaurants, ferry and cruise ports, and private trips across Puerto Rico</small>
-              </span>
-              <span class="category-arrow" aria-hidden="true">→</span>
-            </span>
-          </a>
+        <div class="service-rows">
+          <article class="service-row">
+            <div class="service-row-copy">
+              <h3 data-i18n="cat_transport_title">Transportation</h3>
+              <p data-i18n="cat_transport_desc">Dependable transportation for airport transfers, hotel pickups, ride to excursions, restaurants and cruise ports, and private trips across Puerto Rico. Ferry tickets to Culebra and Vieques also available.</p>
+              <a class="btn btn-secondary" href="transportation.html" data-i18n="svc_link_transport">View transportation</a>
+            </div>
+            <div class="service-row-art">
+              <svg class="service-symbol" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M4 13l1.6-4.8A2 2 0 0 1 7.5 7h9a2 2 0 0 1 1.9 1.2L20 13"/>
+                <path d="M3 13h18v4a1 1 0 0 1-1 1h-1.5a1 1 0 0 1-1-1v-1h-11v1a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1v-4z"/>
+                <circle cx="7.5" cy="16" r="1.2"/>
+                <circle cx="16.5" cy="16" r="1.2"/>
+              </svg>
+            </div>
+          </article>
 
-          <a class="category-accordion category-link" href="tours-excursions.html">
-            <span class="category-summary">
-              <span class="category-icon" aria-hidden="true">🌴</span>
-              <span class="category-text">
-                <strong data-i18n="cat_tours_title">Tours &amp; Excursions</strong>
-                <small data-i18n="cat_tours_desc">Explore Puerto Rico beyond the ride. From historic Old San Juan and scenic rainforest adventures to cave swimming experiences and local winery visits</small>
-              </span>
-              <span class="category-arrow" aria-hidden="true">→</span>
-            </span>
-          </a>
+          <article class="service-row">
+            <div class="service-row-copy">
+              <h3 data-i18n="cat_tours_title">Tours &amp; Excursions</h3>
+              <p data-i18n="cat_tours_desc">Explore Puerto Rico beyond the ride. From historic Old San Juan and scenic rainforest adventures to cave swimming experiences and local winery visits</p>
+              <a class="btn btn-secondary" href="tours-excursions.html" data-i18n="svc_link_tours">View tours &amp; excursions</a>
+            </div>
+            <div class="service-row-art">
+              <svg class="service-symbol" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M4 7.5h2.7l1.5-2h7.6l1.5 2H20a1 1 0 0 1 1 1v9.5a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V8.5a1 1 0 0 1 1-1z"/>
+                <circle cx="12" cy="13" r="3.8"/>
+              </svg>
+            </div>
+          </article>
 
-          <a class="category-accordion category-link" href="boat-charters.html">
-            <span class="category-summary">
-              <span class="category-icon" aria-hidden="true">⚓</span>
-              <span class="category-text">
-                <strong data-i18n="cat_boats_title">Boat Charters</strong>
-                <small data-i18n="cat_boats_desc">Private yachts, jet-skis and boats for unforgettable days at sea.</small>
-              </span>
-              <span class="category-arrow" aria-hidden="true">→</span>
-            </span>
-          </a>
+          <article class="service-row">
+            <div class="service-row-copy">
+              <h3 data-i18n="cat_boats_title">Boat Charters</h3>
+              <p data-i18n="cat_boats_desc">Private yachts, jet-skis and boats for unforgettable days at sea.</p>
+              <a class="btn btn-secondary" href="boat-charters.html" data-i18n="svc_link_boats">View boat charters</a>
+            </div>
+            <div class="service-row-art">
+              <svg class="service-symbol" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M3 17.5c1.5 1 3 1.3 4.5 1s2.5-1.2 4.5-1.2 3 1 4.5 1.2 3-.1 4.5-1"/>
+                <path d="M5 14.5l7-8.5 7 8.5"/>
+                <path d="M12 6v8.5"/>
+              </svg>
+            </div>
+          </article>
         </div>
       </div>
     </section>
@@ -1812,6 +1974,9 @@
                 <li data-i18n="book_check2">Enter the exact destination or place name</li>
                 <li data-i18n="book_check3">Make sure your phone number and email is correct</li>
               </ul>
+            </div>
+            <div class="hero-actions" style="margin: 18px 0 0;">
+              <button class="btn btn-quote" id="openQuoteModal" type="button" data-i18n="hero_quote">Get a Free Quote</button>
             </div>
           </div>
 
@@ -2174,8 +2339,8 @@
       <div class="container section-shell">
         <div class="cta">
           <div>
-            <h2 data-i18n="cta_title">Ready to arrange transportation?</h2>
-            <p data-i18n="cta_desc">Book now, send your trip details, and watch for the confirmation text from the driver.</p>
+            <h2 data-i18n="cta_title">Ready to book your experience?</h2>
+            <p data-i18n="cta_desc">Book now, send your details, and watch for the confirmation text from the driver, captain or tour guide.</p>
           </div>
           <a class="btn btn-primary" href="#book" data-i18n="cta_btn">Go to Booking</a>
         </div>
@@ -2824,7 +2989,7 @@
         // Hero
         hero_eyebrow: 'Viaje Sin Complicaciones: Desde Llegadas al Aeropuerto Hasta Tours Nocturnos a Bahías Bioluminiscentes y Chárters Privados en Bote',
         hero_title: 'Tu viaje, resuelto. Transporte confiable en Puerto Rico, excursiones seleccionadas y chárters de bote para todo tipo de viajero.',
-        hero_desc: 'Tu conexión todo-en-uno para viajar por la isla. Ya sea un traslado directo al puerto, una excursión a lugares escondidos o un día de lujo en bote, hacemos la reserva sin esfuerzo. Conductores profesionales, precios transparentes y confirmación instantánea por texto. No solo llegues—llega con confianza.',
+        hero_desc: 'Tu conexión todo-en-uno para viajar por la isla. Ya sea un traslado directo al puerto, una excursión a lugares escondidos o un día de lujo en bote, hacemos la reserva sin esfuerzo. Conductores, Capitanes y Guías Turísticos profesionales, precios transparentes y confirmación instantánea por texto. No solo llegues—llega con confianza.',
         hero_book: 'Reserve Su Viaje',
         hero_call: 'Llame al 787-214-2058',
         hero_quote: 'Cotización Gratis',
@@ -2887,12 +3052,15 @@
 
         // Service categories
         cat_transport_title: 'Transporte',
-        cat_transport_desc: 'Transporte confiable para traslados al aeropuerto, recogidas en hoteles, viajes a excursiones, restaurantes, puertos de ferry y cruceros, y viajes privados por todo Puerto Rico',
+        cat_transport_desc: 'Transporte confiable para traslados al aeropuerto, recogidas en hoteles, viajes a excursiones, restaurantes y puertos de cruceros, y viajes privados por todo Puerto Rico. También ofrecemos boletos de ferry a Culebra y Vieques.',
         svc_transport_page_title: 'Servicios de Transporte en Puerto Rico en los que Puede Confiar',
         cat_tours_title: 'Tours y Excursiones',
         cat_tours_desc: 'Descubra Puerto Rico más allá del trayecto. Desde el histórico Viejo San Juan y aventuras en el bosque pluvial hasta experiencias de natación en cuevas y visitas a vinerías locales',
         cat_boats_title: 'Chárters de Bote',
         cat_boats_desc: 'Yates privados, jet-skis y botes para días inolvidables en el mar.',
+        svc_link_transport: 'Ver transporte',
+        svc_link_tours: 'Ver tours y excursiones',
+        svc_link_boats: 'Ver chárters de bote',
 
         // Boat cards
         prod_welcraft_title: "Welcraft 30'",
@@ -3069,8 +3237,8 @@
         btn_call_now: 'Llame Ahora',
 
         // CTA
-        cta_title: '¿Listo para organizar su transporte?',
-        cta_desc: 'Reserve ahora, envíe los detalles de su viaje y espere el mensaje de confirmación del conductor.',
+        cta_title: '¿Listo para reservar su experiencia?',
+        cta_desc: 'Reserve ahora, envíe sus datos y espere el mensaje de confirmación del conductor, capitán o guía turístico.',
         cta_btn: 'Ir a Reservar',
 
         // Quote modal
