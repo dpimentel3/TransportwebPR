@@ -336,7 +336,9 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: flex-start;
+      /* Centred vertically so the headline and intro sit around the middle of the
+         header photo rather than crowding the top of it. */
+      justify-content: center;
       text-align: center;
       min-height: min(84vh, 860px);
       padding: clamp(46px, 8vh, 104px) 0 44px;
@@ -1827,7 +1829,7 @@
   <main id="top">
     <section class="hero" aria-labelledby="hero-title">
       <div class="container hero-grid">
-        <h1 id="hero-title" data-i18n="hero_title">Your trip, handled. Reliable Puerto Rico transport, handpicked excursions, and boat charters for every kind of traveler.</h1>
+        <h1 id="hero-title" data-i18n="hero_title">Your Gateway to Puerto Rico</h1>
         <p data-i18n="hero_desc">
           Your all-in-one connection for island travel. Whether it's a direct port transfer, hidden gem excursion, or a luxury boat day, we make booking effortless. Professional drivers, Captains and Tour Guides, transparent pricing and instant text confirmation. Don't just get there-arrive with confidence.
         </p>
@@ -2599,6 +2601,9 @@
         var panels = document.querySelectorAll('.booking-panel');
 
         function activateTab(panelId) {
+          // Landing pages that only offer a single booking form have no panel for the
+          // other services - never hide the form that is on the page.
+          if (!document.getElementById(panelId)) return;
           tabs.forEach(function (t) {
             var isActive = t.getAttribute('data-panel') === panelId;
             t.classList.toggle('active', isActive);
@@ -2988,7 +2993,7 @@
 
         // Hero
         hero_eyebrow: 'Viaje Sin Complicaciones: Desde Llegadas al Aeropuerto Hasta Tours Nocturnos a Bahías Bioluminiscentes y Chárters Privados en Bote',
-        hero_title: 'Tu viaje, resuelto. Transporte confiable en Puerto Rico, excursiones seleccionadas y chárters de bote para todo tipo de viajero.',
+        hero_title: 'Tu Puerta de Entrada a Puerto Rico',
         hero_desc: 'Tu conexión todo-en-uno para viajar por la isla. Ya sea un traslado directo al puerto, una excursión a lugares escondidos o un día de lujo en bote, hacemos la reserva sin esfuerzo. Conductores, Capitanes y Guías Turísticos profesionales, precios transparentes y confirmación instantánea por texto. No solo llegues—llega con confianza.',
         hero_book: 'Reserve Su Viaje',
         hero_call: 'Llame al 787-214-2058',

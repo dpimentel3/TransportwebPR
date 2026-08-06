@@ -2989,6 +2989,9 @@
         var panels = document.querySelectorAll('.booking-panel');
 
         function activateTab(panelId) {
+          // Landing pages that only offer a single booking form have no panel for the
+          // other services - never hide the form that is on the page.
+          if (!document.getElementById(panelId)) return;
           tabs.forEach(function (t) {
             var isActive = t.getAttribute('data-panel') === panelId;
             t.classList.toggle('active', isActive);

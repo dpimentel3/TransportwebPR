@@ -2640,181 +2640,8 @@
             </div>
           </div>
 
-          <aside class="booking-card" aria-labelledby="booking-title">
-            <div class="booking-tabs" role="tablist" aria-label="Booking options">
-              <button type="button" class="booking-tab active" id="tab-transport" role="tab" aria-selected="true" aria-controls="panel-transport" data-panel="panel-transport">
-                <svg class="booking-tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                  <path d="M4 13l1.6-4.8A2 2 0 0 1 7.5 7h9a2 2 0 0 1 1.9 1.2L20 13"/>
-                  <path d="M3 13h18v4a1 1 0 0 1-1 1h-1.5a1 1 0 0 1-1-1v-1h-11v1a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1v-4z"/>
-                  <circle cx="7.5" cy="16" r="1.2"/>
-                  <circle cx="16.5" cy="16" r="1.2"/>
-                </svg>
-                <span data-i18n="tab_transport">Transportation</span>
-              </button>
-              <button type="button" class="booking-tab" id="tab-tours" role="tab" aria-selected="false" aria-controls="panel-tours" data-panel="panel-tours">
-                <svg class="booking-tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                  <path d="M4 7.5h2.7l1.5-2h7.6l1.5 2H20a1 1 0 0 1 1 1v9.5a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V8.5a1 1 0 0 1 1-1z"/>
-                  <circle cx="12" cy="13" r="3.8"/>
-                </svg>
-                <span data-i18n="tab_tours">Tours</span>
-              </button>
-              <button type="button" class="booking-tab" id="tab-boats" role="tab" aria-selected="false" aria-controls="panel-boats" data-panel="panel-boats">
-                <svg class="booking-tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                  <path d="M3 17.5c1.5 1 3 1.3 4.5 1s2.5-1.2 4.5-1.2 3 1 4.5 1.2 3-.1 4.5-1"/>
-                  <path d="M5 14.5l7-8.5 7 8.5"/>
-                  <path d="M12 6v8.5"/>
-                </svg>
-                <span data-i18n="tab_boats">Boat Charters</span>
-              </button>
-            </div>
-
-            <div class="booking-panel" id="panel-transport" role="tabpanel" aria-labelledby="tab-transport">
-              <h2 id="booking-title" data-i18n="book_form_title">Book your transportation</h2>
-              <form id="bookingForm" name="booking" method="POST" data-netlify="true" netlify-honeypot="bot-field">
-              <input type="hidden" name="form-name" value="booking" />
-              <p class="hidden-field">
-                <label>Don’t fill this out if you’re human: <input name="bot-field" /></label>
-              </p>
-              <div>
-                <label for="serviceType" data-i18n="label_service_type">Service type</label>
-                <select id="serviceType" name="serviceType" required>
-                  <option value="" disabled selected data-i18n="ph_service_type">Choose a service</option>
-                  <option value="Airport Transfers" data-i18n="service_airport">Airport Transfers</option>
-                  <option value="Ferry Tickets" data-i18n="service_cruise">Ferry Tickets</option>
-                  <option value="Excursions Transport" data-i18n="service_excursions">Excursions Transport</option>
-                  <option value="Luxury Travel" data-i18n="service_luxury">Luxury Travel</option>
-                </select>
-              </div>
-
-              <div>
-                <label for="roundTrip" data-i18n="label_round_trip">Round trip</label>
-                <select id="roundTrip" name="roundTrip">
-                  <option value="No" data-i18n="round_trip_no">No</option>
-                  <option value="Yes" data-i18n="round_trip_yes">Yes</option>
-                </select>
-              </div>
-
-              <div class="field-grid">
-                <div>
-                  <label for="tripDate" data-i18n="label_date">Date (month/day)</label>
-                  <input id="tripDate" name="tripDate" type="date" required />
-                </div>
-                <div>
-                  <label for="pickupLocation" data-i18n="label_pickup">Pick up location</label>
-                  <div class="iq-input-wrap">
-                    <input id="pickupLocation" name="pickupLocation" type="text" data-i18n-placeholder="ph_pickup" placeholder="Example: SJU Airport or hotel name" required />
-                    <button type="button" class="iq-clear" data-target="pickupLocation" aria-label="Clear pick up location">&times;</button>
-                  </div>
-                </div>
-              </div>
-
-              <div>
-                <label for="pickupTime" data-i18n="label_time">Time of pick up</label>
-                <input id="pickupTime" type="time" required />
-                <input type="hidden" id="pickupTimeFormatted" name="pickupTime" value="" />
-              </div>
-
-              <div>
-                <label for="destination" data-i18n="label_destination">Destination</label>
-                <div class="iq-input-wrap">
-                  <input id="destination" name="destination" type="text" data-i18n-placeholder="ph_destination" placeholder="Example: San Juan Cruise Port" required />
-                  <button type="button" class="iq-clear" data-target="destination" aria-label="Clear destination">&times;</button>
-                </div>
-                <div class="helper" data-i18n="helper_destination">Use a place name or address so the driver clearly understands your destination.</div>
-              </div>
-
-              <div class="field-grid">
-                <div>
-                  <label for="passengers" data-i18n="label_passengers">Number of passengers</label>
-                  <input id="passengers" name="passengers" type="number" min="1" max="50" data-i18n-placeholder="ph_passengers" placeholder="Example: 4" required />
-                </div>
-                <div>
-                  <label for="phone" data-i18n="label_phone">Phone number</label>
-                  <input id="phone" name="phone" type="tel" placeholder="787-214-2058" required />
-                </div>
-              </div>
-
-              <div>
-                <label for="firstName" data-i18n="label_name">First name</label>
-                <input id="firstName" name="firstName" type="text" required />
-              </div>
-
-              <div>
-                <label for="comments" data-i18n="label_comments">Comments</label>
-                <textarea id="comments" name="comments" data-i18n-placeholder="ph_comments" placeholder="Add any extra details about your trip if necessary (flight number/airline, need/have car seat, number of bags or golf bags)"></textarea>
-              </div>
-
-              <div class="hero-actions" style="margin: 6px 0 0;">
-                <button type="submit" class="btn btn-primary" data-i18n="btn_send_booking">Send Booking Request</button>
-              </div>
-              <div class="booking-note" data-i18n="booking_note">
-                No payments are made through the website
-              </div>
-            </form>
-            </div>
-
-            <div class="booking-panel" id="panel-tours" role="tabpanel" aria-labelledby="tab-tours" hidden>
-              <h2 id="tours-title" data-i18n="book_tours_title">Book your tour</h2>
-              <form id="toursForm" name="tour-booking-v2" method="POST" data-netlify="true" netlify-honeypot="bot-field">
-                <input type="hidden" name="form-name" value="tour-booking-v2" />
-                <p class="hidden-field">
-                  <label>Don’t fill this out if you’re human: <input name="bot-field" /></label>
-                </p>
-                <div class="field-grid">
-                  <div>
-                    <label for="tourDate" data-i18n="label_date">Date (month/day)</label>
-                    <input id="tourDate" name="tripDate" type="date" required />
-                  </div>
-                  <div>
-                    <label for="tourSelect" data-i18n="label_select_tour">Select tour</label>
-                    <select id="tourSelect" name="tour" required>
-                      <option value="" disabled selected data-i18n="ph_select_tour">Choose a tour</option>
-                      <option value="Old San Juan Tour" data-i18n="tour_option_osj">Old San Juan Tour</option>
-                      <option value="Cave Swimming Adventure" data-i18n="tour_option_cave">Cave Swimming Adventure</option>
-                      <option value="Bioluminescent Kayak Tour(Transport included)" data-i18n="tour_option_biokayak">Bioluminescent Kayak Tour(Transport included)</option>
-                    </select>
-                  </div>
-                </div>
-
-                <div>
-                  <label for="tourPickup" data-i18n="label_pickup">Pick up location</label>
-                  <div class="iq-input-wrap">
-                    <input id="tourPickup" name="pickupLocation" type="text" data-i18n-placeholder="ph_pickup" placeholder="Example: SJU Airport or hotel name" required />
-                    <button type="button" class="iq-clear" data-target="tourPickup" aria-label="Clear pick up location">&times;</button>
-                  </div>
-                </div>
-
-                <div class="field-grid">
-                  <div>
-                    <label for="tourPassengers" data-i18n="label_passengers">Number of passengers</label>
-                    <input id="tourPassengers" name="passengers" type="number" min="1" max="50" data-i18n-placeholder="ph_passengers" placeholder="Example: 4" required />
-                  </div>
-                  <div>
-                    <label for="tourPhone" data-i18n="label_phone">Phone number</label>
-                    <input id="tourPhone" name="phone" type="tel" placeholder="787-214-2058" required />
-                  </div>
-                </div>
-
-                <div>
-                  <label for="tourFirstName" data-i18n="label_name">First name</label>
-                  <input id="tourFirstName" name="firstName" type="text" required />
-                </div>
-
-                <div>
-                  <label for="tourComments" data-i18n="label_comments">Comments</label>
-                  <textarea id="tourComments" name="comments" data-i18n-placeholder="ph_comments_tour" placeholder="Add any extra details about your tour if necessary"></textarea>
-                </div>
-
-                <div class="hero-actions" style="margin: 6px 0 0;">
-                  <button type="submit" class="btn btn-primary" data-i18n="btn_send_booking">Send Booking Request</button>
-                </div>
-                <div class="booking-note" data-i18n="booking_note">
-                  No payments are made through the website
-                </div>
-              </form>
-            </div>
-
-            <div class="booking-panel" id="panel-boats" role="tabpanel" aria-labelledby="tab-boats" hidden>
+          <aside class="booking-card" aria-labelledby="boats-title">
+            <div class="booking-panel" id="panel-boats">
               <h2 id="boats-title" data-i18n="book_boats_title">Book a boat charter</h2>
               <form id="boatsForm" name="boat-charter-booking" method="POST" data-netlify="true" netlify-honeypot="bot-field">
                 <input type="hidden" name="form-name" value="boat-charter-booking" />
@@ -3216,6 +3043,9 @@
         var panels = document.querySelectorAll('.booking-panel');
 
         function activateTab(panelId) {
+          // Landing pages that only offer a single booking form have no panel for the
+          // other services - never hide the form that is on the page.
+          if (!document.getElementById(panelId)) return;
           tabs.forEach(function (t) {
             var isActive = t.getAttribute('data-panel') === panelId;
             t.classList.toggle('active', isActive);
@@ -4803,6 +4633,12 @@
               scale: 9
             }
           });
+          // On single-form landing pages the other booking panels are not present,
+          // so send the visitor to the page that does have that form.
+          function bookHref(panelId, page) {
+            return document.getElementById(panelId) ? '#book' : page + '#book';
+          }
+
           marker._cats = place.cats;
           marker._place = place;
 
@@ -4818,13 +4654,13 @@
                 if (btn.type === 'link') {
                   buttonsHtml += '<a href="' + btn.url + '" target="_blank" rel="noopener" class="explore-popup-btn" style="display:inline-block;margin-top:8px;margin-right:6px;padding:5px 12px;background:#FF9800;color:#fff;border-radius:4px;font-size:0.82rem;text-decoration:none;font-weight:600;">' + btnLabel + '</a>';
                 } else if (btn.type === 'tour') {
-                  buttonsHtml += '<a href="#book" class="explore-popup-btn book-tour-link" data-tour="' + btn.tour + '" style="display:inline-block;margin-top:8px;margin-right:6px;padding:5px 12px;background:#FF9800;color:#fff;border-radius:4px;font-size:0.82rem;text-decoration:none;font-weight:600;">' + btnLabel + '</a>';
+                  buttonsHtml += '<a href="' + bookHref('panel-tours', 'tours-excursions.html') + '" class="explore-popup-btn book-tour-link" data-tour="' + btn.tour + '" style="display:inline-block;margin-top:8px;margin-right:6px;padding:5px 12px;background:#FF9800;color:#fff;border-radius:4px;font-size:0.82rem;text-decoration:none;font-weight:600;">' + btnLabel + '</a>';
                 } else if (btn.type === 'transport') {
-                  buttonsHtml += '<a href="#book" class="explore-popup-btn book-transport-link" data-service="' + btn.service + '" style="display:inline-block;margin-top:8px;margin-right:6px;padding:5px 12px;background:#FF9800;color:#fff;border-radius:4px;font-size:0.82rem;text-decoration:none;font-weight:600;">' + btnLabel + '</a>';
+                  buttonsHtml += '<a href="' + bookHref('panel-transport', 'transportation.html') + '" class="explore-popup-btn book-transport-link" data-service="' + btn.service + '" style="display:inline-block;margin-top:8px;margin-right:6px;padding:5px 12px;background:#FF9800;color:#fff;border-radius:4px;font-size:0.82rem;text-decoration:none;font-weight:600;">' + btnLabel + '</a>';
                 } else if (btn.type === 'charter') {
-                  buttonsHtml += '<a href="#book" class="explore-popup-btn book-charter-link" style="display:inline-block;margin-top:8px;margin-right:6px;padding:5px 12px;background:#FF9800;color:#fff;border-radius:4px;font-size:0.82rem;text-decoration:none;font-weight:600;">' + btnLabel + '</a>';
+                  buttonsHtml += '<a href="' + bookHref('panel-boats', 'boat-charters.html') + '" class="explore-popup-btn book-charter-link" style="display:inline-block;margin-top:8px;margin-right:6px;padding:5px 12px;background:#FF9800;color:#fff;border-radius:4px;font-size:0.82rem;text-decoration:none;font-weight:600;">' + btnLabel + '</a>';
                 } else if (btn.type === 'roundtrip') {
-                  buttonsHtml += '<a href="#book" class="explore-popup-btn book-roundtrip-link" data-service="' + btn.service + '" style="display:inline-block;margin-top:8px;margin-right:6px;padding:5px 12px;background:#FF9800;color:#fff;border-radius:4px;font-size:0.82rem;text-decoration:none;font-weight:600;">' + btnLabel + '</a>';
+                  buttonsHtml += '<a href="' + bookHref('panel-transport', 'transportation.html') + '" class="explore-popup-btn book-roundtrip-link" data-service="' + btn.service + '" style="display:inline-block;margin-top:8px;margin-right:6px;padding:5px 12px;background:#FF9800;color:#fff;border-radius:4px;font-size:0.82rem;text-decoration:none;font-weight:600;">' + btnLabel + '</a>';
                 }
               });
             }
