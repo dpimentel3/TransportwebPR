@@ -789,26 +789,93 @@
       border-top: 1px solid #e5eaf0;
     }
 
-    .service-page #also-like .category-content,
-    .service-page #also-like .tour-widgets {
+    .service-page #also-like .category-content {
       max-width: 1120px;
     }
 
-    .service-page #also-like .tour-widgets {
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-      gap: 20px;
+    /* "Experiences you may also like" is a carousel: four cards per view on
+       desktop, one per view on mobile, the rest revealed by swiping or arrows. */
+    .service-page #also-like .also-like-carousel {
+      position: relative;
+      max-width: 1120px;
+      margin: 0 auto;
     }
 
+    .service-page #also-like .tour-widgets {
+      max-width: none;
+      margin: 0;
+      display: flex;
+      grid-template-columns: none;
+      gap: 20px;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      scroll-behavior: smooth;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+      padding: 4px 2px 12px;
+    }
+
+    .service-page #also-like .tour-widgets::-webkit-scrollbar {
+      display: none;
+    }
+
+    .service-page #also-like .tour-widget {
+      flex: 0 0 calc((100% - 60px) / 4);
+      scroll-snap-align: start;
+    }
+
+    .service-page #also-like .also-like-nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 3;
+      width: 44px;
+      height: 44px;
+      padding: 0;
+      border-radius: 50%;
+      border: 1px solid #e5eaf0;
+      background: #ffffff;
+      color: var(--primary);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: 0 8px 20px rgba(8, 37, 61, 0.2);
+      transition: background 0.18s ease, color 0.18s ease, opacity 0.18s ease;
+    }
+
+    .service-page #also-like .also-like-nav:hover,
+    .service-page #also-like .also-like-nav:focus-visible {
+      background: var(--accent);
+      color: #1a1a1a;
+    }
+
+    .service-page #also-like .also-like-nav[disabled] {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .service-page #also-like .also-like-nav svg {
+      width: 20px;
+      height: 20px;
+    }
+
+    .service-page #also-like .also-like-prev { left: -14px; }
+    .service-page #also-like .also-like-next { right: -14px; }
+
     @media (max-width: 1080px) {
-      .service-page #also-like .tour-widgets {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
+      .service-page #also-like .tour-widget {
+        flex-basis: calc((100% - 20px) / 2);
       }
     }
 
     @media (max-width: 560px) {
-      .service-page #also-like .tour-widgets {
-        grid-template-columns: minmax(0, 1fr);
+      .service-page #also-like .tour-widget {
+        flex-basis: 100%;
       }
+
+      .service-page #also-like .also-like-prev { left: 4px; }
+      .service-page #also-like .also-like-next { right: 4px; }
     }
 
     .service-page #also-like .tour-widget-cta {
@@ -2671,60 +2738,81 @@
         </div>
         <div class="service-categories">
           <div class="category-content" style="border-top:none;">
-            <div class="tour-widgets">
-              <a class="tour-widget" href="cruise-port-transfers.html">
-                <div class="tour-widget-media">
-                  <img src="ferry-tickets.jpg" alt="Schoodic Explorer ferry docked in Puerto Rico for ferry tickets to Culebra and Vieques" loading="lazy" decoding="async">
-                </div>
-                <div class="tour-widget-body">
-                  <h3 data-i18n="prod_cruise_title">Ferry Tickets</h3>
-                  <ul class="tour-widget-specs">
-                    <li><span class="spec-label" data-i18n="spec_destinations">Destinations</span><span class="spec-value" data-i18n="prod_cruise_destinations">Culebra/Vieques</span></li>
-                  </ul>
-                  <span class="tour-widget-cta" data-i18n="view_service_book">View service &amp; book &rarr;</span>
-                </div>
-              </a>
-              <a class="tour-widget" href="boston-whaler-24.html">
-                <div class="tour-widget-media">
-                  <img src="boston-whaler-3.jpeg" alt="Boston Whaler 24' at Icacos and Palomino islands" loading="lazy" decoding="async">
-                </div>
-                <div class="tour-widget-body">
-                  <h3 data-i18n="prod_whaler_title">Boston Whaler 24'</h3>
-                  <ul class="tour-widget-specs">
-                    <li><span class="spec-label" data-i18n="spec_capacity">Capacity</span><span class="spec-value" data-i18n="prod_whaler_capacity">Max. 6 people</span></li>
-                    <li><span class="spec-label" data-i18n="spec_duration">Duration</span><span class="spec-value" data-i18n="prod_whaler_duration">5 or 7 Hours</span></li>
-                  </ul>
-                  <span class="tour-widget-cta" data-i18n="view_boat_book">View boat &amp; book &rarr;</span>
-                </div>
-              </a>
-              <a class="tour-widget" href="snorkel-with-turtles.html">
-                <div class="tour-widget-media">
-                  <img src="snorkel-turtles-1.jpg" alt="Snorkeler swimming next to a sea turtle in San Juan" loading="lazy" decoding="async">
-                </div>
-                <div class="tour-widget-body">
-                  <h3 data-i18n="prod_snorkel_title">Snorkel With Turtles</h3>
-                  <ul class="tour-widget-specs">
-                    <li><span class="spec-label" data-i18n="spec_cost">Cost</span><span class="spec-value" data-i18n="prod_snorkel_price">$39 / Person</span></li>
-                    <li><span class="spec-label" data-i18n="spec_duration">Duration</span><span class="spec-value" data-i18n="prod_snorkel_duration">1 to 2 Hours</span></li>
-                    <li><span class="spec-label" data-i18n="spec_minimum">Minimum</span><span class="spec-value" data-i18n="prod_snorkel_min">Min. 2 person</span></li>
-                    <li><span class="spec-label" data-i18n="spec_ages">Ages</span><span class="spec-value" data-i18n="prod_snorkel_ages">Ages 8+</span></li>
-                  </ul>
-                  <span class="tour-widget-cta" data-i18n="view_tour_book">View tour &amp; book &rarr;</span>
-                </div>
-              </a>
-              <a class="tour-widget" href="jetski-rental.html">
-                <div class="tour-widget-media">
-                  <img src="jetski-1.jpg" alt="Yamaha WaveRunner jet ski rental rider on clear turquoise water in Puerto Rico" loading="lazy" decoding="async">
-                </div>
-                <div class="tour-widget-body">
-                  <h3 data-i18n="prod_jetski_title">Jetski Rental (Metro Area)</h3>
-                  <ul class="tour-widget-specs">
-                    <li><span class="spec-label" data-i18n="spec_capacity">Capacity</span><span class="spec-value" data-i18n="prod_jetski_capacity">Max. 4 people</span></li>
-                    <li><span class="spec-label" data-i18n="spec_duration">Duration</span><span class="spec-value" data-i18n="prod_jetski_duration">30 Minutes or 1 Hour</span></li>
-                  </ul>
-                  <span class="tour-widget-cta" data-i18n="view_rental_book">View rental &amp; book &rarr;</span>
-                </div>
-              </a>
+            <div class="also-like-carousel">
+              <div class="tour-widgets" id="alsoLikeTrack">
+                <a class="tour-widget" href="cruise-port-transfers.html">
+                  <div class="tour-widget-media">
+                    <img src="ferry-tickets.jpg" alt="Schoodic Explorer ferry docked in Puerto Rico for ferry tickets to Culebra and Vieques" loading="lazy" decoding="async">
+                  </div>
+                  <div class="tour-widget-body">
+                    <h3 data-i18n="prod_cruise_title">Ferry Tickets</h3>
+                    <ul class="tour-widget-specs">
+                      <li><span class="spec-label" data-i18n="spec_destinations">Destinations</span><span class="spec-value" data-i18n="prod_cruise_destinations">Culebra/Vieques</span></li>
+                    </ul>
+                    <span class="tour-widget-cta" data-i18n="view_service_book">View service &amp; book &rarr;</span>
+                  </div>
+                </a>
+                <a class="tour-widget" href="boston-whaler-24.html">
+                  <div class="tour-widget-media">
+                    <img src="boston-whaler-3.jpeg" alt="Boston Whaler 24' at Icacos and Palomino islands" loading="lazy" decoding="async">
+                  </div>
+                  <div class="tour-widget-body">
+                    <h3 data-i18n="prod_whaler_title">Boston Whaler 24'</h3>
+                    <ul class="tour-widget-specs">
+                      <li><span class="spec-label" data-i18n="spec_capacity">Capacity</span><span class="spec-value" data-i18n="prod_whaler_capacity">Max. 6 people</span></li>
+                      <li><span class="spec-label" data-i18n="spec_duration">Duration</span><span class="spec-value" data-i18n="prod_whaler_duration">5 or 7 Hours</span></li>
+                    </ul>
+                    <span class="tour-widget-cta" data-i18n="view_boat_book">View boat &amp; book &rarr;</span>
+                  </div>
+                </a>
+                <a class="tour-widget" href="snorkel-with-turtles.html">
+                  <div class="tour-widget-media">
+                    <img src="snorkel-turtles-1.jpg" alt="Snorkeler swimming next to a sea turtle in San Juan" loading="lazy" decoding="async">
+                  </div>
+                  <div class="tour-widget-body">
+                    <h3 data-i18n="prod_snorkel_title">Snorkel With Turtles</h3>
+                    <ul class="tour-widget-specs">
+                      <li><span class="spec-label" data-i18n="spec_cost">Cost</span><span class="spec-value" data-i18n="prod_snorkel_price">$39 / Person</span></li>
+                      <li><span class="spec-label" data-i18n="spec_duration">Duration</span><span class="spec-value" data-i18n="prod_snorkel_duration">1 to 2 Hours</span></li>
+                      <li><span class="spec-label" data-i18n="spec_minimum">Minimum</span><span class="spec-value" data-i18n="prod_snorkel_min">Min. 2 person</span></li>
+                      <li><span class="spec-label" data-i18n="spec_ages">Ages</span><span class="spec-value" data-i18n="prod_snorkel_ages">Ages 8+</span></li>
+                    </ul>
+                    <span class="tour-widget-cta" data-i18n="view_tour_book">View tour &amp; book &rarr;</span>
+                  </div>
+                </a>
+                <a class="tour-widget" href="jetski-rental.html">
+                  <div class="tour-widget-media">
+                    <img src="jetski-1.jpg" alt="Yamaha WaveRunner jet ski rental rider on clear turquoise water in Puerto Rico" loading="lazy" decoding="async">
+                  </div>
+                  <div class="tour-widget-body">
+                    <h3 data-i18n="prod_jetski_title">Jetski Rental (Metro Area)</h3>
+                    <ul class="tour-widget-specs">
+                      <li><span class="spec-label" data-i18n="spec_capacity">Capacity</span><span class="spec-value" data-i18n="prod_jetski_capacity">Max. 4 people</span></li>
+                      <li><span class="spec-label" data-i18n="spec_duration">Duration</span><span class="spec-value" data-i18n="prod_jetski_duration">30 Minutes or 1 Hour</span></li>
+                    </ul>
+                    <span class="tour-widget-cta" data-i18n="view_rental_book">View rental &amp; book &rarr;</span>
+                  </div>
+                </a>
+                <a class="tour-widget" href="airport-transfers.html">
+                  <div class="tour-widget-media">
+                    <img src="airport-transfer-isla-verde.jpg" alt="DP Transport airport transfer van in Isla Verde" loading="lazy" decoding="async">
+                  </div>
+                  <div class="tour-widget-body">
+                    <h3 data-i18n="prod_airport_title">Airport Transfers</h3>
+                    <ul class="tour-widget-specs">
+                      <li><span class="spec-label" data-i18n="spec_cost">Cost</span><span class="spec-value" data-i18n="prod_airport_price">$10 / Person</span></li>
+                      <li><span class="spec-label" data-i18n="spec_capacity">Capacity</span><span class="spec-value" data-i18n="prod_airport_capacity">Up to 13 People</span></li>
+                    </ul>
+                    <span class="tour-widget-cta" data-i18n="view_service_book">View service &amp; book &rarr;</span>
+                  </div>
+                </a>
+              </div>
+              <button type="button" class="also-like-nav also-like-prev" aria-label="Previous experiences" aria-controls="alsoLikeTrack">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg>
+              </button>
+              <button type="button" class="also-like-nav also-like-next" aria-label="Next experiences" aria-controls="alsoLikeTrack">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg>
+              </button>
             </div>
           </div>
         </div>
@@ -4559,5 +4647,39 @@
   </script>
   <script async defer
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCGKJigzmudkBONv9YWQnXxfs9HCN1wLMI&libraries=places,geometry&callback=initQuoteAutocomplete"></script>
+  <script>
+
+      // "Experiences you may also like" carousel: swipe on touch, arrows elsewhere.
+      (function () {
+        var track = document.getElementById('alsoLikeTrack');
+        if (!track) return;
+        var carousel = track.closest('.also-like-carousel');
+        var prev = carousel.querySelector('.also-like-prev');
+        var next = carousel.querySelector('.also-like-next');
+
+        function step() {
+          var card = track.querySelector('.tour-widget');
+          if (!card) return track.clientWidth;
+          var gap = parseFloat(getComputedStyle(track).columnGap || '0') || 0;
+          return card.getBoundingClientRect().width + gap;
+        }
+
+        function syncArrows() {
+          var maxScroll = track.scrollWidth - track.clientWidth;
+          prev.disabled = track.scrollLeft <= 2;
+          next.disabled = track.scrollLeft >= maxScroll - 2;
+        }
+
+        prev.addEventListener('click', function () {
+          track.scrollBy({ left: -step(), behavior: 'smooth' });
+        });
+        next.addEventListener('click', function () {
+          track.scrollBy({ left: step(), behavior: 'smooth' });
+        });
+        track.addEventListener('scroll', syncArrows, { passive: true });
+        window.addEventListener('resize', syncArrows);
+        syncArrows();
+      })();
+  </script>
 </body>
 </html>
