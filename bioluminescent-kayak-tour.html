@@ -793,91 +793,6 @@
       max-width: 1120px;
     }
 
-    /* "Experiences you may also like" is a carousel: four cards per view on
-       desktop, one per view on mobile, the rest revealed by swiping or arrows. */
-    .service-page #also-like .also-like-carousel {
-      position: relative;
-      max-width: 1120px;
-      margin: 0 auto;
-    }
-
-    .service-page #also-like .tour-widgets {
-      max-width: none;
-      margin: 0;
-      display: flex;
-      grid-template-columns: none;
-      gap: 20px;
-      overflow-x: auto;
-      scroll-snap-type: x mandatory;
-      scroll-behavior: smooth;
-      scrollbar-width: none;
-      -ms-overflow-style: none;
-      padding: 4px 2px 12px;
-    }
-
-    .service-page #also-like .tour-widgets::-webkit-scrollbar {
-      display: none;
-    }
-
-    .service-page #also-like .tour-widget {
-      flex: 0 0 calc((100% - 60px) / 4);
-      scroll-snap-align: start;
-    }
-
-    .service-page #also-like .also-like-nav {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      z-index: 3;
-      width: 44px;
-      height: 44px;
-      padding: 0;
-      border-radius: 50%;
-      border: 1px solid #e5eaf0;
-      background: #ffffff;
-      color: var(--primary);
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      box-shadow: 0 8px 20px rgba(8, 37, 61, 0.2);
-      transition: background 0.18s ease, color 0.18s ease, opacity 0.18s ease;
-    }
-
-    .service-page #also-like .also-like-nav:hover,
-    .service-page #also-like .also-like-nav:focus-visible {
-      background: var(--accent);
-      color: #1a1a1a;
-    }
-
-    .service-page #also-like .also-like-nav[disabled] {
-      opacity: 0;
-      pointer-events: none;
-    }
-
-    .service-page #also-like .also-like-nav svg {
-      width: 20px;
-      height: 20px;
-    }
-
-    .service-page #also-like .also-like-prev { left: -14px; }
-    .service-page #also-like .also-like-next { right: -14px; }
-
-    @media (max-width: 1080px) {
-      .service-page #also-like .tour-widget {
-        flex-basis: calc((100% - 20px) / 2);
-      }
-    }
-
-    @media (max-width: 560px) {
-      .service-page #also-like .tour-widget {
-        flex-basis: 100%;
-      }
-
-      .service-page #also-like .also-like-prev { left: 4px; }
-      .service-page #also-like .also-like-next { right: 4px; }
-    }
-
     .service-page #also-like .tour-widget-cta {
       align-self: flex-start;
       margin-top: auto;
@@ -2448,6 +2363,159 @@
       }
     }
 
+
+    /* Booking card carousel — the booking cards sit in one horizontal track at
+       every screen size: four per view on desktop, two on tablets and one on
+       phones. The rest are reached with the arrows, the dots or a swipe, the
+       same way the image carousels on the site work.
+       min-width: 0 keeps the track from forcing its grid parent wider than the
+       viewport, which is what broke the layout on phones. */
+    .card-carousel {
+      position: relative;
+      /* width: 100% is load-bearing. Without it the auto side margins make this a
+         shrink-to-fit box, which sizes to the whole un-scrolled track (~1100px)
+         and pushes the page sideways on a phone. */
+      width: 100%;
+      max-width: 1120px;
+      min-width: 0;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .card-carousel .tour-widgets {
+      display: flex;
+      grid-template-columns: none;
+      width: 100%;
+      max-width: none;
+      min-width: 0;
+      margin: 0;
+      gap: 20px;
+      padding: 4px 0 12px;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      scroll-behavior: smooth;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+    }
+
+    .card-carousel .tour-widgets::-webkit-scrollbar {
+      display: none;
+    }
+
+    .card-carousel .tour-widget {
+      flex: 0 0 calc((100% - 60px) / 4);
+      min-width: 0;
+      scroll-snap-align: start;
+    }
+
+    .card-carousel-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 3;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 44px;
+      height: 44px;
+      padding: 0;
+      border: 1px solid #e5eaf0;
+      border-radius: 50%;
+      background: #ffffff;
+      color: var(--primary-dark, #0d3557);
+      font-size: 1.05rem;
+      line-height: 1;
+      cursor: pointer;
+      box-shadow: 0 8px 20px rgba(8, 37, 61, 0.2);
+      transition: background 0.18s ease, color 0.18s ease, opacity 0.18s ease;
+    }
+
+    .card-carousel-btn:hover,
+    .card-carousel-btn:focus-visible {
+      background: var(--accent, #ff9800);
+      color: #1a1a1a;
+    }
+
+    .card-carousel-btn[disabled] {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .card-carousel-btn.prev { left: -14px; }
+    .card-carousel-btn.next { right: -14px; }
+
+    .card-carousel-dots {
+      display: none;
+      justify-content: center;
+      gap: 7px;
+      margin-top: 2px;
+    }
+
+    .card-carousel-dots span {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: rgba(13, 53, 87, 0.22);
+      cursor: pointer;
+      transition: background 0.2s ease, transform 0.2s ease;
+    }
+
+    .card-carousel-dots span.active {
+      background: var(--primary-dark, #0d3557);
+      transform: scale(1.15);
+    }
+
+    @media (max-width: 1080px) {
+      .card-carousel .tour-widget {
+        flex-basis: calc((100% - 20px) / 2);
+      }
+    }
+
+    @media (max-width: 760px) {
+      /* One booking card per view, using the image-carousel controls: dark round
+         arrows over the photo and dots underneath. */
+      .card-carousel .tour-widget {
+        flex-basis: 100%;
+      }
+
+      /* Side by side the cards are matched to the tallest one, which leaves a
+         short card looking hollow when it is the only one on screen. */
+      .card-carousel .tour-widgets {
+        align-items: flex-start;
+      }
+
+      /* A swipe along the track must not leave the card stuck in its hover lift. */
+      .card-carousel .tour-widget:hover,
+      .card-carousel .tour-widget:focus-visible {
+        transform: none;
+      }
+
+      .card-carousel-btn {
+        top: 34%;
+        width: 34px;
+        height: 34px;
+        border-color: transparent;
+        background: rgba(0, 0, 0, 0.5);
+        color: #ffffff;
+        font-size: 0.95rem;
+        box-shadow: none;
+      }
+
+      .card-carousel-btn:hover,
+      .card-carousel-btn:focus-visible {
+        background: rgba(0, 0, 0, 0.65);
+        color: #ffffff;
+      }
+
+      .card-carousel-btn.prev { left: 8px; }
+      .card-carousel-btn.next { right: 8px; }
+
+      .card-carousel-dots {
+        display: flex;
+      }
+    }
+
   </style>
   <script type="application/ld+json">
     {
@@ -2712,8 +2780,8 @@
         </div>
         <div class="service-categories">
           <div class="category-content" style="border-top:none;">
-            <div class="also-like-carousel">
-              <div class="tour-widgets" id="alsoLikeTrack">
+            <div class="card-carousel">
+              <div class="tour-widgets">
                 <a class="tour-widget" href="cruise-port-transfers.html">
                   <div class="tour-widget-media">
                     <img src="ferry-tickets.jpg" alt="Schoodic Explorer ferry docked in Puerto Rico for ferry tickets to Culebra and Vieques" loading="lazy" decoding="async">
@@ -2781,12 +2849,9 @@
                   </div>
                 </a>
               </div>
-              <button type="button" class="also-like-nav also-like-prev" aria-label="Previous experiences" aria-controls="alsoLikeTrack">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg>
-              </button>
-              <button type="button" class="also-like-nav also-like-next" aria-label="Next experiences" aria-controls="alsoLikeTrack">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg>
-              </button>
+              <button type="button" class="card-carousel-btn prev" aria-label="Previous card">&#10094;</button>
+              <button type="button" class="card-carousel-btn next" aria-label="Next card">&#10095;</button>
+              <div class="card-carousel-dots" aria-hidden="true"></div>
             </div>
           </div>
         </div>
@@ -4622,38 +4687,71 @@
   <script async defer
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCGKJigzmudkBONv9YWQnXxfs9HCN1wLMI&libraries=places,geometry&callback=initQuoteAutocomplete"></script>
   <script>
-
-      // "Experiences you may also like" carousel: swipe on touch, arrows elsewhere.
-      (function () {
-        var track = document.getElementById('alsoLikeTrack');
+    // Booking card carousel: on phones the cards scroll one per view with
+    // arrows, dots and native swiping. On wider screens the cards sit in their
+    // normal grid, the track does not overflow and these controls stay hidden.
+    (function () {
+      document.querySelectorAll('.card-carousel').forEach(function (carousel) {
+        var track = carousel.querySelector('.tour-widgets');
         if (!track) return;
-        var carousel = track.closest('.also-like-carousel');
-        var prev = carousel.querySelector('.also-like-prev');
-        var next = carousel.querySelector('.also-like-next');
+        var cards = Array.prototype.slice.call(track.querySelectorAll('.tour-widget'));
+        if (!cards.length) return;
+        var prev = carousel.querySelector('.card-carousel-btn.prev');
+        var next = carousel.querySelector('.card-carousel-btn.next');
+        var dotsWrap = carousel.querySelector('.card-carousel-dots');
 
-        function step() {
-          var card = track.querySelector('.tour-widget');
-          if (!card) return track.clientWidth;
-          var gap = parseFloat(getComputedStyle(track).columnGap || '0') || 0;
-          return card.getBoundingClientRect().width + gap;
+        function offsetOf(card) {
+          return card.offsetLeft - track.offsetLeft;
         }
 
-        function syncArrows() {
+        function scrollToCard(card) {
+          track.scrollTo({ left: offsetOf(card), behavior: 'smooth' });
+        }
+
+        if (dotsWrap) {
+          cards.forEach(function (card) {
+            var dot = document.createElement('span');
+            dot.addEventListener('click', function () { scrollToCard(card); });
+            dotsWrap.appendChild(dot);
+          });
+        }
+
+        function activeIndex() {
+          var best = 0;
+          var bestDist = Infinity;
+          cards.forEach(function (card, i) {
+            var dist = Math.abs(offsetOf(card) - track.scrollLeft);
+            if (dist < bestDist) { bestDist = dist; best = i; }
+          });
+          return best;
+        }
+
+        function sync() {
           var maxScroll = track.scrollWidth - track.clientWidth;
-          prev.disabled = track.scrollLeft <= 2;
-          next.disabled = track.scrollLeft >= maxScroll - 2;
+          var index = activeIndex();
+          if (prev) prev.disabled = track.scrollLeft <= 2;
+          if (next) next.disabled = track.scrollLeft >= maxScroll - 2;
+          if (dotsWrap) {
+            Array.prototype.forEach.call(dotsWrap.children, function (dot, i) {
+              dot.classList.toggle('active', i === index);
+            });
+          }
         }
 
-        prev.addEventListener('click', function () {
-          track.scrollBy({ left: -step(), behavior: 'smooth' });
-        });
-        next.addEventListener('click', function () {
-          track.scrollBy({ left: step(), behavior: 'smooth' });
-        });
-        track.addEventListener('scroll', syncArrows, { passive: true });
-        window.addEventListener('resize', syncArrows);
-        syncArrows();
-      })();
+        function step(direction) {
+          var index = Math.min(cards.length - 1, Math.max(0, activeIndex() + direction));
+          scrollToCard(cards[index]);
+        }
+
+        if (prev) prev.addEventListener('click', function () { step(-1); });
+        if (next) next.addEventListener('click', function () { step(1); });
+        track.addEventListener('scroll', sync, { passive: true });
+        window.addEventListener('resize', sync);
+        // Card widths settle once the lazy-loaded photos have a size, so re-check then.
+        window.addEventListener('load', sync);
+        sync();
+      });
+    })();
   </script>
 </body>
 </html>
