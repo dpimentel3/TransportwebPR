@@ -1706,17 +1706,23 @@
       }
 
       .hero-grid {
-        min-height: min(82vh, 600px);
+        /* On phones the hero is taller than it is wide, so the header photo is
+           cropped left/right and its full height is always visible. That puts the
+           green hills at a predictable 38%-49% of the hero height, so the copy is
+           placed off that measurement: the headline lands on the hill line (as it
+           does on desktop) and the paragraph starts below it, on the pale water and
+           sand. */
+        --hero-photo-h: min(82vh, 600px);
+        min-height: var(--hero-photo-h);
         gap: 0;
-        /* The header photo crops taller on phones, so the sky and hills reach much
-           further down than they do on desktop. Anchor the copy to the bottom of the
-           hero so the headline stays over the dark sky/hills and the paragraph lands
-           on the pale water and sand, matching the desktop contrast. */
-        justify-content: flex-end;
-        padding: 30px 0 48px;
+        justify-content: flex-start;
+        padding: calc(var(--hero-photo-h) * 0.30) 0 28px;
       }
 
-      .hero h1 { font-size: clamp(1.75rem, 7.6vw, 2.5rem); }
+      .hero h1 {
+        font-size: clamp(1.75rem, 7.6vw, 2.5rem);
+        margin-bottom: calc(var(--hero-photo-h) * 0.085);
+      }
 
       .hero p {
         font-size: 1rem;
