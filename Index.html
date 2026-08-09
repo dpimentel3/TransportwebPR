@@ -1706,9 +1706,14 @@
       }
 
       .hero-grid {
-        min-height: min(76vh, 560px);
+        min-height: min(82vh, 600px);
         gap: 0;
-        padding: 30px 0 32px;
+        /* The header photo crops taller on phones, so the sky and hills reach much
+           further down than they do on desktop. Anchor the copy to the bottom of the
+           hero so the headline stays over the dark sky/hills and the paragraph lands
+           on the pale water and sand, matching the desktop contrast. */
+        justify-content: flex-end;
+        padding: 30px 0 48px;
       }
 
       .hero h1 { font-size: clamp(1.75rem, 7.6vw, 2.5rem); }
