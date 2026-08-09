@@ -1936,6 +1936,69 @@
       line-height: 1.6;
       margin: 0;
     }
+    .item-fees {
+      margin: 0 0 4px;
+      padding-top: 18px;
+      border-top: 1px solid #e5eaf0;
+    }
+    .item-fees-title {
+      list-style: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: #0d3557;
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin: 0;
+    }
+    .item-fees-title::-webkit-details-marker { display: none; }
+    .item-fees-title::marker { content: ''; }
+    .item-fees-title::after {
+      content: "+";
+      width: 16px;
+      text-align: center;
+      font-size: 1.25rem;
+      font-weight: 700;
+      line-height: 1;
+      color: var(--primary);
+    }
+    .item-fees[open] .item-fees-title::after { content: "−"; }
+    .item-fees-title span { flex: 1; }
+    .item-fees-list {
+      display: grid;
+      gap: 8px;
+      margin-top: 12px;
+      animation: itemFeeSlideDown 180ms ease;
+    }
+    .item-fee {
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      background: #fff;
+      padding: 12px 16px;
+    }
+    .item-fee-head {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 700;
+      font-size: 0.95rem;
+      color: var(--primary);
+    }
+    .item-fee-name { flex: 1; }
+    .item-fee-price { font-weight: 800; }
+    .item-fee-desc {
+      margin: 4px 0 0;
+      color: #4b5563;
+      font-size: 0.9rem;
+      line-height: 1.55;
+    }
+    @keyframes itemFeeSlideDown {
+      from { opacity: 0; transform: translateY(-6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
     .tour-landing-actions {
       display: flex;
       flex-wrap: wrap;
@@ -2144,6 +2207,98 @@
             <span data-i18n="prod_ferry_price_vieques">Vieques $30 Round Trip per person</span>
           </div>
           <p class="card-desc" data-i18n="prod_cruise_desc">First, we check ferry ticket availability based on your destination, travel date, and number of passengers. Once availability is confirmed, you send payment through PayPal or Venmo for the tickets and our service fee. We then purchase and confirm your tickets at the ferry terminal, and Puerto Rico Ferry sends the tickets directly to you electronically via text message. Once you have the tickets you would need to arrive at ferry terminal 1 hour before departure to begin onboarding procedures.</p>
+          <details class="item-fees">
+            <summary class="item-fees-title"><span data-i18n="ferry_items_title">Additional item charges</span></summary>
+            <div class="item-fees-list">
+              <div class="item-fee">
+                <div class="item-fee-head">
+                  <span class="item-fee-name" data-i18n="ferry_item_cabins">Camping cabins</span>
+                  <span class="item-fee-price">$2.00</span>
+                </div>
+                <p class="item-fee-desc" data-i18n="ferry_item_cabins_desc">Small camping gear or portable camping items.</p>
+              </div>
+
+              <div class="item-fee">
+                <div class="item-fee-head">
+                  <span class="item-fee-name" data-i18n="ferry_item_coolers">Beach coolers</span>
+                  <span class="item-fee-price">$2.00</span>
+                </div>
+                <p class="item-fee-desc" data-i18n="ferry_item_coolers_desc">Coolers for food, drinks, ice or beach essentials.</p>
+              </div>
+
+              <div class="item-fee">
+                <div class="item-fee-head">
+                  <span class="item-fee-name" data-i18n="ferry_item_chairs">Beach chairs</span>
+                  <span class="item-fee-price">$1.00</span>
+                </div>
+                <p class="item-fee-desc" data-i18n="ferry_item_chairs_desc">Foldable chairs or personal beach seating.</p>
+              </div>
+
+              <div class="item-fee">
+                <div class="item-fee-head">
+                  <span class="item-fee-name" data-i18n="ferry_item_handtruck">Hand truck</span>
+                  <span class="item-fee-price">$5.00</span>
+                </div>
+                <p class="item-fee-desc" data-i18n="ferry_item_handtruck_desc">Hand truck, dolly or similar carrying equipment.</p>
+              </div>
+
+              <div class="item-fee">
+                <div class="item-fee-head">
+                  <span class="item-fee-name" data-i18n="ferry_item_beverages">Cases of beverages</span>
+                  <span class="item-fee-price">$1.00</span>
+                </div>
+                <p class="item-fee-desc" data-i18n="ferry_item_beverages_desc">Soft drinks, water cases or similar beverage packs.</p>
+              </div>
+
+              <div class="item-fee">
+                <div class="item-fee-head">
+                  <span class="item-fee-name" data-i18n="ferry_item_surfboards">Surfboards</span>
+                  <span class="item-fee-price">$6.00</span>
+                </div>
+                <p class="item-fee-desc" data-i18n="ferry_item_surfboards_desc">Surfboard or similar long water-sport board.</p>
+              </div>
+
+              <div class="item-fee">
+                <div class="item-fee-head">
+                  <span class="item-fee-name" data-i18n="ferry_item_bodyboard">Bodyboard and Sandboard</span>
+                  <span class="item-fee-price">$3.00</span>
+                </div>
+                <p class="item-fee-desc" data-i18n="ferry_item_bodyboard_desc">Bodyboard, sandboard or compact recreational board.</p>
+              </div>
+
+              <div class="item-fee">
+                <div class="item-fee-head">
+                  <span class="item-fee-name" data-i18n="ferry_item_sleepingbags">Sleeping bags</span>
+                  <span class="item-fee-price">$1.00</span>
+                </div>
+                <p class="item-fee-desc" data-i18n="ferry_item_sleepingbags_desc">Individual sleeping bags or rolled camping bedding.</p>
+              </div>
+
+              <div class="item-fee">
+                <div class="item-fee-head">
+                  <span class="item-fee-name" data-i18n="ferry_item_bicycles">Bicycles</span>
+                  <span class="item-fee-price">$2.00</span>
+                </div>
+                <p class="item-fee-desc" data-i18n="ferry_item_bicycles_desc">Personal bicycle transported with passenger.</p>
+              </div>
+
+              <div class="item-fee">
+                <div class="item-fee-head">
+                  <span class="item-fee-name" data-i18n="ferry_item_umbrellas">Beach umbrellas</span>
+                  <span class="item-fee-price">$1.00</span>
+                </div>
+                <p class="item-fee-desc" data-i18n="ferry_item_umbrellas_desc">Beach umbrella or similar shade accessory.</p>
+              </div>
+
+              <div class="item-fee">
+                <div class="item-fee-head">
+                  <span class="item-fee-name" data-i18n="ferry_item_animals">Caged animals</span>
+                  <span class="item-fee-price">$2.00</span>
+                </div>
+                <p class="item-fee-desc" data-i18n="ferry_item_animals_desc">Pets or small animals traveling in an approved carrier.</p>
+              </div>
+            </div>
+          </details>
           <div class="tour-landing-actions">
             <a href="#book" class="btn btn-primary book-transport-link" data-service="Ferry Tickets" data-i18n="book_now">Book Now</a>
           </div>
@@ -3251,6 +3406,31 @@
         prod_ferry_price_vieques: 'Vieques $30 ida y vuelta por persona',
         prod_cruise_desc: 'Primero, verificamos la disponibilidad de boletos de ferry según su destino, fecha de viaje y número de pasajeros. Una vez confirmada la disponibilidad, usted envía el pago a través de PayPal o Venmo por los boletos y nuestra tarifa de servicio. Luego compramos y confirmamos sus boletos en el terminal del ferry, y Puerto Rico Ferry le envía los boletos directamente de forma electrónica por mensaje de texto. Una vez que tenga los boletos, deberá llegar al terminal del ferry 1 hora antes de la salida para comenzar los procedimientos de abordaje.',
         check_pricing: 'Consultar Precios y Disponibilidad',
+
+        // Additional item charges
+        ferry_items_title: 'Cargos por artículos adicionales',
+        ferry_item_cabins: 'Casetas de acampar',
+        ferry_item_cabins_desc: 'Equipo de acampar pequeño o artículos de campamento portátiles.',
+        ferry_item_coolers: 'Neveras de playa',
+        ferry_item_coolers_desc: 'Neveras para comida, bebidas, hielo o esenciales de playa.',
+        ferry_item_chairs: 'Sillas de playa',
+        ferry_item_chairs_desc: 'Sillas plegables o asientos personales de playa.',
+        ferry_item_handtruck: 'Carretilla',
+        ferry_item_handtruck_desc: 'Carretilla, carrito de carga o equipo similar para transportar.',
+        ferry_item_beverages: 'Cajas de bebidas',
+        ferry_item_beverages_desc: 'Refrescos, cajas de agua o paquetes de bebidas similares.',
+        ferry_item_surfboards: 'Tablas de surf',
+        ferry_item_surfboards_desc: 'Tabla de surf o tabla larga similar para deportes acuáticos.',
+        ferry_item_bodyboard: 'Bodyboard y Sandboard',
+        ferry_item_bodyboard_desc: 'Bodyboard, sandboard o tabla recreativa compacta.',
+        ferry_item_sleepingbags: 'Sacos de dormir',
+        ferry_item_sleepingbags_desc: 'Sacos de dormir individuales o ropa de cama de campamento enrollada.',
+        ferry_item_bicycles: 'Bicicletas',
+        ferry_item_bicycles_desc: 'Bicicleta personal transportada con el pasajero.',
+        ferry_item_umbrellas: 'Sombrillas de playa',
+        ferry_item_umbrellas_desc: 'Sombrilla de playa o accesorio de sombra similar.',
+        ferry_item_animals: 'Animales enjaulados',
+        ferry_item_animals_desc: 'Mascotas o animales pequeños que viajan en un transportador aprobado.',
 
         // Service categories
         cat_transport_title: 'Transporte',
