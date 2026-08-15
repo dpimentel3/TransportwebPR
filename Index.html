@@ -21,7 +21,7 @@
   <meta property="og:type" content="website" />
   <meta name="theme-color" content="#0d3557" />
   <link rel="canonical" href="https://www.dptransportpr.com/" />
-  <link rel="preload" as="image" href="home-header.jpg" fetchpriority="high" />
+  <link rel="preload" as="image" href="home-header-sky.jpg" fetchpriority="high" />
   <style>
     :root {
       --primary: #0d3557;
@@ -230,7 +230,6 @@
       isolation: isolate;
     }
 
-    .hero::before,
     .background-section::before {
       content: "";
       position: absolute;
@@ -241,7 +240,6 @@
       transform: scale(1.03);
     }
 
-    .hero::after,
     .background-section::after {
       content: "";
       position: absolute;
@@ -249,17 +247,47 @@
       z-index: -1;
     }
 
-    .hero::before {
-      background-image: url("home-header.jpg");
-      background-size: cover;
-      background-position: center 55%;
-      transform: none;
+    /* The header copy sits on a band of generated sky whose colour is matched to
+       the top of the photograph, so the white headline and intro always land on
+       deep blue however long the copy runs or however narrow the screen is. The
+       photo starts directly below the copy and carries the same sky onward, so
+       the two read as one continuous image. */
+    .hero-sky {
+      background: linear-gradient(180deg, #01143f 0%, #011a52 26%, #01236c 58%, #012f88 82%, #0143a6 100%);
     }
 
-    .hero::after {
-      background:
-        linear-gradient(180deg, rgba(4,24,42,0.62) 0%, rgba(4,24,42,0.34) 34%, rgba(4,24,42,0.10) 58%, rgba(4,24,42,0.00) 74%),
-        linear-gradient(180deg, rgba(242,247,251,0) 84%, rgba(242,247,251,0.55) 94%, #f2f7fb 100%);
+    .hero-photo {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 2400 / 1480;
+      min-height: 200px;
+      max-height: min(44vh, 430px);
+      background-image: url("home-header-sky.jpg");
+      background-size: cover;
+      background-position: center 34%;
+      background-repeat: no-repeat;
+    }
+
+    .hero-photo::before,
+    .hero-photo::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+    }
+
+    /* Blends the top of the photo into the generated sky above it. */
+    .hero-photo::before {
+      top: 0;
+      height: 22%;
+      background: linear-gradient(180deg, #0143a6 0%, rgba(1,67,166,0.45) 18%, rgba(1,67,166,0.12) 56%, rgba(1,67,166,0) 100%);
+    }
+
+    /* Fades the bottom of the photo into the page background. */
+    .hero-photo::after {
+      bottom: 0;
+      height: 26%;
+      background: linear-gradient(180deg, rgba(242,247,251,0) 0%, rgba(242,247,251,0.55) 62%, #f2f7fb 100%);
     }
 
     .section-services::before {
@@ -336,12 +364,10 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      /* Centred vertically so the headline and intro sit around the middle of the
-         header photo rather than crowding the top of it. */
       justify-content: center;
       text-align: center;
-      min-height: min(84vh, 860px);
-      padding: clamp(46px, 8vh, 104px) 0 44px;
+      min-height: min(38vh, 340px);
+      padding: clamp(30px, 5vh, 62px) 0 clamp(28px, 4.6vh, 56px);
     }
 
     .section-shell {
@@ -377,6 +403,7 @@
 
     h1, h2, h3 { line-height: 1.1; margin: 0 0 14px; }
     .hero h1,
+    .hero p,
     .hero .eyebrow { color: #ffffff; }
     h1 { font-size: clamp(2.4rem, 4vw, 4.5rem); letter-spacing: -0.04em; }
     h2 { font-size: clamp(1.8rem, 3vw, 2.6rem); color: var(--primary); letter-spacing: -0.03em; }
@@ -384,21 +411,21 @@
 
     .hero h1 {
       max-width: 1040px;
-      margin: 0 auto 20px;
-      font-size: clamp(1.95rem, 4.4vw, 3.9rem);
+      margin: 0 auto 18px;
+      font-size: clamp(1.85rem, 3.6vw, 3.25rem);
       font-weight: 900;
-      line-height: 1.03;
+      line-height: 1.08;
       letter-spacing: 0;
       text-transform: uppercase;
-      text-shadow: 0 2px 26px rgba(4, 24, 42, 0.55), 0 1px 3px rgba(4, 24, 42, 0.45);
+      text-shadow: 0 2px 18px rgba(0, 12, 40, 0.45);
     }
 
     .hero p {
-      font-size: clamp(1.02rem, 1.5vw, 1.28rem);
-      max-width: 780px;
-      color: #36454F;
+      font-size: clamp(1rem, 1.25vw, 1.16rem);
+      line-height: 1.62;
+      max-width: 860px;
       margin: 0 auto;
-      text-shadow: 0 2px 18px rgba(4, 24, 42, 0.6), 0 1px 2px rgba(4, 24, 42, 0.45);
+      text-shadow: 0 1px 14px rgba(0, 12, 40, 0.4);
     }
 
     .hero-actions {
@@ -1658,8 +1685,8 @@
       }
 
       .hero-grid {
-        min-height: min(78vh, 640px);
-        padding: 42px 0 40px;
+        min-height: min(34vh, 300px);
+        padding: 40px 0 36px;
       }
     }
 
@@ -1706,28 +1733,26 @@
       }
 
       .hero-grid {
-        /* On phones the hero is taller than it is wide, so the header photo is
-           cropped left/right and its full height is always visible. That puts the
-           green hills at a predictable 38%-49% of the hero height, so the copy is
-           placed off that measurement: the headline lands on the hill line (as it
-           does on desktop) and the paragraph starts below it, on the pale water and
-           sand. */
-        --hero-photo-h: min(82vh, 600px);
-        min-height: var(--hero-photo-h);
+        /* The copy sizes the generated sky panel, so on phones the headline and
+           intro simply take the room they need and the photo starts underneath
+           them. Nothing lands on the pale water or sand at any screen size. */
+        min-height: 0;
         gap: 0;
-        justify-content: flex-start;
-        padding: calc(var(--hero-photo-h) * 0.30) 0 28px;
+        padding: 26px 0 30px;
       }
 
       .hero h1 {
-        font-size: clamp(1.75rem, 7.6vw, 2.5rem);
-        margin-bottom: calc(var(--hero-photo-h) * 0.085);
+        font-size: clamp(1.55rem, 6.9vw, 2.3rem);
+        margin-bottom: 14px;
       }
 
       .hero p {
-        font-size: 1rem;
+        font-size: 0.98rem;
+        line-height: 1.6;
         margin-bottom: 0;
       }
+
+      .hero-photo { max-height: 42vh; }
 
       .hero-actions { margin: 20px 0 0; }
       .hero-mobile-note { display: block; margin: 18px auto 0; max-width: 520px; }
@@ -1839,12 +1864,15 @@
 
   <main id="top">
     <section class="hero" aria-labelledby="hero-title">
-      <div class="container hero-grid">
-        <h1 id="hero-title" data-i18n="hero_title">Your Gateway to Puerto Rico</h1>
-        <p data-i18n="hero_desc">
-          Your all-in-one connection for island travel. Whether it's a direct port transfer, hidden gem excursion, or a luxury boat day, we make booking effortless. Professional drivers, Captains and Tour Guides, transparent pricing and instant text confirmation. Don't just get there-arrive with confidence.
-        </p>
+      <div class="hero-sky">
+        <div class="container hero-grid">
+          <h1 id="hero-title" data-i18n="hero_title">Planning a Puerto Rico Trip? We Make It Easy.</h1>
+          <p data-i18n="hero_desc">
+            Everything You Need for Your Puerto Rico Trip &mdash; In One Place. From reliable transportation and unforgettable tours to private boat charters, we make it easy to plan and book your experience without juggling multiple companies. Spend less time organizing and more time enjoying Puerto Rico.
+          </p>
+        </div>
       </div>
+      <div class="hero-photo" role="img" aria-label="A quiet Puerto Rico beach with turquoise water, white sand and green hills"></div>
       <p class="hidden-seo">DP Transport serves travelers in Rio Grande, San Juan, cruise ports, airports, beach towns, hotels, resorts, and excursion destinations across Puerto Rico.</p>
     </section>
 
@@ -3004,8 +3032,8 @@
 
         // Hero
         hero_eyebrow: 'Viaje Sin Complicaciones: Desde Llegadas al Aeropuerto Hasta Tours Nocturnos a Bahías Bioluminiscentes y Chárters Privados en Bote',
-        hero_title: 'Tu Puerta de Entrada a Puerto Rico',
-        hero_desc: 'Tu conexión todo-en-uno para viajar por la isla. Ya sea un traslado directo al puerto, una excursión a lugares escondidos o un día de lujo en bote, hacemos la reserva sin esfuerzo. Conductores, Capitanes y Guías Turísticos profesionales, precios transparentes y confirmación instantánea por texto. No solo llegues—llega con confianza.',
+        hero_title: '¿Planificando un Viaje a Puerto Rico? Se Lo Hacemos Fácil.',
+        hero_desc: 'Todo lo que necesita para su viaje a Puerto Rico — en un solo lugar. Desde transporte confiable y tours inolvidables hasta chárters privados en bote, le facilitamos planificar y reservar su experiencia sin tener que coordinar con varias compañías. Dedique menos tiempo a organizar y más tiempo a disfrutar de Puerto Rico.',
         hero_book: 'Reserve Su Viaje',
         hero_call: 'Llame al 787-214-2058',
         hero_quote: 'Cotización Gratis',
