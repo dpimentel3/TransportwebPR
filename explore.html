@@ -4504,6 +4504,11 @@
       var map, markers = [], infoWindow;
       var activeFilter = 'all';
 
+      // Mobile gets a narrower map, so it is framed and behaves differently on load
+      function isMobileExplore() {
+        return window.matchMedia('(max-width: 700px)').matches;
+      }
+
       function initExploreMap() {
         if (!window.google || !window.google.maps) return;
         if (!document.getElementById('explore-map')) return;
@@ -4521,6 +4526,15 @@
             { featureType: 'poi.park', elementType: 'geometry.fill', stylers: [{ color: '#c8e6c9' }] }
           ]
         });
+
+        // On phones the desktop center/zoom cuts the island off, so fit the whole
+        // island into whatever width the device has
+        if (isMobileExplore()) {
+          map.fitBounds(new google.maps.LatLngBounds(
+            { lat: 17.88, lng: -67.30 },
+            { lat: 18.56, lng: -65.55 }
+          ), 12);
+        }
 
         infoWindow = new google.maps.InfoWindow();
 
@@ -4592,11 +4606,15 @@
           markers.push(marker);
         });
 
-        markers.forEach(function (m) {
-          if (m._place && m._place.name === 'Charco Azul Vega Baja/Morovis') {
-            google.maps.event.trigger(m, 'click');
-          }
-        });
+        // Desktop opens one pin on load as a hint; on mobile the popup would cover
+        // the island, so leave the map clean until a pin is tapped
+        if (!isMobileExplore()) {
+          markers.forEach(function (m) {
+            if (m._place && m._place.name === 'Charco Azul Vega Baja/Morovis') {
+              google.maps.event.trigger(m, 'click');
+            }
+          });
+        }
       }
 
       function filterMarkers(cat) {
