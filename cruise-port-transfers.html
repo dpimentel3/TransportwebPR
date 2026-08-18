@@ -2030,6 +2030,14 @@
       aspect-ratio: 4 / 3;
       object-fit: cover;
     }
+    /* Portrait screenshots (mobile tickets) sit inside the frame instead of being cropped */
+    .tour-landing-gallery.image-slider .slider-track img.slide-contain {
+      object-fit: contain;
+      background: #eaf1f8;
+    }
+    .tour-landing-gallery.image-slider .slider-track img.slide-contain-dark {
+      background: #0d1117;
+    }
     /* Tabbed booking options (Ferry Tickets / Transportation) */
     .booking-tabs { display: grid; }
 
@@ -2197,8 +2205,21 @@
         </div>
       </div>
       <div class="container section-shell tour-landing-shell">
-        <div class="tour-landing-gallery">
-          <img src="ferry-tickets.jpg" alt="Schoodic Explorer ferry docked in Puerto Rico for ferry tickets to Culebra and Vieques" loading="lazy" decoding="async">
+        <div class="tour-landing-gallery image-slider" id="lp-slider">
+          <div class="slider-track">
+            <img src="ferry-tickets-1.jpg" alt="Cayo Blanco ferry docked at the Puerto Rico terminal for ferry tickets to Culebra and Vieques" decoding="async">
+            <img src="ferry-tickets-2.jpg" alt="Family walking along the dock with luggage to board the ferry to Culebra and Vieques" loading="lazy" decoding="async">
+            <img src="ferry-tickets-3.png" class="slide-contain" alt="Mobile ferry ticket with QR code for the Ceiba to Vieques route shown on a phone" loading="lazy" decoding="async">
+            <img src="ferry-tickets-4.png" class="slide-contain slide-contain-dark" alt="Text message delivering Puerto Rico Ferry mobile tickets to a customer" loading="lazy" decoding="async">
+          </div>
+          <button type="button" class="slider-btn prev" aria-label="Previous image">&#10094;</button>
+          <button type="button" class="slider-btn next" aria-label="Next image">&#10095;</button>
+          <div class="slider-dots">
+            <span class="active"></span>
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
         </div>
         <div class="tour-landing-info">
           <h2 data-i18n="prod_cruise_title">Ferry Tickets</h2>
