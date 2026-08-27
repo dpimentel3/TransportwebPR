@@ -2438,13 +2438,17 @@
               <div class="field-grid">
                 <div>
                   <label for="departureTime" data-i18n="label_departure_time">Departure time</label>
-                  <input id="departureTime" type="time" required />
-                  <input type="hidden" id="departureTimeFormatted" name="departureTime" value="" />
+                  <select id="departureTime" name="departureTime" required>
+                    <option value="" disabled selected data-i18n="ph_ferry_time_select">Choose a time</option>
+                  </select>
+                  <div class="helper" id="departureTimeHelper" data-i18n="helper_ferry_time">Choose a destination and date to see the available ferry times.</div>
                 </div>
                 <div>
                   <label for="returnTime" data-i18n="label_return_time">Return time</label>
-                  <input id="returnTime" type="time" required />
-                  <input type="hidden" id="returnTimeFormatted" name="returnTime" value="" />
+                  <select id="returnTime" name="returnTime" required>
+                    <option value="" disabled selected data-i18n="ph_ferry_time_select">Choose a time</option>
+                  </select>
+                  <div class="helper" id="returnTimeHelper" data-i18n="helper_ferry_time">Choose a destination and date to see the available ferry times.</div>
                 </div>
               </div>
 
@@ -2774,21 +2778,94 @@
         return hours + ':' + minutes + ampm;
       }
 
-      var timeInput = document.getElementById('departureTime');
+      // Ferry departure/return times by destination and day type.
+      // weekday = Monday through Friday, weekend = Saturday and Sunday.
+      var FERRY_SCHEDULES = {
+        Culebra: {
+          weekday: {
+            departure: ['3:30 AM', '5:30 AM', '9:00 AM', '12:30 PM', '3:30 PM', '5:30 PM', '7:30 PM'],
+            return: ['6:00 AM', '8:00 AM', '11:30 AM', '3:30 PM', '5:30 PM', '7:30 PM', '9:30 PM']
+          },
+          weekend: {
+            departure: ['3:30 AM', '5:30 AM', '8:00 AM', '9:00 AM', '2:00 PM', '6:00 PM', '7:00 PM'],
+            return: ['6:00 AM', '8:00 AM', '11:00 AM', '1:00 PM', '4:00 PM', '8:00 PM', '9:30 PM']
+          }
+        },
+        Vieques: {
+          weekday: {
+            departure: ['4:30 AM', '4:45 AM', '8:30 AM', '1:00 PM', '3:00 PM', '4:45 PM', '6:30 PM', '8:00 PM'],
+            return: ['6:00 AM', '7:15 AM', '10:00 AM', '3:00 PM', '4:30 PM', '7:15 PM', '8:30 PM', '9:30 PM']
+          },
+          weekend: {
+            departure: ['4:30 AM', '8:30 AM', '10:00 AM', '1:30 PM', '4:00 PM', '8:00 PM'],
+            return: ['6:00 AM', '10:00 AM', '12:00 PM', '3:30 PM', '5:30 PM', '9:30 PM']
+          }
+        }
+      };
 
-      if (timeInput) {
-        timeInput.addEventListener('change', function () {
-          timeInput.setAttribute('data-raw', timeInput.value);
-        });
+      var destinationSelect = document.getElementById('destination');
+      var departureDateInput = document.getElementById('departureDate');
+      var returnDateInput = document.getElementById('returnDate');
+      var departureTimeSelect = document.getElementById('departureTime');
+      var returnTimeSelect = document.getElementById('returnTime');
+
+      function getDayType(dateValue) {
+        if (!dateValue) return '';
+        var parts = dateValue.split('-');
+        if (parts.length !== 3) return '';
+        // Build the date from its parts so the day of week is read in local time
+        var date = new Date(Number(parts[0]), Number(parts[1]) - 1, Number(parts[2]));
+        if (isNaN(date.getTime())) return '';
+        var day = date.getDay();
+        return (day === 0 || day === 6) ? 'weekend' : 'weekday';
       }
 
-      var returnTimeInput = document.getElementById('returnTime');
-
-      if (returnTimeInput) {
-        returnTimeInput.addEventListener('change', function () {
-          returnTimeInput.setAttribute('data-raw', returnTimeInput.value);
-        });
+      function getFerryTimes(destination, dateValue, direction) {
+        var schedule = FERRY_SCHEDULES[destination];
+        var dayType = getDayType(dateValue);
+        if (!schedule || !dayType) return [];
+        return schedule[dayType][direction] || [];
       }
+
+      function fillTimeSelect(select, helper, times) {
+        if (!select) return;
+        var previous = select.value;
+
+        for (var i = select.options.length - 1; i >= 0; i--) {
+          if (select.options[i].value !== '') select.remove(i);
+        }
+
+        times.forEach(function (time) {
+          var option = document.createElement('option');
+          option.value = time;
+          option.textContent = time;
+          select.appendChild(option);
+        });
+
+        // Keep the previous choice when the new schedule still offers it
+        select.value = times.indexOf(previous) !== -1 ? previous : '';
+        if (helper) helper.hidden = times.length > 0;
+      }
+
+      function refreshFerryTimes() {
+        var destination = destinationSelect ? destinationSelect.value : '';
+        fillTimeSelect(
+          departureTimeSelect,
+          document.getElementById('departureTimeHelper'),
+          getFerryTimes(destination, departureDateInput ? departureDateInput.value : '', 'departure')
+        );
+        fillTimeSelect(
+          returnTimeSelect,
+          document.getElementById('returnTimeHelper'),
+          getFerryTimes(destination, returnDateInput ? returnDateInput.value : '', 'return')
+        );
+      }
+
+      [destinationSelect, departureDateInput, returnDateInput].forEach(function (el) {
+        if (el) el.addEventListener('change', refreshFerryTimes);
+      });
+
+      refreshFerryTimes();
 
       const form = document.getElementById('ferryBookingForm');
 
@@ -2820,12 +2897,6 @@
             alert(alertMsg);
             return;
           }
-
-          var rawTime = timeInput.getAttribute('data-raw') || departureTime;
-          document.getElementById('departureTimeFormatted').value = formatTimeTo12Hour(rawTime);
-
-          var rawReturnTime = returnTimeInput.getAttribute('data-raw') || returnTime;
-          document.getElementById('returnTimeFormatted').value = formatTimeTo12Hour(rawReturnTime);
 
           isSubmitting = true;
           submitBtn.disabled = true;
@@ -3582,6 +3653,8 @@
         label_return_date: 'Fecha de regreso',
         label_full_name: 'Nombre completo',
         ph_destination_select: 'Elija un destino',
+        ph_ferry_time_select: 'Elija un horario',
+        helper_ferry_time: 'Elija un destino y una fecha para ver los horarios de ferry disponibles.',
         ph_comments_ferry: 'Escriba el nombre completo de todos los pasajeros y sus edades',
         book_ferry_success_msg: 'Verificaremos la disponibilidad de boletos y nos comunicaremos con usted pronto por mensaje de texto.',
         book_ferry_success_tip: 'Consejo: responda al mensaje de texto para confirmar sus boletos de ferry.',
