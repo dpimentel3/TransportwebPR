@@ -12,17 +12,15 @@ sent to a Stripe-hosted page.
 
 ## Values to Replace
 
-The following values are placeholders and must be updated before going live.
-
-**Files containing placeholders:**
-- [netlify/functions/create-checkout-session.mts](netlify/functions/create-checkout-session.mts)
-- [netlify/functions/stripe-webhook.mts](netlify/functions/stripe-webhook.mts)
+The following values are not set yet and must be configured before going live. All of
+them are environment variables — see Setup step 1 for where to put them.
 
 | Field | Current Value | What to Set |
 |-------|--------------|-------------|
-| `line_items[].price` | `price_...` | Your actual Stripe Price ID for The Culebra Insider Guide, from the Dashboard (<https://dashboard.stripe.com/prices>) or API. Starts with `price_`. |
+| `STRIPE_PRICE_ID` | unset | Your actual Stripe Price ID for The Culebra Insider Guide, from the Dashboard (<https://dashboard.stripe.com/prices>) or API. Starts with `price_`. Set as an environment variable (see Setup step 1) — it is no longer hardcoded in the function. |
 | `mode` | `payment` | Keep `payment` for a one-time charge, or set `subscription` for recurring billing. See the note under Configured Parameters before switching. |
-| Fulfillment in `checkout.session.completed` | `console.log(...)` | Your real delivery step — email the guide link to `session.customer_details?.email`. See [Next Steps](#next-steps). |
+| `GUIDE_DOWNLOAD_URL` | unset | The link the buyer receives for the guide. The webhook will not deliver without it. |
+| `GUIDE_FROM_EMAIL` | unset | The address the guide email is sent from. |
 
 ---
 
@@ -91,6 +89,16 @@ by the function instead of being compiled in.
 | `STRIPE_SECRET_KEY` | Server only | Starts with `sk_test_` / `sk_live_`. Never expose this to the browser. |
 | `STRIPE_PUBLISHABLE_KEY` | Read on the server, returned to the browser | Starts with `pk_test_` / `pk_live_`. Safe to be public, but serving it from the function keeps it out of the repo. |
 | `STRIPE_WEBHOOK_SECRET` | Server only | Starts with `whsec_`. From the webhook endpoint you create in step 5. |
+| `STRIPE_PRICE_ID` | Server only | Starts with `price_`. The price for The Culebra Insider Guide. Not a secret, but kept in configuration so the repository has no environment-specific IDs — test and live mode have different price IDs. |
+| `GUIDE_DOWNLOAD_URL` | Server only | The link emailed to the buyer after payment. |
+| `GUIDE_FROM_EMAIL` | Server only | The sender address for the guide email. |
+
+**The payment form will not load until `STRIPE_SECRET_KEY`, `STRIPE_PUBLISHABLE_KEY` and
+`STRIPE_PRICE_ID` are all set.** `/api/create-checkout-session` returns a 500 naming the
+variables it could not find, and the browser console shows that same message.
+
+Guide delivery additionally needs the Netlify Emails provider configured — see
+[Guide delivery](#guide-delivery) below.
 
 Get the first two from the [Stripe Dashboard → API keys](https://dashboard.stripe.com/apikeys).
 There is no `DOMAIN` variable to set: `return_url` is built from the incoming request's
@@ -129,10 +137,13 @@ npm install
 - `stripe` — server SDK, currently `^22.6.1`. Because this is at or above 21.0.0, the
   correct `ui_mode` is `form`. If you ever downgrade below 21.0.0, change it to `custom`.
 - `@netlify/functions` — TypeScript types for the function handlers.
+- `@netlify/database`, `drizzle-orm`, `drizzle-kit` — used to record purchases so the
+  guide is never emailed twice. Drizzle is pinned to its `beta` line, which is the only
+  one carrying the Netlify Database adapter.
 
 ### 5. Webhook endpoint
 
-Needed once you wire up fulfillment.
+Required — this is what delivers the guide after payment.
 
 - **Production:** [Stripe Dashboard → Webhooks](https://dashboard.stripe.com/webhooks) →
   add endpoint `https://www.dptransportpr.com/api/stripe-webhook`, subscribe to
@@ -149,10 +160,17 @@ New files:
 ```
 .
 ├── netlify/
-│   └── functions/
-│       ├── create-checkout-session.mts   POST /api/create-checkout-session
-│       └── stripe-webhook.mts            POST /api/stripe-webhook
-├── package.json                          stripe + @netlify/functions
+│   ├── functions/
+│   │   ├── create-checkout-session.mts   POST /api/create-checkout-session
+│   │   └── stripe-webhook.mts            POST /api/stripe-webhook
+│   └── database/migrations/              applied by Netlify at deploy time
+├── db/
+│   ├── schema.ts                         guide_purchases table
+│   └── index.ts                          Drizzle client
+├── emails/
+│   └── guide-delivery/index.html         the email the buyer receives
+├── drizzle.config.ts                     migration output settings
+├── package.json                          stripe, @netlify/database, drizzle
 └── STRIPE_INTEGRATION_TODO.md            this file
 ```
 
@@ -179,8 +197,9 @@ Modified:
    `actions.confirm({ formConfirmEvent: event })` to take the payment in place.
 6. Payment methods that need a redirect (bank redirects, wallets) send the buyer to
    `return_url`. The page reads `?checkout=complete` and shows a confirmation.
-7. Stripe posts `checkout.session.completed` to `/api/stripe-webhook`, which is where the
-   guide link should actually be delivered.
+7. Stripe posts `checkout.session.completed` to `/api/stripe-webhook`. That function
+   records the purchase, then emails the buyer their guide link. See
+   [Guide delivery](#guide-delivery).
 
 The session is created once per modal open and reused, so reopening the modal does not
 create duplicate Checkout Sessions. A failed load resets so the next click retries.
@@ -225,35 +244,59 @@ appears in the form for a couple of different billing addresses.
 
 - Change the price or name in the
   [Product catalog](https://dashboard.stripe.com/products). Existing prices cannot be
-  edited — create a new price and update `line_items[].price` in
-  `create-checkout-session.mts`.
+  edited — create a new price and update the `STRIPE_PRICE_ID` environment variable.
 - Adding a second guide: give each card its own `data-price-id`, pass it to the function,
   and validate it server-side against a list of allowed price IDs. Never accept an
   arbitrary price ID from the browser.
 
-### Fulfillment — delivering the guide
+### Guide delivery
 
-Right now a successful payment is logged and nothing is sent. Pick one:
+Delivery is implemented. When `checkout.session.completed` arrives, the webhook records
+the purchase, then emails the buyer the link in `GUIDE_DOWNLOAD_URL` using the
+[Netlify Emails](https://docs.netlify.com/extend/install-and-use/setup-guides/email-integration/)
+template in `emails/guide-delivery/index.html`.
 
-- **Simplest:** turn on
-  [customer emails and receipts](https://dashboard.stripe.com/settings/emails) and put
-  the guide link in the product description or receipt.
-- **Recommended:** send the link from the webhook. In `stripe-webhook.mts`, replace the
-  `console.log` with a call to your email provider using
-  `session.customer_details?.email`.
-- **Gated link:** store the session ID and issue a one-time access URL, then have the
-  guide page check it. This is the only option that actually stops link sharing.
+The email is sent from the webhook rather than the browser on purpose: the buyer may
+close the tab after paying, and only the webhook is guaranteed to fire.
 
-Do the delivery in the webhook, not in the browser after `confirm` — the buyer may close
-the tab, and only the webhook is guaranteed to fire.
+**To turn it on, set the email provider variables** — the integration is enabled on this
+site but has no provider, so sends currently fail:
+
+| Variable | Notes |
+|----------|-------|
+| `NETLIFY_EMAILS_PROVIDER` | `mailgun`, `sendgrid` or `postmark`. |
+| `NETLIFY_EMAILS_PROVIDER_API_KEY` | API key from that provider. |
+| `NETLIFY_EMAILS_MAILGUN_DOMAIN` | Mailgun only. |
+| `NETLIFY_EMAILS_MAILGUN_HOST_REGION` | Mailgun only — `non-eu` or `eu`. |
+
+Scope these to both **Builds** and **Functions**. `NETLIFY_EMAILS_SECRET` and
+`NETLIFY_EMAILS_DIRECTORY` are already set.
+
+Editing the email: it is plain HTML with handlebars placeholders, and receives `name`
+(may be empty, since name collection is optional), `guideUrl` and `orderReference`.
+Preview it locally with `netlify dev` at
+`http://localhost:8888/.netlify/functions/emails`.
+
+**Delivery is sent once per purchase.** Stripe can deliver the same webhook event more
+than once, so each purchase is recorded against its Checkout Session ID and flagged when
+the email actually goes out. A repeated event for an already-delivered purchase is
+ignored; a genuine send failure returns an error so Stripe retries and the buyer still
+gets the guide.
+
+If you would rather gate the link than email it, store the session ID and issue a
+one-time access URL — that is the only option that actually stops link sharing.
 
 ### Order tracking
 
 - Every purchase appears under [Payments](https://dashboard.stripe.com/payments) with the
   buyer's email and billing address. Because `setup_future_usage` is set, repeat buyers
   are also saved as Customers with a reusable payment method.
-- To keep your own records, write the session ID, email and amount to a datastore from
-  the webhook. Netlify Blobs works without adding another service.
+- Purchases are also recorded in this project's Netlify Database, in the
+  `guide_purchases` table — session ID, email, name, amount, currency, and whether the
+  guide email was delivered. The schema lives in [db/schema.ts](db/schema.ts) and the
+  migration in `netlify/database/migrations/`; Netlify applies it at deploy time.
+- A row with `guide_delivered` still `false` is a purchase that was paid for but not
+  emailed — worth checking if a buyer says they received nothing.
 - Webhooks can be delivered more than once, so make fulfillment idempotent: skip a
   session ID you have already handled.
 

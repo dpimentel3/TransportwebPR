@@ -4871,8 +4871,13 @@
 
       async function mountCheckoutForm() {
         var response = await fetch('/api/create-checkout-session', { method: 'POST' });
-        if (!response.ok) throw new Error('create-checkout-session responded ' + response.status);
-        var session = await response.json();
+        var session = await response.json().catch(function () { return {}; });
+        if (!response.ok) {
+          // The function reports the real reason it failed (missing configuration,
+          // a Stripe error). Surfacing it here is what makes a form that will not
+          // load diagnosable from the browser console.
+          throw new Error(session.error || 'create-checkout-session responded ' + response.status);
+        }
 
         var stripe = Stripe(session.publishable_key, { betas: ['custom_checkout_payment_form_1'] });
         var checkout = stripe.initCheckoutFormSdk({
@@ -4884,17 +4889,21 @@
         form.mount('#checkout-form');
 
         var loadActionsResult = await checkout.loadActions();
-        if (loadActionsResult.type === 'success') {
-          form.on('confirm', async function (event) {
-            setStatus(null);
-            try {
-              await loadActionsResult.actions.confirm({ formConfirmEvent: event });
-            } catch (error) {
-              console.error('Payment confirmation error:', error);
-              setStatus('declined', 'error');
-            }
-          });
+        if (loadActionsResult.type !== 'success') {
+          // Otherwise the form mounts but can never take a payment, and the status
+          // line clears as though the load had succeeded.
+          throw new Error('Stripe loadActions failed: ' + loadActionsResult.type);
         }
+
+        form.on('confirm', async function (event) {
+          setStatus(null);
+          try {
+            await loadActionsResult.actions.confirm({ formConfirmEvent: event });
+          } catch (error) {
+            console.error('Payment confirmation error:', error);
+            setStatus('declined', 'error');
+          }
+        });
       }
 
       openBtn.addEventListener('click', function () {
