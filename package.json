@@ -1,0 +1,10 @@
+{
+  "name": "dp-transport-site",
+  "private": true,
+  "dependencies": {
+    "stripe": "^22.6.1"
+  },
+  "devDependencies": {
+    "@netlify/functions": "^6.0.0"
+  }
+}
