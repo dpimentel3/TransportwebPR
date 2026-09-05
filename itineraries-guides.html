@@ -21,7 +21,7 @@
   <meta property="og:type" content="website" />
   <meta name="theme-color" content="#0d3557" />
   <link rel="canonical" href="https://www.dptransportpr.com/itineraries-guides.html" />
-  <script src="https://js.stripe.com/dahlia/stripe.js"></script>
+  <script async src="https://js.stripe.com/v3/buy-button.js"></script>
   <style>
     :root {
       --primary: #0d3557;
@@ -2665,29 +2665,13 @@
       letter-spacing: 0.08em;
     }
 
-    /* Stripe embedded checkout modal */
-    .checkout-modal {
-      max-width: 560px;
-    }
-
-    #checkout-form:not(:empty) {
-      margin-top: 18px;
-    }
-
-    .checkout-status {
-      margin: 18px 0 0;
-      font-size: 0.92rem;
-      line-height: 1.5;
-      color: var(--muted);
-    }
-
-    .checkout-status[data-state="error"] {
-      color: #b3261e;
-    }
-
-    .checkout-status[data-state="done"] {
-      color: #0d6b3f;
-      font-weight: 600;
+    /* Stripe Buy Button. It renders in an iframe we cannot style, so the wrapper
+       carries the layout the old CTA button provided: pinned to the bottom of the
+       card and stretched to the card width. */
+    .tour-widget-buy {
+      margin-top: auto;
+      align-self: stretch;
+      padding-top: 4px;
     }
   </style>
   <script type="application/ld+json">
@@ -2794,7 +2778,13 @@
                       <li><span class="spec-label" data-i18n="spec_cost">Cost</span><span class="spec-value" data-i18n="guide_culebra_cost">$10</span></li>
                     </ul>
                     <p class="tour-widget-note" data-i18n="guide_culebra_desc">Everything we tell our own guests about Culebra: which beaches are worth the trip, how to plan the ferry, where to eat and what to skip.</p>
-                    <button class="tour-widget-cta tour-widget-cta-button" type="button" id="guideCulebraBuy" data-i18n="guide_culebra_cta">Get Your Guide</button>
+                    <div class="tour-widget-buy">
+                      <stripe-buy-button
+                        buy-button-id="buy_btn_1UCDkq7YotKLdmDuMTL4kK6p"
+                        publishable-key="pk_live_51UBeiO7YotKLdmDuTZLCYDQl9b7jLr9BhTk4HOle4VxUVS3SJwnNr3yOBX3sR6ICCNW9PR1MDNCXm8PICM9TPwbe00Jyw04Ybj"
+                      >
+                      </stripe-buy-button>
+                    </div>
                   </div>
                 </article>
                 <article class="tour-widget tour-widget-soon" aria-labelledby="guideViequesTitle">
@@ -2834,17 +2824,6 @@
       </div>
     </section>
   </main>
-
-  <!-- Culebra guide checkout modal (Stripe embedded payment form) -->
-  <div class="quote-modal-overlay" id="guideCheckoutOverlay" aria-hidden="true">
-    <div class="quote-modal checkout-modal" role="dialog" aria-labelledby="guideCheckoutTitle" aria-modal="true">
-      <button class="quote-modal-close" id="guideCheckoutClose" type="button" aria-label="Close checkout">&times;</button>
-      <h2 id="guideCheckoutTitle" data-i18n="guide_checkout_title">The Culebra Insider Guide</h2>
-      <p class="muted" style="margin:0;" data-i18n="guide_checkout_subtitle">Pay securely below and we will send your guide link to the email you enter.</p>
-      <p class="checkout-status" id="guideCheckoutStatus" role="status" aria-live="polite" hidden></p>
-      <div id="checkout-form"></div>
-    </div>
-  </div>
 
   <!-- Free Quote Modal -->
   <div class="quote-modal-overlay" id="quoteModalOverlay" aria-hidden="true">
@@ -3513,12 +3492,9 @@
         guide_culebra_format: 'Guía digital',
         guide_culebra_cost: '$10',
         guide_culebra_desc: 'Todo lo que les contamos a nuestros propios huéspedes sobre Culebra: cuáles playas valen el viaje, cómo planificar el ferry, dónde comer y qué omitir.',
-        guide_culebra_cta: 'Obtén tu guía',
         guide_vieques_title: 'La Guía Virtual de Vieques',
         guide_roadtrip_title: 'Ruta de Este a Oeste',
         guide_soon_label: 'Próximamente',
-        guide_checkout_title: 'La Guía Interna de Culebra',
-        guide_checkout_subtitle: 'Paga de forma segura aquí abajo y te enviaremos el enlace de la guía al correo que indiques.',
         spec_format: 'Formato',
         spec_cost: 'Costo',
         spec_destination: 'Destino',
@@ -4866,151 +4842,6 @@
         window.addEventListener('load', sync);
         sync();
       });
-    })();
-  </script>
-  <!-- Stripe embedded payment form for the Culebra Insider Guide -->
-  <script>
-    (function () {
-      var openBtn = document.getElementById('guideCulebraBuy');
-      var overlay = document.getElementById('guideCheckoutOverlay');
-      var closeBtn = document.getElementById('guideCheckoutClose');
-      var statusEl = document.getElementById('guideCheckoutStatus');
-      if (!openBtn || !overlay || !closeBtn || !statusEl) return;
-
-      var copy = {
-        en: {
-          loading: 'Loading secure payment form\u2026',
-          failed: 'We could not load the payment form. Please refresh the page and try again.',
-          declined: 'That payment could not be completed. Please check your details and try again.',
-          thanks: 'Payment received. Check your email for your guide link.'
-        },
-        es: {
-          loading: 'Cargando el formulario de pago seguro\u2026',
-          failed: 'No pudimos cargar el formulario de pago. Actualiza la p\u00e1gina e int\u00e9ntalo de nuevo.',
-          declined: 'No se pudo completar el pago. Revisa tus datos e int\u00e9ntalo de nuevo.',
-          thanks: 'Pago recibido. Revisa tu correo para acceder a la gu\u00eda.'
-        }
-      };
-
-      function t(key) {
-        var lang = document.documentElement.getAttribute('lang') === 'es' ? 'es' : 'en';
-        return copy[lang][key];
-      }
-
-      function setStatus(key, state) {
-        if (!key) {
-          statusEl.hidden = true;
-          statusEl.textContent = '';
-          statusEl.removeAttribute('data-state');
-          return;
-        }
-        statusEl.hidden = false;
-        statusEl.textContent = t(key);
-        if (state) {
-          statusEl.setAttribute('data-state', state);
-        } else {
-          statusEl.removeAttribute('data-state');
-        }
-      }
-
-      function openModal() {
-        overlay.classList.add('active');
-        overlay.setAttribute('aria-hidden', 'false');
-        document.body.style.overflow = 'hidden';
-        closeBtn.focus();
-      }
-
-      function closeModal() {
-        overlay.classList.remove('active');
-        overlay.setAttribute('aria-hidden', 'true');
-        document.body.style.overflow = '';
-      }
-
-      var appearance = {
-        "theme": "stripe",
-        "labels": "auto",
-        "inputs": "spaced",
-        "variables": {
-          "borderRadius": "4px",
-          "colorBackground": "#ffffff",
-          "colorDanger": "#df1b41",
-          "colorPrimary": "#0570de",
-          "colorSuccess": "#00c853",
-          "colorText": "#30313d",
-          "fontFamily": "default",
-          "fontSizeBase": "16px",
-          "spacingUnit": "4px"
-        }
-      };
-
-      // The form is built once and reused, so reopening the modal does not create a
-      // second Checkout Session.
-      var mounting = null;
-
-      async function mountCheckoutForm() {
-        var response = await fetch('/api/create-checkout-session', { method: 'POST' });
-        var session = await response.json().catch(function () { return {}; });
-        if (!response.ok) {
-          // The function reports the real reason it failed (missing configuration,
-          // a Stripe error). Surfacing it here is what makes a form that will not
-          // load diagnosable from the browser console.
-          throw new Error(session.error || 'create-checkout-session responded ' + response.status);
-        }
-
-        var stripe = Stripe(session.publishable_key, { betas: ['custom_checkout_payment_form_1'] });
-        var checkout = stripe.initCheckoutFormSdk({
-          clientSecret: session.client_secret,
-          appearance: appearance
-        });
-
-        var form = checkout.createForm({ layout: 'expanded' });
-        form.mount('#checkout-form');
-
-        var loadActionsResult = await checkout.loadActions();
-        if (loadActionsResult.type !== 'success') {
-          // Otherwise the form mounts but can never take a payment, and the status
-          // line clears as though the load had succeeded.
-          throw new Error('Stripe loadActions failed: ' + loadActionsResult.type);
-        }
-
-        form.on('confirm', async function (event) {
-          setStatus(null);
-          try {
-            await loadActionsResult.actions.confirm({ formConfirmEvent: event });
-          } catch (error) {
-            console.error('Payment confirmation error:', error);
-            setStatus('declined', 'error');
-          }
-        });
-      }
-
-      openBtn.addEventListener('click', function () {
-        openModal();
-        if (mounting) return;
-        setStatus('loading');
-        mounting = mountCheckoutForm().then(function () {
-          setStatus(null);
-        }, function (error) {
-          console.error('Checkout setup error:', error);
-          setStatus('failed', 'error');
-          // Let the next click retry from scratch.
-          mounting = null;
-        });
-      });
-
-      closeBtn.addEventListener('click', closeModal);
-      overlay.addEventListener('click', function (event) {
-        if (event.target === overlay) closeModal();
-      });
-      document.addEventListener('keydown', function (event) {
-        if (event.key === 'Escape' && overlay.classList.contains('active')) closeModal();
-      });
-
-      // Stripe returns the buyer here after any redirect-based payment method.
-      if (new URLSearchParams(window.location.search).get('checkout') === 'complete') {
-        openModal();
-        setStatus('thanks', 'done');
-      }
     })();
   </script>
 </body>
