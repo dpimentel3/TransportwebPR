@@ -734,9 +734,9 @@
 
     .service-page .service-hero::before {
       display: block;
-      background-image: url("ferry-tickets-header.png");
+      background-image: url("itineraries-header.png");
       background-size: cover;
-      background-position: center 38%;
+      background-position: center center;
       opacity: 1;
       transform: none;
     }
@@ -2609,6 +2609,62 @@
       box-shadow: 0 12px 24px rgba(8, 37, 61, 0.18);
     }
 
+    /* Placeholder cards for guides that are not on sale yet: same shape as a
+       live booking card, but greyed out, empty and not interactive. */
+    .tour-widget-soon {
+      background: #f1f3f5;
+      border-color: #dfe3e8;
+      box-shadow: none;
+      cursor: default;
+    }
+
+    .tour-widget-soon:hover,
+    .tour-widget-soon:focus-visible {
+      box-shadow: none;
+      transform: none;
+    }
+
+    .tour-widget-media-soon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #e8ebef;
+      padding: 18px;
+    }
+
+    .tour-widget-media-soon img {
+      width: auto;
+      max-width: 74%;
+      height: auto;
+      max-height: 100%;
+      object-fit: contain;
+      /* The artwork ships on a white square — multiply drops that white out so
+         the symbol reads as if it were drawn straight onto the grey card. */
+      mix-blend-mode: multiply;
+      opacity: 0.85;
+    }
+
+    .tour-widget-soon:hover .tour-widget-media img {
+      transform: none;
+    }
+
+    .tour-widget-soon .tour-widget-body h3 {
+      color: #6b7280;
+    }
+
+    .tour-widget-soon-label {
+      margin: auto 0 0;
+      align-self: flex-start;
+      padding: 7px 14px;
+      border-radius: 999px;
+      background: #e2e6ea;
+      color: #6b7280;
+      font-size: 0.72rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
     /* Stripe embedded checkout modal */
     .checkout-modal {
       max-width: 560px;
@@ -2735,10 +2791,28 @@
                     <h3 data-i18n="guide_culebra_title">The Culebra Insider Guide</h3>
                     <ul class="tour-widget-specs">
                       <li><span class="spec-label" data-i18n="spec_format">Format</span><span class="spec-value" data-i18n="guide_culebra_format">Digital guide</span></li>
-                      <li><span class="spec-label" data-i18n="spec_destination">Destination</span><span class="spec-value" data-i18n="guide_culebra_destination">Culebra, Puerto Rico</span></li>
+                      <li><span class="spec-label" data-i18n="spec_cost">Cost</span><span class="spec-value" data-i18n="guide_culebra_cost">$10</span></li>
                     </ul>
                     <p class="tour-widget-note" data-i18n="guide_culebra_desc">Everything we tell our own guests about Culebra: which beaches are worth the trip, how to plan the ferry, where to eat and what to skip.</p>
                     <button class="tour-widget-cta tour-widget-cta-button" type="button" id="guideCulebraBuy" data-i18n="guide_culebra_cta">Get Your Guide</button>
+                  </div>
+                </article>
+                <article class="tour-widget tour-widget-soon" aria-labelledby="guideViequesTitle">
+                  <div class="tour-widget-media tour-widget-media-soon">
+                    <img src="coming-soon.png" alt="" aria-hidden="true" loading="lazy" decoding="async">
+                  </div>
+                  <div class="tour-widget-body">
+                    <h3 id="guideViequesTitle" data-i18n="guide_vieques_title">The Vieques Virtual Guide</h3>
+                    <p class="tour-widget-soon-label" data-i18n="guide_soon_label">Coming Soon</p>
+                  </div>
+                </article>
+                <article class="tour-widget tour-widget-soon" aria-labelledby="guideRoadtripTitle">
+                  <div class="tour-widget-media tour-widget-media-soon">
+                    <img src="coming-soon.png" alt="" aria-hidden="true" loading="lazy" decoding="async">
+                  </div>
+                  <div class="tour-widget-body">
+                    <h3 id="guideRoadtripTitle" data-i18n="guide_roadtrip_title">East to West Roadtrip</h3>
+                    <p class="tour-widget-soon-label" data-i18n="guide_soon_label">Coming Soon</p>
                   </div>
                 </article>
               </div>
@@ -3437,12 +3511,16 @@
         guides_itineraries_desc: 'Planes día por día que le indican adónde ir, cuándo ir y cómo llegar, para que no pierda un día de su viaje averiguándolo.',
         guide_culebra_title: 'La Guía Interna de Culebra',
         guide_culebra_format: 'Guía digital',
-        guide_culebra_destination: 'Culebra, Puerto Rico',
+        guide_culebra_cost: '$10',
         guide_culebra_desc: 'Todo lo que les contamos a nuestros propios huéspedes sobre Culebra: cuáles playas valen el viaje, cómo planificar el ferry, dónde comer y qué omitir.',
         guide_culebra_cta: 'Obtén tu guía',
+        guide_vieques_title: 'La Guía Virtual de Vieques',
+        guide_roadtrip_title: 'Ruta de Este a Oeste',
+        guide_soon_label: 'Próximamente',
         guide_checkout_title: 'La Guía Interna de Culebra',
         guide_checkout_subtitle: 'Paga de forma segura aquí abajo y te enviaremos el enlace de la guía al correo que indiques.',
         spec_format: 'Formato',
+        spec_cost: 'Costo',
         spec_destination: 'Destino',
         guides_cta_title: '¿Listo para planificar el resto de su viaje?',
         guides_cta_desc: 'Coordine transporte, tours y chárters de bote según su itinerario y confirmaremos los detalles con usted directamente.',
