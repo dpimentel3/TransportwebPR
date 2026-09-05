@@ -4,9 +4,19 @@ This is the single source of truth for finishing the Stripe checkout behind the
 **Get Your Guide** button on [The Culebra Insider Guide](itineraries-guides.html) card.
 Work through **Values to Replace** and **Setup** below; the rest is reference.
 
-The integration uses the **embedded custom payment form** (Stripe Checkout with
-`ui_mode: 'form'`), so buyers pay in a modal on `itineraries-guides.html` and are never
-sent to a Stripe-hosted page.
+The card now uses a **Stripe Buy Button** (`<stripe-buy-button>`), so the button itself
+and the checkout page it opens are both configured in the Stripe Dashboard rather than in
+this repository. The button's copy, price and success URL live in the Dashboard under that
+buy button; there is no client-side payment code left on the page.
+
+Delivery still runs through `/api/stripe-webhook`, which listens for
+`checkout.session.completed` — the buy button's hosted Checkout emits the same event.
+
+The **embedded custom payment form** described in the reference sections below
+(`ui_mode: 'form'`, the checkout modal, `netlify/functions/create-checkout-session.mts`)
+is the previous implementation. The modal and its client-side wiring have been removed
+from `itineraries-guides.html`; the function is still in the repository but nothing calls
+it.
 
 ---
 
@@ -177,13 +187,25 @@ New files:
 Modified:
 
 ```
-├── itineraries-guides.html   Stripe.js in <head>, checkout modal, client-side SDK wiring
+├── itineraries-guides.html   buy-button.js in <head>, <stripe-buy-button> on the card
 └── .gitignore                added node_modules
 ```
 
 ---
 
 ## How It Works
+
+1. A visitor loads the Culebra card. `js.stripe.com/v3/buy-button.js`, loaded in `<head>`,
+   renders the `<stripe-buy-button>` element in place of the old CTA button.
+2. Clicking it opens the Stripe-hosted Checkout page configured for that buy button.
+3. Stripe posts `checkout.session.completed` to `/api/stripe-webhook`. That function
+   records the purchase, then emails the buyer their guide link. See
+   [Guide delivery](#guide-delivery).
+
+The webhook endpoint and `STRIPE_WEBHOOK_SECRET` must belong to the same Stripe account
+and mode (live vs. test) as the buy button, or delivery never fires.
+
+The steps below describe the previous embedded-form flow and no longer run:
 
 1. A visitor clicks **Get Your Guide** on the Culebra card, and the checkout modal opens.
 2. The browser `POST`s to `/api/create-checkout-session`.
