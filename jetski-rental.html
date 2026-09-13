@@ -12,12 +12,12 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Jetski Rental (Metro Area) | DP Transport</title>
-  <meta name="description" content="Private yachts and boats for unforgettable days at sea in Puerto Rico. Snorkeling, island hopping to Icacos, Palomino, Culebra and Vieques." />
+  <meta name="description" content="Jetski rental in the San Juan metro area, Puerto Rico. 30 minutes or 1 hour on the water, safety briefing and life jackets included. Meeting point: Pine Grove beach, Isla Verde." />
   <meta name="keywords" content="Puerto Rico transportation, airport transfer Puerto Rico, Rio Grande taxi, excursion transportation, port transportation, tourist transportation Puerto Rico, DP Transport" />
   <meta name="author" content="DP Transport" />
   <meta name="robots" content="index, follow" />
   <meta property="og:title" content="Jetski Rental (Metro Area) | DP Transport" />
-  <meta property="og:description" content="Private yachts and boats for unforgettable days at sea in Puerto Rico. Snorkeling, island hopping to Icacos, Palomino, Culebra and Vieques." />
+  <meta property="og:description" content="Jetski rental in the San Juan metro area, Puerto Rico. 30 minutes or 1 hour on the water, safety briefing and life jackets included. Meeting point: Pine Grove beach, Isla Verde." />
   <meta property="og:type" content="website" />
   <meta name="theme-color" content="#0d3557" />
   <link rel="canonical" href="https://www.dptransportpr.com/jetski-rental.html" />
@@ -2478,8 +2478,8 @@
       <div class="service-hero background-section">
         <div class="container section-shell">
           <div class="section-intro">
-            <h1>READY TO BOOK YOUR PRIVATE BOAT DAY IN PUERTO RICO?</h1>
-            <p>Reserve a private charter with captain, music, snorkeling gear, drinks, snacks, and island stops.</p>
+            <h1 data-i18n="rentals_hero_title">READY TO EXPLORE PUERTO RICO ON YOUR OWN SCHEDULE?</h1>
+            <p data-i18n="rentals_hero_desc">Rent a Jeep for the day or take a jetski out in the metro area. More vehicles coming soon.</p>
           </div>
         </div>
       </div>
@@ -2510,7 +2510,7 @@
             <strong data-i18n="prod_jetski_length_label">Trip Length</strong>
             <p data-i18n-html="prod_jetski_length_text">$85 — 30 Minutes ($10 additional for the second passenger)<br>$160 — 1 Hour ($10 additional for the second passenger)</p>
           </div>
-          <a href="#book" class="btn btn-primary book-boat-link" data-boat="Jetski Rental (Metro Area)" data-i18n="book_now">Book Now</a>
+          <a href="#book" class="btn btn-primary book-rental-link" data-rental="Jetski Rental (Metro Area)" data-i18n="book_now">Book Now</a>
         </div>
       </div>
     </section>
@@ -2573,40 +2573,34 @@
             </div>
           </div>
 
-          <aside class="booking-card" aria-labelledby="boats-title">
-<div class="booking-panel" id="panel-boats" role="tabpanel" aria-labelledby="boats-title">
-              <h2 id="boats-title" data-i18n="book_jetski_title">Book your jetski</h2>
-              <form id="boatsForm" name="boat-charter-booking" method="POST" data-netlify="true" netlify-honeypot="bot-field">
-                <input type="hidden" name="form-name" value="boat-charter-booking" />
+          <aside class="booking-card" aria-labelledby="rentals-title">
+<div class="booking-panel" id="panel-rentals" role="tabpanel" aria-labelledby="rentals-title">
+              <h2 id="rentals-title" data-i18n="book_rental_title">Book your rental</h2>
+              <form id="rentalForm" name="rental-booking" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+                <input type="hidden" name="form-name" value="rental-booking" />
                 <p class="hidden-field">
                   <label>Don’t fill this out if you’re human: <input name="bot-field" /></label>
                 </p>
                 <div class="field-grid">
                   <div>
-                    <label for="boatDate" data-i18n="label_date">Date (month/day)</label>
-                    <input id="boatDate" name="tripDate" type="date" required />
+                    <label for="rentalDate" data-i18n="label_date">Date (month/day)</label>
+                    <input id="rentalDate" name="tripDate" type="date" required />
                   </div>
                   <div>
-                    <label for="boatSelect" data-i18n="label_select_boat">Boats and Charters</label>
-                    <select id="boatSelect" name="charter" required>
-                      <option value="" disabled data-i18n="ph_select_boat">Choose a charter</option>
-                      <option value="Welcraft 30'" data-i18n="boat_option_welcraft">Welcraft 30'</option>
-                      <option value="Riviera Yacht 40'" data-i18n="boat_option_riviera">Riviera Yacht 40'</option>
-                      <option value="Luxury Lagoon 42'" data-i18n="boat_option_lagoon">Luxury Lagoon 42'</option>
-                      <option value="Cruiser 54' Yacht" data-i18n="boat_option_cruiser">Cruiser 54' Yacht</option>
-                      <option value="Boston Whaler 24'" data-i18n="boat_option_whaler">Boston Whaler 24'</option>
-                      <option value='Shaefer 40&quot; Luxury Charter' data-i18n="boat_option_shaefer">Shaefer 40&quot; Luxury Charter</option>
-                      <option value="Jetski Rental (Metro Area)" selected data-i18n="boat_option_jetski">Jetski Rental (Metro Area)</option>
-                      <option value="Fishing Trip" data-i18n="boat_option_fishing">Fishing Trip</option>
+                    <label for="rentalSelect" data-i18n="label_select_rental">Rentals</label>
+                    <select id="rentalSelect" name="rental" required>
+                      <option value="" disabled data-i18n="ph_select_rental">Choose a rental</option>
+                      <option value="Jeep Rental" data-i18n="rental_option_jeep">Jeep Rental</option>
+                      <option value="Jetski Rental (Metro Area)" selected data-i18n="rental_option_jetski">Jetski Rental (Metro Area)</option>
                     </select>
                   </div>
                 </div>
 
                 <div class="field-grid">
-                  <div id="boatDepartureField">
-                    <label for="boatDepartureTime" data-i18n="label_departure_time">Departure time</label>
-                    <select id="boatDepartureTime" name="departureTime" required>
-                      <option value="" disabled selected data-i18n="ph_departure_time">Choose a time slot</option>
+                  <div id="rentalPickupField">
+                    <label for="rentalPickupTime" data-i18n="label_pickup_time">Pickup time</label>
+                    <select id="rentalPickupTime" name="pickupTime" required>
+                      <option value="" disabled selected data-i18n="ph_pickup_time">Choose a time slot</option>
                       <option value="9:00 AM">9:00 AM</option>
                       <option value="9:30 AM">9:30 AM</option>
                       <option value="10:00 AM">10:00 AM</option>
@@ -2623,40 +2617,38 @@
                     </select>
                   </div>
                   <div>
-                    <label for="boatTripLength" data-i18n="label_trip_length">Trip length</label>
-                    <select id="boatTripLength" name="tripLength" required>
-                      <option value="" disabled selected data-i18n="ph_trip_length">Choose trip length</option>
-                      <option value="4 hours" data-i18n="trip_length_4h">4 hours</option>
-                      <option value="6 hours" data-i18n="trip_length_6h">6 hours</option>
+                    <label for="rentalLength" data-i18n="label_rental_length">Rental length</label>
+                    <select id="rentalLength" name="rentalLength" required>
+                      <option value="" disabled selected data-i18n="ph_rental_length">Choose rental length</option>
                     </select>
                   </div>
                 </div>
 
                 <div class="field-grid">
                   <div>
-                    <label for="boatPassengers" data-i18n="label_passengers">Number of passengers</label>
-                    <input id="boatPassengers" name="passengers" type="number" min="1" max="50" data-i18n-placeholder="ph_passengers" placeholder="Example: 4" required />
+                    <label for="rentalPassengers" data-i18n="label_passengers">Number of passengers</label>
+                    <input id="rentalPassengers" name="passengers" type="number" min="1" max="50" data-i18n-placeholder="ph_passengers" placeholder="Example: 4" required />
                   </div>
                   <div>
-                    <label for="boatPhone" data-i18n="label_phone">Phone number</label>
-                    <input id="boatPhone" name="phone" type="tel" placeholder="787-214-2058" required />
+                    <label for="rentalPhone" data-i18n="label_phone">Phone number</label>
+                    <input id="rentalPhone" name="phone" type="tel" placeholder="787-214-2058" required />
                   </div>
                 </div>
 
                 <div class="field-grid">
                   <div>
-                    <label for="boatEmail" data-i18n="label_email">Email</label>
-                    <input id="boatEmail" name="email" type="email" placeholder="name@example.com" required />
+                    <label for="rentalEmail" data-i18n="label_email">Email</label>
+                    <input id="rentalEmail" name="email" type="email" placeholder="name@example.com" required />
                   </div>
                   <div>
-                    <label for="boatFirstName" data-i18n="label_name">First name</label>
-                    <input id="boatFirstName" name="firstName" type="text" required />
+                    <label for="rentalFirstName" data-i18n="label_name">First name</label>
+                    <input id="rentalFirstName" name="firstName" type="text" required />
                   </div>
                 </div>
 
                 <div>
-                  <label for="boatComments" data-i18n="label_comments">Comments</label>
-                  <textarea id="boatComments" name="comments" data-i18n-placeholder="ph_comments_boat" placeholder="Add any extra details about your charter if necessary"></textarea>
+                  <label for="rentalComments" data-i18n="label_comments">Comments</label>
+                  <textarea id="rentalComments" name="comments" data-i18n-placeholder="ph_comments_rental" placeholder="Add any extra details about your rental if necessary"></textarea>
                 </div>
 
                 <div class="hero-actions" style="margin: 6px 0 0;">
@@ -2949,6 +2941,8 @@
             activateTab('panel-tours');
           } else if (path.indexOf('boat-charters') !== -1) {
             activateTab('panel-boats');
+          } else if (path.indexOf('rental') !== -1) {
+            activateTab('panel-rentals');
           } else if (path.indexOf('transportation') !== -1) {
             activateTab('panel-transport');
           }
@@ -2986,22 +2980,22 @@
           });
         });
 
-        // Boat card "Book Now" buttons switch to Boats tab and preselect the charter
-        var boatLinks = document.querySelectorAll('.book-boat-link');
-        boatLinks.forEach(function (link) {
+        // Rental card "Book Now" buttons preselect the vehicle in the rental form
+        var rentalLinks = document.querySelectorAll('.book-rental-link');
+        rentalLinks.forEach(function (link) {
           link.addEventListener('click', function () {
-            activateTab('panel-boats');
-            var boatName = link.getAttribute('data-boat');
-            var select = document.getElementById('boatSelect');
-            if (select && boatName) {
+            activateTab('panel-rentals');
+            var rentalName = link.getAttribute('data-rental');
+            var select = document.getElementById('rentalSelect');
+            if (select && rentalName) {
               var options = select.querySelectorAll('option');
               options.forEach(function (opt) {
-                if (opt.value === boatName) select.value = boatName;
+                if (opt.value === rentalName) select.value = rentalName;
               });
             }
-            // Limit/restore the departure-time and trip-length menus for this charter.
-            if (typeof window.applyCharterFieldOptions === 'function') {
-              window.applyCharterFieldOptions(boatName);
+            // Swap the pickup-time and rental-length menus for this vehicle.
+            if (typeof window.applyRentalFieldOptions === 'function') {
+              window.applyRentalFieldOptions(rentalName);
             }
           });
         });
@@ -3132,14 +3126,14 @@
           successTipEs: 'Consejo: responda al mensaje de texto del guía para confirmar su viaje.'
         });
         buildExtraForm({
-          formId: 'boatsForm',
-          formName: 'boat-charter-booking',
-          successMsgKey: 'book_boat_success_msg',
-          successTipKey: 'book_boat_success_tip',
-          successMsgEn: 'The Captain will reach out to you shortly via email.',
-          successTipEn: 'Tip: reply to the captain\'s text email to confirm your trip.',
-          successMsgEs: 'El capitán se comunicará con usted pronto por correo electrónico.',
-          successTipEs: 'Consejo: responda al correo electrónico del capitán para confirmar su viaje.'
+          formId: 'rentalForm',
+          formName: 'rental-booking',
+          successMsgKey: 'book_rental_success_msg',
+          successTipKey: 'book_rental_success_tip',
+          successMsgEn: 'We will reach out to you shortly by text message or email.',
+          successTipEn: 'Tip: reply to that message to confirm your rental.',
+          successMsgEs: 'Nos comunicaremos con usted pronto por mensaje de texto o correo electrónico.',
+          successTipEs: 'Consejo: responda a ese mensaje para confirmar su alquiler.'
         });
       })();
 
@@ -3296,6 +3290,34 @@
       var langBtnEs = allLangEsBtns[0];
 
       var esTranslations = {
+        // Rentals
+        spec_cost: 'Costo',
+        rentals_hero_title: '¿LISTO PARA EXPLORAR PUERTO RICO A SU PROPIO RITMO?',
+        rentals_hero_desc: 'Alquile un Jeep por el día o salga en jetski por el área metro. Más vehículos próximamente.',
+        cat_rentals_title: 'Alquileres',
+        cat_rentals_desc: 'Alquile un Jeep por el día o salga en jetski por el área metro y explore Puerto Rico a su propio ritmo. Más vehículos próximamente.',
+        svc_link_rentals: 'Ver alquileres',
+        prod_jeep_title: 'Alquiler de Jeep',
+        prod_jeep_capacity: '5 personas',
+        prod_jeep_cost: '80$/día',
+        prod_jeep_cost_label: 'Costo',
+        prod_jeep_cost_text: '$80 por día',
+        book_rental_title: 'Reserve su alquiler',
+        label_select_rental: 'Alquileres',
+        label_pickup_time: 'Hora de recogida',
+        label_rental_length: 'Duración del alquiler',
+        rental_option_jeep: 'Alquiler de Jeep',
+        rental_option_jetski: 'Alquiler de Jetski (Área Metro)',
+        rental_days_1: '1 día',
+        rental_days_2: '2 días',
+        rental_days_3: '3 días',
+        rental_days_4: '4 días',
+        rental_days_5: '5 días',
+        rental_days_6: '6 días',
+        rental_days_7: '7 días',
+        book_rental_success_msg: 'Nos comunicaremos con usted pronto por mensaje de texto o correo electrónico.',
+        book_rental_success_tip: 'Consejo: responda a ese mensaje para confirmar su alquiler.',
+
         // Navigation
         nav_explore: 'Explorar',
         nav_services: 'Servicios',
@@ -3622,6 +3644,10 @@
 
       // Placeholder translations
       var esPlaceholders = {
+        ph_select_rental: 'Elija un alquiler',
+        ph_pickup_time: 'Elija un horario',
+        ph_rental_length: 'Elija la duración del alquiler',
+        ph_comments_rental: 'Agregue cualquier detalle adicional sobre su alquiler si es necesario',
         ph_pickup: 'Ejemplo: Aeropuerto SJU o nombre del hotel',
         ph_destination: 'Ejemplo: Puerto de Cruceros de San Juan',
         ph_passengers: 'Ejemplo: 4',
@@ -3651,6 +3677,18 @@
 
       // English translations for dynamically added elements
       var enTranslations = {
+        ph_rental_length: 'Choose rental length',
+        trip_length_30min: '30 minutes',
+        trip_length_1h: '1 hour',
+        rental_days_1: '1 day',
+        rental_days_2: '2 days',
+        rental_days_3: '3 days',
+        rental_days_4: '4 days',
+        rental_days_5: '5 days',
+        rental_days_6: '6 days',
+        rental_days_7: '7 days',
+        book_rental_success_msg: 'We will reach out to you shortly by text message or email.',
+        book_rental_success_tip: 'Tip: reply to that message to confirm your rental.',
         quote_success_title: 'Quote request sent!',
         quote_success_subtitle: 'The driver will reach out to you shortly.',
         quote_success_tip: 'Pro tip: most quotes are flexible. Just check with your driver and they\'ll help you out.',
@@ -3743,136 +3781,68 @@
       allLangEnBtns.forEach(function(b) { if(b) b.addEventListener('click', function () { setLanguage('en'); }); });
       allLangEsBtns.forEach(function(b) { if(b) b.addEventListener('click', function () { setLanguage('es'); }); });
 
-      // Charter-specific booking field options.
-      // The Boston Whaler 24' runs a 5-hour half-day or 7-hour full-day, each
-      // with its own set of departure windows (the full-day options only appear
-      // once the 7-hour trip length is chosen). The Shaefer 40" Luxury Charter
-      // runs a single 6-hour trip with its own four departure windows. Selecting
-      // either charter (via its Book Now button or the charter dropdown) limits
-      // the departure-time and trip-length menus accordingly. The four standard
-      // charters keep the full departure list for their 4-hour trip but only run
-      // two windows for the 6-hour one, so their departure menu narrows as soon as
-      // 6 hours is chosen. Any other charter restores the full default list.
+      // Rental-specific booking field options.
+      // The Jeep is rented by the day and needs a pickup time, so it keeps the
+      // time-slot menu and offers 1 to 7 days. The Jetski has no set departure
+      // windows, so its pickup-time field is hidden and it offers 30 minutes or
+      // 1 hour instead. Selecting a vehicle (via its Book Now button or the
+      // rental dropdown) swaps both menus accordingly.
       // Defined here so it can re-apply translations.
       (function () {
-        var departureSelect = document.getElementById('boatDepartureTime');
-        var tripLengthSelect = document.getElementById('boatTripLength');
-        var departureField = document.getElementById('boatDepartureField');
-        var boatSelect = document.getElementById('boatSelect');
-        if (!departureSelect || !tripLengthSelect) return;
+        var pickupSelect = document.getElementById('rentalPickupTime');
+        var lengthSelect = document.getElementById('rentalLength');
+        var pickupField = document.getElementById('rentalPickupField');
+        var rentalSelect = document.getElementById('rentalSelect');
+        if (!pickupSelect || !lengthSelect) return;
 
-        var defaultDepartureHTML = departureSelect.innerHTML;
-        var defaultTripLengthHTML = tripLengthSelect.innerHTML;
+        var defaultPickupHTML = pickupSelect.innerHTML;
 
-        var whalerHalfDayDepartureHTML =
-          '<option value="" disabled selected data-i18n="ph_departure_time">Choose a time slot</option>' +
-          '<option value="8:30 AM to 1:00 PM" data-i18n="whaler_departure_morning">8:30 AM to 1:00 PM</option>' +
-          '<option value="1:30 PM to 6:30 PM" data-i18n="whaler_departure_afternoon">1:30 PM to 6:30 PM</option>';
+        var placeholderLengthHTML =
+          '<option value="" disabled selected data-i18n="ph_rental_length">Choose rental length</option>';
 
-        var whalerFullDayDepartureHTML =
-          '<option value="" disabled selected data-i18n="ph_departure_time">Choose a time slot</option>' +
-          '<option value="9:00 AM to 4:00 PM" data-i18n="whaler_departure_full_1">9:00 AM to 4:00 PM</option>' +
-          '<option value="10:00 AM to 5:00 PM" data-i18n="whaler_departure_full_2">10:00 AM to 5:00 PM</option>' +
-          '<option value="11:00 AM to 6:00 PM" data-i18n="whaler_departure_full_3">11:00 AM to 6:00 PM</option>';
+        var jeepLengthHTML = placeholderLengthHTML +
+          '<option value="1 day" data-i18n="rental_days_1">1 day</option>' +
+          '<option value="2 days" data-i18n="rental_days_2">2 days</option>' +
+          '<option value="3 days" data-i18n="rental_days_3">3 days</option>' +
+          '<option value="4 days" data-i18n="rental_days_4">4 days</option>' +
+          '<option value="5 days" data-i18n="rental_days_5">5 days</option>' +
+          '<option value="6 days" data-i18n="rental_days_6">6 days</option>' +
+          '<option value="7 days" data-i18n="rental_days_7">7 days</option>';
 
-        var whalerTripLengthHTML =
-          '<option value="" disabled selected data-i18n="ph_trip_length">Choose trip length</option>' +
-          '<option value="5 hours" data-i18n="trip_length_5h">5 hours (Half-Day)</option>' +
-          '<option value="7 hours" data-i18n="trip_length_7h">7 hours (Full-Day)</option>';
-
-        var shaeferDepartureHTML =
-          '<option value="" disabled selected data-i18n="ph_departure_time">Choose a time slot</option>' +
-          '<option value="9:00 AM to 3:00 PM" data-i18n="shaefer_departure_1">9:00 AM to 3:00 PM</option>' +
-          '<option value="10:00 AM to 4:00 PM" data-i18n="shaefer_departure_2">10:00 AM to 4:00 PM</option>' +
-          '<option value="11:00 AM to 5:00 PM" data-i18n="shaefer_departure_3">11:00 AM to 5:00 PM</option>' +
-          '<option value="12:00 PM to 6:00 PM" data-i18n="shaefer_departure_4">12:00 PM to 6:00 PM</option>';
-
-        var shaeferTripLengthHTML =
-          '<option value="" disabled selected data-i18n="ph_trip_length">Choose trip length</option>' +
-          '<option value="6 hours" data-i18n="trip_length_6h">6 hours</option>';
-
-        // The two windows the standard charters run their 6-hour trip on.
-        var sixHourDepartureHTML =
-          '<option value="" disabled selected data-i18n="ph_departure_time">Choose a time slot</option>' +
-          '<option value="9:00 AM to 3:00 PM" data-i18n="six_hour_departure_1">9:00 AM to 3:00 PM</option>' +
-          '<option value="10:00 AM to 4:00 PM" data-i18n="six_hour_departure_2">10:00 AM to 4:00 PM</option>';
-
-        var SIX_HOUR_WINDOW_CHARTERS = [
-          "Welcraft 30'",
-          "Riviera Yacht 40'",
-          "Luxury Lagoon 42'",
-          "Cruiser 54' Yacht"
-        ];
-
-        function hasSixHourWindows(boatName) {
-          return SIX_HOUR_WINDOW_CHARTERS.indexOf(boatName) !== -1;
-        }
-
-        var jetskiTripLengthHTML =
-          '<option value="" disabled selected data-i18n="ph_trip_length">Choose trip length</option>' +
+        var jetskiLengthHTML = placeholderLengthHTML +
           '<option value="30 minutes" data-i18n="trip_length_30min">30 minutes</option>' +
           '<option value="1 hour" data-i18n="trip_length_1h">1 hour</option>';
 
-        var SHAEFER = 'Shaefer 40" Luxury Charter';
+        var JEEP = 'Jeep Rental';
         var JETSKI = 'Jetski Rental (Metro Area)';
 
-        window.applyCharterFieldOptions = function (boatName) {
-          // Restore the departure-time field by default; the Jet Ski hides it below.
-          if (departureField) departureField.style.display = '';
-          departureSelect.setAttribute('required', '');
-          if (boatName === "Boston Whaler 24'") {
-            tripLengthSelect.innerHTML = whalerTripLengthHTML;
-            // Default to the half-day windows until a 7-hour trip length is picked.
-            departureSelect.innerHTML = whalerHalfDayDepartureHTML;
-          } else if (boatName === SHAEFER) {
-            tripLengthSelect.innerHTML = shaeferTripLengthHTML;
-            departureSelect.innerHTML = shaeferDepartureHTML;
-          } else if (boatName === JETSKI) {
-            // The Jetski rental has no set departure windows, so hide the
-            // departure-time field entirely and drop its required flag.
-            tripLengthSelect.innerHTML = jetskiTripLengthHTML;
-            departureSelect.innerHTML = defaultDepartureHTML;
-            departureSelect.value = '';
-            departureSelect.removeAttribute('required');
-            if (departureField) departureField.style.display = 'none';
+        window.applyRentalFieldOptions = function (rentalName) {
+          // Restore the pickup-time field by default; the Jetski hides it below.
+          if (pickupField) pickupField.style.display = '';
+          pickupSelect.setAttribute('required', '');
+          if (rentalName === JETSKI) {
+            lengthSelect.innerHTML = jetskiLengthHTML;
+            pickupSelect.innerHTML = defaultPickupHTML;
+            pickupSelect.value = '';
+            pickupSelect.removeAttribute('required');
+            if (pickupField) pickupField.style.display = 'none';
+          } else if (rentalName === JEEP) {
+            lengthSelect.innerHTML = jeepLengthHTML;
+            pickupSelect.innerHTML = defaultPickupHTML;
           } else {
-            tripLengthSelect.innerHTML = defaultTripLengthHTML;
-            // Restoring the default trip lengths clears any earlier choice, so this
-            // only keeps the narrowed windows when 6 hours survives the reset.
-            departureSelect.innerHTML =
-              hasSixHourWindows(boatName) && tripLengthSelect.value === '6 hours'
-                ? sixHourDepartureHTML
-                : defaultDepartureHTML;
+            lengthSelect.innerHTML = placeholderLengthHTML;
+            pickupSelect.innerHTML = defaultPickupHTML;
           }
           setLanguage(currentLang);
         };
 
-        // For the Boston Whaler, the departure windows depend on the trip length:
-        // the half-day uses its two windows, the full-day its three. The four
-        // standard charters swap between the full list and their two 6-hour
-        // windows the same way.
-        tripLengthSelect.addEventListener('change', function () {
-          if (!boatSelect) return;
-          if (boatSelect.value === "Boston Whaler 24'") {
-            departureSelect.innerHTML = tripLengthSelect.value === '7 hours'
-              ? whalerFullDayDepartureHTML
-              : whalerHalfDayDepartureHTML;
-            setLanguage(currentLang);
-          } else if (hasSixHourWindows(boatSelect.value)) {
-            departureSelect.innerHTML = tripLengthSelect.value === '6 hours'
-              ? sixHourDepartureHTML
-              : defaultDepartureHTML;
-            setLanguage(currentLang);
-          }
-        });
-
-        // Keep the menus in sync when the charter dropdown is changed directly.
-        if (boatSelect) {
-          boatSelect.addEventListener('change', function () {
-            window.applyCharterFieldOptions(boatSelect.value);
+        // Keep the menus in sync when the rental dropdown is changed directly.
+        if (rentalSelect) {
+          rentalSelect.addEventListener('change', function () {
+            window.applyRentalFieldOptions(rentalSelect.value);
           });
-          if (boatSelect.value) window.applyCharterFieldOptions(boatSelect.value);
         }
+        window.applyRentalFieldOptions(rentalSelect ? rentalSelect.value : '');
       })();
     })();
 
