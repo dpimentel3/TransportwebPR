@@ -2590,7 +2590,10 @@
                     <label for="rentalSelect" data-i18n="label_select_rental">Rentals</label>
                     <select id="rentalSelect" name="rental" required>
                       <option value="" disabled data-i18n="ph_select_rental">Choose a rental</option>
-                      <option value="Jeep Rental" data-i18n="rental_option_jeep">Jeep Rental</option>
+                      <option value="Jeep Rental" data-i18n="rental_option_jeep">Jeep Rental (Big Red)</option>
+                      <option value="Jeep Rental (Bluey)" data-i18n="rental_option_jeep_bluey">Jeep Rental (Bluey)</option>
+                      <option value="Jeep Rental (Sky)" data-i18n="rental_option_jeep_sky">Jeep Rental (Sky)</option>
+                      <option value="Jeep Rental (Red Sky)" data-i18n="rental_option_jeep_red_sky">Jeep Rental (Red Sky)</option>
                       <option value="Jetski Rental (Metro Area)" selected data-i18n="rental_option_jetski">Jetski Rental (Metro Area)</option>
                     </select>
                   </div>
@@ -3302,11 +3305,26 @@
         prod_jeep_cost: '80$/día',
         prod_jeep_cost_label: 'Costo',
         prod_jeep_cost_text: '$80 por día',
+        prod_jeep_bluey_title: 'Alquiler de Jeep (Bluey)',
+        prod_jeep_bluey_capacity: '5 personas',
+        prod_jeep_bluey_cost: '89$/día',
+        prod_jeep_bluey_cost_text: '$89 por día',
+        prod_jeep_sky_title: 'Alquiler de Jeep (Sky)',
+        prod_jeep_sky_capacity: '5 personas',
+        prod_jeep_sky_cost: '99$/día',
+        prod_jeep_sky_cost_text: '$99 por día',
+        prod_jeep_red_sky_title: 'Alquiler de Jeep (Red Sky)',
+        prod_jeep_red_sky_capacity: '5 personas',
+        prod_jeep_red_sky_cost: '99$/día',
+        prod_jeep_red_sky_cost_text: '$99 por día',
+        rental_option_jeep_bluey: 'Alquiler de Jeep (Bluey)',
+        rental_option_jeep_sky: 'Alquiler de Jeep (Sky)',
+        rental_option_jeep_red_sky: 'Alquiler de Jeep (Red Sky)',
         book_rental_title: 'Reserve su alquiler',
         label_select_rental: 'Alquileres',
         label_pickup_time: 'Hora de recogida',
         label_rental_length: 'Duración del alquiler',
-        rental_option_jeep: 'Alquiler de Jeep',
+        rental_option_jeep: 'Alquiler de Jeep (Big Red)',
         rental_option_jetski: 'Alquiler de Jetski (Área Metro)',
         rental_days_1: '1 día',
         rental_days_2: '2 días',
@@ -3826,7 +3844,7 @@
             pickupSelect.value = '';
             pickupSelect.removeAttribute('required');
             if (pickupField) pickupField.style.display = 'none';
-          } else if (rentalName === JEEP) {
+          } else if (String(rentalName || '').indexOf(JEEP) === 0) {
             lengthSelect.innerHTML = jeepLengthHTML;
             pickupSelect.innerHTML = defaultPickupHTML;
           } else {

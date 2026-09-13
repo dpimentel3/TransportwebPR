@@ -2652,6 +2652,45 @@
                   <span class="tour-widget-cta" data-i18n="view_rental_book">View rental &amp; book &rarr;</span>
                 </div>
               </a>
+              <a class="tour-widget" href="jeep-rental-bluey.html">
+                <div class="tour-widget-media">
+                  <img src="jeep-bluey-1.jpg" alt="Blue Jeep Wrangler Willys available for daily rental in Puerto Rico" loading="lazy" decoding="async">
+                </div>
+                <div class="tour-widget-body">
+                  <h3 data-i18n="prod_jeep_bluey_title">Jeep Rental (Bluey)</h3>
+                  <ul class="tour-widget-specs">
+                  <li><span class="spec-label" data-i18n="spec_capacity">Capacity</span><span class="spec-value" data-i18n="prod_jeep_bluey_capacity">5 people</span></li>
+                  <li><span class="spec-label" data-i18n="spec_cost">Cost</span><span class="spec-value" data-i18n="prod_jeep_bluey_cost">89$/day</span></li>
+                  </ul>
+                  <span class="tour-widget-cta" data-i18n="view_rental_book">View rental &amp; book &rarr;</span>
+                </div>
+              </a>
+              <a class="tour-widget" href="jeep-rental-sky.html">
+                <div class="tour-widget-media">
+                  <img src="jeep-sky-1.jpg" alt="White Jeep Wrangler Willys with teal accents available for daily rental in Puerto Rico" loading="lazy" decoding="async">
+                </div>
+                <div class="tour-widget-body">
+                  <h3 data-i18n="prod_jeep_sky_title">Jeep Rental (Sky)</h3>
+                  <ul class="tour-widget-specs">
+                  <li><span class="spec-label" data-i18n="spec_capacity">Capacity</span><span class="spec-value" data-i18n="prod_jeep_sky_capacity">5 people</span></li>
+                  <li><span class="spec-label" data-i18n="spec_cost">Cost</span><span class="spec-value" data-i18n="prod_jeep_sky_cost">99$/day</span></li>
+                  </ul>
+                  <span class="tour-widget-cta" data-i18n="view_rental_book">View rental &amp; book &rarr;</span>
+                </div>
+              </a>
+              <a class="tour-widget" href="jeep-rental-red-sky.html">
+                <div class="tour-widget-media">
+                  <img src="jeep-red-sky-1.jpg" alt="Red Jeep Wrangler Willys on black wheels available for daily rental in Puerto Rico" loading="lazy" decoding="async">
+                </div>
+                <div class="tour-widget-body">
+                  <h3 data-i18n="prod_jeep_red_sky_title">Jeep Rental (Red Sky)</h3>
+                  <ul class="tour-widget-specs">
+                  <li><span class="spec-label" data-i18n="spec_capacity">Capacity</span><span class="spec-value" data-i18n="prod_jeep_red_sky_capacity">5 people</span></li>
+                  <li><span class="spec-label" data-i18n="spec_cost">Cost</span><span class="spec-value" data-i18n="prod_jeep_red_sky_cost">99$/day</span></li>
+                  </ul>
+                  <span class="tour-widget-cta" data-i18n="view_rental_book">View rental &amp; book &rarr;</span>
+                </div>
+              </a>
               <a class="tour-widget" href="jetski-rental.html">
                 <div class="tour-widget-media">
                   <img src="jetski-1.jpg" alt="Yamaha WaveRunner jet ski rental rider on clear turquoise water in Puerto Rico" loading="lazy" decoding="async">
@@ -2750,7 +2789,10 @@
                     <label for="rentalSelect" data-i18n="label_select_rental">Rentals</label>
                     <select id="rentalSelect" name="rental" required>
                       <option value="" disabled selected data-i18n="ph_select_rental">Choose a rental</option>
-                      <option value="Jeep Rental" data-i18n="rental_option_jeep">Jeep Rental</option>
+                      <option value="Jeep Rental" data-i18n="rental_option_jeep">Jeep Rental (Big Red)</option>
+                      <option value="Jeep Rental (Bluey)" data-i18n="rental_option_jeep_bluey">Jeep Rental (Bluey)</option>
+                      <option value="Jeep Rental (Sky)" data-i18n="rental_option_jeep_sky">Jeep Rental (Sky)</option>
+                      <option value="Jeep Rental (Red Sky)" data-i18n="rental_option_jeep_red_sky">Jeep Rental (Red Sky)</option>
                       <option value="Jetski Rental (Metro Area)" data-i18n="rental_option_jetski">Jetski Rental (Metro Area)</option>
                     </select>
                   </div>
@@ -3590,11 +3632,23 @@
         prod_jeep_title: 'Alquiler de Jeep (Big Red)',
         prod_jeep_capacity: '5 personas',
         prod_jeep_cost: '80$/día',
+        prod_jeep_bluey_title: 'Alquiler de Jeep (Bluey)',
+        prod_jeep_bluey_capacity: '5 personas',
+        prod_jeep_bluey_cost: '89$/día',
+        prod_jeep_sky_title: 'Alquiler de Jeep (Sky)',
+        prod_jeep_sky_capacity: '5 personas',
+        prod_jeep_sky_cost: '99$/día',
+        prod_jeep_red_sky_title: 'Alquiler de Jeep (Red Sky)',
+        prod_jeep_red_sky_capacity: '5 personas',
+        prod_jeep_red_sky_cost: '99$/día',
+        rental_option_jeep_bluey: 'Alquiler de Jeep (Bluey)',
+        rental_option_jeep_sky: 'Alquiler de Jeep (Sky)',
+        rental_option_jeep_red_sky: 'Alquiler de Jeep (Red Sky)',
         book_rental_title: 'Reserve su alquiler',
         label_select_rental: 'Alquileres',
         label_pickup_time: 'Hora de recogida',
         label_rental_length: 'Duración del alquiler',
-        rental_option_jeep: 'Alquiler de Jeep',
+        rental_option_jeep: 'Alquiler de Jeep (Big Red)',
         rental_option_jetski: 'Alquiler de Jetski (Área Metro)',
         rental_days_1: '1 día',
         rental_days_2: '2 días',
@@ -4041,7 +4095,7 @@
             pickupSelect.value = '';
             pickupSelect.removeAttribute('required');
             if (pickupField) pickupField.style.display = 'none';
-          } else if (rentalName === JEEP) {
+          } else if (String(rentalName || '').indexOf(JEEP) === 0) {
             lengthSelect.innerHTML = jeepLengthHTML;
             pickupSelect.innerHTML = defaultPickupHTML;
           } else {
