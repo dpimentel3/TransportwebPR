@@ -2717,19 +2717,6 @@
                   <span class="tour-widget-cta" data-i18n="view_boat_book">View boat &amp; book &rarr;</span>
                 </div>
               </a>
-              <a class="tour-widget" href="jetski-rental.html">
-                <div class="tour-widget-media">
-                  <img src="jetski-1.jpg" alt="Yamaha WaveRunner jet ski rental rider on clear turquoise water in Puerto Rico" loading="lazy" decoding="async">
-                </div>
-                <div class="tour-widget-body">
-                  <h3 data-i18n="prod_jetski_title">Jetski Rental (Metro Area)</h3>
-                  <ul class="tour-widget-specs">
-                  <li><span class="spec-label" data-i18n="spec_capacity">Capacity</span><span class="spec-value" data-i18n="prod_jetski_capacity">Max. 4 people</span></li>
-                  <li><span class="spec-label" data-i18n="spec_duration">Duration</span><span class="spec-value" data-i18n="prod_jetski_duration">30 Minutes or 1 Hour</span></li>
-                  </ul>
-                  <span class="tour-widget-cta" data-i18n="view_rental_book">View rental &amp; book &rarr;</span>
-                </div>
-              </a>
             </div>
             <button type="button" class="card-carousel-btn prev" aria-label="Previous card">&#10094;</button>
             <button type="button" class="card-carousel-btn next" aria-label="Next card">&#10095;</button>
@@ -2821,7 +2808,6 @@
                       <option value="Cruiser 54' Yacht" data-i18n="boat_option_cruiser">Cruiser 54' Yacht</option>
                       <option value="Boston Whaler 24'" data-i18n="boat_option_whaler">Boston Whaler 24'</option>
                       <option value='Shaefer 40&quot; Luxury Charter' data-i18n="boat_option_shaefer">Shaefer 40&quot; Luxury Charter</option>
-                      <option value="Jetski Rental (Metro Area)" data-i18n="boat_option_jetski">Jetski Rental (Metro Area)</option>
                       <option value="Fishing Trip" data-i18n="boat_option_fishing">Fishing Trip</option>
                     </select>
                   </div>
@@ -3638,7 +3624,6 @@
         spec_capacity: 'Capacidad',
         spec_duration: 'Duración',
         view_boat_book: 'Ver barco y reservar →',
-        view_rental_book: 'Ver alquiler y reservar →',
         prod_excursion_title: 'Excursiones y Paseos Turísticos',
         prod_excursion_transport_title: 'Transporte para Excursiones',
         prod_exc_capacity: 'Máx. 25 personas',
@@ -3703,13 +3688,6 @@
         prod_shaefer_pkg_label: 'El paquete incluye',
         prod_shaefer_pkg_text: 'Su chárter incluye un capitán certificado por la USCG, cabina con aire acondicionado, baño a bordo, combustible y una nevera con hielo. Durante todo el viaje se ofrecen agua, refrescos y snacks de cortesía, junto con equipo de snorkel, colchonetas flotantes y otros flotadores para mayor diversión y relajación. Los huéspedes también pueden disfrutar de su música favorita con el sistema de sonido Bluetooth a bordo mientras navegan por las hermosas aguas de Puerto Rico. Puede visitar Icacos o Palomino. Punto de encuentro: Marina Puerto Del Rey, Fajardo, Puerto Rico. Estacionamiento disponible.',
         prod_shaefer_length_label: 'Duración del Viaje',
-        prod_jetski_title: 'Alquiler de Jetski (Área Metro)',
-        prod_jetski_capacity: 'Máx. 4 personas',
-        prod_jetski_duration: '30 minutos o 1 hora',
-        prod_jetski_details: 'Ver Detalles',
-        prod_jetski_pkg_label: 'El paquete incluye',
-        prod_jetski_pkg_text: 'Añada velocidad y emoción a sus vacaciones en Puerto Rico con el alquiler de un jet ski en las hermosas aguas costeras de la isla. Ya sea que conduzca solo o comparta la experiencia con un acompañante, disfrutará de una aventura inolvidable rodeado de paisajes tropicales y aguas cristalinas. Su alquiler incluye una charla de seguridad, chalecos salvavidas e instrucciones de un miembro del personal con experiencia antes de entrar al agua. No se requiere experiencia previa en jet ski. Solo llegue listo para divertirse, siga el área de conducción designada y las pautas de seguridad, y disfrute de su tiempo en el agua. Debe tener 18 años o más para alquilar el jet ski, a menos que esté acompañado por un adulto. Punto de encuentro: playa Pine Groove, Isla Verde, Puerto Rico.',
-        prod_jetski_length_label: 'Duración del Viaje',
         prod_boat_more_info: 'Más información próximamente.',
         boat_option_welcraft: "Welcraft 30'",
         boat_option_riviera: "Riviera Yacht 40'",
@@ -3834,7 +3812,6 @@
         boat_option_cruiser: "Cruiser 54' Yacht",
         boat_option_whaler: "Boston Whaler 24'",
         boat_option_shaefer: 'Shaefer 40" Luxury Charter',
-        boat_option_jetski: 'Alquiler de Jetski (Área Metro)',
         helper_destination: 'Use un nombre de lugar o dirección para que el conductor entienda claramente su destino.',
         btn_send_booking: 'Enviar Solicitud de Reserva',
         booking_note: 'No se realizan pagos a través del sitio web.',
@@ -3927,8 +3904,7 @@
         prod_lagoon_length_text: '$2,325 — viaje de 4 horas<br>$2,825 — viaje de 6 horas',
         prod_cruiser_length_text: '$3,450 — viaje de 4 horas<br>$4,100 — viaje de 6 horas',
         prod_whaler_length_text: '$750 — 5 horas (Medio Día)<br>$950 — 7 horas (Día Completo)',
-        prod_shaefer_length_text: '$2,700 — 6 horas',
-        prod_jetski_length_text: '$85 — 30 minutos ($10 adicionales por el segundo pasajero)<br>$160 — 1 hora ($10 adicionales por el segundo pasajero)'
+        prod_shaefer_length_text: '$2,700 — 6 horas'
       };
 
       // English translations for dynamically added elements
@@ -4039,7 +4015,6 @@
       (function () {
         var departureSelect = document.getElementById('boatDepartureTime');
         var tripLengthSelect = document.getElementById('boatTripLength');
-        var departureField = document.getElementById('boatDepartureField');
         var boatSelect = document.getElementById('boatSelect');
         if (!departureSelect || !tripLengthSelect) return;
 
@@ -4090,18 +4065,9 @@
           return SIX_HOUR_WINDOW_CHARTERS.indexOf(boatName) !== -1;
         }
 
-        var jetskiTripLengthHTML =
-          '<option value="" disabled selected data-i18n="ph_trip_length">Choose trip length</option>' +
-          '<option value="30 minutes" data-i18n="trip_length_30min">30 minutes</option>' +
-          '<option value="1 hour" data-i18n="trip_length_1h">1 hour</option>';
-
         var SHAEFER = 'Shaefer 40" Luxury Charter';
-        var JETSKI = 'Jetski Rental (Metro Area)';
 
         window.applyCharterFieldOptions = function (boatName) {
-          // Restore the departure-time field by default; the Jet Ski hides it below.
-          if (departureField) departureField.style.display = '';
-          departureSelect.setAttribute('required', '');
           if (boatName === "Boston Whaler 24'") {
             tripLengthSelect.innerHTML = whalerTripLengthHTML;
             // Default to the half-day windows until a 7-hour trip length is picked.
@@ -4109,14 +4075,6 @@
           } else if (boatName === SHAEFER) {
             tripLengthSelect.innerHTML = shaeferTripLengthHTML;
             departureSelect.innerHTML = shaeferDepartureHTML;
-          } else if (boatName === JETSKI) {
-            // The Jetski rental has no set departure windows, so hide the
-            // departure-time field entirely and drop its required flag.
-            tripLengthSelect.innerHTML = jetskiTripLengthHTML;
-            departureSelect.innerHTML = defaultDepartureHTML;
-            departureSelect.value = '';
-            departureSelect.removeAttribute('required');
-            if (departureField) departureField.style.display = 'none';
           } else {
             tripLengthSelect.innerHTML = defaultTripLengthHTML;
             // Restoring the default trip lengths clears any earlier choice, so this
