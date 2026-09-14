@@ -4430,6 +4430,7 @@
         { name: 'Gozalandia San Sebastián', cats: ['places'], lat: 18.3456, lng: -66.9926, desc: 'Breathtaking twin waterfalls in San Sebastián with natural pools perfect for swimming and cliff jumping. There\'s even a rope swing. Parking available.', address: 'Gozalandia Waterfalls Campground, Sec Rincon, San Sebastian, San Sebastián 00685' },
         { name: 'Ojo de Agua', cats: ['places'], lat: 18.4492, lng: -66.4183, desc: 'Crystal-clear natural spring pool surrounded by el barrio. Perfect for kids during hot summer days. There are small local venders that offer different types of foods and you can even rent a kayak and paddle around the pond. Rideshares not recommended as you can be left stranded. Book your roundtrip starting at $160.', address: 'Ojo De Agua, Vega Baja, 00693', buttons: [{ label: 'Book Roundtrip', labelEs: 'Reservar Ida y Vuelta', type: 'roundtrip', service: 'Excursions Transport' }] },
         { name: 'Charco Prieto Bayamón', cats: ['places'], lat: 18.3588, lng: -66.1658, desc: 'One of the top hidden gems in the island and its located in the metro area not too far from San Juan, it offers a 45 minute hike that ends at one of the tallest waterfalls in the island. The trail is mark with orange bands wrap around tree branches so that you don\'t get lost. Parking spots are limited.', address: 'Trailhead; Charco Prieto Waterfall, 7RQ6+5Q, Bayamón 00956' },
+        { name: 'Charco Los Peces', cats: ['places'], lat: 18.0866, lng: -66.7959, desc: 'Hidden river swimming hole tucked into the hills of Guayanilla, with clear natural pools and small fish darting around your feet. A quiet local favorite well off the tourist trail — the road in is narrow, so a car is the way to get there.', address: 'Charco los peces, 36P3+MM, Guayanilla 00656' },
         { name: 'Castillo San Felipe del Morro', cats: ['places'], lat: 18.4706, lng: -66.1240, desc: 'Iconic 16th-century Spanish fortress guarding San Juan Bay with stunning ocean views and rich history.', address: 'Castillo San Felipe del Morro, 501 Calle Norzagaray, San Juan, 00901' },
         { name: 'Poza Las Mujeres', cats: ['places'], lat: 18.4955, lng: -66.5050, desc: 'Secluded natural pool in Manatí with calm turquoise waters nestled between rocky limestone formations. Parking can be far from the beach so travel light if you\'re thinking visiting.', address: 'La Poza de las Mujeres, Tierras Nuevas Poniente, 00674' },
         { name: 'Mar Chiquita', cats: ['places'], lat: 18.4897, lng: -66.5175, desc: 'Unique crescent-shaped beach in Manatí enclosed by dramatic rock formations creating a natural cove. One of the most stunning views in the island. Not the best for spending the day as it can dangerous but definitely a cool spot to stop by and take a few pictures.', address: 'Mar Chiquita beach, FGF8+42C, Tierras Nuevas Poniente, 00674' },
@@ -4478,6 +4479,7 @@
         'Gozalandia San Sebastián': { name: 'Gozalandia San Sebastián', desc: 'Impresionantes cascadas gemelas en San Sebastián con piscinas naturales perfectas para nadar y saltar de acantilados. Incluso hay un columpio de cuerda. Estacionamiento disponible.' },
         'Ojo de Agua': { name: 'Ojo de Agua', desc: 'Piscina natural de manantial cristalino rodeada por el barrio. Perfecto para niños durante los días calurosos de verano. Hay pequeños vendedores locales que ofrecen diferentes tipos de comidas e incluso puedes alquilar un kayak y remar por el estanque. No se recomiendan rideshares ya que te pueden dejar varado. Reserva tu ida y vuelta desde $160.' },
         'Charco Prieto Bayamón': { name: 'Charco Prieto Bayamón', desc: 'Una de las joyas escondidas de la isla y está ubicada en el área metro no muy lejos de San Juan, ofrece una caminata de 45 minutos que termina en una de las cascadas más altas de la isla. El sendero está marcado con bandas naranjas envueltas alrededor de las ramas de los árboles para que no te pierdas. Los espacios de estacionamiento son limitados.' },
+        'Charco Los Peces': { name: 'Charco Los Peces', desc: 'Charco escondido de río en las montañas de Guayanilla, con pozas naturales cristalinas y pequeños peces nadando entre tus pies. Un favorito local lejos de la ruta turística — el camino de entrada es estrecho, así que lo mejor es llegar en auto.' },
         'Castillo San Felipe del Morro': { name: 'Castillo San Felipe del Morro', desc: 'Icónica fortaleza española del siglo XVI que protege la Bahía de San Juan con impresionantes vistas al océano y rica historia.' },
         'Poza Las Mujeres': { name: 'Poza Las Mujeres', desc: 'Piscina natural aislada en Manatí con aguas turquesas tranquilas entre formaciones rocosas de piedra caliza. El estacionamiento puede estar lejos de la playa así que viaja ligero si piensas visitar.' },
         'Mar Chiquita': { name: 'Mar Chiquita', desc: 'Playa única en forma de media luna en Manatí rodeada por dramáticas formaciones rocosas que crean una cala natural. Una de las vistas más impresionantes de la isla. No es la mejor para pasar el día ya que puede ser peligrosa pero definitivamente un lugar genial para parar y tomar algunas fotos.' },
@@ -4500,6 +4502,9 @@
         places: '#2196F3',
         eat: '#FF5722'
       };
+
+      // "Places To Go" pins that should not show the Rent A Car button
+      var NO_RENTAL_CTA = ['Vieques', 'Culebra'];
 
       var map, markers = [], infoWindow;
       var activeFilter = 'all';
@@ -4585,6 +4590,14 @@
                 }
               });
             }
+
+            // Every "Places To Go" pin gets a rentals CTA, since these spots are
+            // best reached by car. The islands are excluded — you take a ferry or
+            // plane there, not one of our vehicles.
+            if (place.cats.indexOf('places') !== -1 && NO_RENTAL_CTA.indexOf(place.name) === -1) {
+              buttonsHtml += '<a href="rentals.html" class="explore-popup-btn" style="display:inline-block;margin-top:8px;margin-right:6px;padding:5px 12px;background:#e3b04b;color:#1a1a1a;border-radius:4px;font-size:0.82rem;text-decoration:none;font-weight:600;">' + (isEs ? 'Alquilar un Auto' : 'Rent A Car') + '</a>';
+            }
+
             var addressHtml = '';
             var directionsHtml = '';
             if (place.address) {
