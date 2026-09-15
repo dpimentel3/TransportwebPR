@@ -2383,6 +2383,69 @@
       margin: 0;
     }
 
+    .item-fees {
+      margin: 0 0 4px;
+      padding-top: 18px;
+      border-top: 1px solid #e5eaf0;
+    }
+    .item-fees-title {
+      list-style: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: #0d3557;
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin: 0;
+    }
+    .item-fees-title::-webkit-details-marker { display: none; }
+    .item-fees-title::marker { content: ''; }
+    .item-fees-title::after {
+      content: "+";
+      width: 16px;
+      text-align: center;
+      font-size: 1.25rem;
+      font-weight: 700;
+      line-height: 1;
+      color: var(--primary);
+    }
+    .item-fees[open] .item-fees-title::after { content: "−"; }
+    .item-fees-title span { flex: 1; }
+    .item-fees-list {
+      display: grid;
+      gap: 8px;
+      margin-top: 12px;
+      animation: itemFeeSlideDown 180ms ease;
+    }
+    .item-fee {
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      background: #fff;
+      padding: 12px 16px;
+    }
+    .item-fee-head {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 700;
+      font-size: 0.95rem;
+      color: var(--primary);
+    }
+    .item-fee-name { flex: 1; }
+    .item-fee-price { font-weight: 800; }
+    .item-fee-desc {
+      margin: 4px 0 0;
+      color: #4b5563;
+      font-size: 0.9rem;
+      line-height: 1.55;
+    }
+    @keyframes itemFeeSlideDown {
+      from { opacity: 0; transform: translateY(-6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
     .tour-landing-info .btn-primary {
       display: inline-block;
       margin-top: 24px;
@@ -2514,11 +2577,67 @@
             <span data-i18n="prod_jeep_red_sky_capacity">5 people</span>
             <span data-i18n="prod_jeep_red_sky_cost">99$/day</span>
           </div>
-          <div class="tour-landing-details">
-            <strong data-i18n="prod_jeep_cost_label">Cost</strong>
-            <p data-i18n="prod_jeep_red_sky_cost_text">$99 per day</p>
-          </div>
-          <!-- Full rental description, pickup location, and requirements go here. -->
+          <p class="card-desc" data-i18n="jeep_rental_desc">Explore Puerto Rico your way with one of our Jeep rentals. Built for island roads, beach days, mountain drives, and everything in between, our Jeeps give you the freedom to go where you want, when you want. They’re perfect for scenic drives, beach hopping, exploring local towns, and discovering more of the island at your own pace. Pick your Jeep, grab the keys, and create your own Puerto Rico adventure.</p>
+          <details class="item-fees">
+            <summary class="item-fees-title"><span data-i18n="jeep_policies_title">Reservation Policies</span></summary>
+            <div class="item-fees-list">
+              <div class="item-fee">
+                <div class="item-fee-head">
+                  <span class="item-fee-name" data-i18n="jeep_policy_booking">Booking Terms</span>
+                </div>
+                <p class="item-fee-desc" data-i18n="jeep_policy_booking_desc">You need a valid driver’s license. You must be at least 18 years old. Drivers ages 18–24 may pay an extra fee. A payment method is needed to book. We will send your booking details by email and WhatsApp. Changes should be made at least 24 hours before your trip. One-day rentals have an extra $50 fee.</p>
+              </div>
+
+              <div class="item-fee">
+                <div class="item-fee-head">
+                  <span class="item-fee-name" data-i18n="jeep_policy_cancellation">Cancellation Policy</span>
+                </div>
+                <p class="item-fee-desc" data-i18n="jeep_policy_cancellation_desc">Cancel more than 2 hours before pickup and you get your money back. Cancel less than 2 hours before pickup and there is no refund. If you do not show up, there is no refund. Contact us by WhatsApp or email to cancel.</p>
+              </div>
+
+              <div class="item-fee">
+                <div class="item-fee-head">
+                  <span class="item-fee-name" data-i18n="jeep_policy_insurance">Insurance &amp; Liability</span>
+                </div>
+                <p class="item-fee-desc" data-i18n="jeep_policy_insurance_desc">We place a $150 temporary hold when your rental starts. You get it back if there are no extra charges. You are responsible for damage to the Jeep while you have it. We take photos when the Jeep is returned. Extra trip insurance is not included, but you may buy your own.</p>
+              </div>
+
+              <div class="item-fee">
+                <div class="item-fee-head">
+                  <span class="item-fee-name" data-i18n="jeep_policy_fuel">Fuel &amp; Mileage</span>
+                </div>
+                <p class="item-fee-desc" data-i18n="jeep_policy_fuel_desc">Your Jeep comes with a full tank of gas. Please return it with a full tank. If you do not, you may be charged for gas. Unlimited miles are included. The Jeep has GPS tracking and extra fees may apply if it goes outside approved areas.</p>
+              </div>
+
+              <div class="item-fee">
+                <div class="item-fee-head">
+                  <span class="item-fee-name" data-i18n="jeep_policy_use">Vehicle Use</span>
+                </div>
+                <p class="item-fee-desc" data-i18n="jeep_policy_use_desc">The Jeep is for personal use only. Do not use it for business. Do not drive off-road unless we give you written permission. No smoking. Pets need approval first. A Jeep can hold up to 5 people. You cannot rent the Jeep to someone else.</p>
+              </div>
+
+              <div class="item-fee">
+                <div class="item-fee-head">
+                  <span class="item-fee-name" data-i18n="jeep_policy_delivery">Remote Delivery &amp; Pickup</span>
+                </div>
+                <p class="item-fee-desc" data-i18n="jeep_policy_delivery_desc">Local delivery and pickup around San Juan is free. Delivery to Aguadilla, Ponce, or Mayagüez costs $100 for rentals of 2 days or less. That fee is waived for rentals of 3 days or more. Delivery depends on availability.</p>
+              </div>
+
+              <div class="item-fee">
+                <div class="item-fee-head">
+                  <span class="item-fee-name" data-i18n="jeep_policy_weather">Weather</span>
+                </div>
+                <p class="item-fee-desc" data-i18n="jeep_policy_weather_desc">Bad weather does not automatically mean a refund. Our normal cancellation rules still apply. We may allow you to change your date if another date is available.</p>
+              </div>
+
+              <div class="item-fee">
+                <div class="item-fee-head">
+                  <span class="item-fee-name" data-i18n="jeep_policy_notallowed">Not Allowed</span>
+                </div>
+                <p class="item-fee-desc" data-i18n="jeep_policy_notallowed_desc">Do not drive on sand dunes, deep mud, or unmarked off-road areas. Do not smoke in the Jeep. Do not carry more people than the Jeep allows. Do not leave the roof open when nobody is with the Jeep. The Jeep must stay in Puerto Rico, it can’t cross to other islands.</p>
+              </div>
+            </div>
+          </details>
           <a href="#book" class="btn btn-primary book-rental-link" data-rental="Jeep Rental (Red Sky)" data-i18n="book_now">Book Now</a>
         </div>
       </div>
@@ -2535,7 +2654,7 @@
             <span class="step-compact-num">1</span>
             <div class="step-compact-text">
               <h3 data-i18n="step1_title">Fill in your trip details</h3>
-              <p data-i18n="step1_desc">Enter your date, pickup time and location, destination, number of passengers, first name, and phone number. Email if necessary.</p>
+              <p data-i18n="step1_desc">Enter your rental dates, pickup time and location, delivery time and location, full name, email, driver’s license, driver’s license number expiration date and phone number.</p>
             </div>
           </li>
           <li class="step-compact">
@@ -2548,15 +2667,15 @@
           <li class="step-compact">
             <span class="step-compact-num">3</span>
             <div class="step-compact-text">
-              <h3 data-i18n="step3_title">Receive a text from your Driver, Captain or Tour Guide</h3>
+              <h3 data-i18n="step3_title">Receive a text from your Rental Company</h3>
               <p data-i18n="step3_desc">After your request is received, we will contact you with your trip details and confirmation steps.</p>
             </div>
           </li>
           <li class="step-compact">
             <span class="step-compact-num">4</span>
             <div class="step-compact-text">
-              <h3 data-i18n="step4_title">Reply to confirm the trip</h3>
-              <p data-i18n="step4_desc">Answer the text or email to confirm the details. Once you reply, your trip is confirmed.</p>
+              <h3 data-i18n="step4_title">Pick Up, Explore &amp; Return</h3>
+              <p data-i18n="step4_desc">Arrive at your pickup location and follow the instructions sent to you. Grab the keys and start your adventure. When your rental is over, return the vehicle to the predetermined drop-off location.</p>
             </div>
           </li>
         </ol>
@@ -2590,27 +2709,22 @@
                 <p class="hidden-field">
                   <label>Don’t fill this out if you’re human: <input name="bot-field" /></label>
                 </p>
+                <input type="hidden" name="rental" value="Jeep Rental (Red Sky)" />
+
                 <div class="field-grid">
                   <div>
-                    <label for="rentalDate" data-i18n="label_date">Date (month/day)</label>
-                    <input id="rentalDate" name="tripDate" type="date" required />
+                    <label for="rentalPickupDate" data-i18n="label_pickup_date">Pick up date</label>
+                    <input id="rentalPickupDate" name="pickupDate" type="date" required />
                   </div>
                   <div>
-                    <label for="rentalSelect" data-i18n="label_select_rental">Rentals</label>
-                    <select id="rentalSelect" name="rental" required>
-                      <option value="" disabled data-i18n="ph_select_rental">Choose a rental</option>
-                      <option value="Jeep Rental" data-i18n="rental_option_jeep">Jeep Rental (Big Red)</option>
-                      <option value="Jeep Rental (Bluey)" data-i18n="rental_option_jeep_bluey">Jeep Rental (Bluey)</option>
-                      <option value="Jeep Rental (Sky)" data-i18n="rental_option_jeep_sky">Jeep Rental (Sky)</option>
-                      <option value="Jeep Rental (Red Sky)" selected data-i18n="rental_option_jeep_red_sky">Jeep Rental (Red Sky)</option>
-                      <option value="Jetski Rental (Metro Area)" data-i18n="rental_option_jetski">Jetski Rental (Metro Area)</option>
-                    </select>
+                    <label for="rentalReturnDate" data-i18n="label_return_date">Return date</label>
+                    <input id="rentalReturnDate" name="returnDate" type="date" required />
                   </div>
                 </div>
 
                 <div class="field-grid">
-                  <div id="rentalPickupField">
-                    <label for="rentalPickupTime" data-i18n="label_pickup_time">Pickup time</label>
+                  <div>
+                    <label for="rentalPickupTime" data-i18n="label_pickup_time">Pick up time</label>
                     <select id="rentalPickupTime" name="pickupTime" required>
                       <option value="" disabled selected data-i18n="ph_pickup_time">Choose a time slot</option>
                       <option value="9:00 AM">9:00 AM</option>
@@ -2629,17 +2743,52 @@
                     </select>
                   </div>
                   <div>
-                    <label for="rentalLength" data-i18n="label_rental_length">Rental length</label>
-                    <select id="rentalLength" name="rentalLength" required>
-                      <option value="" disabled selected data-i18n="ph_rental_length">Choose rental length</option>
+                    <label for="rentalReturnTime" data-i18n="label_return_time">Return time</label>
+                    <select id="rentalReturnTime" name="returnTime" required>
+                      <option value="" disabled selected data-i18n="ph_pickup_time">Choose a time slot</option>
+                      <option value="9:00 AM">9:00 AM</option>
+                      <option value="9:30 AM">9:30 AM</option>
+                      <option value="10:00 AM">10:00 AM</option>
+                      <option value="10:30 AM">10:30 AM</option>
+                      <option value="11:00 AM">11:00 AM</option>
+                      <option value="11:30 AM">11:30 AM</option>
+                      <option value="12:00 PM">12:00 PM</option>
+                      <option value="12:30 PM">12:30 PM</option>
+                      <option value="1:00 PM">1:00 PM</option>
+                      <option value="1:30 PM">1:30 PM</option>
+                      <option value="2:00 PM">2:00 PM</option>
+                      <option value="2:30 PM">2:30 PM</option>
+                      <option value="3:00 PM">3:00 PM</option>
                     </select>
                   </div>
                 </div>
 
                 <div class="field-grid">
                   <div>
-                    <label for="rentalPassengers" data-i18n="label_passengers">Number of passengers</label>
-                    <input id="rentalPassengers" name="passengers" type="number" min="1" max="50" data-i18n-placeholder="ph_passengers" placeholder="Example: 4" required />
+                    <label for="rentalPickupLocation" data-i18n="label_pickup">Pick up location</label>
+                    <input id="rentalPickupLocation" name="pickupLocation" type="text" data-i18n-placeholder="ph_pickup" placeholder="Example: SJU Airport or hotel name" required />
+                  </div>
+                  <div>
+                    <label for="rentalDropoffLocation" data-i18n="label_dropoff">Drop off location</label>
+                    <input id="rentalDropoffLocation" name="dropoffLocation" type="text" data-i18n-placeholder="ph_dropoff" placeholder="Example: SJU Airport or hotel name" required />
+                  </div>
+                </div>
+
+                <div class="field-grid">
+                  <div>
+                    <label for="rentalFullName" data-i18n="label_full_name">Full name</label>
+                    <input id="rentalFullName" name="fullName" type="text" required />
+                  </div>
+                  <div>
+                    <label for="rentalEmail" data-i18n="label_email">Email</label>
+                    <input id="rentalEmail" name="email" type="email" placeholder="name@example.com" required />
+                  </div>
+                </div>
+
+                <div class="field-grid">
+                  <div>
+                    <label for="rentalDob" data-i18n="label_dob">Date of birth</label>
+                    <input id="rentalDob" name="dateOfBirth" type="date" required />
                   </div>
                   <div>
                     <label for="rentalPhone" data-i18n="label_phone">Phone number</label>
@@ -2649,18 +2798,19 @@
 
                 <div class="field-grid">
                   <div>
-                    <label for="rentalEmail" data-i18n="label_email">Email</label>
-                    <input id="rentalEmail" name="email" type="email" placeholder="name@example.com" required />
+                    <label for="rentalLicenseNumber" data-i18n="label_license_number">Driver’s License Number</label>
+                    <input id="rentalLicenseNumber" name="licenseNumber" type="text" required />
                   </div>
                   <div>
-                    <label for="rentalFirstName" data-i18n="label_name">First name</label>
-                    <input id="rentalFirstName" name="firstName" type="text" required />
+                    <label for="rentalLicenseExp" data-i18n="label_license_exp">License Expiration Date</label>
+                    <input id="rentalLicenseExp" name="licenseExpiration" type="date" required />
+                    <div class="helper" data-i18n="helper_license">Bring this driver’s license to pickup — it’s the ID we’ll verify before handing over the keys.</div>
                   </div>
                 </div>
 
                 <div>
                   <label for="rentalComments" data-i18n="label_comments">Comments</label>
-                  <textarea id="rentalComments" name="comments" data-i18n-placeholder="ph_comments_rental" placeholder="Add any extra details about your rental if necessary"></textarea>
+                  <textarea id="rentalComments" name="comments" data-i18n-placeholder="ph_comments_rental" placeholder="Add any extra details about your rental if necessary, like another driver, car seat or young driver (18-24)"></textarea>
                 </div>
 
                 <div class="hero-actions" style="margin: 6px 0 0;">
@@ -2672,6 +2822,46 @@
               </form>
             </div>
           </aside>
+        </div>
+      </div>
+    </section>
+
+    <section id="faq" class="background-section section-faq">
+      <div class="container section-shell">
+        <div class="section-intro">
+          <h2 data-i18n="faq_title">Frequently asked questions</h2>
+          <p data-i18n="faq_desc">Clear answers so you feel comfortable booking your rental.</p>
+        </div>
+        <div class="faq-grid faq-list">
+          <details class="faq-item">
+            <summary data-i18n="jeep_faq1_q">Can I take the Jeep to Culebra or Vieques?</summary>
+            <div class="faq-answer" data-i18n="jeep_faq1_a">Vehicles cannot be transported by ferry to Culebra or Vieques. However, you can drive to Ceiba (1 hour from San Juan), take the ferry, and explore the islands on foot or by golf cart. Our Jeep gets you to the dock comfortably.</div>
+          </details>
+
+          <details class="faq-item">
+            <summary data-i18n="jeep_faq2_q">Is there an incidental hold?</summary>
+            <div class="faq-answer" data-i18n="jeep_faq2_a">Yes — a $150 refundable incidental hold is placed on your credit card at the start of your trip (not charged unless damage occurs). It’s fully released within 3–5 business days after a clean return. Like a hotel hold, it covers potential damage but is never actually charged if there’s no damage.</div>
+          </details>
+
+          <details class="faq-item">
+            <summary data-i18n="jeep_faq3_q">Do I need trip protection?</summary>
+            <div class="faq-answer" data-i18n="jeep_faq3_a">Trip protection is not included in your reservation price. Guests are responsible for meeting the coverage requirements in the reservation agreement. Optional third-party protection may be obtained independently through RentalCover.com, subject to the provider’s eligibility, terms and conditions. Roadside assistance is included with every reservation.</div>
+          </details>
+
+          <details class="faq-item">
+            <summary data-i18n="jeep_faq4_q">Do you offer airport delivery?</summary>
+            <div class="faq-answer" data-i18n="jeep_faq4_a">Yes! We deliver to SJU (Luis Muñoz Marín International) and can coordinate pickup at your hotel or Airbnb. Just mention your location in the Special Requests field. Airport delivery is free within the San Juan metro area.</div>
+          </details>
+
+          <details class="faq-item">
+            <summary data-i18n="jeep_faq5_q">Can I cancel my reservation?</summary>
+            <div class="faq-answer" data-i18n="jeep_faq5_a">Cancellations made more than 2 hours before the scheduled pickup time receive a full refund of any amount paid toward the reservation, including any One-Day Reservation Fee paid. Cancellations made within 2 hours of pickup are not refundable. No-shows are not refundable. Please review our Reservation Policies for full details. Request cancellation by WhatsApp at (939) 903-3429 or by email at Christian@luxewildpr.com.</div>
+          </details>
+
+          <details class="faq-item">
+            <summary data-i18n="jeep_faq6_q">What is the minimum age to reserve?</summary>
+            <div class="faq-answer" data-i18n="jeep_faq6_a">Minimum age is 18. Guests aged 18–24 pay a $15/day young driver fee. Guests 25+ have no extra fee. All drivers must present a valid driver’s license at pickup.</div>
+          </details>
         </div>
       </div>
     </section>
@@ -2992,23 +3182,13 @@
           });
         });
 
-        // Rental card "Book Now" buttons preselect the vehicle in the rental form
+        // Rental card "Book Now" buttons open the rental form. This page rents a
+        // single vehicle, so the form carries it in a hidden field and there is
+        // no vehicle menu to preselect.
         var rentalLinks = document.querySelectorAll('.book-rental-link');
         rentalLinks.forEach(function (link) {
           link.addEventListener('click', function () {
             activateTab('panel-rentals');
-            var rentalName = link.getAttribute('data-rental');
-            var select = document.getElementById('rentalSelect');
-            if (select && rentalName) {
-              var options = select.querySelectorAll('option');
-              options.forEach(function (opt) {
-                if (opt.value === rentalName) select.value = rentalName;
-              });
-            }
-            // Swap the pickup-time and rental-length menus for this vehicle.
-            if (typeof window.applyRentalFieldOptions === 'function') {
-              window.applyRentalFieldOptions(rentalName);
-            }
           });
         });
 
@@ -3519,17 +3699,62 @@
         prod_biokayak_length_label: 'Duración del Tour',
         prod_biokayak_length_text: '3+ horas dependiendo de la ubicación de recogida.',
 
+        // Jeep rental FAQ
+        jeep_faq1_q: '¿Puedo llevar el Jeep a Culebra o Vieques?',
+        jeep_faq1_a: 'Los vehículos no pueden transportarse en ferry a Culebra o Vieques. Sin embargo, puedes manejar hasta Ceiba (1h desde San Juan), tomar el ferry y explorar las islas a pie o en golf cart. Nuestro Jeep te lleva hasta el muelle cómodamente.',
+        jeep_faq2_q: '¿Hay una retención por incidentales?',
+        jeep_faq2_a: 'Sí — se coloca una retención reembolsable de $150 en su tarjeta de crédito al comienzo de su viaje (no se cobra a menos que ocurra algún daño). Se libera por completo dentro de 3 a 5 días laborables después de una devolución sin daños. Como la retención de un hotel, cubre posibles daños, pero nunca se cobra realmente si no hay daños.',
+        jeep_faq3_q: '¿Necesito protección de viaje?',
+        jeep_faq3_a: 'La protección de viaje no está incluida en el precio de su reserva. Los huéspedes son responsables de cumplir con los requisitos de cobertura del acuerdo de reserva. La protección opcional de terceros puede obtenerse de forma independiente a través de RentalCover.com, sujeta a la elegibilidad, términos y condiciones del proveedor. La asistencia en carretera está incluida en cada reserva.',
+        jeep_faq4_q: '¿Ofrecen entrega en el aeropuerto?',
+        jeep_faq4_a: '¡Sí! Entregamos en SJU (Aeropuerto Internacional Luis Muñoz Marín) y podemos coordinar la recogida en su hotel o Airbnb. Solo mencione su ubicación en el campo de Solicitudes Especiales. La entrega en el aeropuerto es gratis dentro del área metropolitana de San Juan.',
+        jeep_faq5_q: '¿Puedo cancelar mi reserva?',
+        jeep_faq5_a: 'Las cancelaciones hechas con más de 2 horas de antelación a la hora de recogida programada reciben un reembolso completo de cualquier cantidad pagada hacia la reserva, incluyendo cualquier Cargo por Reserva de Un Día pagado. Las cancelaciones hechas dentro de las 2 horas antes de la recogida no son reembolsables. Las ausencias no son reembolsables. Por favor revise nuestras Políticas de Reserva para más detalles. Solicite la cancelación por WhatsApp al (939) 903-3429 o por correo electrónico a Christian@luxewildpr.com.',
+        jeep_faq6_q: '¿Cuál es la edad mínima para reservar?',
+        jeep_faq6_a: 'La edad mínima es 18 años. Los huéspedes de 18 a 24 años pagan un cargo de $15 por día por conductor joven. Los huéspedes de 25 años o más no pagan cargo adicional. Todos los conductores deben presentar una licencia de conducir válida al momento de la recogida.',
+
+        // Jeep rental booking form fields
+        label_pickup_date: 'Fecha de recogida',
+        label_return_date: 'Fecha de devolución',
+        label_return_time: 'Hora de devolución',
+        label_dropoff: 'Lugar de entrega',
+        label_full_name: 'Nombre completo',
+        label_dob: 'Fecha de nacimiento',
+        label_license_number: 'Número de licencia de conducir',
+        label_license_exp: 'Fecha de vencimiento de la licencia',
+        helper_license: 'Traiga esta licencia de conducir al momento de la recogida — es la identificación que verificaremos antes de entregarle las llaves.',
+
+        // Jeep rental description and reservation policies
+        jeep_rental_desc: 'Explora Puerto Rico a tu manera con uno de nuestros alquileres de Jeep. Hechos para las carreteras de la isla, días de playa, paseos por la montaña y todo lo que hay en medio, nuestros Jeeps te dan la libertad de ir donde quieras, cuando quieras. Son perfectos para paseos escénicos, recorrer playas, explorar pueblos locales y descubrir más de la isla a tu propio ritmo. Elige tu Jeep, toma las llaves y crea tu propia aventura en Puerto Rico.',
+        jeep_policies_title: 'Políticas de reserva',
+        jeep_policy_booking: 'Términos de reserva',
+        jeep_policy_booking_desc: 'Necesitas una licencia de conducir válida. Debes tener al menos 18 años. Los conductores de 18 a 24 años pueden pagar un cargo adicional. Se necesita un método de pago para reservar. Enviaremos los detalles de tu reserva por correo electrónico y WhatsApp. Los cambios deben hacerse al menos 24 horas antes de tu viaje. Los alquileres de un solo día tienen un cargo adicional de $50.',
+        jeep_policy_cancellation: 'Política de cancelación',
+        jeep_policy_cancellation_desc: 'Cancela con más de 2 horas de antelación a la recogida y recibes tu dinero de vuelta. Cancela con menos de 2 horas de antelación a la recogida y no hay reembolso. Si no te presentas, no hay reembolso. Comunícate con nosotros por WhatsApp o correo electrónico para cancelar.',
+        jeep_policy_insurance: 'Seguro y responsabilidad',
+        jeep_policy_insurance_desc: 'Hacemos una retención temporal de $150 cuando comienza tu alquiler. La recibes de vuelta si no hay cargos adicionales. Eres responsable por los daños al Jeep mientras lo tengas. Tomamos fotos cuando se devuelve el Jeep. El seguro de viaje adicional no está incluido, pero puedes comprar el tuyo.',
+        jeep_policy_fuel: 'Combustible y millaje',
+        jeep_policy_fuel_desc: 'Tu Jeep viene con el tanque de gasolina lleno. Por favor devuélvelo con el tanque lleno. Si no lo haces, se te puede cobrar la gasolina. Las millas ilimitadas están incluidas. El Jeep tiene rastreo GPS y pueden aplicar cargos adicionales si sale de las áreas aprobadas.',
+        jeep_policy_use: 'Uso del vehículo',
+        jeep_policy_use_desc: 'El Jeep es solo para uso personal. No lo uses para negocios. No conduzcas fuera de carretera a menos que te demos permiso por escrito. No se permite fumar. Las mascotas necesitan aprobación previa. Un Jeep puede llevar hasta 5 personas. No puedes alquilar el Jeep a otra persona.',
+        jeep_policy_delivery: 'Entrega y recogida remota',
+        jeep_policy_delivery_desc: 'La entrega y recogida local en el área de San Juan es gratis. La entrega a Aguadilla, Ponce o Mayagüez cuesta $100 para alquileres de 2 días o menos. Ese cargo se exonera para alquileres de 3 días o más. La entrega depende de la disponibilidad.',
+        jeep_policy_weather: 'Clima',
+        jeep_policy_weather_desc: 'El mal clima no significa automáticamente un reembolso. Nuestras reglas normales de cancelación siguen aplicando. Podemos permitirte cambiar tu fecha si hay otra fecha disponible.',
+        jeep_policy_notallowed: 'No permitido',
+        jeep_policy_notallowed_desc: 'No conduzcas en dunas de arena, lodo profundo ni áreas fuera de carretera sin marcar. No fumes en el Jeep. No lleves más personas de las que el Jeep permite. No dejes el techo abierto cuando nadie esté con el Jeep. El Jeep debe permanecer en Puerto Rico, no puede cruzar a otras islas.',
+
         // How it works
         how_title: 'Cómo funciona',
         how_desc: 'Cada paso está explicado claramente para que organizar su transporte sea rápido y sencillo.',
         step1_title: 'Complete los detalles de su viaje',
-        step1_desc: 'Ingrese la fecha, hora y lugar de recogida, destino, número de pasajeros, nombre y número de teléfono. Correo electrónico si es necesario.',
+        step1_desc: 'Ingrese las fechas de su alquiler, la hora y el lugar de recogida, la hora y el lugar de entrega, su nombre completo, correo electrónico, licencia de conducir, número de licencia de conducir, fecha de vencimiento y número de teléfono.',
         step2_title: 'Envíe la solicitud',
         step2_desc: 'Presione el botón de reserva para enviar su solicitud con todos los detalles incluidos.',
-        step3_title: 'Reciba un mensaje de su Conductor, Capitán o Guía Turístico',
+        step3_title: 'Reciba un mensaje de su Compañía de Alquiler',
         step3_desc: 'Después de recibir su solicitud, nos comunicaremos con usted con los detalles de su viaje y los pasos de confirmación.',
-        step4_title: 'Responda para confirmar el viaje',
-        step4_desc: 'Responda al mensaje de texto o correo electrónico para confirmar los detalles. Una vez que responda, su viaje estará confirmado.',
+        step4_title: 'Recoja, Explore y Devuelva',
+        step4_desc: 'Llegue a su lugar de recogida y siga las instrucciones que le enviamos. Tome las llaves y comience su aventura. Cuando termine su alquiler, devuelva el vehículo al lugar de entrega acordado.',
 
         // Reviews section
         reviews_title: 'Reseñas en TripAdvisor',
@@ -3608,7 +3833,7 @@
 
         // FAQ
         faq_title: 'Preguntas frecuentes',
-        faq_desc: 'Respuestas claras para que se sienta cómodo reservando su viaje.',
+        faq_desc: 'Respuestas claras para que se sienta cómodo reservando su alquiler.',
         faq1_q: '¿Sus conductores y Capitanes tienen licencia?',
         faq1_a: 'Sí. Nuestros conductores/Capitanes son profesionales con licencia y años de experiencia en el negocio.',
         faq2_q: '¿Ofrecen transporte seguro y puntual?',
@@ -3674,8 +3899,9 @@
         ph_select_rental: 'Elija un alquiler',
         ph_pickup_time: 'Elija un horario',
         ph_rental_length: 'Elija la duración del alquiler',
-        ph_comments_rental: 'Agregue cualquier detalle adicional sobre su alquiler si es necesario',
+        ph_comments_rental: 'Agregue cualquier detalle adicional sobre su alquiler si es necesario, como otro conductor, asiento para niños o conductor joven (18-24)',
         ph_pickup: 'Ejemplo: Aeropuerto SJU o nombre del hotel',
+        ph_dropoff: 'Ejemplo: Aeropuerto SJU o nombre del hotel',
         ph_destination: 'Ejemplo: Puerto de Cruceros de San Juan',
         ph_passengers: 'Ejemplo: 4',
         ph_comments: 'Agregue cualquier detalle adicional sobre su viaje si es necesario (número de vuelo/aerolínea, necesita/tiene asiento de bebé, número de maletas o bolsas de golf)',
@@ -3807,70 +4033,6 @@
 
       allLangEnBtns.forEach(function(b) { if(b) b.addEventListener('click', function () { setLanguage('en'); }); });
       allLangEsBtns.forEach(function(b) { if(b) b.addEventListener('click', function () { setLanguage('es'); }); });
-
-      // Rental-specific booking field options.
-      // The Jeep is rented by the day and needs a pickup time, so it keeps the
-      // time-slot menu and offers 1 to 7 days. The Jetski has no set departure
-      // windows, so its pickup-time field is hidden and it offers 30 minutes or
-      // 1 hour instead. Selecting a vehicle (via its Book Now button or the
-      // rental dropdown) swaps both menus accordingly.
-      // Defined here so it can re-apply translations.
-      (function () {
-        var pickupSelect = document.getElementById('rentalPickupTime');
-        var lengthSelect = document.getElementById('rentalLength');
-        var pickupField = document.getElementById('rentalPickupField');
-        var rentalSelect = document.getElementById('rentalSelect');
-        if (!pickupSelect || !lengthSelect) return;
-
-        var defaultPickupHTML = pickupSelect.innerHTML;
-
-        var placeholderLengthHTML =
-          '<option value="" disabled selected data-i18n="ph_rental_length">Choose rental length</option>';
-
-        var jeepLengthHTML = placeholderLengthHTML +
-          '<option value="1 day" data-i18n="rental_days_1">1 day</option>' +
-          '<option value="2 days" data-i18n="rental_days_2">2 days</option>' +
-          '<option value="3 days" data-i18n="rental_days_3">3 days</option>' +
-          '<option value="4 days" data-i18n="rental_days_4">4 days</option>' +
-          '<option value="5 days" data-i18n="rental_days_5">5 days</option>' +
-          '<option value="6 days" data-i18n="rental_days_6">6 days</option>' +
-          '<option value="7 days" data-i18n="rental_days_7">7 days</option>';
-
-        var jetskiLengthHTML = placeholderLengthHTML +
-          '<option value="30 minutes" data-i18n="trip_length_30min">30 minutes</option>' +
-          '<option value="1 hour" data-i18n="trip_length_1h">1 hour</option>';
-
-        var JEEP = 'Jeep Rental';
-        var JETSKI = 'Jetski Rental (Metro Area)';
-
-        window.applyRentalFieldOptions = function (rentalName) {
-          // Restore the pickup-time field by default; the Jetski hides it below.
-          if (pickupField) pickupField.style.display = '';
-          pickupSelect.setAttribute('required', '');
-          if (rentalName === JETSKI) {
-            lengthSelect.innerHTML = jetskiLengthHTML;
-            pickupSelect.innerHTML = defaultPickupHTML;
-            pickupSelect.value = '';
-            pickupSelect.removeAttribute('required');
-            if (pickupField) pickupField.style.display = 'none';
-          } else if (String(rentalName || '').indexOf(JEEP) === 0) {
-            lengthSelect.innerHTML = jeepLengthHTML;
-            pickupSelect.innerHTML = defaultPickupHTML;
-          } else {
-            lengthSelect.innerHTML = placeholderLengthHTML;
-            pickupSelect.innerHTML = defaultPickupHTML;
-          }
-          setLanguage(currentLang);
-        };
-
-        // Keep the menus in sync when the rental dropdown is changed directly.
-        if (rentalSelect) {
-          rentalSelect.addEventListener('change', function () {
-            window.applyRentalFieldOptions(rentalSelect.value);
-          });
-        }
-        window.applyRentalFieldOptions(rentalSelect ? rentalSelect.value : '');
-      })();
     })();
 
     /* Image Slider */

@@ -80,24 +80,43 @@
     <form name="rental-booking" method="POST" data-netlify="true" netlify-honeypot="bot-field" hidden>
       <input type="hidden" name="form-name" value="rental-booking" />
       <label for="rb_bot">Don't fill this out if you're human: <input id="rb_bot" name="bot-field" /></label>
-      <label for="rb_tripDate">Date (month/day)</label>
-      <input id="rb_tripDate" name="tripDate" type="date" />
       <label for="rb_rental">Rentals</label>
       <input id="rb_rental" name="rental" type="text" />
-      <label for="rb_pickupTime">Pickup time</label>
+      <label for="rb_pickupDate">Pick up date</label>
+      <input id="rb_pickupDate" name="pickupDate" type="date" />
+      <label for="rb_returnDate">Return date</label>
+      <input id="rb_returnDate" name="returnDate" type="date" />
+      <label for="rb_pickupTime">Pick up time</label>
       <input id="rb_pickupTime" name="pickupTime" type="text" />
+      <label for="rb_returnTime">Return time</label>
+      <input id="rb_returnTime" name="returnTime" type="text" />
+      <label for="rb_pickupLocation">Pick up location</label>
+      <input id="rb_pickupLocation" name="pickupLocation" type="text" />
+      <label for="rb_dropoffLocation">Drop off location</label>
+      <input id="rb_dropoffLocation" name="dropoffLocation" type="text" />
+      <label for="rb_fullName">Full name</label>
+      <input id="rb_fullName" name="fullName" type="text" />
+      <label for="rb_email">Email</label>
+      <input id="rb_email" name="email" type="email" />
+      <label for="rb_dateOfBirth">Date of birth</label>
+      <input id="rb_dateOfBirth" name="dateOfBirth" type="date" />
+      <label for="rb_phone">Phone number</label>
+      <input id="rb_phone" name="phone" type="tel" />
+      <label for="rb_licenseNumber">Driver's License Number</label>
+      <input id="rb_licenseNumber" name="licenseNumber" type="text" />
+      <label for="rb_licenseExpiration">License Expiration Date</label>
+      <input id="rb_licenseExpiration" name="licenseExpiration" type="date" />
+      <label for="rb_comments">Comments</label>
+      <textarea id="rb_comments" name="comments"></textarea>
+      <!-- Still submitted by the Jetski rental page, which keeps the original field set. -->
+      <label for="rb_tripDate">Date (month/day)</label>
+      <input id="rb_tripDate" name="tripDate" type="date" />
       <label for="rb_rentalLength">Rental length</label>
       <input id="rb_rentalLength" name="rentalLength" type="text" />
       <label for="rb_passengers">Number of passengers</label>
       <input id="rb_passengers" name="passengers" type="number" />
-      <label for="rb_phone">Phone number</label>
-      <input id="rb_phone" name="phone" type="tel" />
-      <label for="rb_email">Email</label>
-      <input id="rb_email" name="email" type="email" />
       <label for="rb_firstName">First name</label>
       <input id="rb_firstName" name="firstName" type="text" />
-      <label for="rb_comments">Comments</label>
-      <textarea id="rb_comments" name="comments"></textarea>
     </form>
     <form name="ferry-booking" method="POST" data-netlify="true" netlify-honeypot="bot-field" hidden>
       <input type="hidden" name="form-name" value="ferry-booking" />
