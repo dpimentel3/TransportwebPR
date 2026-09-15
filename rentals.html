@@ -1418,6 +1418,10 @@
 
     .booking-panel[hidden] { display: none; }
 
+    /* Vehicle picker above the booking forms it swaps between */
+    .rental-picker { margin-bottom: 14px; }
+    .rental-picker .helper { margin-top: 8px; }
+
     select {
       width: 100%;
       padding: 13px 40px 13px 14px;
@@ -2775,32 +2779,49 @@
           <aside class="booking-card" aria-labelledby="rentals-title">
             <div class="booking-panel" id="panel-rentals">
               <h2 id="rentals-title" data-i18n="book_rental_title">Book a rental</h2>
-              <form id="rentalForm" name="rental-booking" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+              <!--
+                The rental picker sits outside both forms so choosing a vehicle can
+                swap in the right one. Each vehicle type has its own Netlify form
+                because the details differ: Jeeps are booked by the day and need the
+                driver's license, the Jetski runs in 30-minute and 1-hour slots.
+                Keeping them separate is what stops one vehicle's fields showing up
+                blank on the other's submissions.
+              -->
+              <div class="rental-picker">
+                <label for="rentalSelect" data-i18n="label_select_rental">Rentals</label>
+                <select id="rentalSelect" required>
+                  <option value="" disabled selected data-i18n="ph_select_rental">Choose a rental</option>
+                  <option value="Jeep Rental" data-i18n="rental_option_jeep">Jeep Rental (Big Red)</option>
+                  <option value="Jeep Rental (Bluey)" data-i18n="rental_option_jeep_bluey">Jeep Rental (Bluey)</option>
+                  <option value="Jeep Rental (Sky)" data-i18n="rental_option_jeep_sky">Jeep Rental (Sky)</option>
+                  <option value="Jeep Rental (Red Sky)" data-i18n="rental_option_jeep_red_sky">Jeep Rental (Red Sky)</option>
+                  <option value="Jetski Rental (Metro Area)" data-i18n="rental_option_jetski">Jetski Rental (Metro Area)</option>
+                </select>
+                <div class="helper" id="rentalPickerHint" data-i18n="helper_choose_rental">Choose a rental above and the booking form will show the details we need for it.</div>
+              </div>
+
+              <!-- Jeep rentals: booked by the day, with the driver's details. -->
+              <form id="rentalForm" name="rental-booking" method="POST" data-netlify="true" netlify-honeypot="bot-field" style="display:none;">
                 <input type="hidden" name="form-name" value="rental-booking" />
                 <p class="hidden-field">
                   <label>Don’t fill this out if you’re human: <input name="bot-field" /></label>
                 </p>
+                <input type="hidden" id="rentalJeepName" name="rental" value="" />
+
                 <div class="field-grid">
                   <div>
-                    <label for="rentalDate" data-i18n="label_date">Date (month/day)</label>
-                    <input id="rentalDate" name="tripDate" type="date" required />
+                    <label for="rentalPickupDate" data-i18n="label_pickup_date">Pick up date</label>
+                    <input id="rentalPickupDate" name="pickupDate" type="date" required />
                   </div>
                   <div>
-                    <label for="rentalSelect" data-i18n="label_select_rental">Rentals</label>
-                    <select id="rentalSelect" name="rental" required>
-                      <option value="" disabled selected data-i18n="ph_select_rental">Choose a rental</option>
-                      <option value="Jeep Rental" data-i18n="rental_option_jeep">Jeep Rental (Big Red)</option>
-                      <option value="Jeep Rental (Bluey)" data-i18n="rental_option_jeep_bluey">Jeep Rental (Bluey)</option>
-                      <option value="Jeep Rental (Sky)" data-i18n="rental_option_jeep_sky">Jeep Rental (Sky)</option>
-                      <option value="Jeep Rental (Red Sky)" data-i18n="rental_option_jeep_red_sky">Jeep Rental (Red Sky)</option>
-                      <option value="Jetski Rental (Metro Area)" data-i18n="rental_option_jetski">Jetski Rental (Metro Area)</option>
-                    </select>
+                    <label for="rentalReturnDate" data-i18n="label_return_date">Return date</label>
+                    <input id="rentalReturnDate" name="returnDate" type="date" required />
                   </div>
                 </div>
 
                 <div class="field-grid">
-                  <div id="rentalPickupField">
-                    <label for="rentalPickupTime" data-i18n="label_pickup_time">Pickup time</label>
+                  <div>
+                    <label for="rentalPickupTime" data-i18n="label_pickup_time">Pick up time</label>
                     <select id="rentalPickupTime" name="pickupTime" required>
                       <option value="" disabled selected data-i18n="ph_pickup_time">Choose a time slot</option>
                       <option value="9:00 AM">9:00 AM</option>
@@ -2819,38 +2840,132 @@
                     </select>
                   </div>
                   <div>
-                    <label for="rentalLength" data-i18n="label_rental_length">Rental length</label>
-                    <select id="rentalLength" name="rentalLength" required>
-                      <option value="" disabled selected data-i18n="ph_rental_length">Choose rental length</option>
+                    <label for="rentalReturnTime" data-i18n="label_return_time">Return time</label>
+                    <select id="rentalReturnTime" name="returnTime" required>
+                      <option value="" disabled selected data-i18n="ph_pickup_time">Choose a time slot</option>
+                      <option value="9:00 AM">9:00 AM</option>
+                      <option value="9:30 AM">9:30 AM</option>
+                      <option value="10:00 AM">10:00 AM</option>
+                      <option value="10:30 AM">10:30 AM</option>
+                      <option value="11:00 AM">11:00 AM</option>
+                      <option value="11:30 AM">11:30 AM</option>
+                      <option value="12:00 PM">12:00 PM</option>
+                      <option value="12:30 PM">12:30 PM</option>
+                      <option value="1:00 PM">1:00 PM</option>
+                      <option value="1:30 PM">1:30 PM</option>
+                      <option value="2:00 PM">2:00 PM</option>
+                      <option value="2:30 PM">2:30 PM</option>
+                      <option value="3:00 PM">3:00 PM</option>
                     </select>
                   </div>
                 </div>
 
                 <div class="field-grid">
                   <div>
-                    <label for="rentalPassengers" data-i18n="label_passengers">Number of passengers</label>
-                    <input id="rentalPassengers" name="passengers" type="number" min="1" max="50" data-i18n-placeholder="ph_passengers" placeholder="Example: 4" required />
+                    <label for="rentalPickupLocation" data-i18n="label_pickup">Pick up location</label>
+                    <input id="rentalPickupLocation" autocomplete="off" name="pickupLocation" type="text" data-i18n-placeholder="ph_pickup" placeholder="Example: SJU Airport or hotel name" required />
                   </div>
                   <div>
-                    <label for="rentalPhone" data-i18n="label_phone">Phone number</label>
-                    <input id="rentalPhone" name="phone" type="tel" placeholder="787-214-2058" required />
+                    <label for="rentalDropoffLocation" data-i18n="label_dropoff">Drop off location</label>
+                    <input id="rentalDropoffLocation" autocomplete="off" name="dropoffLocation" type="text" data-i18n-placeholder="ph_dropoff" placeholder="Example: SJU Airport or hotel name" required />
                   </div>
                 </div>
 
                 <div class="field-grid">
                   <div>
-                    <label for="rentalEmail" data-i18n="label_email">Email</label>
-                    <input id="rentalEmail" name="email" type="email" placeholder="name@example.com" required />
+                    <label for="rentalFullName" data-i18n="label_full_name">Full name</label>
+                    <input id="rentalFullName" name="fullName" type="text" required />
                   </div>
                   <div>
-                    <label for="rentalFirstName" data-i18n="label_name">First name</label>
-                    <input id="rentalFirstName" name="firstName" type="text" required />
+                    <label for="rentalDob" data-i18n="label_dob">Date of birth</label>
+                    <input id="rentalDob" name="dateOfBirth" type="date" required />
+                  </div>
+                </div>
+
+                <div class="field-grid">
+                  <div>
+                    <label for="rentalLicenseNumber" data-i18n="label_license_number">Driver’s License Number</label>
+                    <input id="rentalLicenseNumber" name="licenseNumber" type="text" required />
+                  </div>
+                  <div>
+                    <label for="rentalLicenseExp" data-i18n="label_license_exp">License Expiration Date</label>
+                    <input id="rentalLicenseExp" name="licenseExpiration" type="date" required />
+                    <div class="helper" data-i18n="helper_license">Bring this driver’s license to pickup — it’s the ID we’ll verify before handing over the keys.</div>
+                  </div>
+                </div>
+
+                <div class="field-grid">
+                  <div>
+                    <label for="rentalPhone" data-i18n="label_phone">Phone number</label>
+                    <input id="rentalPhone" name="phone" type="tel" placeholder="787-214-2058" required />
+                  </div>
+                  <div>
+                    <label for="rentalEmail" data-i18n="label_email">Email</label>
+                    <input id="rentalEmail" name="email" type="email" placeholder="name@example.com" required />
                   </div>
                 </div>
 
                 <div>
                   <label for="rentalComments" data-i18n="label_comments">Comments</label>
                   <textarea id="rentalComments" name="comments" data-i18n-placeholder="ph_comments_rental" placeholder="Add any extra details about your rental if necessary"></textarea>
+                </div>
+
+                <div class="hero-actions" style="margin: 6px 0 0;">
+                  <button type="submit" class="btn btn-primary" data-i18n="btn_send_booking">Send Booking Request</button>
+                </div>
+                <div class="booking-note" data-i18n="booking_note">
+                  No payments are made through the website
+                </div>
+              </form>
+
+              <!-- Jetski rentals: 30-minute and 1-hour slots, no set departure windows. -->
+              <form id="jetskiRentalForm" name="jetski-rental-booking" method="POST" data-netlify="true" netlify-honeypot="bot-field" style="display:none;">
+                <input type="hidden" name="form-name" value="jetski-rental-booking" />
+                <p class="hidden-field">
+                  <label>Don’t fill this out if you’re human: <input name="bot-field" /></label>
+                </p>
+                <input type="hidden" id="rentalJetskiName" name="rental" value="" />
+
+                <div class="field-grid">
+                  <div>
+                    <label for="jetskiDate" data-i18n="label_date">Date (month/day)</label>
+                    <input id="jetskiDate" name="tripDate" type="date" required />
+                  </div>
+                  <div>
+                    <label for="jetskiLength" data-i18n="label_rental_length">Rental length</label>
+                    <select id="jetskiLength" name="rentalLength" required>
+                      <option value="" disabled selected data-i18n="ph_rental_length">Choose rental length</option>
+                      <option value="30 minutes" data-i18n="trip_length_30min">30 minutes</option>
+                      <option value="1 hour" data-i18n="trip_length_1h">1 hour</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="field-grid">
+                  <div>
+                    <label for="jetskiPassengers" data-i18n="label_passengers">Number of passengers</label>
+                    <input id="jetskiPassengers" name="passengers" type="number" min="1" max="50" data-i18n-placeholder="ph_passengers" placeholder="Example: 4" required />
+                  </div>
+                  <div>
+                    <label for="jetskiFirstName" data-i18n="label_name">First name</label>
+                    <input id="jetskiFirstName" name="firstName" type="text" required />
+                  </div>
+                </div>
+
+                <div class="field-grid">
+                  <div>
+                    <label for="jetskiPhone" data-i18n="label_phone">Phone number</label>
+                    <input id="jetskiPhone" name="phone" type="tel" placeholder="787-214-2058" required />
+                  </div>
+                  <div>
+                    <label for="jetskiEmail" data-i18n="label_email">Email</label>
+                    <input id="jetskiEmail" name="email" type="email" placeholder="name@example.com" required />
+                  </div>
+                </div>
+
+                <div>
+                  <label for="jetskiComments" data-i18n="label_comments">Comments</label>
+                  <textarea id="jetskiComments" name="comments" data-i18n-placeholder="ph_comments_rental" placeholder="Add any extra details about your rental if necessary"></textarea>
                 </div>
 
                 <div class="hero-actions" style="margin: 6px 0 0;">
@@ -3338,6 +3453,7 @@
                   });
                 } catch (e) { /* no-op */ }
 
+                formEl.dataset.submitted = 'true';
                 var panel = formEl.closest('.booking-panel');
                 var titleEl = panel ? panel.querySelector('h2') : null;
                 if (titleEl) {
@@ -3384,6 +3500,16 @@
         buildExtraForm({
           formId: 'rentalForm',
           formName: 'rental-booking',
+          successMsgKey: 'book_rental_success_msg',
+          successTipKey: 'book_rental_success_tip',
+          successMsgEn: 'We will reach out to you shortly by text message or email.',
+          successTipEn: 'Tip: reply to that message to confirm your rental.',
+          successMsgEs: 'Nos comunicaremos con usted pronto por mensaje de texto o correo electrónico.',
+          successTipEs: 'Consejo: responda a ese mensaje para confirmar su alquiler.'
+        });
+        buildExtraForm({
+          formId: 'jetskiRentalForm',
+          formName: 'jetski-rental-booking',
           successMsgKey: 'book_rental_success_msg',
           successTipKey: 'book_rental_success_tip',
           successMsgEn: 'We will reach out to you shortly by text message or email.',
@@ -3647,16 +3773,19 @@
         book_rental_title: 'Reserve su alquiler',
         label_select_rental: 'Alquileres',
         label_pickup_time: 'Hora de recogida',
+        label_pickup_date: 'Fecha de recogida',
+        label_return_date: 'Fecha de devolución',
+        label_return_time: 'Hora de devolución',
+        label_dropoff: 'Lugar de entrega',
+        label_full_name: 'Nombre completo',
+        label_dob: 'Fecha de nacimiento',
+        label_license_number: 'Número de licencia de conducir',
+        label_license_exp: 'Fecha de vencimiento de la licencia',
+        helper_license: 'Traiga esta licencia de conducir al momento de la recogida — es la identificación que verificaremos antes de entregarle las llaves.',
+        helper_choose_rental: 'Elija un alquiler arriba y el formulario de reserva mostrará los datos que necesitamos para ese alquiler.',
         label_rental_length: 'Duración del alquiler',
         rental_option_jeep: 'Alquiler de Jeep (Big Red)',
         rental_option_jetski: 'Alquiler de Jetski (Área Metro)',
-        rental_days_1: '1 día',
-        rental_days_2: '2 días',
-        rental_days_3: '3 días',
-        rental_days_4: '4 días',
-        rental_days_5: '5 días',
-        rental_days_6: '6 días',
-        rental_days_7: '7 días',
         book_rental_success_msg: 'Nos comunicaremos con usted pronto por mensaje de texto o correo electrónico.',
         book_rental_success_tip: 'Consejo: responda a ese mensaje para confirmar su alquiler.',
 
@@ -3918,6 +4047,7 @@
       // Placeholder translations
       var esPlaceholders = {
         ph_pickup: 'Ejemplo: Aeropuerto SJU o nombre del hotel',
+        ph_dropoff: 'Ejemplo: Aeropuerto SJU o nombre del hotel',
         ph_destination: 'Ejemplo: Puerto de Cruceros de San Juan',
         ph_passengers: 'Ejemplo: 4',
         ph_comments: 'Agregue cualquier detalle adicional sobre su viaje si es necesario (número de vuelo/aerolínea, necesita/tiene asiento de bebé, número de maletas o bolsas de golf)',
@@ -3970,13 +4100,6 @@
         ph_rental_length: 'Choose rental length',
         trip_length_30min: '30 minutes',
         trip_length_1h: '1 hour',
-        rental_days_1: '1 day',
-        rental_days_2: '2 days',
-        rental_days_3: '3 days',
-        rental_days_4: '4 days',
-        rental_days_5: '5 days',
-        rental_days_6: '6 days',
-        rental_days_7: '7 days',
         book_rental_success_msg: 'We will reach out to you shortly by text message or email.',
         book_rental_success_tip: 'Tip: reply to that message to confirm your rental.'
       };
@@ -4050,62 +4173,37 @@
       allLangEnBtns.forEach(function(b) { if(b) b.addEventListener('click', function () { setLanguage('en'); }); });
       allLangEsBtns.forEach(function(b) { if(b) b.addEventListener('click', function () { setLanguage('es'); }); });
 
-      // Rental-specific booking field options.
-      // The Jeep is rented by the day and needs a pickup time, so it keeps the
-      // time-slot menu and offers 1 to 7 days. The Jetski has no set departure
-      // windows, so its pickup-time field is hidden and it offers 30 minutes or
-      // 1 hour instead. Selecting a vehicle (via its Book Now button or the
-      // rental dropdown) swaps both menus accordingly.
-      // Defined here so it can re-apply translations.
+      // Rental-specific booking forms.
+      // Each vehicle type has its own form, so picking a rental reveals the one
+      // that matches it and hides the other. Defined here so it can re-apply
+      // translations.
       (function () {
-        var pickupSelect = document.getElementById('rentalPickupTime');
-        var lengthSelect = document.getElementById('rentalLength');
-        var pickupField = document.getElementById('rentalPickupField');
+        var jeepForm = document.getElementById('rentalForm');
+        var jetskiForm = document.getElementById('jetskiRentalForm');
+        var jeepName = document.getElementById('rentalJeepName');
+        var jetskiName = document.getElementById('rentalJetskiName');
+        var hint = document.getElementById('rentalPickerHint');
         var rentalSelect = document.getElementById('rentalSelect');
-        if (!pickupSelect || !lengthSelect) return;
+        if (!jeepForm || !jetskiForm) return;
 
-        var defaultPickupHTML = pickupSelect.innerHTML;
-
-        var placeholderLengthHTML =
-          '<option value="" disabled selected data-i18n="ph_rental_length">Choose rental length</option>';
-
-        var jeepLengthHTML = placeholderLengthHTML +
-          '<option value="1 day" data-i18n="rental_days_1">1 day</option>' +
-          '<option value="2 days" data-i18n="rental_days_2">2 days</option>' +
-          '<option value="3 days" data-i18n="rental_days_3">3 days</option>' +
-          '<option value="4 days" data-i18n="rental_days_4">4 days</option>' +
-          '<option value="5 days" data-i18n="rental_days_5">5 days</option>' +
-          '<option value="6 days" data-i18n="rental_days_6">6 days</option>' +
-          '<option value="7 days" data-i18n="rental_days_7">7 days</option>';
-
-        var jetskiLengthHTML = placeholderLengthHTML +
-          '<option value="30 minutes" data-i18n="trip_length_30min">30 minutes</option>' +
-          '<option value="1 hour" data-i18n="trip_length_1h">1 hour</option>';
-
-        var JEEP = 'Jeep Rental';
         var JETSKI = 'Jetski Rental (Metro Area)';
 
         window.applyRentalFieldOptions = function (rentalName) {
-          // Restore the pickup-time field by default; the Jetski hides it below.
-          if (pickupField) pickupField.style.display = '';
-          pickupSelect.setAttribute('required', '');
-          if (rentalName === JETSKI) {
-            lengthSelect.innerHTML = jetskiLengthHTML;
-            pickupSelect.innerHTML = defaultPickupHTML;
-            pickupSelect.value = '';
-            pickupSelect.removeAttribute('required');
-            if (pickupField) pickupField.style.display = 'none';
-          } else if (String(rentalName || '').indexOf(JEEP) === 0) {
-            lengthSelect.innerHTML = jeepLengthHTML;
-            pickupSelect.innerHTML = defaultPickupHTML;
-          } else {
-            lengthSelect.innerHTML = placeholderLengthHTML;
-            pickupSelect.innerHTML = defaultPickupHTML;
-          }
+          var chosen = String(rentalName || '');
+          var isJetski = chosen === JETSKI;
+          // Forms replace themselves with a thank-you message once submitted;
+          // leave a submitted form alone rather than hiding the confirmation.
+          if (!jeepForm.dataset.submitted) jeepForm.style.display = chosen && !isJetski ? '' : 'none';
+          if (!jetskiForm.dataset.submitted) jetskiForm.style.display = isJetski ? '' : 'none';
+          if (hint) hint.style.display = chosen ? 'none' : '';
+          // The picker lives outside both forms, so carry the choice across in a
+          // hidden field on whichever form is being sent.
+          if (jeepName) jeepName.value = chosen;
+          if (jetskiName) jetskiName.value = chosen;
           setLanguage(currentLang);
         };
 
-        // Keep the menus in sync when the rental dropdown is changed directly.
+        // Keep the forms in sync when the rental dropdown is changed directly.
         if (rentalSelect) {
           rentalSelect.addEventListener('change', function () {
             window.applyRentalFieldOptions(rentalSelect.value);
@@ -4594,6 +4692,56 @@
         bindBookingAutocomplete(bookingDestination);
         bindBookingAutocomplete(tourPickup);
       }
+
+      // Chain onto the existing Maps API callback so we bind once the API is ready
+      var prevInit = window.initQuoteAutocomplete;
+      window.initQuoteAutocomplete = function() {
+        if (typeof prevInit === 'function') {
+          try { prevInit(); } catch (e) { /* no-op */ }
+        }
+        bindAll();
+      };
+
+      // In case the Maps API already loaded before this script ran
+      if (window.google && window.google.maps && window.google.maps.places) {
+        bindAll();
+      }
+    })();
+
+    /* Google Places Autocomplete — Rental Form */
+    (function() {
+      var rentalPickup = document.getElementById('rentalPickupLocation');
+      var rentalDropoff = document.getElementById('rentalDropoffLocation');
+      if (!rentalPickup && !rentalDropoff) return;
+
+      function bindRentalAutocomplete(input) {
+        if (!input || input.getAttribute('data-places-bound') === 'true') return;
+        if (!window.google || !window.google.maps || !window.google.maps.places) return;
+        try {
+          new google.maps.places.Autocomplete(input, {
+            fields: ['geometry', 'formatted_address', 'name'],
+            componentRestrictions: { country: ['pr', 'us'] }
+          });
+          input.setAttribute('data-places-bound', 'true');
+        } catch (e) {
+          // Silently fail — users can still type the address manually
+        }
+      }
+
+      function bindAll() {
+        bindRentalAutocomplete(rentalPickup);
+        bindRentalAutocomplete(rentalDropoff);
+      }
+
+      // These inputs start out in a hidden tab panel, so also bind the first
+      // time one is focused. Binding is guarded by data-places-bound, so the
+      // extra attempt is a no-op once it has succeeded.
+      [rentalPickup, rentalDropoff].forEach(function(input) {
+        if (!input) return;
+        input.addEventListener('focus', function() {
+          bindRentalAutocomplete(input);
+        });
+      });
 
       // Chain onto the existing Maps API callback so we bind once the API is ready
       var prevInit = window.initQuoteAutocomplete;
