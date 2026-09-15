@@ -2709,7 +2709,22 @@
                 <p class="hidden-field">
                   <label>Don’t fill this out if you’re human: <input name="bot-field" /></label>
                 </p>
-                <input type="hidden" name="rental" value="Jeep Rental" />
+                <!--
+                  Pre-selected to this page's Jeep so every submission records
+                  which vehicle was asked for. Left as a menu rather than a fixed
+                  label so a guest who lands here but wants a different Jeep can
+                  switch without starting over. Only Jeeps are listed: they all
+                  share this form’s daily-rental fields.
+                -->
+                <div>
+                  <label for="rentalSelect" data-i18n="label_select_rental">Rentals</label>
+                  <select id="rentalSelect" name="rental" required>
+                    <option value="Jeep Rental" selected data-i18n="rental_option_jeep">Jeep Rental (Big Red)</option>
+                    <option value="Jeep Rental (Bluey)" data-i18n="rental_option_jeep_bluey">Jeep Rental (Bluey)</option>
+                    <option value="Jeep Rental (Sky)" data-i18n="rental_option_jeep_sky">Jeep Rental (Sky)</option>
+                    <option value="Jeep Rental (Red Sky)" data-i18n="rental_option_jeep_red_sky">Jeep Rental (Red Sky)</option>
+                  </select>
+                </div>
 
                 <div class="field-grid">
                   <div>
@@ -2766,11 +2781,11 @@
                 <div class="field-grid">
                   <div>
                     <label for="rentalPickupLocation" data-i18n="label_pickup">Pick up location</label>
-                    <input id="rentalPickupLocation" name="pickupLocation" type="text" data-i18n-placeholder="ph_pickup" placeholder="Example: SJU Airport or hotel name" required />
+                    <input id="rentalPickupLocation" autocomplete="off" name="pickupLocation" type="text" data-i18n-placeholder="ph_pickup" placeholder="Example: SJU Airport or hotel name" required />
                   </div>
                   <div>
                     <label for="rentalDropoffLocation" data-i18n="label_dropoff">Drop off location</label>
-                    <input id="rentalDropoffLocation" name="dropoffLocation" type="text" data-i18n-placeholder="ph_dropoff" placeholder="Example: SJU Airport or hotel name" required />
+                    <input id="rentalDropoffLocation" autocomplete="off" name="dropoffLocation" type="text" data-i18n-placeholder="ph_dropoff" placeholder="Example: SJU Airport or hotel name" required />
                   </div>
                 </div>
 
@@ -3182,13 +3197,20 @@
           });
         });
 
-        // Rental card "Book Now" buttons open the rental form. This page rents a
-        // single vehicle, so the form carries it in a hidden field and there is
-        // no vehicle menu to preselect.
+        // Rental card "Book Now" buttons open the rental form with the vehicle
+        // they name already chosen.
         var rentalLinks = document.querySelectorAll('.book-rental-link');
         rentalLinks.forEach(function (link) {
           link.addEventListener('click', function () {
             activateTab('panel-rentals');
+            var rentalName = link.getAttribute('data-rental');
+            var select = document.getElementById('rentalSelect');
+            if (select && rentalName) {
+              var options = select.querySelectorAll('option');
+              options.forEach(function (opt) {
+                if (opt.value === rentalName) select.value = rentalName;
+              });
+            }
           });
         });
 
@@ -4514,6 +4536,56 @@
         bindBookingAutocomplete(bookingDestination);
         bindBookingAutocomplete(tourPickup);
       }
+
+      // Chain onto the existing Maps API callback so we bind once the API is ready
+      var prevInit = window.initQuoteAutocomplete;
+      window.initQuoteAutocomplete = function() {
+        if (typeof prevInit === 'function') {
+          try { prevInit(); } catch (e) { /* no-op */ }
+        }
+        bindAll();
+      };
+
+      // In case the Maps API already loaded before this script ran
+      if (window.google && window.google.maps && window.google.maps.places) {
+        bindAll();
+      }
+    })();
+
+    /* Google Places Autocomplete — Rental Form */
+    (function() {
+      var rentalPickup = document.getElementById('rentalPickupLocation');
+      var rentalDropoff = document.getElementById('rentalDropoffLocation');
+      if (!rentalPickup && !rentalDropoff) return;
+
+      function bindRentalAutocomplete(input) {
+        if (!input || input.getAttribute('data-places-bound') === 'true') return;
+        if (!window.google || !window.google.maps || !window.google.maps.places) return;
+        try {
+          new google.maps.places.Autocomplete(input, {
+            fields: ['geometry', 'formatted_address', 'name'],
+            componentRestrictions: { country: ['pr', 'us'] }
+          });
+          input.setAttribute('data-places-bound', 'true');
+        } catch (e) {
+          // Silently fail — users can still type the address manually
+        }
+      }
+
+      function bindAll() {
+        bindRentalAutocomplete(rentalPickup);
+        bindRentalAutocomplete(rentalDropoff);
+      }
+
+      // These inputs start out in a hidden tab panel, so also bind the first
+      // time one is focused. Binding is guarded by data-places-bound, so the
+      // extra attempt is a no-op once it has succeeded.
+      [rentalPickup, rentalDropoff].forEach(function(input) {
+        if (!input) return;
+        input.addEventListener('focus', function() {
+          bindRentalAutocomplete(input);
+        });
+      });
 
       // Chain onto the existing Maps API callback so we bind once the API is ready
       var prevInit = window.initQuoteAutocomplete;
