@@ -2338,6 +2338,19 @@
       object-fit: cover;
     }
 
+    /* Inline directions link inside the package description. */
+    .map-link {
+      color: var(--primary);
+      font-weight: 700;
+      text-decoration: underline;
+      text-underline-offset: 2px;
+    }
+
+    .map-link:hover,
+    .map-link:focus-visible {
+      color: var(--accent-dark);
+    }
+
     .tour-landing-info h2 {
       color: #111827;
       font-size: clamp(1.7rem, 3.4vw, 2.6rem);
@@ -2488,12 +2501,16 @@
         <div class="slider-track">
             <img src="jetski-1.jpg" alt="Yamaha WaveRunner jet ski rental rider on clear turquoise water in Puerto Rico" loading="lazy" decoding="async">
             <img src="jetski-2.jpg" alt="Two riders on a Yamaha jet ski rental near Pine Grove beach in Isla Verde, Puerto Rico" loading="lazy" decoding="async">
-            <img src="jetski-3.png" alt="Jet ski rentals moored in crystal-clear water along the Puerto Rico coast" loading="lazy" decoding="async">
+            <img src="jetski-4.jpg" alt="Jet ski rental kiosk with a red umbrella on the sand at Pine Grove beach, the meeting point in Isla Verde, Puerto Rico" loading="lazy" decoding="async">
+            <img src="jetski-5.jpg" alt="Couple wearing life jackets on a Yamaha WaveRunner jet ski rental off the Isla Verde coast in Puerto Rico" loading="lazy" decoding="async">
+            <img src="jetski-6.jpg" alt="Group of riders on two Yamaha jet ski rentals along the shoreline in Puerto Rico" loading="lazy" decoding="async">
         </div>
         <button class="slider-btn prev" aria-label="Previous image">&#10094;</button>
         <button class="slider-btn next" aria-label="Next image">&#10095;</button>
         <div class="slider-dots">
           <span class="active"></span>
+          <span></span>
+          <span></span>
           <span></span>
           <span></span>
         </div>
@@ -2506,7 +2523,7 @@
           </div>
           <div class="tour-landing-details">
             <strong data-i18n="prod_jetski_pkg_label">Package includes</strong>
-            <p data-i18n="prod_jetski_pkg_text">Add some speed and excitement to your Puerto Rico vacation with a jet ski rental on the island's beautiful coastal waters. Whether you are riding solo or sharing the experience with a passenger, you will enjoy an unforgettable adventure surrounded by tropical scenery and crystal-clear water. Your rental includes a safety briefing, life jackets, and instructions from an experienced staff member before entering the water. No previous jet ski experience is required. Simply arrive ready for fun, follow the designated riding area and safety guidelines, and enjoy your time on the water. Need to be 18 or older to rent the jet ski unless you are accompanied by an adult. Meeting point: Pine Groove beach, Isla Verde, Puerto Rico.</p>
+            <p data-i18n-html="prod_jetski_pkg_text">Add some speed and excitement to your Puerto Rico vacation with a jet ski rental on the island's beautiful coastal waters. Whether you are riding solo or sharing the experience with a passenger, you will enjoy an unforgettable adventure surrounded by tropical scenery and crystal-clear water. Your rental includes a safety briefing, life jackets, and instructions from an experienced staff member before entering the water. No previous jet ski experience is required. Simply arrive ready for fun, follow the designated riding area and safety guidelines, and enjoy your time on the water. Need to be 18 or older to rent the jet ski unless you are accompanied by an adult. Meeting point: Pine Grove beach, Isla Verde, Puerto Rico (<a class="map-link" href="https://www.google.com/maps/dir/?api=1&amp;destination=Pine%20Grove%20Beach%2C%20Isla%20Verde%2C%20Carolina%2C%20PR%2000979" target="_blank" rel="noopener noreferrer">Pine Grove Beach, Carolina, 00979</a>).</p>
             <strong data-i18n="prod_jetski_length_label">Trip Length</strong>
             <p data-i18n-html="prod_jetski_length_text">$85 — 30 Minutes ($10 additional for the second passenger)<br>$160 — 1 Hour ($10 additional for the second passenger)</p>
           </div>
@@ -2546,8 +2563,8 @@
           <li class="step-compact">
             <span class="step-compact-num">4</span>
             <div class="step-compact-text">
-              <h3 data-i18n="step4_title">Reply to confirm the trip</h3>
-              <p data-i18n="step4_desc">Answer the text or email to confirm the details. Once you reply, your trip is confirmed.</p>
+              <h3 data-i18n="step4_title">Arrive at the meeting point</h3>
+              <p data-i18n="step4_desc">Use the location in the description. Go behind the Marriott Isla Verde hotel. Look to the right for the banners and the kiosk with the red umbrella. They will be waiting there with your rental.</p>
             </div>
           </li>
         </ol>
@@ -2601,7 +2618,7 @@
 
                 <div class="field-grid">
                   <div id="rentalPickupField">
-                    <label for="rentalPickupTime" data-i18n="label_pickup_time">Pickup time</label>
+                    <label for="rentalPickupTime" id="rentalTimeLabel" data-i18n="label_pickup_time">Pickup time</label>
                     <select id="rentalPickupTime" name="pickupTime" required>
                       <option value="" disabled selected data-i18n="ph_pickup_time">Choose a time slot</option>
                       <option value="9:00 AM">9:00 AM</option>
@@ -3323,6 +3340,7 @@
         book_rental_title: 'Reserve su alquiler',
         label_select_rental: 'Alquileres',
         label_pickup_time: 'Hora de recogida',
+        label_time_slot: 'Horario',
         label_rental_length: 'Duración del alquiler',
         rental_option_jeep: 'Alquiler de Jeep (Big Red)',
         rental_option_jetski: 'Alquiler de Jetski (Área Metro)',
@@ -3465,7 +3483,6 @@
         prod_jetski_duration: '30 minutos o 1 hora',
         prod_jetski_details: 'Ver Detalles',
         prod_jetski_pkg_label: 'El paquete incluye',
-        prod_jetski_pkg_text: 'Añada velocidad y emoción a sus vacaciones en Puerto Rico con el alquiler de un jet ski en las hermosas aguas costeras de la isla. Ya sea que conduzca solo o comparta la experiencia con un acompañante, disfrutará de una aventura inolvidable rodeado de paisajes tropicales y aguas cristalinas. Su alquiler incluye una charla de seguridad, chalecos salvavidas e instrucciones de un miembro del personal con experiencia antes de entrar al agua. No se requiere experiencia previa en jet ski. Solo llegue listo para divertirse, siga el área de conducción designada y las pautas de seguridad, y disfrute de su tiempo en el agua. Debe tener 18 años o más para alquilar el jet ski, a menos que esté acompañado por un adulto. Punto de encuentro: playa Pine Groove, Isla Verde, Puerto Rico.',
         prod_jetski_length_label: 'Duración del Viaje',
         prod_boat_more_info: 'Más información próximamente.',
         boat_option_welcraft: "Welcraft 30'",
@@ -3519,8 +3536,8 @@
         step2_desc: 'Presione el botón de reserva para enviar su solicitud con todos los detalles incluidos.',
         step3_title: 'Reciba un mensaje de su Conductor, Capitán o Guía Turístico',
         step3_desc: 'Después de recibir su solicitud, nos comunicaremos con usted con los detalles de su viaje y los pasos de confirmación.',
-        step4_title: 'Responda para confirmar el viaje',
-        step4_desc: 'Responda al mensaje de texto o correo electrónico para confirmar los detalles. Una vez que responda, su viaje estará confirmado.',
+        step4_title: 'Llegue al punto de encuentro',
+        step4_desc: 'Use la ubicación que aparece en la descripción. Vaya detrás del hotel Marriott de Isla Verde. Mire a la derecha para ver los banners y el kiosco con la sombrilla roja. Allí lo estarán esperando con su alquiler.',
 
         // Reviews section
         reviews_title: 'Reseñas en TripAdvisor',
@@ -3690,11 +3707,14 @@
         prod_cruiser_length_text: '$3,450 — viaje de 4 horas<br>$4,100 — viaje de 6 horas',
         prod_whaler_length_text: '$750 — 5 horas (Medio Día)<br>$950 — 7 horas (Día Completo)',
         prod_shaefer_length_text: '$2,700 — 6 horas',
-        prod_jetski_length_text: '$85 — 30 minutos ($10 adicionales por el segundo pasajero)<br>$160 — 1 hora ($10 adicionales por el segundo pasajero)'
+        prod_jetski_length_text: '$85 — 30 minutos ($10 adicionales por el segundo pasajero)<br>$160 — 1 hora ($10 adicionales por el segundo pasajero)',
+        prod_jetski_pkg_text: 'Añada velocidad y emoción a sus vacaciones en Puerto Rico con el alquiler de un jet ski en las hermosas aguas costeras de la isla. Ya sea que conduzca solo o comparta la experiencia con un acompañante, disfrutará de una aventura inolvidable rodeado de paisajes tropicales y aguas cristalinas. Su alquiler incluye una charla de seguridad, chalecos salvavidas e instrucciones de un miembro del personal con experiencia antes de entrar al agua. No se requiere experiencia previa en jet ski. Solo llegue listo para divertirse, siga el área de conducción designada y las pautas de seguridad, y disfrute de su tiempo en el agua. Debe tener 18 años o más para alquilar el jet ski, a menos que esté acompañado por un adulto. Punto de encuentro: playa Pine Grove, Isla Verde, Puerto Rico (<a class="map-link" href="https://www.google.com/maps/dir/?api=1&amp;destination=Pine%20Grove%20Beach%2C%20Isla%20Verde%2C%20Carolina%2C%20PR%2000979" target="_blank" rel="noopener noreferrer">Pine Grove Beach, Carolina, 00979</a>).'
       };
 
       // English translations for dynamically added elements
       var enTranslations = {
+        label_pickup_time: 'Pickup time',
+        label_time_slot: 'Time slot',
         ph_rental_length: 'Choose rental length',
         trip_length_30min: '30 minutes',
         trip_length_1h: '1 hour',
@@ -3800,18 +3820,24 @@
       allLangEsBtns.forEach(function(b) { if(b) b.addEventListener('click', function () { setLanguage('es'); }); });
 
       // Rental-specific booking field options.
-      // The Jeep is rented by the day and needs a pickup time, so it keeps the
-      // time-slot menu and offers 1 to 7 days. The Jetski has no set departure
-      // windows, so its pickup-time field is hidden and it offers 30 minutes or
-      // 1 hour instead. Selecting a vehicle (via its Book Now button or the
-      // rental dropdown) swaps both menus accordingly.
+      // The Jeep is rented by the day, so it keeps the "Pickup time" label and
+      // offers 1 to 7 days. The Jetski is booked for a specific slot on the
+      // water, so the same menu is relabeled "Time slot" and it offers 30
+      // minutes or 1 hour instead. Selecting a vehicle (via its Book Now button
+      // or the rental dropdown) swaps both menus accordingly.
       // Defined here so it can re-apply translations.
       (function () {
         var pickupSelect = document.getElementById('rentalPickupTime');
         var lengthSelect = document.getElementById('rentalLength');
         var pickupField = document.getElementById('rentalPickupField');
+        var pickupLabel = document.getElementById('rentalTimeLabel');
         var rentalSelect = document.getElementById('rentalSelect');
         if (!pickupSelect || !lengthSelect) return;
+
+        // Swaps the time menu's label between the two rental types.
+        function setTimeLabel(key) {
+          if (pickupLabel) pickupLabel.setAttribute('data-i18n', key);
+        }
 
         var defaultPickupHTML = pickupSelect.innerHTML;
 
@@ -3835,21 +3861,19 @@
         var JETSKI = 'Jetski Rental (Metro Area)';
 
         window.applyRentalFieldOptions = function (rentalName) {
-          // Restore the pickup-time field by default; the Jetski hides it below.
+          // Every rental asks for a time; only the label and the length menu change.
           if (pickupField) pickupField.style.display = '';
+          pickupSelect.innerHTML = defaultPickupHTML;
           pickupSelect.setAttribute('required', '');
           if (rentalName === JETSKI) {
             lengthSelect.innerHTML = jetskiLengthHTML;
-            pickupSelect.innerHTML = defaultPickupHTML;
-            pickupSelect.value = '';
-            pickupSelect.removeAttribute('required');
-            if (pickupField) pickupField.style.display = 'none';
+            setTimeLabel('label_time_slot');
           } else if (String(rentalName || '').indexOf(JEEP) === 0) {
             lengthSelect.innerHTML = jeepLengthHTML;
-            pickupSelect.innerHTML = defaultPickupHTML;
+            setTimeLabel('label_pickup_time');
           } else {
             lengthSelect.innerHTML = placeholderLengthHTML;
-            pickupSelect.innerHTML = defaultPickupHTML;
+            setTimeLabel('label_pickup_time');
           }
           setLanguage(currentLang);
         };
