@@ -2039,6 +2039,320 @@
       .step-compact-text h3 { font-size: 0.95rem; margin: 2px 0 3px; }
       .step-compact-text p { font-size: 0.85rem; line-height: 1.4; }
     }
+
+    /* "Prefer driving yourself?" — Jeep rental booking cards under the booking form */
+    .section-drive-yourself {
+      background: #ffffff;
+    }
+
+    .section-drive-yourself .section-shell {
+      padding: 72px 0 80px;
+    }
+
+    .section-drive-yourself .section-intro {
+      max-width: 820px;
+      margin: 0 auto 40px;
+      text-align: center;
+    }
+
+    .section-drive-yourself .section-intro h2 {
+      color: #111827;
+      font-size: clamp(1.75rem, 3vw, 2.5rem);
+      font-weight: 900;
+      line-height: 1.1;
+      letter-spacing: 0;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+
+    .section-drive-yourself .section-intro p {
+      margin: 0;
+      font-size: 1.05rem;
+    }
+
+    .section-drive-yourself .tour-widget-cta {
+      align-self: flex-start;
+      margin-top: auto;
+      padding: 11px 18px;
+      border-radius: 999px;
+      background: var(--accent);
+      color: #1a1a1a;
+      box-shadow: 0 6px 14px rgba(8, 37, 61, 0.12);
+      transition: background 0.18s ease, box-shadow 0.18s ease;
+    }
+
+    .section-drive-yourself .tour-widget:hover .tour-widget-cta,
+    .section-drive-yourself .tour-widget:focus-visible .tour-widget-cta {
+      background: var(--accent-dark);
+      color: #1a1a1a;
+      box-shadow: 0 8px 18px rgba(8, 37, 61, 0.18);
+    }
+
+    @media (max-width: 760px) {
+      .section-drive-yourself .section-shell {
+        padding: 52px 0 60px;
+      }
+
+      .section-drive-yourself .section-intro {
+        margin-bottom: 28px;
+      }
+    }
+
+    /* Tour widgets — clickable booking cards linking to each landing page */
+    .tour-widgets {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 24px;
+    }
+
+    .tour-widget {
+      display: flex;
+      flex-direction: column;
+      background: #fff;
+      border: 1px solid #e5eaf0;
+      border-radius: 12px;
+      overflow: hidden;
+      text-decoration: none;
+      color: inherit;
+      box-shadow: 0 1px 2px rgba(8, 37, 61, 0.06);
+      transition: box-shadow 0.2s ease, transform 0.2s ease;
+    }
+
+    .tour-widget:hover,
+    .tour-widget:focus-visible {
+      box-shadow: 0 18px 40px rgba(8, 37, 61, 0.16);
+      transform: translateY(-4px);
+      outline: none;
+    }
+
+    .tour-widget-media {
+      aspect-ratio: 4 / 3;
+      background: #eef3f8;
+      overflow: hidden;
+    }
+
+    .tour-widget-media img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.4s ease;
+    }
+
+    .tour-widget:hover .tour-widget-media img {
+      transform: scale(1.06);
+    }
+
+    .tour-widget-body {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      padding: 18px 20px 22px;
+      flex: 1;
+    }
+
+    .tour-widget-body h3 {
+      color: #111827;
+      font-size: 1.15rem;
+      font-weight: 800;
+      line-height: 1.15;
+      text-transform: uppercase;
+      letter-spacing: 0.01em;
+      margin: 0;
+    }
+
+    .tour-widget-specs {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+    }
+
+    .tour-widget-specs li {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 12px;
+      font-size: 0.9rem;
+      color: #6b7280;
+      padding-bottom: 7px;
+      border-bottom: 1px solid #f0f3f7;
+    }
+
+    .tour-widget-specs li:last-child {
+      padding-bottom: 0;
+      border-bottom: none;
+    }
+
+    .tour-widget-specs li .spec-label {
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-size: 0.72rem;
+      font-weight: 700;
+    }
+
+    .tour-widget-specs li .spec-value {
+      color: #0d3557;
+      font-weight: 700;
+      text-align: right;
+    }
+
+    .tour-widget-cta {
+      margin-top: auto;
+      padding-top: 4px;
+      font-size: 0.8rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--primary-dark, #0d3557);
+    }
+
+    /* Booking card carousel — four cards per view on desktop, two on tablets and
+       one on phones, reached with the arrows, the dots or a swipe.
+       width: 100% and min-width: 0 keep the track from pushing the page
+       sideways on a phone. */
+    .card-carousel {
+      position: relative;
+      width: 100%;
+      max-width: 1120px;
+      min-width: 0;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .card-carousel .tour-widgets {
+      display: flex;
+      grid-template-columns: none;
+      width: 100%;
+      max-width: none;
+      min-width: 0;
+      margin: 0;
+      gap: 20px;
+      padding: 4px 0 12px;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      scroll-behavior: smooth;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+    }
+
+    .card-carousel .tour-widgets::-webkit-scrollbar {
+      display: none;
+    }
+
+    .card-carousel .tour-widget {
+      flex: 0 0 calc((100% - 60px) / 4);
+      min-width: 0;
+      scroll-snap-align: start;
+    }
+
+    .card-carousel-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 3;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 44px;
+      height: 44px;
+      padding: 0;
+      border: 1px solid #e5eaf0;
+      border-radius: 50%;
+      background: #ffffff;
+      color: var(--primary-dark, #0d3557);
+      font-size: 1.05rem;
+      line-height: 1;
+      cursor: pointer;
+      box-shadow: 0 8px 20px rgba(8, 37, 61, 0.2);
+      transition: background 0.18s ease, color 0.18s ease, opacity 0.18s ease;
+    }
+
+    .card-carousel-btn:hover,
+    .card-carousel-btn:focus-visible {
+      background: var(--accent, #ff9800);
+      color: #1a1a1a;
+    }
+
+    .card-carousel-btn[disabled] {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .card-carousel-btn.prev { left: -14px; }
+    .card-carousel-btn.next { right: -14px; }
+
+    .card-carousel-dots {
+      display: none;
+      justify-content: center;
+      gap: 7px;
+      margin-top: 2px;
+    }
+
+    .card-carousel-dots span {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: rgba(13, 53, 87, 0.22);
+      cursor: pointer;
+      transition: background 0.2s ease, transform 0.2s ease;
+    }
+
+    .card-carousel-dots span.active {
+      background: var(--primary-dark, #0d3557);
+      transform: scale(1.15);
+    }
+
+    @media (max-width: 1080px) {
+      .card-carousel .tour-widget {
+        flex-basis: calc((100% - 20px) / 2);
+      }
+    }
+
+    @media (max-width: 760px) {
+      .card-carousel .tour-widget {
+        flex-basis: 100%;
+      }
+
+      .card-carousel .tour-widgets {
+        align-items: flex-start;
+      }
+
+      /* A swipe along the track must not leave the card stuck in its hover lift. */
+      .card-carousel .tour-widget:hover,
+      .card-carousel .tour-widget:focus-visible {
+        transform: none;
+      }
+
+      .card-carousel-btn {
+        top: 34%;
+        width: 34px;
+        height: 34px;
+        border-color: transparent;
+        background: rgba(0, 0, 0, 0.5);
+        color: #ffffff;
+        font-size: 0.95rem;
+        box-shadow: none;
+      }
+
+      .card-carousel-btn:hover,
+      .card-carousel-btn:focus-visible {
+        background: rgba(0, 0, 0, 0.65);
+        color: #ffffff;
+      }
+
+      .card-carousel-btn.prev { left: 8px; }
+      .card-carousel-btn.next { right: 8px; }
+
+      .card-carousel-dots {
+        display: flex;
+      }
+    }
 </style>
   <script type="application/ld+json">
     {
@@ -2314,6 +2628,74 @@
             </div>
 
           </aside>
+        </div>
+      </div>
+    </section>
+
+    <section id="drive-yourself" class="section-drive-yourself">
+      <div class="container section-shell">
+        <div class="section-intro">
+          <h2 data-i18n="drive_yourself_title">Prefer Driving Yourself? Explore Puerto Rico Your Way</h2>
+          <p data-i18n="drive_yourself_desc">Rent one of our Jeeps and explore the island on your own schedule.</p>
+        </div>
+        <div class="card-carousel">
+          <div class="tour-widgets">
+                <a class="tour-widget" href="jeep-rental.html">
+                  <div class="tour-widget-media">
+                    <img src="jeep-rental-1.jpg" alt="Red Jeep Wrangler Willys available for daily rental in Puerto Rico" loading="lazy" decoding="async">
+                  </div>
+                  <div class="tour-widget-body">
+                    <h3 data-i18n="prod_jeep_title">Jeep Rental (Big Red)</h3>
+                    <ul class="tour-widget-specs">
+                      <li><span class="spec-label" data-i18n="spec_capacity">Capacity</span><span class="spec-value" data-i18n="prod_jeep_capacity">5 people</span></li>
+                      <li><span class="spec-label" data-i18n="spec_cost">Cost</span><span class="spec-value" data-i18n="prod_jeep_cost">80$/day</span></li>
+                    </ul>
+                    <span class="tour-widget-cta" data-i18n="view_rental_book">View rental &amp; book &rarr;</span>
+                  </div>
+                </a>
+                <a class="tour-widget" href="jeep-rental-bluey.html">
+                  <div class="tour-widget-media">
+                    <img src="jeep-bluey-1.jpg" alt="Blue Jeep Wrangler Willys available for daily rental in Puerto Rico" loading="lazy" decoding="async">
+                  </div>
+                  <div class="tour-widget-body">
+                    <h3 data-i18n="prod_jeep_bluey_title">Jeep Rental (Bluey)</h3>
+                    <ul class="tour-widget-specs">
+                      <li><span class="spec-label" data-i18n="spec_capacity">Capacity</span><span class="spec-value" data-i18n="prod_jeep_bluey_capacity">5 people</span></li>
+                      <li><span class="spec-label" data-i18n="spec_cost">Cost</span><span class="spec-value" data-i18n="prod_jeep_bluey_cost">89$/day</span></li>
+                    </ul>
+                    <span class="tour-widget-cta" data-i18n="view_rental_book">View rental &amp; book &rarr;</span>
+                  </div>
+                </a>
+                <a class="tour-widget" href="jeep-rental-sky.html">
+                  <div class="tour-widget-media">
+                    <img src="jeep-sky-1.jpg" alt="White Jeep Wrangler Willys with teal accents available for daily rental in Puerto Rico" loading="lazy" decoding="async">
+                  </div>
+                  <div class="tour-widget-body">
+                    <h3 data-i18n="prod_jeep_sky_title">Jeep Rental (Sky)</h3>
+                    <ul class="tour-widget-specs">
+                      <li><span class="spec-label" data-i18n="spec_capacity">Capacity</span><span class="spec-value" data-i18n="prod_jeep_sky_capacity">5 people</span></li>
+                      <li><span class="spec-label" data-i18n="spec_cost">Cost</span><span class="spec-value" data-i18n="prod_jeep_sky_cost">99$/day</span></li>
+                    </ul>
+                    <span class="tour-widget-cta" data-i18n="view_rental_book">View rental &amp; book &rarr;</span>
+                  </div>
+                </a>
+                <a class="tour-widget" href="jeep-rental-red-sky.html">
+                  <div class="tour-widget-media">
+                    <img src="jeep-red-sky-1.jpg" alt="Red Jeep Wrangler Willys on black wheels available for daily rental in Puerto Rico" loading="lazy" decoding="async">
+                  </div>
+                  <div class="tour-widget-body">
+                    <h3 data-i18n="prod_jeep_red_sky_title">Jeep Rental (Red Sky)</h3>
+                    <ul class="tour-widget-specs">
+                      <li><span class="spec-label" data-i18n="spec_capacity">Capacity</span><span class="spec-value" data-i18n="prod_jeep_red_sky_capacity">5 people</span></li>
+                      <li><span class="spec-label" data-i18n="spec_cost">Cost</span><span class="spec-value" data-i18n="prod_jeep_red_sky_cost">99$/day</span></li>
+                    </ul>
+                    <span class="tour-widget-cta" data-i18n="view_rental_book">View rental &amp; book &rarr;</span>
+                  </div>
+                </a>
+          </div>
+          <button type="button" class="card-carousel-btn prev" aria-label="Previous card">&#10094;</button>
+          <button type="button" class="card-carousel-btn next" aria-label="Next card">&#10095;</button>
+          <div class="card-carousel-dots" aria-hidden="true"></div>
         </div>
       </div>
     </section>
@@ -3167,6 +3549,25 @@
         // Book section
         book_title: 'Reservar',
         book_desc: 'Complete el formulario para que podamos dar seguimiento y confirmar su viaje.',
+
+        // Prefer driving yourself (Jeep rentals)
+        drive_yourself_title: '¿Prefiere manejar usted mismo? Explore Puerto Rico a su manera',
+        drive_yourself_desc: 'Alquile uno de nuestros Jeeps y explore la isla a su propio ritmo.',
+        spec_capacity: 'Capacidad',
+        spec_cost: 'Costo',
+        view_rental_book: 'Ver alquiler y reservar →',
+        prod_jeep_title: 'Alquiler de Jeep (Big Red)',
+        prod_jeep_capacity: '5 personas',
+        prod_jeep_cost: '80$/día',
+        prod_jeep_bluey_title: 'Alquiler de Jeep (Bluey)',
+        prod_jeep_bluey_capacity: '5 personas',
+        prod_jeep_bluey_cost: '89$/día',
+        prod_jeep_sky_title: 'Alquiler de Jeep (Sky)',
+        prod_jeep_sky_capacity: '5 personas',
+        prod_jeep_sky_cost: '99$/día',
+        prod_jeep_red_sky_title: 'Alquiler de Jeep (Red Sky)',
+        prod_jeep_red_sky_capacity: '5 personas',
+        prod_jeep_red_sky_cost: '99$/día',
         book_before_title: 'Antes de enviar la solicitud',
         book_before_desc: 'Tener estos detalles listos hace que la confirmación sea más rápida.',
         book_check1: 'Elija la fecha y hora/lugar de recogida correctos',
@@ -4108,5 +4509,71 @@
   </script>
   <script async defer
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCGKJigzmudkBONv9YWQnXxfs9HCN1wLMI&libraries=places,geometry&callback=initQuoteAutocomplete"></script>
+  <script>
+    // Booking card carousel: arrows, dots and native swiping move through the
+    // cards one at a time. Arrows hide at either end of the track.
+    (function () {
+      document.querySelectorAll('.card-carousel').forEach(function (carousel) {
+        var track = carousel.querySelector('.tour-widgets');
+        if (!track) return;
+        var cards = Array.prototype.slice.call(track.querySelectorAll('.tour-widget'));
+        if (!cards.length) return;
+        var prev = carousel.querySelector('.card-carousel-btn.prev');
+        var next = carousel.querySelector('.card-carousel-btn.next');
+        var dotsWrap = carousel.querySelector('.card-carousel-dots');
+
+        function offsetOf(card) {
+          return card.offsetLeft - track.offsetLeft;
+        }
+
+        function scrollToCard(card) {
+          track.scrollTo({ left: offsetOf(card), behavior: 'smooth' });
+        }
+
+        if (dotsWrap) {
+          cards.forEach(function (card) {
+            var dot = document.createElement('span');
+            dot.addEventListener('click', function () { scrollToCard(card); });
+            dotsWrap.appendChild(dot);
+          });
+        }
+
+        function activeIndex() {
+          var best = 0;
+          var bestDist = Infinity;
+          cards.forEach(function (card, i) {
+            var dist = Math.abs(offsetOf(card) - track.scrollLeft);
+            if (dist < bestDist) { bestDist = dist; best = i; }
+          });
+          return best;
+        }
+
+        function sync() {
+          var maxScroll = track.scrollWidth - track.clientWidth;
+          var index = activeIndex();
+          if (prev) prev.disabled = track.scrollLeft <= 2;
+          if (next) next.disabled = track.scrollLeft >= maxScroll - 2;
+          if (dotsWrap) {
+            Array.prototype.forEach.call(dotsWrap.children, function (dot, i) {
+              dot.classList.toggle('active', i === index);
+            });
+          }
+        }
+
+        function step(direction) {
+          var index = Math.min(cards.length - 1, Math.max(0, activeIndex() + direction));
+          scrollToCard(cards[index]);
+        }
+
+        if (prev) prev.addEventListener('click', function () { step(-1); });
+        if (next) next.addEventListener('click', function () { step(1); });
+        track.addEventListener('scroll', sync, { passive: true });
+        window.addEventListener('resize', sync);
+        // Card widths settle once the lazy-loaded photos have a size, so re-check then.
+        window.addEventListener('load', sync);
+        sync();
+      });
+    })();
+  </script>
 </body>
 </html>
