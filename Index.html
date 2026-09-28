@@ -2813,6 +2813,7 @@
               options.forEach(function (opt) {
                 if (opt.value === boatName) select.value = boatName;
               });
+              if (window.applyCharterFieldOptions) window.applyCharterFieldOptions();
             }
           });
         });
@@ -3327,7 +3328,18 @@
         ph_departure_time: 'Elija un horario',
         ph_trip_length: 'Elija la duración del viaje',
         trip_length_4h: '4 horas',
+        trip_length_5h: '5 horas (Medio Día)',
         trip_length_6h: '6 horas',
+        trip_length_7h: '7 horas (Día Completo)',
+        whaler_departure_morning: '8:30 AM a 1:00 PM',
+        whaler_departure_afternoon: '1:30 PM a 6:30 PM',
+        whaler_departure_full_1: '9:00 AM a 4:00 PM',
+        whaler_departure_full_2: '10:00 AM a 5:00 PM',
+        whaler_departure_full_3: '11:00 AM a 6:00 PM',
+        shaefer_departure_1: '9:00 AM a 3:00 PM',
+        shaefer_departure_2: '10:00 AM a 4:00 PM',
+        shaefer_departure_3: '11:00 AM a 5:00 PM',
+        shaefer_departure_4: '12:00 PM a 6:00 PM',
         six_hour_departure_1: '9:00 AM a 3:00 PM',
         six_hour_departure_2: '10:00 AM a 4:00 PM',
         tour_option_osj: 'Tour del Viejo San Juan',
@@ -3446,6 +3458,17 @@
         book_tour_success_tip: 'Tip: reply to the guide\'s text message to confirm your trip.',
         book_boat_success_msg: 'The Captain will reach out to you shortly via email.',
         book_boat_success_tip: 'Tip: reply to the captain\'s text email to confirm your trip.',
+        trip_length_5h: '5 hours (Half-Day)',
+        trip_length_7h: '7 hours (Full-Day)',
+        whaler_departure_morning: '8:30 AM to 1:00 PM',
+        whaler_departure_afternoon: '1:30 PM to 6:30 PM',
+        whaler_departure_full_1: '9:00 AM to 4:00 PM',
+        whaler_departure_full_2: '10:00 AM to 5:00 PM',
+        whaler_departure_full_3: '11:00 AM to 6:00 PM',
+        shaefer_departure_1: '9:00 AM to 3:00 PM',
+        shaefer_departure_2: '10:00 AM to 4:00 PM',
+        shaefer_departure_3: '11:00 AM to 5:00 PM',
+        shaefer_departure_4: '12:00 PM to 6:00 PM',
         six_hour_departure_1: '9:00 AM to 3:00 PM',
         six_hour_departure_2: '10:00 AM to 4:00 PM'
       };
@@ -3519,10 +3542,14 @@
       allLangEnBtns.forEach(function(b) { if(b) b.addEventListener('click', function () { setLanguage('en'); }); });
       allLangEsBtns.forEach(function(b) { if(b) b.addEventListener('click', function () { setLanguage('es'); }); });
 
-      // Welcraft 30', Riviera Yacht 40', Luxury Lagoon 42' and Cruiser 54' Yacht
-      // keep the full departure list for their 4-hour trip, but only run two
-      // windows for the 6-hour one, so narrow the departure menu whenever one of
-      // those charters is paired with a 6-hour trip length.
+      // Charter-specific booking field options.
+      // The Boston Whaler 24' runs a 5-hour half-day or 7-hour full-day, each
+      // with its own set of departure windows (the full-day options only appear
+      // once the 7-hour trip length is chosen). The Shaefer 40" Luxury Charter
+      // runs a single 6-hour trip with its own four departure windows. The four
+      // standard charters keep the full departure list for their 4-hour trip but
+      // only run two windows for the 6-hour one, so their departure menu narrows
+      // as soon as 6 hours is chosen.
       (function () {
         var departureSelect = document.getElementById('boatDepartureTime');
         var tripLengthSelect = document.getElementById('boatTripLength');
@@ -3530,7 +3557,36 @@
         if (!departureSelect || !tripLengthSelect || !boatSelect) return;
 
         var defaultDepartureHTML = departureSelect.innerHTML;
+        var defaultTripLengthHTML = tripLengthSelect.innerHTML;
 
+        var whalerHalfDayDepartureHTML =
+          '<option value="" disabled selected data-i18n="ph_departure_time">Choose a time slot</option>' +
+          '<option value="8:30 AM to 1:00 PM" data-i18n="whaler_departure_morning">8:30 AM to 1:00 PM</option>' +
+          '<option value="1:30 PM to 6:30 PM" data-i18n="whaler_departure_afternoon">1:30 PM to 6:30 PM</option>';
+
+        var whalerFullDayDepartureHTML =
+          '<option value="" disabled selected data-i18n="ph_departure_time">Choose a time slot</option>' +
+          '<option value="9:00 AM to 4:00 PM" data-i18n="whaler_departure_full_1">9:00 AM to 4:00 PM</option>' +
+          '<option value="10:00 AM to 5:00 PM" data-i18n="whaler_departure_full_2">10:00 AM to 5:00 PM</option>' +
+          '<option value="11:00 AM to 6:00 PM" data-i18n="whaler_departure_full_3">11:00 AM to 6:00 PM</option>';
+
+        var whalerTripLengthHTML =
+          '<option value="" disabled selected data-i18n="ph_trip_length">Choose trip length</option>' +
+          '<option value="5 hours" data-i18n="trip_length_5h">5 hours (Half-Day)</option>' +
+          '<option value="7 hours" data-i18n="trip_length_7h">7 hours (Full-Day)</option>';
+
+        var shaeferDepartureHTML =
+          '<option value="" disabled selected data-i18n="ph_departure_time">Choose a time slot</option>' +
+          '<option value="9:00 AM to 3:00 PM" data-i18n="shaefer_departure_1">9:00 AM to 3:00 PM</option>' +
+          '<option value="10:00 AM to 4:00 PM" data-i18n="shaefer_departure_2">10:00 AM to 4:00 PM</option>' +
+          '<option value="11:00 AM to 5:00 PM" data-i18n="shaefer_departure_3">11:00 AM to 5:00 PM</option>' +
+          '<option value="12:00 PM to 6:00 PM" data-i18n="shaefer_departure_4">12:00 PM to 6:00 PM</option>';
+
+        var shaeferTripLengthHTML =
+          '<option value="" disabled selected data-i18n="ph_trip_length">Choose trip length</option>' +
+          '<option value="6 hours" data-i18n="trip_length_6h">6 hours</option>';
+
+        // The two windows the standard charters run their 6-hour trip on.
         var sixHourDepartureHTML =
           '<option value="" disabled selected data-i18n="ph_departure_time">Choose a time slot</option>' +
           '<option value="9:00 AM to 3:00 PM" data-i18n="six_hour_departure_1">9:00 AM to 3:00 PM</option>' +
@@ -3542,25 +3598,54 @@
           "Luxury Lagoon 42'",
           "Cruiser 54' Yacht"
         ];
+        var WHALER = "Boston Whaler 24'";
+        var SHAEFER = 'Shaefer 40" Luxury Charter';
 
-        // Only rewrite the menu when the mode actually flips, so an already valid
-        // departure choice is not cleared out from under the visitor.
-        var currentMode = 'default';
-
-        function syncDepartureOptions() {
-          var mode = SIX_HOUR_WINDOW_CHARTERS.indexOf(boatSelect.value) !== -1 &&
-            tripLengthSelect.value === '6 hours' ? 'sixHour' : 'default';
-          if (mode === currentMode) return;
-          currentMode = mode;
-          departureSelect.innerHTML = mode === 'sixHour'
-            ? sixHourDepartureHTML
-            : defaultDepartureHTML;
-          setLanguage(currentLang);
+        function departureHTMLFor(boatName, tripLength) {
+          if (boatName === WHALER) {
+            return tripLength === '7 hours' ? whalerFullDayDepartureHTML : whalerHalfDayDepartureHTML;
+          }
+          if (boatName === SHAEFER) return shaeferDepartureHTML;
+          if (SIX_HOUR_WINDOW_CHARTERS.indexOf(boatName) !== -1 && tripLength === '6 hours') {
+            return sixHourDepartureHTML;
+          }
+          return defaultDepartureHTML;
         }
 
-        tripLengthSelect.addEventListener('change', syncDepartureOptions);
-        boatSelect.addEventListener('change', syncDepartureOptions);
-        syncDepartureOptions();
+        function tripLengthHTMLFor(boatName) {
+          if (boatName === WHALER) return whalerTripLengthHTML;
+          if (boatName === SHAEFER) return shaeferTripLengthHTML;
+          return defaultTripLengthHTML;
+        }
+
+        // Only rewrite a menu when its option set actually changes, so an already
+        // valid choice is not cleared out from under the visitor.
+        var currentTripLengthHTML = defaultTripLengthHTML;
+        var currentDepartureHTML = defaultDepartureHTML;
+
+        function syncCharterFields() {
+          var tripHTML = tripLengthHTMLFor(boatSelect.value);
+          var changed = false;
+          if (tripHTML !== currentTripLengthHTML) {
+            currentTripLengthHTML = tripHTML;
+            tripLengthSelect.innerHTML = tripHTML;
+            changed = true;
+          }
+          var depHTML = departureHTMLFor(boatSelect.value, tripLengthSelect.value);
+          if (depHTML !== currentDepartureHTML) {
+            currentDepartureHTML = depHTML;
+            departureSelect.innerHTML = depHTML;
+            changed = true;
+          }
+          if (changed) setLanguage(currentLang);
+        }
+
+        // Exposed so the "Book Now" buttons that preselect a charter can refresh the menus.
+        window.applyCharterFieldOptions = syncCharterFields;
+
+        tripLengthSelect.addEventListener('change', syncCharterFields);
+        boatSelect.addEventListener('change', syncCharterFields);
+        syncCharterFields();
       })();
     })();
 
