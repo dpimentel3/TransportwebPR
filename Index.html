@@ -2186,16 +2186,29 @@
                       <option value="Old San Juan Tour" data-i18n="tour_option_osj">Old San Juan Tour</option>
                       <option value="Cave Swimming Adventure" data-i18n="tour_option_cave">Cave Swimming Adventure</option>
                       <option value="Bioluminescent Kayak Tour(Transport included)" data-i18n="tour_option_biokayak">Bioluminescent Kayak Tour(Transport included)</option>
+                      <option value="Snorkel With Turtles" data-i18n="tour_option_snorkel">Snorkel With Turtles</option>
+                      <option value="Scuba Diving Tour" data-i18n="tour_option_scuba">Scuba Diving Tour</option>
                     </select>
                   </div>
                 </div>
 
-                <div>
+                <div id="tourPickupField">
                   <label for="tourPickup" data-i18n="label_pickup">Pick up location</label>
                   <div class="iq-input-wrap">
                     <input id="tourPickup" name="pickupLocation" type="text" data-i18n-placeholder="ph_pickup" placeholder="Example: SJU Airport or hotel name" required />
                     <button type="button" class="iq-clear" data-target="tourPickup" aria-label="Clear pick up location">&times;</button>
                   </div>
+                </div>
+
+                <div id="tourTimeSlotField" hidden>
+                  <label for="tourTimeSlot" data-i18n="label_time_slot">Time slot</label>
+                  <select id="tourTimeSlot" name="timeSlot">
+                    <option value="" disabled selected data-i18n="ph_time_slot">Choose a time slot</option>
+                    <option value="9:00am">9:00am</option>
+                    <option value="11:00am">11:00am</option>
+                    <option value="1:00pm">1:00pm</option>
+                    <option value="3:00pm">3:00pm</option>
+                  </select>
                 </div>
 
                 <div class="field-grid">
@@ -2244,11 +2257,12 @@
                     <label for="boatSelect" data-i18n="label_select_boat">Boats and Charters</label>
                     <select id="boatSelect" name="charter" required>
                       <option value="" disabled selected data-i18n="ph_select_boat">Choose a charter</option>
+                      <option value="Boston Whaler 24'" data-i18n="boat_option_whaler">Boston Whaler 24'</option>
                       <option value="Welcraft 30'" data-i18n="boat_option_welcraft">Welcraft 30'</option>
                       <option value="Riviera Yacht 40'" data-i18n="boat_option_riviera">Riviera Yacht 40'</option>
                       <option value="Luxury Lagoon 42'" data-i18n="boat_option_lagoon">Luxury Lagoon 42'</option>
                       <option value="Cruiser 54' Yacht" data-i18n="boat_option_cruiser">Cruiser 54' Yacht</option>
-                      <option value="Fishing Trip" data-i18n="boat_option_fishing">Fishing Trip</option>
+                      <option value='Shaefer 40&quot; Luxury Charter' data-i18n="boat_option_shaefer">Shaefer 40&quot; Luxury Charter</option>
                     </select>
                   </div>
                 </div>
@@ -2717,6 +2731,43 @@
           preselect('roundTrip', params.get('roundTrip'));
         })();
 
+        // Some tours use a fixed set of departure time slots instead of a pick up location
+        var TIME_SLOT_TOURS = ['Snorkel With Turtles', 'Scuba Diving Tour'];
+        function updateTourFields() {
+          var select = document.getElementById('tourSelect');
+          var pickupField = document.getElementById('tourPickupField');
+          var pickupInput = document.getElementById('tourPickup');
+          var timeSlotField = document.getElementById('tourTimeSlotField');
+          var timeSlotInput = document.getElementById('tourTimeSlot');
+          if (!select || !pickupField || !pickupInput || !timeSlotField || !timeSlotInput) return;
+          var usesTimeSlot = TIME_SLOT_TOURS.indexOf(select.value) !== -1;
+          // Pick up location: hidden and excluded from submission for time-slot tours
+          pickupField.hidden = usesTimeSlot;
+          pickupInput.disabled = usesTimeSlot;
+          pickupInput.required = !usesTimeSlot;
+          // Time slot: shown, enabled and required only for time-slot tours
+          timeSlotField.hidden = !usesTimeSlot;
+          timeSlotInput.disabled = !usesTimeSlot;
+          timeSlotInput.required = usesTimeSlot;
+          // Route time-slot tours (Snorkel With Turtles / Scuba Diving Tour) to their dedicated Netlify form
+          var toursForm = document.getElementById('toursForm');
+          if (toursForm) {
+            var formNameInput = toursForm.querySelector('input[name="form-name"]');
+            var targetFormName = usesTimeSlot ? 'tour-booking-timeslots' : 'tour-booking-v2';
+            if (formNameInput) formNameInput.value = targetFormName;
+            toursForm.setAttribute('name', targetFormName);
+          }
+        }
+
+        // Toggle pick up / time slot fields whenever the selected tour changes
+        (function () {
+          var tourSelect = document.getElementById('tourSelect');
+          if (tourSelect) {
+            tourSelect.addEventListener('change', updateTourFields);
+            updateTourFields();
+          }
+        })();
+
         // Tour card "Book Now" buttons switch to Tours tab and preselect the tour
         var tourLinks = document.querySelectorAll('.book-tour-link');
         tourLinks.forEach(function (link) {
@@ -2729,6 +2780,7 @@
               options.forEach(function (opt) {
                 if (opt.value === tourName) select.value = tourName;
               });
+              updateTourFields();
             }
           });
         });
@@ -2777,6 +2829,7 @@
               options.forEach(function (opt) {
                 if (opt.value === tourName) select.value = tourName;
               });
+              updateTourFields();
             }
           } else if (btn.classList.contains('book-transport-link')) {
             activateTab('panel-transport');
@@ -3280,7 +3333,12 @@
         tour_option_osj: 'Tour del Viejo San Juan',
         tour_option_cave: 'Aventura de Natación en Cueva',
         tour_option_biokayak: 'Tour de Kayak Bioluminiscente(Transporte incluido)',
-        boat_option_fishing: 'Viaje de Pesca',
+        tour_option_snorkel: 'Snorkel con Tortugas',
+        tour_option_scuba: 'Tour de Buceo',
+        label_time_slot: 'Horario',
+        ph_time_slot: 'Elija un horario',
+        boat_option_whaler: "Boston Whaler 24'",
+        boat_option_shaefer: 'Shaefer 40" Luxury Charter',
         boat_option_lagoon: "Luxury Lagoon 42'",
         boat_option_cruiser: "Cruiser 54' Yacht",
         helper_destination: 'Use un nombre de lugar o dirección para que el conductor entienda claramente su destino.',
