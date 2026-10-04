@@ -1967,6 +1967,7 @@
     }
 
     .explore-map-wrapper {
+      position: relative;
       border-radius: var(--radius-lg);
       overflow: hidden;
       box-shadow: var(--shadow-lg);
@@ -1976,6 +1977,95 @@
     #explore-map {
       width: 100%;
       height: 520px;
+    }
+
+    .explore-search {
+      position: absolute;
+      top: 12px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 5;
+      width: min(420px, calc(100% - 120px));
+    }
+
+    .explore-search-icon {
+      position: absolute;
+      left: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 0.95rem;
+      pointer-events: none;
+    }
+
+    #explore-search-input {
+      width: 100%;
+      box-sizing: border-box;
+      padding: 11px 16px 11px 40px;
+      border: 2px solid transparent;
+      border-radius: 100px;
+      background: #fff;
+      color: var(--text);
+      font-size: 0.95rem;
+      font-family: inherit;
+      box-shadow: 0 4px 14px rgba(13, 53, 87, 0.18);
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    #explore-search-input:focus {
+      border-color: var(--primary);
+    }
+
+    .explore-search-results,
+    .explore-search-empty {
+      position: absolute;
+      top: calc(100% + 6px);
+      left: 0;
+      right: 0;
+      margin: 0;
+      padding: 6px;
+      list-style: none;
+      background: #fff;
+      border-radius: 14px;
+      box-shadow: 0 8px 24px rgba(13, 53, 87, 0.2);
+      box-sizing: border-box;
+    }
+
+    .explore-search-results {
+      max-height: 280px;
+      overflow-y: auto;
+    }
+
+    .explore-search-empty {
+      display: block;
+      padding: 12px 14px;
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+
+    .explore-search-results[hidden],
+    .explore-search-empty[hidden] {
+      display: none;
+    }
+
+    .explore-search-results li {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 9px 12px;
+      border-radius: 10px;
+      font-size: 0.92rem;
+      color: var(--text);
+      cursor: pointer;
+    }
+
+    .explore-search-results li.active,
+    .explore-search-results li:hover {
+      background: rgba(13, 53, 87, 0.08);
+    }
+
+    .explore-search-results .explore-legend-dot {
+      flex-shrink: 0;
     }
 
     .explore-categories {
@@ -2049,6 +2139,16 @@
       }
       #explore-map {
         height: 380px;
+      }
+      .explore-search {
+        top: 10px;
+        left: 10px;
+        transform: none;
+        width: calc(100% - 70px);
+      }
+      #explore-search-input {
+        padding: 9px 14px 9px 36px;
+        font-size: 16px;
       }
       .explore-categories {
         gap: 8px;
@@ -2438,6 +2538,15 @@
         </div>
 
         <div class="explore-map-wrapper" style="margin-top: 24px;">
+          <div class="explore-search" role="search">
+            <span class="explore-search-icon" aria-hidden="true">🔍</span>
+            <input id="explore-search-input" type="search" autocomplete="off" spellcheck="false"
+              role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="explore-search-results"
+              aria-label="Search places on the map"
+              data-i18n-placeholder="explore_search_ph" placeholder="Search a place on the map..." />
+            <ul id="explore-search-results" class="explore-search-results" role="listbox" hidden></ul>
+            <span class="explore-search-empty" data-i18n="explore_search_empty" hidden>No places found</span>
+          </div>
           <div id="explore-map"></div>
         </div>
 
@@ -3484,6 +3593,7 @@
         explore_leg_todo: 'Cosas Que Hacer',
         explore_leg_places: 'Lugares Para Ir',
         explore_leg_eat: 'Cosas Para Comer',
+        explore_search_empty: 'No se encontraron lugares',
 
         // Services
         svc_title: 'Servicios',
@@ -3774,7 +3884,8 @@
         ph_quote_phone: 'Ejemplo: 787-555-1234',
         iq_ph_pickup: 'Comience a escribir un lugar de recogida',
         iq_ph_destination: 'Comience a escribir un destino',
-        iq_ph_fare: 'Seleccione ambos lugares para ver la tarifa'
+        iq_ph_fare: 'Seleccione ambos lugares para ver la tarifa',
+        explore_search_ph: 'Buscar un lugar en el mapa...'
       };
 
       // HTML translations (for elements with nested HTML)
@@ -4660,6 +4771,129 @@
           activeFilter = btn.getAttribute('data-filter');
           filterMarkers(activeFilter);
         });
+      });
+
+      // ---- Pin search ----
+      var searchInput = document.getElementById('explore-search-input');
+      var searchResults = document.getElementById('explore-search-results');
+      var searchEmpty = document.querySelector('.explore-search-empty');
+      var searchMatches = [];
+      var searchActive = -1;
+
+      // Accent/case-insensitive so "rincon" finds "Faro de Rincón"
+      function normalizeSearch(str) {
+        return (str || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').trim();
+      }
+
+      function searchDisplayName(place) {
+        var isEs = document.documentElement.getAttribute('lang') === 'es';
+        return isEs && EXPLORE_PLACES_ES[place.name] ? EXPLORE_PLACES_ES[place.name].name : place.name;
+      }
+
+      function closeSearchResults() {
+        searchResults.hidden = true;
+        searchEmpty.hidden = true;
+        searchInput.setAttribute('aria-expanded', 'false');
+        searchActive = -1;
+      }
+
+      function highlightSearchResult(idx) {
+        var items = searchResults.querySelectorAll('li');
+        items.forEach(function (li, i) {
+          li.classList.toggle('active', i === idx);
+          li.setAttribute('aria-selected', i === idx ? 'true' : 'false');
+        });
+        searchActive = idx;
+        if (items[idx]) items[idx].scrollIntoView({ block: 'nearest' });
+      }
+
+      function renderSearchResults() {
+        var q = normalizeSearch(searchInput.value);
+        searchResults.innerHTML = '';
+        if (!q) { closeSearchResults(); return; }
+
+        searchMatches = EXPLORE_PLACES.filter(function (place) {
+          var es = EXPLORE_PLACES_ES[place.name];
+          return normalizeSearch(place.name).indexOf(q) !== -1 ||
+            (es && normalizeSearch(es.name).indexOf(q) !== -1);
+        }).sort(function (a, b) {
+          // Names starting with the query come first
+          var aStart = normalizeSearch(searchDisplayName(a)).indexOf(q) === 0 ? 0 : 1;
+          var bStart = normalizeSearch(searchDisplayName(b)).indexOf(q) === 0 ? 0 : 1;
+          return aStart - bStart;
+        });
+
+        if (!searchMatches.length) {
+          searchResults.hidden = true;
+          searchEmpty.hidden = false;
+          searchInput.setAttribute('aria-expanded', 'false');
+          return;
+        }
+
+        searchMatches.forEach(function (place, i) {
+          var li = document.createElement('li');
+          li.setAttribute('role', 'option');
+          li.id = 'explore-search-opt-' + i;
+          var dot = document.createElement('span');
+          dot.className = 'explore-legend-dot';
+          dot.style.background = categoryColors[place.cats[0]] || '#666';
+          var label = document.createElement('span');
+          label.textContent = searchDisplayName(place);
+          li.appendChild(dot);
+          li.appendChild(label);
+          // mousedown fires before the input blurs and hides the list
+          li.addEventListener('mousedown', function (e) {
+            e.preventDefault();
+            selectSearchPlace(place);
+          });
+          searchResults.appendChild(li);
+        });
+        searchEmpty.hidden = true;
+        searchResults.hidden = false;
+        searchInput.setAttribute('aria-expanded', 'true');
+        highlightSearchResult(0);
+      }
+
+      function selectSearchPlace(place) {
+        searchInput.value = searchDisplayName(place);
+        closeSearchResults();
+        searchInput.blur();
+        if (!map) return;
+
+        var marker = null;
+        markers.forEach(function (m) { if (m._place === place) marker = m; });
+        if (!marker) return;
+
+        // If a category filter is hiding this pin, switch back to "All"
+        if (!marker.getVisible()) {
+          var allBtn = document.querySelector('.explore-filter-btn[data-filter="all"]');
+          if (allBtn) allBtn.click();
+        }
+
+        map.panTo(marker.getPosition());
+        if (map.getZoom() < 11) map.setZoom(11);
+        google.maps.event.trigger(marker, 'click');
+      }
+
+      searchInput.addEventListener('input', renderSearchResults);
+      searchInput.addEventListener('focus', function () {
+        if (searchInput.value) renderSearchResults();
+      });
+      searchInput.addEventListener('blur', closeSearchResults);
+      searchInput.addEventListener('keydown', function (e) {
+        var open = !searchResults.hidden && searchMatches.length;
+        if (e.key === 'ArrowDown' && open) {
+          e.preventDefault();
+          highlightSearchResult((searchActive + 1) % searchMatches.length);
+        } else if (e.key === 'ArrowUp' && open) {
+          e.preventDefault();
+          highlightSearchResult((searchActive - 1 + searchMatches.length) % searchMatches.length);
+        } else if (e.key === 'Enter') {
+          e.preventDefault();
+          if (open) selectSearchPlace(searchMatches[searchActive >= 0 ? searchActive : 0]);
+        } else if (e.key === 'Escape') {
+          closeSearchResults();
+        }
       });
 
       var prevInitExplore = window.initQuoteAutocomplete;
