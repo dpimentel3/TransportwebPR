@@ -1980,12 +1980,10 @@
     }
 
     .explore-search {
-      position: absolute;
-      top: 12px;
-      left: 50%;
-      transform: translateX(-50%);
-      z-index: 5;
-      width: min(420px, calc(100% - 120px));
+      position: relative;
+      z-index: 20;
+      width: min(520px, 100%);
+      margin: 24px auto 0;
     }
 
     .explore-search-icon {
@@ -2141,10 +2139,8 @@
         height: 380px;
       }
       .explore-search {
-        top: 10px;
-        left: 10px;
-        transform: none;
-        width: calc(100% - 70px);
+        width: 100%;
+        margin-top: 18px;
       }
       #explore-search-input {
         padding: 9px 14px 9px 36px;
@@ -2537,16 +2533,16 @@
           <button class="explore-filter-btn" data-filter="eat"><span class="filter-icon" aria-hidden="true">🍽️</span> <span data-i18n="explore_filter_eat">Things To Eat</span></button>
         </div>
 
-        <div class="explore-map-wrapper" style="margin-top: 24px;">
-          <div class="explore-search" role="search">
-            <span class="explore-search-icon" aria-hidden="true">🔍</span>
-            <input id="explore-search-input" type="search" autocomplete="off" spellcheck="false"
-              role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="explore-search-results"
-              aria-label="Search places on the map"
-              data-i18n-placeholder="explore_search_ph" placeholder="Search a place on the map..." />
-            <ul id="explore-search-results" class="explore-search-results" role="listbox" hidden></ul>
-            <span class="explore-search-empty" data-i18n="explore_search_empty" hidden>No places found</span>
-          </div>
+        <div class="explore-search" role="search">
+          <span class="explore-search-icon" aria-hidden="true">🔍</span>
+          <input id="explore-search-input" type="search" autocomplete="off" spellcheck="false"
+            role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="explore-search-results"
+            aria-label="Search places on the map"
+            data-i18n-placeholder="explore_search_ph" placeholder="Search a place on the map..." />
+          <ul id="explore-search-results" class="explore-search-results" role="listbox" hidden></ul>
+          <span class="explore-search-empty" data-i18n="explore_search_empty" hidden>No places found</span>
+        </div>
+        <div class="explore-map-wrapper" style="margin-top: 14px;">
           <div id="explore-map"></div>
         </div>
 
