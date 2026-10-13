@@ -2803,6 +2803,7 @@
               <!-- Jeep rentals: booked by the day, with the driver's details. -->
               <form id="rentalForm" name="rental-booking" method="POST" data-netlify="true" netlify-honeypot="bot-field" style="display:none;">
                 <input type="hidden" name="form-name" value="rental-booking" />
+                <input type="hidden" name="jeep" value="" />
                 <p class="hidden-field">
                   <label>Don’t fill this out if you’re human: <input name="bot-field" /></label>
                 </p>
@@ -2917,6 +2918,15 @@
                   No payments are made through the website
                 </div>
               </form>
+              <script>
+                // Copy the chosen Jeep into its own "jeep" field, sent first, so each
+                // submission and notification email names the vehicle up top.
+                document.getElementById('rentalForm').addEventListener('formdata', function (e) {
+                  var rental = String(e.formData.get('rental') || '');
+                  var match = rental.match(/\(([^)]+)\)/);
+                  e.formData.set('jeep', match ? match[1] : rental);
+                });
+              </script>
 
               <!-- Jetski rentals: 30-minute and 1-hour slots, no set departure windows. -->
               <form id="jetskiRentalForm" name="jetski-rental-booking" method="POST" data-netlify="true" netlify-honeypot="bot-field" style="display:none;">

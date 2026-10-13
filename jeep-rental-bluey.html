@@ -2704,6 +2704,7 @@
               <h2 id="rentals-title" data-i18n="book_rental_title">Book your rental</h2>
               <form id="rentalForm" name="rental-booking" method="POST" data-netlify="true" netlify-honeypot="bot-field">
                 <input type="hidden" name="form-name" value="rental-booking" />
+                <input type="hidden" name="jeep" value="" />
                 <p class="hidden-field">
                   <label>Don’t fill this out if you’re human: <input name="bot-field" /></label>
                 </p>
@@ -2833,6 +2834,15 @@
                   No payments are made through the website
                 </div>
               </form>
+              <script>
+                // Copy the chosen Jeep into its own "jeep" field, sent first, so each
+                // submission and notification email names the vehicle up top.
+                document.getElementById('rentalForm').addEventListener('formdata', function (e) {
+                  var rental = String(e.formData.get('rental') || '');
+                  var match = rental.match(/\(([^)]+)\)/);
+                  e.formData.set('jeep', match ? match[1] : rental);
+                });
+              </script>
             </div>
           </aside>
         </div>
