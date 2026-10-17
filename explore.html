@@ -4136,8 +4136,8 @@
       function getAirportFareText(entry) {
         var isEs = document.documentElement.getAttribute('lang') === 'es';
         return isEs
-          ? entry.es + ': $' + entry.price + '/1-4 personas'
-          : entry.en + ': ' + entry.price + '$/1-4 people';
+          ? '$' + entry.price + '/1-4 personas'
+          : entry.price + '$/1-4 people';
       }
 
       function getShortTripFormText() {
