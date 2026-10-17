@@ -4175,9 +4175,31 @@
         return '';
       }
 
-      function getAirportFareText() {
+      // Flat airport-transfer fares from SJU by drop-off area (1-4 passengers).
+      // Order matters: Old San Juan and Condado are checked before the broader Carolina match.
+      var AIRPORT_AREA_FARES = [
+        { price: 35, en: 'Luis Munoz Marin airport to Old San Juan area', es: 'Aeropuerto Luis Muñoz Marín al área de Viejo San Juan', keywords: [['old san juan'], ['viejo san juan'], ['00901']] },
+        { price: 30, en: 'Luis Munoz Marin airport to Condado, San Juan area', es: 'Aeropuerto Luis Muñoz Marín a Condado, área de San Juan', keywords: [['condado'], ['00907']] },
+        { price: 25, en: 'Luis Munoz Marin airport to Isla Verde, Carolina area', es: 'Aeropuerto Luis Muñoz Marín a Isla Verde, área de Carolina', keywords: [['isla verde'], ['carolina'], ['00979'], ['00983'], ['00985'], ['00987']] }
+      ];
+
+      function getAirportAreaFare(destPlace) {
+        var hay = placeHaystack(destPlace);
+        if (!hay) return null;
+        for (var i = 0; i < AIRPORT_AREA_FARES.length; i++) {
+          var entry = AIRPORT_AREA_FARES[i];
+          for (var j = 0; j < entry.keywords.length; j++) {
+            if (matchesKeywords(hay, entry.keywords[j])) return entry;
+          }
+        }
+        return null;
+      }
+
+      function getAirportFareText(entry) {
         var isEs = document.documentElement.getAttribute('lang') === 'es';
-        return isEs ? 'Traslados al/del Aeropuerto $10/persona' : 'Airport Transfers $10/person';
+        return isEs
+          ? entry.es + ': $' + entry.price + '/1-4 personas'
+          : entry.en + ': ' + entry.price + '$/1-4 people';
       }
 
       function getShortTripFormText() {
@@ -4352,7 +4374,8 @@
 
         // Airport flat-rate: only when pickup is AT SJU and destination is within 10 miles of SJU
         if (isAtSJU(pickupPlace.location) && isNearSJU(destinationPlace.location)) {
-          fareInput.value = getAirportFareText();
+          var airportFare = getAirportAreaFare(destinationPlace);
+          fareInput.value = airportFare ? getAirportFareText(airportFare) : getShortTripFormText();
           return;
         }
 
