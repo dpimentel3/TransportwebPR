@@ -2928,7 +2928,7 @@
                 });
               </script>
 
-              <!-- Jetski rentals: 30-minute and 1-hour slots, no set departure windows. -->
+              <!-- Jetski rentals: a time slot plus a 30-minute or 1-hour length, matching the jetski page's form. -->
               <form id="jetskiRentalForm" name="jetski-rental-booking" method="POST" data-netlify="true" netlify-honeypot="bot-field" style="display:none;">
                 <input type="hidden" name="form-name" value="jetski-rental-booking" />
                 <p class="hidden-field">
@@ -2942,6 +2942,28 @@
                     <input id="jetskiDate" name="tripDate" type="date" required />
                   </div>
                   <div>
+                    <label for="jetskiPickupTime" data-i18n="label_time_slot">Time slot</label>
+                    <select id="jetskiPickupTime" name="pickupTime" required>
+                      <option value="" disabled selected data-i18n="ph_pickup_time">Choose a time slot</option>
+                      <option value="9:00 AM">9:00 AM</option>
+                      <option value="9:30 AM">9:30 AM</option>
+                      <option value="10:00 AM">10:00 AM</option>
+                      <option value="10:30 AM">10:30 AM</option>
+                      <option value="11:00 AM">11:00 AM</option>
+                      <option value="11:30 AM">11:30 AM</option>
+                      <option value="12:00 PM">12:00 PM</option>
+                      <option value="12:30 PM">12:30 PM</option>
+                      <option value="1:00 PM">1:00 PM</option>
+                      <option value="1:30 PM">1:30 PM</option>
+                      <option value="2:00 PM">2:00 PM</option>
+                      <option value="2:30 PM">2:30 PM</option>
+                      <option value="3:00 PM">3:00 PM</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="field-grid">
+                  <div>
                     <label for="jetskiLength" data-i18n="label_rental_length">Rental length</label>
                     <select id="jetskiLength" name="rentalLength" required>
                       <option value="" disabled selected data-i18n="ph_rental_length">Choose rental length</option>
@@ -2949,16 +2971,9 @@
                       <option value="1 hour" data-i18n="trip_length_1h">1 hour</option>
                     </select>
                   </div>
-                </div>
-
-                <div class="field-grid">
                   <div>
                     <label for="jetskiPassengers" data-i18n="label_passengers">Number of passengers</label>
                     <input id="jetskiPassengers" name="passengers" type="number" min="1" max="50" data-i18n-placeholder="ph_passengers" placeholder="Example: 4" required />
-                  </div>
-                  <div>
-                    <label for="jetskiFirstName" data-i18n="label_name">First name</label>
-                    <input id="jetskiFirstName" name="firstName" type="text" required />
                   </div>
                 </div>
 
@@ -2970,6 +2985,13 @@
                   <div>
                     <label for="jetskiEmail" data-i18n="label_email">Email</label>
                     <input id="jetskiEmail" name="email" type="email" placeholder="name@example.com" required />
+                  </div>
+                </div>
+
+                <div class="field-grid">
+                  <div>
+                    <label for="jetskiFirstName" data-i18n="label_name">First name</label>
+                    <input id="jetskiFirstName" name="firstName" type="text" required />
                   </div>
                 </div>
 
@@ -3783,6 +3805,7 @@
         book_rental_title: 'Reserve su alquiler',
         label_select_rental: 'Alquileres',
         label_pickup_time: 'Hora de recogida',
+        label_time_slot: 'Horario',
         label_pickup_date: 'Fecha de recogida',
         label_return_date: 'Fecha de devolución',
         label_return_time: 'Hora de devolución',
@@ -4111,6 +4134,7 @@
         six_hour_departure_1: '9:00 AM to 3:00 PM',
         six_hour_departure_2: '10:00 AM to 4:00 PM',
         ph_rental_length: 'Choose rental length',
+        label_time_slot: 'Time slot',
         trip_length_30min: '30 minutes',
         trip_length_1h: '1 hour',
         book_rental_success_msg: 'We will reach out to you shortly by text message or email.',
