@@ -2597,6 +2597,11 @@
       object-position: center 70%;
     }
 
+    /* Portrait coast photo: frame the cliffs and shoreline rather than the sky. */
+    .tour-widget-media-roadtrip img {
+      object-position: center 55%;
+    }
+
     .tour-widget-cta-button {
       border: none;
       font-family: inherit;
@@ -2787,21 +2792,32 @@
                     </div>
                   </div>
                 </article>
+                <article class="tour-widget">
+                  <div class="tour-widget-media tour-widget-media-roadtrip">
+                    <img src="east-to-west-guide-1.jpg" alt="Rocky sea cliffs and palm-lined coastline on Puerto Rico's north shore" loading="lazy" decoding="async">
+                  </div>
+                  <div class="tour-widget-body">
+                    <h3 data-i18n="guide_roadtrip_title">East To West Roadtrip Guide</h3>
+                    <ul class="tour-widget-specs">
+                      <li><span class="spec-label" data-i18n="spec_format">Format</span><span class="spec-value" data-i18n="guide_roadtrip_format">Digital guide</span></li>
+                      <li><span class="spec-label" data-i18n="spec_cost">Cost</span><span class="spec-value" data-i18n="guide_roadtrip_cost">$20</span></li>
+                    </ul>
+                    <p class="tour-widget-note" data-i18n="guide_roadtrip_desc">Explore Puerto Rico beyond the usual tourist spots with our East to West Road Trip Guide. Discover hidden beaches, scenic stops, local favorites, and a ready-to-follow itinerary with directions to make planning your adventure easy.</p>
+                    <div class="tour-widget-buy">
+                      <stripe-buy-button
+                        buy-button-id="buy_btn_1US8lw7YotKLdmDuMd1daO8s"
+                        publishable-key="pk_live_51UBeiO7YotKLdmDuTZLCYDQl9b7jLr9BhTk4HOle4VxUVS3SJwnNr3yOBX3sR6ICCNW9PR1MDNCXm8PICM9TPwbe00Jyw04Ybj"
+                      >
+                      </stripe-buy-button>
+                    </div>
+                  </div>
+                </article>
                 <article class="tour-widget tour-widget-soon" aria-labelledby="guideViequesTitle">
                   <div class="tour-widget-media tour-widget-media-soon">
                     <img src="coming-soon.png" alt="" aria-hidden="true" loading="lazy" decoding="async">
                   </div>
                   <div class="tour-widget-body">
                     <h3 id="guideViequesTitle" data-i18n="guide_vieques_title">The Vieques Virtual Guide</h3>
-                    <p class="tour-widget-soon-label" data-i18n="guide_soon_label">Coming Soon</p>
-                  </div>
-                </article>
-                <article class="tour-widget tour-widget-soon" aria-labelledby="guideRoadtripTitle">
-                  <div class="tour-widget-media tour-widget-media-soon">
-                    <img src="coming-soon.png" alt="" aria-hidden="true" loading="lazy" decoding="async">
-                  </div>
-                  <div class="tour-widget-body">
-                    <h3 id="guideRoadtripTitle" data-i18n="guide_roadtrip_title">East to West Roadtrip</h3>
                     <p class="tour-widget-soon-label" data-i18n="guide_soon_label">Coming Soon</p>
                   </div>
                 </article>
@@ -3493,7 +3509,10 @@
         guide_culebra_cost: '$10',
         guide_culebra_desc: 'Todo lo que les contamos a nuestros propios huéspedes sobre Culebra: cuáles playas valen el viaje, cómo planificar el ferry, dónde comer y qué omitir.',
         guide_vieques_title: 'La Guía Virtual de Vieques',
-        guide_roadtrip_title: 'Ruta de Este a Oeste',
+        guide_roadtrip_title: 'Guía de Ruta de Este a Oeste',
+        guide_roadtrip_format: 'Guía digital',
+        guide_roadtrip_cost: '$20',
+        guide_roadtrip_desc: 'Explore Puerto Rico más allá de los lugares turísticos de siempre con nuestra Guía de Ruta de Este a Oeste. Descubra playas escondidas, paradas panorámicas, favoritos locales y un itinerario listo para seguir con direcciones para que planificar su aventura sea fácil.',
         guide_soon_label: 'Próximamente',
         spec_format: 'Formato',
         spec_cost: 'Costo',
