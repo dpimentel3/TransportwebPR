@@ -2576,7 +2576,7 @@
           <li class="step-compact">
             <span class="step-compact-num">3</span>
             <div class="step-compact-text">
-              <h3 data-i18n="step3_title">Receive a text from your Driver, Captain or Tour Guide</h3>
+              <h3 data-i18n="step3_title">Receive a text from your rental company</h3>
               <p data-i18n="step3_desc">After your request is received, we will contact you with your trip details and confirmation steps.</p>
             </div>
           </li>
@@ -2584,7 +2584,7 @@
             <span class="step-compact-num">4</span>
             <div class="step-compact-text">
               <h3 data-i18n="step4_title">Arrive at the meeting point</h3>
-              <p data-i18n="step4_desc">Use the location in the description. Go behind the Marriott Isla Verde hotel. Look to the right for the banners and the kiosk with the red umbrella. They will be waiting there with your rental.</p>
+              <p data-i18n-html="step4_desc">Use the location in the description. Go behind the Marriott Isla Verde hotel. Look to the right for the banners that say <strong>"Cortijo Jetski Rental"</strong> and the kiosk with the red umbrella. They will be waiting there with your rental.</p>
             </div>
           </li>
         </ol>
@@ -2628,7 +2628,6 @@
                     <select id="rentalSelect" name="rental" required>
                       <option value="" disabled data-i18n="ph_select_rental">Choose a rental</option>
                       <option value="Jeep Rental (Big Red)" data-i18n="rental_option_jeep">Jeep Rental (Big Red)</option>
-                      <option value="Jeep Rental (Bluey)" data-i18n="rental_option_jeep_bluey">Jeep Rental (Bluey)</option>
                       <option value="Jeep Rental (Sky)" data-i18n="rental_option_jeep_sky">Jeep Rental (Sky)</option>
                       <option value="Jeep Rental (Red Sky)" data-i18n="rental_option_jeep_red_sky">Jeep Rental (Red Sky)</option>
                       <option value="Jetski Rental (Metro Area)" selected data-i18n="rental_option_jetski">Jetski Rental (Metro Area)</option>
@@ -3342,10 +3341,6 @@
         prod_jeep_cost: '80$/día',
         prod_jeep_cost_label: 'Costo',
         prod_jeep_cost_text: '$80 por día',
-        prod_jeep_bluey_title: 'Alquiler de Jeep (Bluey)',
-        prod_jeep_bluey_capacity: '5 personas',
-        prod_jeep_bluey_cost: '89$/día',
-        prod_jeep_bluey_cost_text: '$89 por día',
         prod_jeep_sky_title: 'Alquiler de Jeep (Sky)',
         prod_jeep_sky_capacity: '5 personas',
         prod_jeep_sky_cost: '99$/día',
@@ -3354,7 +3349,6 @@
         prod_jeep_red_sky_capacity: '5 personas',
         prod_jeep_red_sky_cost: '99$/día',
         prod_jeep_red_sky_cost_text: '$99 por día',
-        rental_option_jeep_bluey: 'Alquiler de Jeep (Bluey)',
         rental_option_jeep_sky: 'Alquiler de Jeep (Sky)',
         rental_option_jeep_red_sky: 'Alquiler de Jeep (Red Sky)',
         book_rental_title: 'Reserve su alquiler',
@@ -3555,10 +3549,9 @@
         step1_desc: 'Ingrese la fecha, hora y lugar de recogida, destino, número de pasajeros, nombre y número de teléfono. Correo electrónico si es necesario.',
         step2_title: 'Envíe la solicitud',
         step2_desc: 'Presione el botón de reserva para enviar su solicitud con todos los detalles incluidos.',
-        step3_title: 'Reciba un mensaje de su Conductor, Capitán o Guía Turístico',
+        step3_title: 'Reciba un mensaje de texto de su compañía de alquiler',
         step3_desc: 'Después de recibir su solicitud, nos comunicaremos con usted con los detalles de su viaje y los pasos de confirmación.',
         step4_title: 'Llegue al punto de encuentro',
-        step4_desc: 'Use la ubicación que aparece en la descripción. Vaya detrás del hotel Marriott de Isla Verde. Mire a la derecha para ver los banners y el kiosco con la sombrilla roja. Allí lo estarán esperando con su alquiler.',
 
         // Reviews section
         reviews_title: 'Reseñas en TripAdvisor',
@@ -3720,6 +3713,7 @@
 
       // HTML translations (for elements with nested HTML)
       var esHtmlTranslations = {
+        step4_desc: 'Use la ubicación que aparece en la descripción. Vaya detrás del hotel Marriott de Isla Verde. Mire a la derecha para ver los banners que dicen <strong>"Cortijo Jetski Rental"</strong> y el kiosco con la sombrilla roja. Allí lo estarán esperando con su alquiler.',
         hero_mobile_note: 'Opción más rápida: toque <strong>Reserve Su Viaje</strong> y complete el formulario en menos de un minuto.',
         quote_note: 'Después de presionar <strong>Enviar Solicitud de Cotización</strong> le contactaremos con una cotización.',
         prod_welcraft_length_text: '$900 — viaje de 4 horas<br>$1,100 — viaje de 6 horas',
@@ -3903,7 +3897,6 @@
         // to that Jeep's own page, whose form records the Jeep and driver details.
         var JEEP_PAGES = {
           'Jeep Rental (Big Red)': 'jeep-rental.html#book',
-          'Jeep Rental (Bluey)': 'jeep-rental-bluey.html#book',
           'Jeep Rental (Sky)': 'jeep-rental-sky.html#book',
           'Jeep Rental (Red Sky)': 'jeep-rental-red-sky.html#book'
         };

@@ -733,7 +733,7 @@
 
     .service-page .service-hero::before {
       display: block;
-      background-image: url("rentals-header.jpg");
+      background-image: url("rentals-header-lineup.png");
       background-size: cover;
       background-position: center center;
       opacity: 1;
@@ -2656,19 +2656,6 @@
                   <span class="tour-widget-cta" data-i18n="view_rental_book">View rental &amp; book &rarr;</span>
                 </div>
               </a>
-              <a class="tour-widget" href="jeep-rental-bluey.html">
-                <div class="tour-widget-media">
-                  <img src="jeep-bluey-1.jpg" alt="Blue Jeep Wrangler Willys available for daily rental in Puerto Rico" loading="lazy" decoding="async">
-                </div>
-                <div class="tour-widget-body">
-                  <h3 data-i18n="prod_jeep_bluey_title">Jeep Rental (Bluey)</h3>
-                  <ul class="tour-widget-specs">
-                  <li><span class="spec-label" data-i18n="spec_capacity">Capacity</span><span class="spec-value" data-i18n="prod_jeep_bluey_capacity">5 people</span></li>
-                  <li><span class="spec-label" data-i18n="spec_cost">Cost</span><span class="spec-value" data-i18n="prod_jeep_bluey_cost">89$/day</span></li>
-                  </ul>
-                  <span class="tour-widget-cta" data-i18n="view_rental_book">View rental &amp; book &rarr;</span>
-                </div>
-              </a>
               <a class="tour-widget" href="jeep-rental-sky.html">
                 <div class="tour-widget-media">
                   <img src="jeep-sky-1.jpg" alt="White Jeep Wrangler Willys with teal accents available for daily rental in Puerto Rico" loading="lazy" decoding="async">
@@ -2729,7 +2716,7 @@
             <span class="step-compact-num">1</span>
             <div class="step-compact-text">
               <h3 data-i18n="step1_title">Fill in your trip details</h3>
-              <p data-i18n="step1_desc">Enter your date, departure time, selected boat or jet ski, trip length, number of passengers, name, phone number, and email.</p>
+              <p data-i18n="step1_desc">Enter your rental dates, pickup time and location, delivery time and location, full name, email, driver’s license, driver’s license number expiration date and phone number, if necessary.</p>
             </div>
           </li>
           <li class="step-compact">
@@ -2742,15 +2729,15 @@
           <li class="step-compact">
             <span class="step-compact-num">3</span>
             <div class="step-compact-text">
-              <h3 data-i18n="step3_title">Receive a message from your captain</h3>
-              <p data-i18n="step3_desc">After your request is received, the captain will contact you with your charter details and confirmation steps.</p>
+              <h3 data-i18n="step3_title">Receive a text from your Rental Company</h3>
+              <p data-i18n="step3_desc">After your request is received, we will contact you with your trip details and confirmation steps.</p>
             </div>
           </li>
           <li class="step-compact">
             <span class="step-compact-num">4</span>
             <div class="step-compact-text">
-              <h3 data-i18n="step4_title">Reply to confirm the trip</h3>
-              <p data-i18n="step4_desc">Answer the text or email to confirm the details. Once you reply, your trip is confirmed.</p>
+              <h3 data-i18n="step4_title">Pick Up, Explore &amp; Return</h3>
+              <p data-i18n="step4_desc">Arrive at your pickup location and follow the instructions sent to you. Grab the keys and start your adventure. When your rental is over, return the vehicle/jetski to the predetermined drop-off location.</p>
             </div>
           </li>
         </ol>
@@ -2792,7 +2779,6 @@
                 <select id="rentalSelect" required>
                   <option value="" disabled selected data-i18n="ph_select_rental">Choose a rental</option>
                   <option value="Jeep Rental (Big Red)" data-i18n="rental_option_jeep">Jeep Rental (Big Red)</option>
-                  <option value="Jeep Rental (Bluey)" data-i18n="rental_option_jeep_bluey">Jeep Rental (Bluey)</option>
                   <option value="Jeep Rental (Sky)" data-i18n="rental_option_jeep_sky">Jeep Rental (Sky)</option>
                   <option value="Jeep Rental (Red Sky)" data-i18n="rental_option_jeep_red_sky">Jeep Rental (Red Sky)</option>
                   <option value="Jetski Rental (Metro Area)" data-i18n="rental_option_jetski">Jetski Rental (Metro Area)</option>
@@ -3790,16 +3776,12 @@
         prod_jeep_title: 'Alquiler de Jeep (Big Red)',
         prod_jeep_capacity: '5 personas',
         prod_jeep_cost: '80$/día',
-        prod_jeep_bluey_title: 'Alquiler de Jeep (Bluey)',
-        prod_jeep_bluey_capacity: '5 personas',
-        prod_jeep_bluey_cost: '89$/día',
         prod_jeep_sky_title: 'Alquiler de Jeep (Sky)',
         prod_jeep_sky_capacity: '5 personas',
         prod_jeep_sky_cost: '99$/día',
         prod_jeep_red_sky_title: 'Alquiler de Jeep (Red Sky)',
         prod_jeep_red_sky_capacity: '5 personas',
         prod_jeep_red_sky_cost: '99$/día',
-        rental_option_jeep_bluey: 'Alquiler de Jeep (Bluey)',
         rental_option_jeep_sky: 'Alquiler de Jeep (Sky)',
         rental_option_jeep_red_sky: 'Alquiler de Jeep (Red Sky)',
         book_rental_title: 'Reserve su alquiler',
@@ -3928,13 +3910,13 @@
         how_title: 'Cómo funciona',
         how_desc: 'Cada paso está explicado claramente para que organizar su alquiler de barco sea rápido y sencillo.',
         step1_title: 'Complete los detalles de su viaje',
-        step1_desc: 'Ingrese la fecha, hora de salida, barco o jet ski seleccionado, duración, número de pasajeros, nombre, teléfono y correo electrónico.',
+        step1_desc: 'Ingrese las fechas de alquiler, hora y lugar de recogida, hora y lugar de entrega, nombre completo, correo electrónico, licencia de conducir, fecha de expiración del número de licencia de conducir y número de teléfono, si es necesario.',
         step2_title: 'Envíe la solicitud',
         step2_desc: 'Presione el botón de reserva para enviar su solicitud con todos los detalles incluidos.',
-        step3_title: 'Reciba un mensaje de su capitán',
-        step3_desc: 'Después de recibir su solicitud, el capitán se comunicará con usted con los detalles del alquiler y los pasos de confirmación.',
-        step4_title: 'Responda para confirmar el viaje',
-        step4_desc: 'Responda al mensaje de texto o correo electrónico para confirmar los detalles. Una vez que responda, su viaje estará confirmado.',
+        step3_title: 'Reciba un mensaje de texto de su Compañía de Alquiler',
+        step3_desc: 'Después de recibir su solicitud, nos comunicaremos con usted con los detalles de su viaje y los pasos de confirmación.',
+        step4_title: 'Recoja, Explore y Devuelva',
+        step4_desc: 'Llegue a su lugar de recogida y siga las instrucciones que le enviamos. Tome las llaves y comience su aventura. Cuando termine su alquiler, devuelva el vehículo/jetski en el lugar de entrega acordado.',
 
         // Reviews section
         reviews_title: 'Reseñas en TripAdvisor',
