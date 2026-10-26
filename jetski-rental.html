@@ -2405,6 +2405,67 @@
       margin: 0;
     }
 
+    .jetski-deposit-note {
+      margin-top: 10px !important;
+    }
+    .item-fees {
+      margin: 16px 0 4px;
+      padding-top: 18px;
+      border-top: 1px solid #e5eaf0;
+    }
+    .item-fees-title {
+      list-style: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: #0d3557;
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin: 0;
+    }
+    .item-fees-title::-webkit-details-marker { display: none; }
+    .item-fees-title::marker { content: ''; }
+    .item-fees-title::after {
+      content: "+";
+      width: 16px;
+      text-align: center;
+      font-size: 1.25rem;
+      font-weight: 700;
+      line-height: 1;
+      color: var(--primary);
+    }
+    .item-fees[open] .item-fees-title::after { content: "\2212"; }
+    .item-fees-title span { flex: 1; }
+    .item-fees-list {
+      display: grid;
+      gap: 8px;
+      margin-top: 12px;
+      animation: itemFeeSlideDown 180ms ease;
+    }
+    .item-fee {
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      background: #fff;
+      padding: 12px 16px;
+    }
+    .item-fee-head {
+      font-weight: 700;
+      font-size: 0.95rem;
+      color: var(--primary);
+    }
+    .item-fee-desc {
+      margin: 6px 0 0;
+      color: #4b5563;
+      font-size: 0.9rem;
+      line-height: 1.55;
+    }
+    @keyframes itemFeeSlideDown {
+      from { opacity: 0; transform: translateY(-6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
     .tour-landing-info .btn-primary {
       display: inline-block;
       margin-top: 24px;
@@ -2546,7 +2607,33 @@
             <strong data-i18n="prod_jetski_length_label">Trip Length</strong>
             <p data-i18n-html="prod_jetski_length_text">$85 — 30 Minutes ($10 additional for the second passenger)<br>$160 — 1 Hour ($10 additional for the second passenger)</p>
             <p data-i18n-html="prod_jetski_reserve_text">Monday–Friday: Reservations must be made in advance. On weekdays, only 1-hour rentals are available.<br>Saturday–Sunday: Same-day reservations are available.</p>
+            <p class="jetski-deposit-note" data-i18n-html="prod_jetski_deposit_text">A 40% deposit is required to secure your jet ski rental. The remaining 60% must be paid at the rental location before your ride.<br><br>Your reservation is not confirmed until the deposit has been paid.</p>
           </div>
+          <details class="item-fees">
+            <summary class="item-fees-title"><span data-i18n="jetski_policy_title">Jet Ski Rental Cancellation &amp; Refund Policy</span></summary>
+            <div class="item-fees-list">
+              <div class="item-fee">
+                <div class="item-fee-head" data-i18n="jetski_policy_deposit_title">Booking &amp; Deposit</div>
+                <p class="item-fee-desc" data-i18n="jetski_policy_deposit_desc">A 40% deposit is required to secure your jet ski rental once availability has been confirmed. The remaining 60% must be paid at the rental location before your ride.</p>
+              </div>
+              <div class="item-fee">
+                <div class="item-fee-head" data-i18n="jetski_policy_cancel_title">Cancellations &amp; Refunds</div>
+                <p class="item-fee-desc" data-i18n-html="jetski_policy_cancel_desc"><strong>24 hours or more before your rental:</strong> Receive a full refund of your deposit.<br><br><strong>Less than 24 hours before your rental:</strong> Your deposit is non-refundable.<br><br><strong>No-shows:</strong> Customers who fail to arrive for their scheduled rental will forfeit their deposit.<br><br><strong>Rescheduling:</strong> Requests made at least 24 hours in advance are subject to availability.<br><br><strong>Same-day bookings:</strong> Once confirmed and paid, cancellations are subject to the less-than-24-hour policy.</p>
+              </div>
+              <div class="item-fee">
+                <div class="item-fee-head" data-i18n="jetski_policy_weather_title">Weather &amp; Operator Cancellations</div>
+                <p class="item-fee-desc" data-i18n="jetski_policy_weather_desc">Your safety is our priority. If the rental operator cancels due to unsafe weather, water conditions, equipment issues, or other operational circumstances, you may reschedule or receive a full refund of your deposit.</p>
+              </div>
+              <div class="item-fee">
+                <div class="item-fee-head" data-i18n="jetski_policy_late_title">Late Arrivals</div>
+                <p class="item-fee-desc" data-i18n="jetski_policy_late_desc">Please arrive at least 15 minutes before your scheduled rental. Late arrivals may result in a reduced rental time or cancellation, depending on availability. If the rental is canceled due to a late arrival, the deposit will not be refunded.</p>
+              </div>
+              <div class="item-fee">
+                <div class="item-fee-head" data-i18n="jetski_policy_refund_title">Refund Requests</div>
+                <p class="item-fee-desc" data-i18n-html="jetski_policy_refund_desc">To request a cancellation, refund, or rescheduling, please contact DP Transport through the contact information provided in your booking confirmation.<br><br>Approved refunds will be returned to the original payment method. Processing times may vary depending on your payment provider.<br><br>All policies are subject to applicable consumer-protection laws.</p>
+              </div>
+            </div>
+          </details>
           <a href="#book" class="btn btn-primary book-rental-link" data-rental="Jetski Rental (Metro Area)" data-i18n="book_now">Book Now</a>
         </div>
       </div>
@@ -2577,7 +2664,7 @@
             <span class="step-compact-num">3</span>
             <div class="step-compact-text">
               <h3 data-i18n="step3_title">Receive a text from your rental company</h3>
-              <p data-i18n="step3_desc">After your request is received, we will contact you with your trip details and confirmation steps.</p>
+              <p data-i18n="step3_desc">After your request is received, we will contact you with your trip details, deposit payment link and confirmation steps.</p>
             </div>
           </li>
           <li class="step-compact">
@@ -3492,6 +3579,15 @@
         prod_shaefer_pkg_label: 'El paquete incluye',
         prod_shaefer_pkg_text: 'Su chárter incluye un capitán certificado por la USCG, cabina con aire acondicionado, baño a bordo, combustible y una nevera con hielo. Durante todo el viaje se ofrecen agua, refrescos y snacks de cortesía, junto con equipo de snorkel, colchonetas flotantes y otros flotadores para mayor diversión y relajación. Los huéspedes también pueden disfrutar de su música favorita con el sistema de sonido Bluetooth a bordo mientras navegan por las hermosas aguas de Puerto Rico. Puede visitar Icacos o Palomino. Punto de encuentro: Marina Puerto Del Rey, Fajardo, Puerto Rico. Estacionamiento disponible.',
         prod_shaefer_length_label: 'Duración del Viaje',
+        jetski_policy_title: 'Política de Cancelación y Reembolso del Alquiler de Jet Ski',
+        jetski_policy_deposit_title: 'Reservación y Depósito',
+        jetski_policy_deposit_desc: 'Se requiere un depósito del 40% para asegurar su alquiler de jet ski una vez se confirme la disponibilidad. El 60% restante debe pagarse en el lugar del alquiler antes de su paseo.',
+        jetski_policy_cancel_title: 'Cancelaciones y Reembolsos',
+        jetski_policy_weather_title: 'Cancelaciones por Clima u Operador',
+        jetski_policy_weather_desc: 'Su seguridad es nuestra prioridad. Si el operador cancela debido a mal tiempo, condiciones del agua, problemas con el equipo u otras circunstancias operacionales, podrá reprogramar o recibir un reembolso completo de su depósito.',
+        jetski_policy_late_title: 'Llegadas Tarde',
+        jetski_policy_late_desc: 'Por favor llegue al menos 15 minutos antes de su alquiler programado. Las llegadas tarde pueden resultar en un tiempo de alquiler reducido o en la cancelación, según la disponibilidad. Si el alquiler se cancela por llegada tarde, el depósito no será reembolsado.',
+        jetski_policy_refund_title: 'Solicitudes de Reembolso',
         prod_jetski_title: 'Alquiler de Jetski (Área Metro)',
         prod_jetski_capacity: 'Máx. 4 personas',
         prod_jetski_duration: '30 minutos o 1 hora',
@@ -3550,7 +3646,7 @@
         step2_title: 'Envíe la solicitud',
         step2_desc: 'Presione el botón de reserva para enviar su solicitud con todos los detalles incluidos.',
         step3_title: 'Reciba un mensaje de texto de su compañía de alquiler',
-        step3_desc: 'Después de recibir su solicitud, nos comunicaremos con usted con los detalles de su viaje y los pasos de confirmación.',
+        step3_desc: 'Después de recibir su solicitud, nos comunicaremos con usted con los detalles de su viaje, el enlace de pago del depósito y los pasos de confirmación.',
         step4_title: 'Llegue al punto de encuentro',
 
         // Reviews section
@@ -3713,6 +3809,10 @@
 
       // HTML translations (for elements with nested HTML)
       var esHtmlTranslations = {
+        prod_jetski_reserve_text: 'Lunes a viernes: Las reservaciones deben hacerse con anticipación. Entre semana, solo hay alquileres de 1 hora disponibles.<br>Sábado y domingo: Reservaciones para el mismo día disponibles.',
+        prod_jetski_deposit_text: 'Se requiere un depósito del 40% para asegurar su alquiler de jet ski. El 60% restante debe pagarse en el lugar del alquiler antes de su paseo.<br><br>Su reservación no está confirmada hasta que se haya pagado el depósito.',
+        jetski_policy_cancel_desc: '<strong>24 horas o más antes de su alquiler:</strong> Reciba un reembolso completo de su depósito.<br><br><strong>Menos de 24 horas antes de su alquiler:</strong> Su depósito no es reembolsable.<br><br><strong>Ausencias:</strong> Los clientes que no se presenten a su alquiler programado perderán su depósito.<br><br><strong>Reprogramación:</strong> Las solicitudes hechas con al menos 24 horas de anticipación están sujetas a disponibilidad.<br><br><strong>Reservaciones del mismo día:</strong> Una vez confirmadas y pagadas, las cancelaciones están sujetas a la política de menos de 24 horas.',
+        jetski_policy_refund_desc: 'Para solicitar una cancelación, reembolso o reprogramación, comuníquese con DP Transport a través de la información de contacto provista en su confirmación de reservación.<br><br>Los reembolsos aprobados se devolverán al método de pago original. Los tiempos de procesamiento pueden variar según su proveedor de pago.<br><br>Todas las políticas están sujetas a las leyes de protección al consumidor aplicables.',
         step4_desc: 'Use la ubicación que aparece en la descripción. Vaya detrás del hotel Marriott de Isla Verde. Mire a la derecha para ver los banners que dicen <strong>"Cortijo Jetski Rental"</strong> y el kiosco con la sombrilla roja. Allí lo estarán esperando con su alquiler.',
         hero_mobile_note: 'Opción más rápida: toque <strong>Reserve Su Viaje</strong> y complete el formulario en menos de un minuto.',
         quote_note: 'Después de presionar <strong>Enviar Solicitud de Cotización</strong> le contactaremos con una cotización.',
