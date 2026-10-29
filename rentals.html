@@ -2956,6 +2956,7 @@
                       <option value="30 minutes" data-i18n="trip_length_30min">30 minutes</option>
                       <option value="1 hour" data-i18n="trip_length_1h">1 hour</option>
                     </select>
+                    <p id="jetskiWeekdayNote" class="booking-note" data-i18n="jetski_weekday_note" role="status" style="display:none; margin-top: 8px;">30-minute rides are available on weekends only. For Monday–Friday dates, please choose a 1-hour rental.</p>
                   </div>
                   <div>
                     <label for="jetskiPassengers" data-i18n="label_passengers">Number of passengers</label>
@@ -3983,6 +3984,7 @@
         trip_length_7h: '7 horas (Día Completo)',
         trip_length_30min: '30 minutos',
         trip_length_1h: '1 hora',
+        jetski_weekday_note: 'Los paseos de 30 minutos solo están disponibles los fines de semana. Para fechas de lunes a viernes, elija un alquiler de 1 hora.',
         tour_option_osj: 'Tour del Viejo San Juan',
         tour_option_cave: 'Aventura de Natación en Cueva',
         tour_option_biokayak: 'Tour de Kayak Bioluminiscente(Transporte incluido)',
@@ -4119,6 +4121,7 @@
         label_time_slot: 'Time slot',
         trip_length_30min: '30 minutes',
         trip_length_1h: '1 hour',
+        jetski_weekday_note: '30-minute rides are available on weekends only. For Monday–Friday dates, please choose a 1-hour rental.',
         book_rental_success_msg: 'We will reach out to you shortly by text message or email.',
         book_rental_success_tip: 'Tip: reply to that message to confirm your rental.'
       };
@@ -4230,6 +4233,31 @@
         }
         window.applyRentalFieldOptions(rentalSelect ? rentalSelect.value : '');
       })();
+
+      // 30-minute jetski rides are weekend-only: on a Monday–Friday date the
+      // 30-minute option is disabled and a note explains why.
+      window.applyJetskiWeekdayRule = function (dateId, lengthId, noteId) {
+        var dateInput = document.getElementById(dateId);
+        var lengthSelect = document.getElementById(lengthId);
+        var note = document.getElementById(noteId);
+        if (!dateInput || !lengthSelect) return;
+        var parts = String(dateInput.value || '').split('-');
+        var day = parts.length === 3 ? new Date(+parts[0], +parts[1] - 1, +parts[2]).getDay() : -1;
+        var isWeekday = day >= 1 && day <= 5;
+        var halfHour = lengthSelect.querySelector('option[value="30 minutes"]');
+        if (halfHour) {
+          halfHour.disabled = isWeekday;
+          if (isWeekday && lengthSelect.value === '30 minutes') lengthSelect.value = '';
+        }
+        if (note) note.style.display = isWeekday && halfHour ? '' : 'none';
+      };
+      window.applyJetskiWeekdayRule('jetskiDate', 'jetskiLength', 'jetskiWeekdayNote');
+      ['jetskiDate', 'jetskiLength'].forEach(function (id) {
+        var el = document.getElementById(id);
+        if (el) el.addEventListener('change', function () {
+          window.applyJetskiWeekdayRule('jetskiDate', 'jetskiLength', 'jetskiWeekdayNote');
+        });
+      });
     })();
 
     /* Image Slider */
