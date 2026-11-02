@@ -2344,6 +2344,21 @@
       object-fit: cover;
     }
 
+    .tour-landing-gallery.image-slider .slider-video {
+      min-width: 100%;
+      max-width: 100%;
+      flex-shrink: 0;
+      aspect-ratio: 4 / 3;
+      background: #000;
+    }
+
+    .tour-landing-gallery.image-slider .slider-video iframe {
+      width: 100%;
+      height: 100%;
+      border: 0;
+      display: block;
+    }
+
     .tour-landing-info h2 {
       color: #111827;
       font-size: clamp(1.7rem, 3.4vw, 2.6rem);
@@ -2555,6 +2570,9 @@
       <div class="container section-shell tour-landing-shell">
       <div class="tour-landing-gallery image-slider" id="lp-slider">
         <div class="slider-track">
+            <div class="slider-video">
+              <iframe src="https://player.mediadelivery.net/embed/739813/7996c133-b89e-4e2d-afdc-dd21dfb14d36?autoplay=false&amp;preload=true&amp;responsive=true" title="DP Transport Jeep Sky rental video" loading="lazy" allow="accelerometer; gyroscope; encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe>
+            </div>
             <img src="jeep-sky-1.jpg" alt="White Jeep Wrangler Willys with teal accents available for daily rental in Puerto Rico" loading="lazy" decoding="async">
             <img src="jeep-sky-2.jpg" alt="White Jeep Willys parked by the ocean at sunset under a palm tree" loading="lazy" decoding="async">
             <img src="jeep-sky-3.jpg" alt="Guest standing through the open roof of the white Jeep Willys on a rainforest road" loading="lazy" decoding="async">
@@ -2566,6 +2584,7 @@
         <button class="slider-btn next" aria-label="Next image">&#10095;</button>
         <div class="slider-dots">
           <span class="active"></span>
+          <span></span>
           <span></span>
           <span></span>
           <span></span>
@@ -4067,7 +4086,7 @@
     (function() {
       document.querySelectorAll('.image-slider').forEach(function(slider) {
         var track = slider.querySelector('.slider-track');
-        var imgs = track.querySelectorAll('img');
+        var imgs = track.children;
         var dots = slider.querySelectorAll('.slider-dots span');
         var prevBtn = slider.querySelector('.slider-btn.prev');
         var nextBtn = slider.querySelector('.slider-btn.next');
